@@ -4,50 +4,53 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 
+/** Temporary: all destinations point home while only the homepage is live. */
+const HOME = '/';
+
 const shopMenu = {
   columns: [
     {
       title: 'Categories',
       links: [
-        { href: '/shop?category=rings', label: 'Rings' },
-        { href: '/shop?category=earrings', label: 'Earrings' },
-        { href: '/shop?category=necklaces', label: 'Necklaces' },
-        { href: '/shop?category=necklaces', label: 'Pendants' },
-        { href: '/shop?category=bracelets', label: 'Bracelets' },
-        { href: '/shop?category=cuffs', label: 'Brooches' },
+        { href: HOME, label: 'Rings' },
+        { href: HOME, label: 'Earrings' },
+        { href: HOME, label: 'Necklaces' },
+        { href: HOME, label: 'Pendants' },
+        { href: HOME, label: 'Bracelets' },
+        { href: HOME, label: 'Brooches' },
       ],
     },
     {
       title: 'Collections',
       links: [
-        { href: '/shop?collection=the-shell-edit', label: 'The Shell Edit' },
-        { href: '/shop?collection=pearls-of-nacre', label: 'Lumen Line' },
-        { href: '/shop?collection=gilded-tide', label: 'Gilded Tide' },
-        { href: '/shop?collection=private-atelier', label: 'Private Atelier' },
-        { href: '/lookbook', label: 'Lookbook' },
-        { href: '/shop', label: 'View all' },
+        { href: HOME, label: 'The Shell Edit' },
+        { href: HOME, label: 'Lumen Line' },
+        { href: HOME, label: 'Gilded Tide' },
+        { href: HOME, label: 'Private Atelier' },
+        { href: HOME, label: 'Lookbook' },
+        { href: HOME, label: 'View all' },
       ],
     },
     {
       title: 'The edit',
       links: [
-        { href: '/shop?badge=new', label: 'New arrivals' },
-        { href: '/shop?badge=limited', label: 'Limited pieces' },
-        { href: '/shop?badge=atelier', label: 'Atelier made' },
-        { href: '/wishlist', label: 'Saved pieces' },
-        { href: '/gifting', label: 'Gifting' },
-        { href: '/contact', label: 'Private appointment' },
+        { href: HOME, label: 'New arrivals' },
+        { href: HOME, label: 'Limited pieces' },
+        { href: HOME, label: 'Atelier made' },
+        { href: HOME, label: 'Saved pieces' },
+        { href: HOME, label: 'Gifting' },
+        { href: HOME, label: 'Private appointment' },
       ],
     },
   ],
   features: [
     {
-      href: '/shop?collection=the-shell-edit',
+      href: HOME,
       image: '/images/product-nacre-collar.png',
       label: 'The Shell Edit',
     },
     {
-      href: '/shop?collection=gilded-tide',
+      href: HOME,
       image: '/images/product-tide-drops.png',
       label: 'Gilded Tide',
     },
@@ -59,45 +62,45 @@ const brandMenu = {
     {
       title: 'About us',
       links: [
-        { href: '/about', label: 'Our story' },
-        { href: '/about#atelier', label: 'The atelier' },
-        { href: '/journal', label: 'Journal' },
-        { href: '/contact', label: 'Contact' },
-        { href: '/shipping', label: 'Shipping' },
-        { href: '/faq', label: 'FAQs' },
+        { href: HOME, label: 'Our story' },
+        { href: HOME, label: 'The atelier' },
+        { href: HOME, label: 'Journal' },
+        { href: HOME, label: 'Contact' },
+        { href: HOME, label: 'Shipping' },
+        { href: HOME, label: 'FAQs' },
       ],
     },
     {
       title: 'The house',
       links: [
-        { href: '/about#materials', label: 'Materials' },
-        { href: '/about#craft', label: 'Craft' },
-        { href: '/about#floral', label: 'Floral theme' },
-        { href: '/lookbook', label: 'Lookbook' },
-        { href: '/journal', label: 'Notes from Jaipur' },
-        { href: '/contact', label: 'Appointments' },
+        { href: HOME, label: 'Materials' },
+        { href: HOME, label: 'Craft' },
+        { href: HOME, label: 'Floral theme' },
+        { href: HOME, label: 'Lookbook' },
+        { href: HOME, label: 'Notes from Jaipur' },
+        { href: HOME, label: 'Appointments' },
       ],
     },
     {
       title: 'Materials',
       links: [
-        { href: '/about#materials', label: 'S925 silver' },
-        { href: '/about#materials', label: '18k gold' },
-        { href: '/about#materials', label: 'Champagne finish' },
-        { href: '/about#materials', label: 'Diamonds' },
-        { href: '/care', label: 'Care guide' },
-        { href: '/returns', label: 'Returns' },
+        { href: HOME, label: 'S925 silver' },
+        { href: HOME, label: '18k gold' },
+        { href: HOME, label: 'Champagne finish' },
+        { href: HOME, label: 'Diamonds' },
+        { href: HOME, label: 'Care guide' },
+        { href: HOME, label: 'Returns' },
       ],
     },
   ],
   features: [
     {
-      href: '/journal',
+      href: HOME,
       image: '/images/look-neck-ears.png',
       label: 'Our journal',
     },
     {
-      href: '/about',
+      href: HOME,
       image: '/images/banner-bracelets.png',
       label: 'Our story',
     },
@@ -107,7 +110,6 @@ const brandMenu = {
 function MegaPanel({ menu, onNavigate }) {
   return (
     <div className="relative overflow-hidden border-t border-ink/6 bg-ivory">
-      {/* Soft floral wash */}
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <Image
           src="/images/hero-floral.png"
@@ -141,12 +143,7 @@ function MegaPanel({ menu, onNavigate }) {
 
         <div className="col-span-6 grid grid-cols-2 gap-5 pl-4">
           {menu.features.map((feature) => (
-            <Link
-              key={feature.label}
-              href={feature.href}
-              onClick={onNavigate}
-              className="group block"
-            >
+            <Link key={feature.label} href={feature.href} onClick={onNavigate} className="group block">
               <span className="relative block aspect-[4/3] overflow-hidden rounded-[1.1rem] bg-pearl">
                 <Image
                   src={feature.image}

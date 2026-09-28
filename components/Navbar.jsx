@@ -9,13 +9,14 @@ import { useStore } from '@/context/StoreContext';
 import MegaMenu from './MegaMenu';
 
 const links = [
-  { href: '/shop?category=rings', label: 'Rings', match: 'rings' },
-  { href: '/shop?category=earrings', label: 'Earrings', match: 'earrings' },
-  { href: '/shop?category=necklaces', label: 'Pendants', match: 'necklaces' },
-  { href: '/shop?category=bracelets', label: 'Bracelets', match: 'bracelets' },
-  { href: '/shop?category=cuffs', label: 'Brooches', match: 'cuffs' },
-  { href: '/shop', label: 'Shop', match: 'shop', mega: 'shop' },
-  { href: '/about', label: 'Brand', match: 'brand', mega: 'brand' },
+  { href: '/', label: 'Rings', match: 'rings' },
+  { href: '/', label: 'Earrings', match: 'earrings' },
+  { href: '/', label: 'Pendants', match: 'necklaces' },
+  { href: '/', label: 'Bracelets', match: 'bracelets' },
+  { href: '/', label: 'Brooches', match: 'cuffs' },
+  { href: '/', label: 'Shop', match: 'shop', mega: 'shop' },
+  { href: '/', label: 'Gifting', match: 'gifting' },
+  { href: '/', label: 'Brand', match: 'brand', mega: 'brand' },
 ];
 
 function IconSearch({ className = 'h-5 w-5' }) {
@@ -175,7 +176,7 @@ export default function Navbar() {
               <IconSearch className="h-[1.35rem] w-[1.35rem]" />
             </button>
             <Link
-              href="/account"
+              href="/"
               aria-label="Account"
               className="inline-flex h-11 w-11 items-center justify-center text-white/85 transition-colors hover:text-white"
             >
@@ -275,7 +276,7 @@ export default function Navbar() {
                 >
                   <IconSearch className="h-6 w-6" />
                 </button>
-                <Link href="/account" aria-label="Account" onClick={() => setMenuOpen(false)}>
+                <Link href="/" aria-label="Account" onClick={() => setMenuOpen(false)}>
                   <IconAccount className="h-6 w-6" />
                 </Link>
                 <button
