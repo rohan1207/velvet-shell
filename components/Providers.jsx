@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { StoreProvider } from '@/context/StoreContext';
 import SmoothScroll from './SmoothScroll';
 import CustomCursor from './CustomCursor';
@@ -18,7 +19,9 @@ export default function Providers({ children }) {
         <SmoothScroll>
           <Preloader />
           <CustomCursor />
-          <Navbar />
+          <Suspense fallback={null}>
+            <Navbar />
+          </Suspense>
           <CartDrawer />
           <SearchModal />
           <main className="relative w-full overflow-x-hidden">{children}</main>
