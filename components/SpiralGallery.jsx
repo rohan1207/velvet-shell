@@ -12,8 +12,8 @@ const images = [
   { src: '/images/product-moonlit-strand.png', alt: 'Moonlit Strand', href: '/shop/moonlit-strand' },
   { src: '/images/look-neck-ears.png', alt: 'Collar edit look' },
   { src: '/images/look-wrist-ring.png', alt: 'Wrist edit look' },
-  { src: '/images/hero-shell-reveal.png', alt: 'Shell reveal' },
-  { src: '/images/banner-bracelets.png', alt: 'Bracelets campaign' },
+  { src: '/images/hero-gift.png', alt: 'Shell reveal' },
+  { src: '/images/banner-bracelets.jpg', alt: 'Velvet Shell floral jewellery campaign' },
 ];
 
 export default function SpiralGallery() {

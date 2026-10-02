@@ -4,7 +4,6 @@ import { Suspense } from 'react';
 import { StoreProvider } from '@/context/StoreContext';
 import SmoothScroll from './SmoothScroll';
 import CustomCursor from './CustomCursor';
-import Preloader from './Preloader';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import CartDrawer from './CartDrawer';
@@ -17,7 +16,6 @@ export default function Providers({ children }) {
       <MobileBlock />
       <div className="max-md:hidden">
         <SmoothScroll>
-          <Preloader />
           <CustomCursor />
           <Suspense fallback={null}>
             <Navbar />

@@ -19,10 +19,10 @@ function ArrowCircle({ className = '' }) {
 
 export default function Hero3() {
   return (
-    <section className="box-border flex h-[100svh] flex-col bg-ivory pt-[5.75rem] md:pt-[6.5rem]">
+    <section className="box-border flex h-[100svh] flex-col bg-ivory pt-[6.25rem] md:pt-[7.1rem]">
       <div className="mx-auto flex min-h-0 w-full max-w-[1600px] flex-1 flex-col px-3 pb-3 md:px-4 md:pb-4">
         {/* Desktop / tablet: full viewport bento */}
-        <div className="hidden min-h-0 flex-1 gap-3 md:grid md:grid-cols-[1.38fr_1fr] lg:grid-cols-[1.42fr_1.05fr] lg:gap-3.5">
+        <div className="hidden min-h-0 flex-1 gap-3 md:grid md:grid-cols-[minmax(0,1fr)_auto] lg:gap-3.5">
           {/* Left column */}
           <div className="flex min-h-0 flex-col gap-3 lg:gap-3.5">
             <div className="relative flex shrink-0 flex-col items-center justify-center overflow-hidden rounded-[1.5rem] bg-pearl px-8 py-8 text-center lg:rounded-[1.75rem] lg:px-12 lg:py-10 xl:py-11">
@@ -71,7 +71,7 @@ export default function Hero3() {
                 className="group relative min-h-0 overflow-hidden rounded-[1.5rem] lg:rounded-[1.75rem]"
               >
                 <Image
-                  src="/images/hero-shell-reveal.png"
+                  src="/images/hero-gift.png"
                   alt="Open shell with burgundy pouch and pearl ring"
                   fill
                   sizes="28vw"
@@ -87,25 +87,20 @@ export default function Hero3() {
             </div>
           </div>
 
+          {/* Right card sized to image aspect so it fills with no crop */}
           <Link
             href="/shop?category=bracelets"
             data-cursor="Shop"
-            className="group relative min-h-0 overflow-hidden rounded-[1.5rem] lg:rounded-[1.75rem]"
+            className="group relative h-full min-h-0 aspect-[1073/1466] max-w-full justify-self-end overflow-hidden rounded-[1.5rem] bg-pearl lg:rounded-[1.75rem]"
           >
             <Image
-              src="/images/banner-bracelets.png"
-              alt="Campaign — bracelets"
+              src="/hero/floral_ring.png"
+              alt="Indian model wearing Velvet Shell floral silver necklace, bracelet, and rings"
               fill
               priority
               sizes="42vw"
-              className="object-cover object-center transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+              className="object-contain object-center transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02]"
             />
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5 lg:p-6">
-              <span className="inline-flex max-w-[14rem] items-center rounded-full bg-ivory/95 px-4 py-2.5 text-[11px] font-semibold tracking-[0.14em] text-ink uppercase shadow-sm lg:text-[12px]">
-                Fine jewellery · Signature pieces
-              </span>
-              <ArrowCircle className="h-9 w-9 border-ink/10 bg-ivory" />
-            </div>
           </Link>
         </div>
 
@@ -134,22 +129,16 @@ export default function Hero3() {
 
           <Link
             href="/shop?category=bracelets"
-            className="relative min-h-0 flex-[1.35] overflow-hidden rounded-[1.35rem]"
+            className="relative min-h-0 flex-[1.35] overflow-hidden rounded-[1.35rem] bg-pearl"
           >
             <Image
-              src="/images/banner-bracelets.png"
-              alt="Campaign — bracelets"
+              src="/hero/floral_ring.png"
+              alt="Indian model wearing Velvet Shell floral silver necklace, bracelet, and rings"
               fill
               priority
               sizes="100vw"
-              className="object-cover object-center"
+              className="object-contain object-center"
             />
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4">
-              <span className="rounded-full bg-ivory/95 px-3.5 py-2 text-[10px] font-semibold tracking-[0.14em] text-ink uppercase shadow-sm">
-                Shop bracelets
-              </span>
-              <ArrowCircle />
-            </div>
           </Link>
 
           <div className="grid min-h-0 flex-1 grid-cols-2 gap-2.5">
@@ -158,7 +147,7 @@ export default function Hero3() {
             </Link>
             <Link href="/shop" className="relative min-h-0 overflow-hidden rounded-[1.25rem]">
               <Image
-                src="/images/hero-shell-reveal.png"
+                src="/images/hero-gift.png"
                 alt="Shell reveal still life"
                 fill
                 sizes="50vw"

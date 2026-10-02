@@ -114,25 +114,29 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-[box-shadow,border-radius] duration-500 ${
+        className={`fixed inset-x-0 top-0 z-50 overflow-hidden transition-[box-shadow,border-radius] duration-500 ${
           mega ? 'rounded-none' : 'rounded-b-[1.35rem] md:rounded-b-[1.6rem]'
         }`}
         style={{
           backgroundColor: '#5E062A',
-          boxShadow: scrolled || mega ? '0 14px 40px rgba(94, 6, 42, 0.35)' : '0 6px 22px rgba(94, 6, 42, 0.18)',
+          backgroundImage: "url('/images/navbar-velvet.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          boxShadow: scrolled || mega ? '0 14px 40px rgba(74, 14, 19, 0.45)' : '0 6px 22px rgba(74, 14, 19, 0.28)',
         }}
         onMouseLeave={scheduleCloseMega}
       >
-        <div className="relative mx-auto flex h-[4.75rem] max-w-[1600px] items-center justify-between gap-4 px-4 md:h-[5.25rem] md:px-8">
+        <div className="relative mx-auto flex h-[5.25rem] max-w-[1600px] items-center justify-between gap-4 px-4 md:h-[5.85rem] md:px-8">
           <Link href="/" aria-label="Velvet Shell home" className="relative z-10 -ml-0.5 shrink-0">
-            <span className="relative block h-[4.5rem] w-[4.5rem] overflow-visible md:h-[5.5rem] md:w-[5.5rem]">
+            <span className="relative block h-[5.1rem] w-[5.1rem] overflow-visible md:h-[6.25rem] md:w-[6.25rem]">
               <Image
                 src="/logo-splash.png"
                 alt="Velvet Shell"
                 fill
                 priority
-                className="origin-center object-contain object-left scale-[1.28] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.34]"
-                sizes="(max-width: 768px) 90px, 110px"
+                className="origin-center object-contain object-left scale-[1.36] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.42]"
+                sizes="(max-width: 768px) 100px, 120px"
                 style={{ mixBlendMode: 'screen' }}
               />
             </span>
@@ -217,21 +221,26 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-40"
-            style={{ backgroundColor: '#5E062A' }}
+            style={{
+              backgroundColor: '#5E062A',
+              backgroundImage: "url('/images/navbar-velvet.jpg')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
           >
-            <div className="mx-auto flex h-[4.75rem] max-w-[1600px] items-center justify-between px-4 md:h-[5.25rem] md:px-8">
+            <div className="mx-auto flex h-[5.25rem] max-w-[1600px] items-center justify-between px-4 md:h-[5.85rem] md:px-8">
               <Link
                 href="/"
                 aria-label="Velvet Shell home"
-                className="relative block h-[4.5rem] w-[4.5rem] overflow-visible md:h-[5.5rem] md:w-[5.5rem]"
+                className="relative block h-[5.1rem] w-[5.1rem] overflow-visible md:h-[6.25rem] md:w-[6.25rem]"
                 onClick={() => setMenuOpen(false)}
               >
                 <Image
                   src="/logo-splash.png"
                   alt=""
                   fill
-                  className="origin-center object-contain scale-[1.28]"
-                  sizes="(max-width: 768px) 90px, 110px"
+                  className="origin-center object-contain scale-[1.36]"
+                  sizes="(max-width: 768px) 100px, 120px"
                   style={{ mixBlendMode: 'screen' }}
                 />
               </Link>

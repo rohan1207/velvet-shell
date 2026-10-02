@@ -101,7 +101,7 @@ const brandMenu = {
     },
     {
       href: HOME,
-      image: '/images/banner-bracelets.png',
+      image: '/images/banner-bracelets.jpg',
       label: 'Our story',
     },
   ],
