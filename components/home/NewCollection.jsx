@@ -18,19 +18,19 @@ export default function NewCollection() {
           <div>
             <p className="font-label text-gold">New collection</p>
             <h2 className="font-display mt-3 text-4xl text-ink md:text-6xl">{featuredCollection.name}</h2>
-            <p className="mt-4 max-w-md text-sm font-light leading-relaxed text-ink/55">
+            <p className="mt-4 max-w-md text-sm font-light leading-relaxed text-ink/85">
               {featuredCollection.line}
             </p>
           </div>
           <Link
             href={`/shop?collection=${featuredCollection.slug}`}
-            className="inline-flex items-center rounded-full border border-ink/12 px-5 py-2.5 font-label text-[11px] text-ink transition-colors hover:border-burgundy/30 hover:text-burgundy"
+            className="bg-velvet-texture inline-flex items-center rounded-full px-5 py-2.5 font-label text-[11px] text-ivory transition-opacity hover:opacity-90"
           >
             View collection
           </Link>
         </div>
 
-        <div className="grid gap-x-6 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12 lg:grid-cols-4">
           {featured.map((product, index) => (
             <ProductCard key={product.slug} product={product} index={index} />
           ))}

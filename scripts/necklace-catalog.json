@@ -1,0 +1,345 @@
+{
+  "skus": [
+    {
+      "slug": "bamboo-charm-necklace",
+      "name": "Bamboo Charm Necklace",
+      "collection": "private-atelier",
+      "category": "necklaces",
+      "price": 3180,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/necklace/catalog/bamboo-charm-necklace.jpg",
+      "gallery": [
+        "/necklace/catalog/bamboo-charm-necklace.jpg",
+        "/necklace/catalog/bamboo-charm-necklace-2.jpg",
+        "/necklace/catalog/bamboo-charm-necklace-3.jpg",
+        "/necklace/catalog/wear-bamboo-charm-necklace.jpg"
+      ],
+      "hoverImage": "/necklace/catalog/wear-bamboo-charm-necklace.jpg",
+      "description": "A fine chain with a bamboo charm — slender segments, quiet green memory in metal.",
+      "story": "Bamboo that never breaks the line.",
+      "details": [
+        "Bamboo charm",
+        "Fine chain",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Wipe dry after wear. Keep away from perfume and water. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Bamboo charm necklace.jpg",
+        "Bamboo charm necklace(1).jpg",
+        "Bamboo charm necklace(2).jpg"
+      ],
+      "_defaultSource": "Bamboo charm necklace.jpg"
+    },
+    {
+      "slug": "bamboo-charm-necklace-gold",
+      "name": "Bamboo Charm Necklace — Gold",
+      "collection": "gilded-tide",
+      "category": "necklaces",
+      "price": 3380,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "18K Gold plated"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/necklace/catalog/bamboo-charm-necklace-gold.jpg",
+      "gallery": [
+        "/necklace/catalog/bamboo-charm-necklace-gold.jpg",
+        "/necklace/catalog/bamboo-charm-necklace-gold-2.jpg",
+        "/necklace/catalog/bamboo-charm-necklace-gold-3.jpg",
+        "/necklace/catalog/wear-bamboo-charm-necklace-gold.jpg"
+      ],
+      "hoverImage": "/necklace/catalog/wear-bamboo-charm-necklace-gold.jpg",
+      "description": "The bamboo charm necklace in warm gold — same slender segments, richer light.",
+      "story": "Gold for quieter evenings.",
+      "details": [
+        "Gold-toned charm",
+        "Fine chain",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Wipe dry after wear. Keep away from perfume and water. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Bamboo charm necklace(gold).jpg",
+        "Bamboo charm necklace(gold)(1).jpg",
+        "Bamboo charm necklace(gold)(2).jpg"
+      ],
+      "_defaultSource": "Bamboo charm necklace(gold).jpg"
+    },
+    {
+      "slug": "bamboo-charm-necklace-silver",
+      "name": "Bamboo Charm Necklace — Silver",
+      "collection": "pearls-of-nacre",
+      "category": "necklaces",
+      "price": 3280,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/necklace/catalog/bamboo-charm-necklace-silver.jpg",
+      "gallery": [
+        "/necklace/catalog/bamboo-charm-necklace-silver.jpg",
+        "/necklace/catalog/wear-bamboo-charm-necklace-silver.jpg"
+      ],
+      "hoverImage": "/necklace/catalog/wear-bamboo-charm-necklace-silver.jpg",
+      "description": "The bamboo charm in cool silver — crisp segments, everyday light.",
+      "story": "Silver bamboo for daylight.",
+      "details": [
+        "S925 silver",
+        "Bamboo charm",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Wipe dry after wear. Keep away from perfume and water. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Bamboo charm necklace(silver).jpg"
+      ],
+      "_defaultSource": "Bamboo charm necklace(silver).jpg"
+    },
+    {
+      "slug": "flower-in-the-rain-necklace-pink",
+      "name": "Flower In The Rain Necklace — Pink",
+      "collection": "pearls-of-nacre",
+      "category": "necklaces",
+      "price": 4280,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/necklace/catalog/flower-in-the-rain-necklace-pink.jpg",
+      "gallery": [
+        "/necklace/catalog/flower-in-the-rain-necklace-pink.jpg",
+        "/necklace/catalog/flower-in-the-rain-necklace-pink-2.jpg",
+        "/necklace/catalog/flower-in-the-rain-necklace-pink-3.jpg",
+        "/necklace/catalog/flower-in-the-rain-necklace-pink-4.jpg",
+        "/necklace/catalog/wear-flower-in-the-rain-necklace-pink.jpg"
+      ],
+      "hoverImage": "/necklace/catalog/wear-flower-in-the-rain-necklace-pink.jpg",
+      "description": "A silver branch pendant holding a translucent pink bloom — carved petals, tiny stamens, two fine leaves.",
+      "story": "A flower caught after rain, worn close to the collarbone.",
+      "details": [
+        "Translucent pink flower",
+        "Branch pendant",
+        "S925 silver",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Wipe dry after wear. Keep away from perfume and water. Store alone in the pouch.",
+      "_sourceFiles": [
+        "flower in the rain(pink).jpg",
+        "flower in the rain.jpg",
+        "flower in the rain(pink)(1).jpg",
+        "flower in the rain(pink)(2).jpg"
+      ],
+      "_defaultSource": "flower in the rain(pink).jpg"
+    },
+    {
+      "slug": "flower-in-the-rain-necklace-white",
+      "name": "Flower In The Rain Necklace — White",
+      "collection": "pearls-of-nacre",
+      "category": "necklaces",
+      "price": 4280,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/necklace/catalog/flower-in-the-rain-necklace-white.jpg",
+      "gallery": [
+        "/necklace/catalog/flower-in-the-rain-necklace-white.jpg",
+        "/necklace/catalog/flower-in-the-rain-necklace-white-2.jpg",
+        "/necklace/catalog/flower-in-the-rain-necklace-white-3.jpg",
+        "/necklace/catalog/flower-in-the-rain-necklace-white-4.jpg",
+        "/necklace/catalog/flower-in-the-rain-necklace-white-5.jpg",
+        "/necklace/catalog/flower-in-the-rain-necklace-white-6.jpg",
+        "/necklace/catalog/wear-flower-in-the-rain-necklace-white.jpg"
+      ],
+      "hoverImage": "/necklace/catalog/wear-flower-in-the-rain-necklace-white.jpg",
+      "description": "The same branch motif with a frosted white flower — cool, luminous, quietly botanical.",
+      "story": "White bloom after rain.",
+      "details": [
+        "Frosted white flower",
+        "Branch pendant",
+        "S925 silver",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Wipe dry after wear. Keep away from perfume and water. Store alone in the pouch.",
+      "_sourceFiles": [
+        "flower in the rain(white).jpg",
+        "flower in the rain(white)(1).jpg",
+        "Flower in the Rain(white)(2).jpg",
+        "flower in the rain(white)(3).jpg",
+        "flower in the rain(white)(4).jpg",
+        "flower in the rain(white)(5).jpg"
+      ],
+      "_defaultSource": "flower in the rain(white).jpg"
+    },
+    {
+      "slug": "fresh-redbud-bell-necklace",
+      "name": "Fresh Redbud Bell Necklace",
+      "collection": "private-atelier",
+      "category": "necklaces",
+      "price": 4680,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver",
+        "Gold accent"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/necklace/catalog/fresh-redbud-bell-necklace.jpg",
+      "gallery": [
+        "/necklace/catalog/fresh-redbud-bell-necklace.jpg",
+        "/necklace/catalog/fresh-redbud-bell-necklace-2.jpg",
+        "/necklace/catalog/fresh-redbud-bell-necklace-3.jpg",
+        "/necklace/catalog/fresh-redbud-bell-necklace-4.jpg",
+        "/necklace/catalog/fresh-redbud-bell-necklace-5.jpg",
+        "/necklace/catalog/fresh-redbud-bell-necklace-6.jpg",
+        "/necklace/catalog/fresh-redbud-bell-necklace-7.jpg",
+        "/necklace/catalog/fresh-redbud-bell-necklace-8.jpg",
+        "/necklace/catalog/fresh-redbud-bell-necklace-9.jpg",
+        "/necklace/catalog/fresh-redbud-bell-necklace-10.jpg",
+        "/necklace/catalog/fresh-redbud-bell-necklace-11.jpg",
+        "/necklace/catalog/wear-fresh-redbud-bell-necklace.jpg"
+      ],
+      "hoverImage": "/necklace/catalog/wear-fresh-redbud-bell-necklace.jpg",
+      "description": "Redbud bell blooms on a fine chain — soft petals, botanical fall at the chest.",
+      "story": "Spring bells, held still.",
+      "details": [
+        "Redbud bell motif",
+        "Fine chain",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Wipe dry after wear. Keep away from perfume and water. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Fresh Redbud Bell.jpg",
+        "Fresh Redbud Bell(1).jpg",
+        "Fresh Redbud Bell(2).jpg",
+        "Fresh Redbud Bell(3).jpg",
+        "Fresh Redbud Bell(4).jpg",
+        "Fresh Redbud Bell(5).jpg",
+        "Fresh Redbud Bell(6).jpg",
+        "Fresh Redbud Bell.png",
+        "Fresh Redbud Bell(1).png",
+        "Fresh Redbud Bell(2).png",
+        "Fresh Redbud Bell(3).png"
+      ],
+      "_defaultSource": "Fresh Redbud Bell.jpg"
+    },
+    {
+      "slug": "hollow-butterfly-pendant-gold",
+      "name": "Hollow Butterfly Pendant — Gold",
+      "collection": "gilded-tide",
+      "category": "necklaces",
+      "price": 3980,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "18K Gold plated"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/necklace/catalog/hollow-butterfly-pendant-gold.jpg",
+      "gallery": [
+        "/necklace/catalog/hollow-butterfly-pendant-gold.jpg",
+        "/necklace/catalog/hollow-butterfly-pendant-gold-2.jpg",
+        "/necklace/catalog/hollow-butterfly-pendant-gold-3.jpg",
+        "/necklace/catalog/wear-hollow-butterfly-pendant-gold.jpg"
+      ],
+      "hoverImage": "/necklace/catalog/wear-hollow-butterfly-pendant-gold.jpg",
+      "description": "A hollow-out butterfly pendant in gold — open wings, light moving through filigree.",
+      "story": "Wings drawn as architecture.",
+      "details": [
+        "Hollow butterfly",
+        "Gold-toned",
+        "Fine chain",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Wipe dry after wear. Keep away from perfume and water. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Hollow out butterfly pedant(gold).jpg",
+        "Hollow out butterfly pedant(gold)(1).jpg",
+        "Hollow out butterfly pedant(gold)(2).jpg"
+      ],
+      "_defaultSource": "Hollow out butterfly pedant(gold).jpg"
+    },
+    {
+      "slug": "hollow-butterfly-pendant-silver",
+      "name": "Hollow Butterfly Pendant — Silver",
+      "collection": "private-atelier",
+      "category": "necklaces",
+      "price": 3780,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/necklace/catalog/hollow-butterfly-pendant-silver.jpg",
+      "gallery": [
+        "/necklace/catalog/hollow-butterfly-pendant-silver.jpg",
+        "/necklace/catalog/hollow-butterfly-pendant-silver-2.jpg",
+        "/necklace/catalog/hollow-butterfly-pendant-silver-3.jpg",
+        "/necklace/catalog/hollow-butterfly-pendant-silver-4.jpg",
+        "/necklace/catalog/wear-hollow-butterfly-pendant-silver.jpg"
+      ],
+      "hoverImage": "/necklace/catalog/wear-hollow-butterfly-pendant-silver.jpg",
+      "description": "A hollow-out butterfly pendant in silver — open wings, cool filigree light.",
+      "story": "Silver wings for quieter rooms.",
+      "details": [
+        "Hollow butterfly",
+        "S925 silver",
+        "Fine chain",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Wipe dry after wear. Keep away from perfume and water. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Hollow out butterfly pedant.jpg",
+        "Hollow out butterfly pedant(silver).jpg",
+        "Hollow out butterfly pedant(silver)(1).jpg",
+        "Hollow out butterfly pedant(silver)(2).jpg"
+      ],
+      "_defaultSource": "Hollow out butterfly pedant.jpg"
+    }
+  ],
+  "orphans": [],
+  "totalSource": 35
+}

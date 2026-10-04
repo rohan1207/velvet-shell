@@ -7,6 +7,7 @@ import CustomCursor from './CustomCursor';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import CartDrawer from './CartDrawer';
+import QuickViewDrawer from './QuickViewDrawer';
 import SearchModal from './SearchModal';
 import MobileBlock from './MobileBlock';
 
@@ -21,8 +22,9 @@ export default function Providers({ children }) {
             <Navbar />
           </Suspense>
           <CartDrawer />
+          <QuickViewDrawer />
           <SearchModal />
-          <main className="relative w-full overflow-x-hidden">{children}</main>
+          <main className="relative w-full overflow-x-clip">{children}</main>
           <Footer />
         </SmoothScroll>
       </div>

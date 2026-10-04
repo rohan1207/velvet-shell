@@ -25,29 +25,36 @@ export default function Hero3() {
         <div className="hidden min-h-0 flex-1 gap-3 md:grid md:grid-cols-[minmax(0,1fr)_auto] lg:gap-3.5">
           {/* Left column */}
           <div className="flex min-h-0 flex-col gap-3 lg:gap-3.5">
-            <div className="relative flex shrink-0 flex-col items-center justify-center overflow-hidden rounded-[1.5rem] bg-pearl px-8 py-8 text-center lg:rounded-[1.75rem] lg:px-12 lg:py-10 xl:py-11">
-              <span className="pointer-events-none absolute top-0 left-0 h-full w-1.5 bg-burgundy" />
-              <span className="pointer-events-none absolute top-5 right-6 h-1.5 w-1.5 rounded-full bg-gold" />
-              <Image
-                src="/images/hero-floral.png"
-                alt=""
-                width={220}
-                height={220}
-                className="pointer-events-none absolute -right-6 -bottom-8 w-[42%] max-w-[220px] select-none opacity-[0.92] drop-shadow-[0_12px_28px_rgba(94,6,42,0.12)] lg:-right-4 lg:-bottom-6 lg:w-[38%]"
-                aria-hidden
-              />
+            <div className="relative grid shrink-0 grid-cols-[minmax(0,1fr)_minmax(160px,32%)] items-center overflow-hidden rounded-[1.5rem] bg-pearl lg:rounded-[1.75rem] xl:grid-cols-[minmax(0,1fr)_minmax(200px,30%)]">
+              <span className="pointer-events-none absolute top-0 left-0 z-10 h-full w-1.5 bg-burgundy" />
+              <span className="pointer-events-none absolute top-5 right-5 z-10 h-1.5 w-1.5 rounded-full bg-gold" />
 
-              <h1 className="relative z-10 font-bodoni text-[clamp(2.4rem,4.6vw,4.6rem)] leading-[0.92] tracking-[0.05em] text-ink uppercase">
-                Velvet Shell
-              </h1>
-              <p className="font-script relative z-10 mt-1 text-[clamp(1.45rem,2.4vw,2.35rem)] leading-none text-burgundy">
-                A treasure in every reveal
-              </p>
-              <span className="relative z-10 mt-4 h-px w-16 bg-gradient-to-r from-transparent via-gold to-transparent" />
-              <p className="relative z-10 mt-4 max-w-md text-[13px] leading-[1.65] font-normal tracking-[-0.01em] text-ink/65 lg:text-[14px]">
-                Each jewellery piece is designed to inspire confidence and celebrate your unique style —
-                a little mystery, a precious reveal.
-              </p>
+              <div className="relative z-10 px-8 py-8 pr-4 md:px-9 md:py-9 lg:px-12 lg:py-10 xl:px-14 xl:py-11">
+                <h1 className="font-bodoni text-[clamp(2rem,3.2vw,3.1rem)] leading-[1.08] tracking-[0.01em] text-ink">
+                  The Beauty Of Becoming
+                </h1>
+                <span className="mt-4 block h-px w-16 bg-gradient-to-r from-gold via-gold to-transparent" />
+                <p className="mt-5 max-w-2xl text-[15px] leading-[1.75] font-normal tracking-[-0.01em] text-ink/80 lg:text-[16px] lg:leading-[1.8]">
+                  Velvet Shell is a contemporary house of jewellery, gifting and lifestyle creations.
+                  Every piece begins with considered design and ends with a moment of discovery -
+                  something to wear, to give, to keep and to remember.
+                </p>
+                <p className="mt-4 max-w-2xl text-[15px] leading-[1.75] font-normal tracking-[-0.01em] text-ink/80 lg:text-[16px] lg:leading-[1.8]">
+                  And in every becoming - of self, of a bond, of a moment, there is something beautiful
+                  waiting to unwrap.
+                </p>
+              </div>
+
+              <div className="relative flex h-full min-h-[11rem] items-end justify-center self-stretch p-3 pb-2 pr-4 md:min-h-[12.5rem] lg:min-h-[14rem] lg:p-4 lg:pr-5">
+                <Image
+                  src="/images/hero-floral.png"
+                  alt=""
+                  width={320}
+                  height={320}
+                  className="h-auto w-full max-w-[240px] object-contain object-bottom drop-shadow-[0_12px_28px_rgba(94,6,42,0.12)] lg:max-w-[280px]"
+                  aria-hidden
+                />
+              </div>
             </div>
 
             <div className="grid min-h-0 flex-1 grid-cols-2 gap-3 lg:gap-3.5">
@@ -77,7 +84,7 @@ export default function Hero3() {
                   sizes="28vw"
                   className="object-cover object-center transition-transform duration-[1.15s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
                 />
-                <span className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full bg-burgundy py-2 pr-2 pl-3.5 shadow-sm">
+                <span className="bg-velvet-texture absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full py-2 pr-2 pl-3.5 shadow-sm">
                   <span className="text-[9px] font-semibold tracking-[0.14em] text-ivory uppercase">
                     Gifting
                   </span>
@@ -106,25 +113,33 @@ export default function Hero3() {
 
         {/* Mobile */}
         <div className="flex min-h-0 flex-1 flex-col gap-2.5 md:hidden">
-          <div className="relative shrink-0 overflow-hidden rounded-[1.35rem] bg-pearl px-5 py-7 text-center">
-            <span className="absolute top-0 left-0 h-full w-1 bg-burgundy" />
-            <Image
-              src="/images/hero-floral.png"
-              alt=""
-              width={140}
-              height={140}
-              className="pointer-events-none absolute -right-5 -bottom-6 w-[38%] max-w-[140px] select-none opacity-90"
-              aria-hidden
-            />
-            <h1 className="relative z-10 font-bodoni text-[2.15rem] leading-[0.92] tracking-[0.04em] text-ink uppercase">
-              Velvet Shell
-            </h1>
-            <p className="font-script relative z-10 mt-1 text-[1.45rem] leading-none text-burgundy">
-              A treasure in every reveal
-            </p>
-            <p className="relative z-10 mt-3 text-[12px] leading-relaxed text-ink/60">
-              A little mystery, a precious reveal.
-            </p>
+          <div className="relative shrink-0 overflow-hidden rounded-[1.35rem] bg-pearl">
+            <span className="absolute top-0 left-0 z-10 h-full w-1 bg-burgundy" />
+            <div className="px-5 pt-6 pr-4 pb-2">
+              <h1 className="font-bodoni text-[1.85rem] leading-[1.08] tracking-[0.01em] text-ink">
+                The Beauty Of Becoming
+              </h1>
+              <span className="mt-3 block h-px w-14 bg-gradient-to-r from-gold via-gold to-transparent" />
+              <p className="mt-4 text-[14px] leading-[1.7] text-ink/80">
+                Velvet Shell is a contemporary house of jewellery, gifting and lifestyle creations.
+                Every piece begins with considered design and ends with a moment of discovery -
+                something to wear, to give, to keep and to remember.
+              </p>
+              <p className="mt-3 text-[14px] leading-[1.7] text-ink/80">
+                And in every becoming - of self, of a bond, of a moment, there is something beautiful
+                waiting to unwrap.
+              </p>
+            </div>
+            <div className="flex justify-end px-3 pb-2">
+              <Image
+                src="/images/hero-floral.png"
+                alt=""
+                width={160}
+                height={160}
+                className="h-auto w-[42%] max-w-[150px] object-contain"
+                aria-hidden
+              />
+            </div>
           </div>
 
           <Link

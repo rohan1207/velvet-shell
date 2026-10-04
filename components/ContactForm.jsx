@@ -28,7 +28,7 @@ export default function ContactForm() {
         <span className="text-[10px] tracking-[0.28em] uppercase">Message</span>
         <textarea name="message" rows={5} required className="mt-3 w-full resize-none border-b border-cream bg-transparent py-3 outline-none" />
       </label>
-      <button type="submit" className="h-12 bg-ink px-10 text-[11px] tracking-[0.28em] text-ivory uppercase">
+      <button type="submit" className="h-12 rounded-full bg-ink px-10 text-[11px] tracking-[0.28em] text-ivory uppercase">
         Send
       </button>
     </form>
@@ -44,7 +44,7 @@ function Field({ label, name, type = 'text', required, placeholder }) {
         type={type}
         required={required}
         placeholder={placeholder}
-        className="mt-3 w-full border-b border-cream bg-transparent py-3 outline-none placeholder:text-stone/50"
+        className="mt-3 w-full border-b border-cream bg-transparent py-3 outline-none placeholder:text-stone/75"
       />
     </label>
   );

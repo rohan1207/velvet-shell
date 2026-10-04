@@ -1,108 +1,154 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { brand } from '@/lib/brand';
 
-export const metadata = { title: 'Brand' };
+export const metadata = {
+  title: 'About Us',
+  description:
+    'Where a pearl begins and a dream takes shape — the story, mission and vision of Velvet Shell.',
+};
 
 export default function AboutPage() {
   return (
-    <div className="bg-ivory pt-28 pb-0 md:pt-36">
-      <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-        <p className="font-label text-gold">Brand introduction</p>
-        <h1 className="font-display mt-4 max-w-5xl text-5xl leading-[1.08] md:text-7xl lg:text-8xl">
-          Where beautiful things become meaningful discoveries.
-        </h1>
-        <p className="mt-8 max-w-2xl text-base font-light leading-relaxed text-ink/70 md:text-lg">
-          A premium house of jewellery, gifting, fragrances, home and lifestyle creations — thoughtful
-          design and refined luxury, so every reveal feels truly special.
-        </p>
-      </div>
-
-      <div className="mt-16 grid md:grid-cols-2">
-        <div className="relative min-h-[70vh]">
-          <Image
-            src="/images/atelier-daylight.png"
-            alt="Velvet Shell atelier"
-            fill
-            className="object-cover"
-            sizes="50vw"
-          />
-        </div>
-        <div className="flex flex-col justify-center bg-pearl px-8 py-16 md:px-16">
-          <p className="font-label text-gold">Brand story</p>
-          <p className="font-display-italic mt-5 text-3xl text-burgundy md:text-4xl">
-            The most precious things rarely reveal themselves at first glance.
-          </p>
-          <p className="mt-8 text-base font-light leading-relaxed text-ink/70">
-            A shell keeps its treasure hidden; protected, patiently formed, and waiting for the right
-            moment to be discovered. When it opens, it reveals more than a pearl. It reveals wonder.
-          </p>
-          <p className="mt-5 text-base font-light leading-relaxed text-ink/70">
-            Velvet lends the softness of luxury. The shell brings strength and mystery. And within
-            lies the pearl — something rare, meaningful and beautifully unexpected.
-          </p>
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-[1600px] px-5 py-24 md:px-10 md:py-32">
-        <p className="font-label text-gold">Brand philosophy</p>
-        <h2 className="font-display mt-4 max-w-3xl text-4xl md:text-5xl">
-          At Velvet Shell, luxury begins before the reveal.
-        </h2>
-        <p className="mt-6 max-w-xl text-base font-light leading-relaxed text-ink/65">
-          It lives in the anticipation, the thoughtful details and the quiet excitement of discovering
-          what lies within. True luxury is not simply something you see or own — it is something you
-          unwrap, experience and remember.
-        </p>
-
-        <div className="mt-16 grid gap-8 border-t border-ink/10 pt-12 sm:grid-cols-2 lg:grid-cols-4">
-          {brand.essence.map((word, i) => (
-            <div key={word}>
-              <p className="font-label text-gold">0{i + 1}</p>
-              <p className="font-heading mt-3 text-2xl font-light tracking-[-0.02em] text-ink md:text-3xl">
-                {word}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="border-y border-ink/8 bg-pearl">
-        <div className="mx-auto max-w-[1600px] px-5 py-20 md:px-10 md:py-24">
-          <p className="font-label text-gold">What Velvet Shell stands for</p>
-          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
-            {[
-              ['Refined', 'Thoughtful design with restraint.'],
-              ['Precious', 'Beauty that feels considered and valuable.'],
-              ['Emotional', 'Objects that carry meaning beyond function.'],
-              ['Intriguing', 'A sense of anticipation before the reveal.'],
-              ['Versatile', 'A luxury language across categories.'],
-            ].map(([title, line]) => (
-              <div key={title}>
-                <h3 className="font-heading text-xl font-light text-burgundy">{title}</h3>
-                <p className="mt-3 text-sm font-light leading-relaxed text-ink/60">{line}</p>
-              </div>
-            ))}
+    <div className="bg-ivory">
+      {/* Intro */}
+      <section className="pt-28 pb-16 md:pt-36 md:pb-24">
+        <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+          <p className="font-label text-gold">About Us</p>
+          <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.8rem,7vw,5.8rem)] leading-[0.98] tracking-[-0.03em] text-ink">
+            Where A Pearl Begins.
+            <span className="mt-1 block">Where A Dream Takes Shape.</span>
+          </h1>
+          <div className="mt-10 max-w-2xl space-y-5 text-[15px] font-light leading-[1.8] text-ink/80 md:text-base">
+            <p>
+              A pearl begins with something unexpected - a tiny irritant entering the shell. Layer by
+              layer, the shell responds, forming something rare around it.
+            </p>
+            <p>
+              For us, that holds a deeper thought: beautiful things can emerge from beginnings that are
+              not always perfect or planned.
+            </p>
+            <p>
+              Velvet Shell also grew from our founder&apos;s desire to build something of her own - a
+              creative pursuit shaped by independence, purpose and the belief that women can create,
+              lead and build on their own terms.
+            </p>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="relative min-h-[70vh]">
-        <Image src="/images/salon-viewing.png" alt="Private viewing" fill className="object-cover" sizes="100vw" />
-        <div className="absolute inset-0 bg-burgundy/45" />
-        <div className="relative z-10 flex min-h-[70vh] items-end px-8 py-16 md:px-16">
-          <div>
-            <p className="font-label text-gold">{brand.tagline}</p>
-            <h2 className="font-display mt-4 text-5xl text-ivory md:text-7xl">Viewings, not queues.</h2>
+      {/* Visual break */}
+      <section className="relative min-h-[55vh] md:min-h-[70vh]">
+        <Image
+          src="/images/atelier-daylight.png"
+          alt="Velvet Shell atelier"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent" aria-hidden />
+      </section>
+
+      {/* Our story */}
+      <section className="border-b border-ink/8 bg-pearl">
+        <div className="mx-auto grid max-w-[1600px] gap-12 px-5 py-20 md:px-10 md:py-28 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-4">
+            <p className="font-label text-gold">Our story</p>
+            <h2 className="font-display mt-4 text-[clamp(2rem,3.8vw,3.2rem)] leading-[1.08] tracking-[-0.02em] text-ink">
+              From A Small Beginning, Something Precious.
+            </h2>
+          </div>
+          <div className="space-y-5 text-[15px] font-light leading-[1.85] text-ink/80 lg:col-span-7 lg:col-start-6 md:text-base">
+            <p>
+              After nearly 20 years in business, our founder, Mrs. Smita Eghe wanted to explore a more
+              creative side of her journey - one rooted in jewellery, styling, gifting and beauty.
+            </p>
+            <p>
+              Her background is in Instrumentation Engineering, with years spent in technical and
+              project-led businesses. Yet jewellery was always a personal interest. She loved choosing
+              pieces for herself, and friends would often notice her choices and ask where she had found
+              them.
+            </p>
+            <p>
+              Over time, one simple thought began to take shape: if this is something we love choosing,
+              why not create something of our own? That thought became the beginning of Velvet Shell.
+            </p>
+            <p>
+              The name draws from something that has always fascinated us - the making of a pearl. When
+              an unexpected particle enters an oyster, it responds layer by layer, eventually creating
+              something rare and beautiful.
+            </p>
+            <p>
+              That idea became more than an inspiration. It became a philosophy we hold close: we cannot
+              always choose what enters our lives, but we can choose what we create from it.
+            </p>
+            <p>
+              And that is what Velvet Shell is about - bringing together jewellery, gifting and lifestyle
+              creations with curiosity, thought and a deep appreciation for the beauty that can emerge
+              along the way.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission + Vision */}
+      <section
+        id="mission"
+        className="mx-auto max-w-[1600px] scroll-mt-28 px-5 py-20 md:scroll-mt-32 md:px-10 md:py-28"
+      >
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
+          <div className="border-t border-ink/10 pt-10">
+            <p className="font-label text-gold">Mission</p>
+            <h2 className="font-display mt-4 text-[clamp(2rem,3.5vw,3rem)] leading-[1.08] tracking-[-0.02em] text-ink">
+              To Create. To Empower. To Inspire.
+            </h2>
+            <p className="mt-7 max-w-md text-[15px] font-light leading-[1.85] text-ink/80 md:text-base">
+              To create thoughtfully designed jewellery and gifting experiences that carry beauty,
+              meaning and individuality while nurturing a culture where women feel empowered to create,
+              lead and build with confidence.
+            </p>
+          </div>
+
+          <div className="border-t border-ink/10 pt-10">
+            <p className="font-label text-gold">Vision</p>
+            <h2 className="font-display mt-4 text-[clamp(2rem,3.5vw,3rem)] leading-[1.08] tracking-[-0.02em] text-ink">
+              To Build A World Of Meaningful Luxury.
+            </h2>
+            <p className="mt-7 max-w-md text-[15px] font-light leading-[1.85] text-ink/80 md:text-base">
+              To grow Velvet Shell into a distinctive contemporary luxury house, where thoughtful design,
+              refined craft and the spirit of discovery come together while creating an ecosystem that
+              encourages women to pursue their own ideas, ambitions and journeys.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Closing visual */}
+      <section className="relative min-h-[60vh] md:min-h-[70vh]">
+        <Image
+          src="/images/salon-viewing.png"
+          alt="Velvet Shell private viewing"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-burgundy/50" aria-hidden />
+        <div className="relative z-10 flex min-h-[60vh] items-end px-5 py-14 md:min-h-[70vh] md:px-10 md:py-20">
+          <div className="mx-auto w-full max-w-[1600px]">
+            <p className="font-label text-gold">Velvet Shell</p>
+            <h2 className="font-display mt-4 max-w-2xl text-[clamp(2.2rem,5vw,4rem)] leading-[1.05] tracking-[-0.03em] text-ivory">
+              We cannot always choose what enters our lives, but we can choose what we create from it.
+            </h2>
             <Link
               href="/contact"
-              className="mt-6 inline-block font-label text-ivory transition-opacity hover:opacity-70"
+              className="mt-8 inline-flex items-center gap-3 font-label text-[11px] tracking-[0.2em] text-ivory transition-colors hover:text-gold"
             >
-              Private appointment
+              Begin a conversation
+              <span aria-hidden>→</span>
             </Link>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

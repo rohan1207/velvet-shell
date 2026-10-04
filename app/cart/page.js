@@ -39,7 +39,7 @@ export default function CartPage() {
                             {item.metal} · {item.size}
                           </p>
                         </div>
-                        <p>{money(product.price * item.qty)}</p>
+                        <p className="font-num">{money(product.price * item.qty)}</p>
                       </div>
                       <div className="mt-auto flex items-center justify-between pt-4">
                         <div className="flex items-center gap-4">
@@ -63,9 +63,9 @@ export default function CartPage() {
             <div className="mt-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
               <div>
                 <p className="text-sm text-stone">Subtotal</p>
-                <p className="font-display text-4xl">{money(cartTotal)}</p>
+                <p className="font-num text-3xl text-ink md:text-4xl">{money(cartTotal)}</p>
               </div>
-              <Link href="/checkout" className="flex h-12 items-center bg-ink px-10 text-[11px] tracking-[0.28em] text-ivory uppercase">
+              <Link href="/checkout" className="flex h-12 items-center rounded-full bg-ink px-10 text-[11px] tracking-[0.28em] text-ivory uppercase">
                 Checkout
               </Link>
             </div>

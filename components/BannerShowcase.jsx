@@ -2,24 +2,46 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const INTERVAL_MS = 4000;
 
 const slides = [
   {
-    id: 'unique',
-    image: '/images/banner-slide-unique.png',
-    alt: 'What sets us apart — silver that meets eighteen-karat gold',
+    id: 'rings',
+    image: '/images/category-banner-rings.jpg',
+    alt: 'Rings — petals and polish, shaped for the hand',
+    href: '/shop?category=rings',
   },
   {
-    id: 'atelier',
-    image: '/images/banner-slide-atelier.png',
-    alt: 'The design — quiet lines, lasting weight',
+    id: 'bracelets',
+    image: '/images/category-banner-bracelets.jpg',
+    alt: 'Bracelets — delicate branches that follow the wrist',
+    href: '/shop?category=bracelets',
   },
   {
-    id: 'offer',
-    image: '/images/banner-slide-offer.png',
-    alt: 'Private note — complimentary shipping worldwide',
+    id: 'earrings',
+    image: '/images/category-banner-earrings.jpg',
+    alt: 'Earrings — nature-drawn gold and silver for the ear',
+    href: '/shop?category=earrings',
+  },
+  {
+    id: 'necklaces',
+    image: '/images/category-banner-necklaces.jpg',
+    alt: 'Necklaces — floral forms worn close to the collarbone',
+    href: '/shop?category=necklaces',
+  },
+  {
+    id: 'brooches',
+    image: '/images/category-banner-brooches.jpg',
+    alt: 'Brooches — calla lilies and quiet botanical pins',
+    href: '/shop?category=cuffs',
+  },
+  {
+    id: 'gifting',
+    image: '/images/hero-gift.png',
+    alt: 'Gifting — This Diwali, gift your loved ones',
+    href: '/gifting',
   },
 ];
 
@@ -60,7 +82,7 @@ export default function BannerShowcase() {
 
   return (
     <section
-      className="relative box-border h-[100svh] w-full overflow-hidden bg-ivory"
+      className="relative box-border h-[calc(100svh-6.25rem)] w-full scroll-mt-[6.25rem] overflow-hidden bg-ivory md:h-[calc(100svh-7.1rem)] md:scroll-mt-[7.1rem]"
       aria-roledescription="carousel"
       aria-label="Featured banners"
     >
@@ -77,14 +99,16 @@ export default function BannerShowcase() {
             className="relative h-full w-full min-w-full shrink-0 basis-full"
             aria-hidden={i !== index}
           >
-            <Image
-              src={slide.image}
-              alt={slide.alt}
-              fill
-              priority={i === 0}
-              sizes="100vw"
-              className="object-cover object-center"
-            />
+            <Link href={slide.href} className="absolute inset-0 block" aria-label={slide.alt}>
+              <Image
+                src={slide.image}
+                alt={slide.alt}
+                fill
+                priority={i === 0}
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+            </Link>
           </article>
         ))}
       </div>

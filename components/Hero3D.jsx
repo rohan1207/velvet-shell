@@ -16,7 +16,7 @@ export default function Hero3D() {
         <div className="hero-copy order-2 flex flex-col justify-center md:order-1 md:col-span-5 lg:col-span-5">
           <div className="inline-flex w-fit items-center gap-2 rounded-full border border-cream bg-pearl px-3.5 py-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-            <span className="text-[11px] font-medium tracking-[0.18em] text-ink/70 uppercase">
+            <span className="text-[11px] font-medium tracking-[0.18em] text-ink/80 uppercase">
               New season · Autumn 2027
             </span>
           </div>
@@ -30,7 +30,7 @@ export default function Hero3D() {
           <p className="mt-6 max-w-md text-[15px] leading-[1.75] text-stone md:text-[16px]">
             Sculptural jewelry in nacre and champagne gold — made slowly in Jaipur, finished for the body, never for a tray.
           </p>
-          <p className="mt-3 max-w-md text-[14px] leading-[1.7] text-stone/80 md:text-[15px]">
+          <p className="mt-3 max-w-md text-[14px] leading-[1.7] text-stone md:text-[15px]">
             Drag the piece to turn it in light. Then choose how you enter the house.
           </p>
 
@@ -39,7 +39,7 @@ export default function Hero3D() {
               <Link
                 href="/shop"
                 data-cursor="Enter"
-                className="inline-flex items-center rounded-full bg-[#5E062A] px-7 py-3.5 text-[13px] font-semibold tracking-[0.04em] text-white transition-transform hover:scale-[1.02]"
+                className="bg-velvet-texture inline-flex items-center rounded-full px-7 py-3.5 text-[13px] font-semibold tracking-[0.04em] text-white transition-transform hover:scale-[1.02]"
               >
                 Shop the edit
               </Link>
@@ -68,7 +68,7 @@ export default function Hero3D() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-full border border-cream bg-pearl px-4 py-2 text-[12px] font-medium tracking-[0.06em] text-ink/75 uppercase transition-colors hover:border-gold/40 hover:bg-white hover:text-ink"
+                className="rounded-full border border-cream bg-pearl px-4 py-2 text-[12px] font-medium tracking-[0.06em] text-ink/85 uppercase transition-colors hover:border-gold/40 hover:bg-white hover:text-ink"
               >
                 {item.label}
               </Link>
@@ -89,7 +89,7 @@ export default function Hero3D() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-5 text-[10px] tracking-[0.3em] text-stone/45 uppercase md:left-10">
+      <div className="absolute bottom-8 left-5 text-[10px] tracking-[0.3em] text-stone/85 uppercase md:left-10">
         Scroll
       </div>
     </section>

@@ -48,7 +48,7 @@ export default function SearchModal() {
                       <Image src={product.image} alt="" fill className="object-cover" sizes="56px" />
                     </span>
                     <span className="font-display text-2xl">{product.name}</span>
-                    <span className="ml-auto text-sm text-stone">{money(product.price)}</span>
+                    <span className="font-num ml-auto text-sm text-ink/85">{money(product.price)}</span>
                   </Link>
                 </li>
               ))}

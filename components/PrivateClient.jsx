@@ -18,13 +18,13 @@ export default function PrivateClient() {
         <div className="grid items-stretch gap-10 lg:grid-cols-12 lg:gap-14">
           <div className="flex flex-col justify-between lg:col-span-5">
             <div>
-              <p className="text-[11px] font-semibold tracking-[0.18em] text-ink/45 uppercase">
+              <p className="text-[11px] font-semibold tracking-[0.18em] text-ink/85 uppercase">
                 Private client · 02
               </p>
               <h2 className="font-display mt-4 max-w-md text-4xl font-semibold tracking-[-0.04em] text-ink md:text-5xl lg:text-[3.35rem]">
                 By appointment, not by accident.
               </h2>
-              <p className="mt-7 max-w-md text-[15px] leading-[1.7] text-ink/65 md:text-base">
+              <p className="mt-7 max-w-md text-[15px] leading-[1.7] text-ink/85 md:text-base">
                 A viewing in Paris or Jaipur. A piece made to the measure of a hand. The house keeps
                 a small book of private work — collars, signets, and objects that will not be repeated.
               </p>
@@ -34,7 +34,7 @@ export default function PrivateClient() {
               <dl className="grid grid-cols-2 gap-x-6 gap-y-6 border-t border-ink/10 pt-7">
                 {details.map((item) => (
                   <div key={item.label}>
-                    <dt className="text-[10px] font-semibold tracking-[0.16em] text-ink/35 uppercase">
+                    <dt className="text-[10px] font-semibold tracking-[0.16em] text-ink/85 uppercase">
                       {item.label}
                     </dt>
                     <dd className="mt-1.5 text-sm text-ink">{item.value}</dd>
@@ -45,7 +45,7 @@ export default function PrivateClient() {
               <Magnetic className="mt-10 inline-block">
                 <Link
                   href="/contact"
-                  className="inline-flex h-12 items-center bg-[#5E062A] px-8 text-[11px] font-semibold tracking-[0.18em] text-ivory uppercase transition-opacity hover:opacity-90"
+                  className="bg-velvet-texture inline-flex h-12 items-center px-8 text-[11px] font-semibold tracking-[0.18em] text-ivory uppercase transition-opacity hover:opacity-90"
                 >
                   Request a viewing
                 </Link>
@@ -74,10 +74,10 @@ export default function PrivateClient() {
                 />
               </div>
               <div className="border border-ink/10 bg-ivory px-5 py-5">
-                <p className="text-[10px] font-semibold tracking-[0.16em] text-ink/35 uppercase">
+                <p className="text-[10px] font-semibold tracking-[0.16em] text-ink/85 uppercase">
                   The quiet room
                 </p>
-                <p className="mt-2 text-sm leading-relaxed text-ink/65">
+                <p className="mt-2 text-sm leading-relaxed text-ink/85">
                   One tray. Soft light. Time enough to decide how a piece should live on you.
                 </p>
               </div>

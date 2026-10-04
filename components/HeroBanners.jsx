@@ -190,7 +190,7 @@ export default function HeroBanners() {
                   <Link
                     href={slide.href}
                     data-cursor="Shop"
-                    className="inline-flex items-center rounded-full bg-[#5E062A] px-8 py-3.5 text-[12px] font-semibold tracking-[0.14em] text-white uppercase transition-transform duration-500 hover:scale-[1.02]"
+                    className="bg-velvet-texture inline-flex items-center rounded-full px-8 py-3.5 text-[12px] font-semibold tracking-[0.14em] text-white uppercase transition-transform duration-500 hover:scale-[1.02]"
                   >
                     {slide.cta}
                   </Link>
@@ -242,7 +242,7 @@ export default function HeroBanners() {
                 onClick={() => goTo(i, i > index ? 1 : -1)}
                 className={`rounded-full px-3.5 py-1.5 text-[10px] font-semibold tracking-[0.16em] uppercase transition-all duration-500 ${
                   i === index
-                    ? 'bg-[#5E062A] text-white'
+                    ? 'bg-velvet-texture text-white'
                     : 'border border-[#2D2B2B]/10 bg-white/45 text-[#2D2B2B]/55 hover:bg-white/75'
                 }`}
               >

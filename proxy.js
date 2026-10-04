@@ -1,17 +1,7 @@
 import { NextResponse } from 'next/server';
 
-/**
- * Temporary: client preview is homepage-only.
- * All app routes redirect to `/` until other pages are ready.
- */
-export function proxy(request) {
-  const { pathname } = request.nextUrl;
-
-  if (pathname === '/') {
-    return NextResponse.next();
-  }
-
-  return NextResponse.redirect(new URL('/', request.url));
+export function proxy() {
+  return NextResponse.next();
 }
 
 export const config = {

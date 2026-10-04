@@ -1,0 +1,1284 @@
+{
+  "skus": [
+    {
+      "slug": "autumn-tree-branch-earrings",
+      "name": "Autumn Tree Branch Earrings",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 3280,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/autumn-tree-branch-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/autumn-tree-branch-earrings.jpg",
+        "/earrings/catalog/autumn-tree-branch-earrings-2.jpg",
+        "/earrings/catalog/autumn-tree-branch-earrings-3.jpg",
+        "/earrings/catalog/autumn-tree-branch-earrings-4.jpg",
+        "/earrings/catalog/autumn-tree-branch-earrings-5.jpg",
+        "/earrings/catalog/autumn-tree-branch-earrings-6.jpg",
+        "/earrings/catalog/wear-autumn-tree-branch-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-autumn-tree-branch-earrings.jpg",
+      "description": "Silver branch earrings drawn like late autumn wood — organic line, quiet weight at the ear.",
+      "story": "A tree held small enough for everyday.",
+      "details": [
+        "S925 silver",
+        "Branch motif",
+        "Lightweight drop",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Autum Tree Branch(silver).jpg",
+        "Autum Tree Branch(silver)(1).jpg",
+        "Autum Tree Branch(silver)(2).jpg",
+        "Autum Tree Branch(silver)(3).jpg",
+        "Autum Tree Branch(silver)(4).jpg",
+        "Autum Tree Branch(silver)(5).jpg"
+      ],
+      "_defaultSource": "Autum Tree Branch(silver).jpg"
+    },
+    {
+      "slug": "chrysanthemum-dangle-earrings",
+      "name": "Chrysanthemum Dangle Earrings",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 4580,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver",
+        "Gold accent"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/chrysanthemum-dangle-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/chrysanthemum-dangle-earrings.jpg",
+        "/earrings/catalog/chrysanthemum-dangle-earrings-2.jpg",
+        "/earrings/catalog/chrysanthemum-dangle-earrings-3.jpg",
+        "/earrings/catalog/chrysanthemum-dangle-earrings-4.jpg",
+        "/earrings/catalog/chrysanthemum-dangle-earrings-5.jpg",
+        "/earrings/catalog/chrysanthemum-dangle-earrings-6.jpg",
+        "/earrings/catalog/chrysanthemum-dangle-earrings-7.jpg",
+        "/earrings/catalog/chrysanthemum-dangle-earrings-8.jpg",
+        "/earrings/catalog/chrysanthemum-dangle-earrings-9.jpg",
+        "/earrings/catalog/chrysanthemum-dangle-earrings-10.jpg",
+        "/earrings/catalog/wear-chrysanthemum-dangle-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-chrysanthemum-dangle-earrings.jpg",
+      "description": "Long chrysanthemum drops — silver outer petals, gold centres, French hooks.",
+      "story": "A bloom that falls with intention.",
+      "details": [
+        "Two-tone floral",
+        "Long dangle",
+        "French hooks",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Chrysanthemum Flower Dangle Long.jpg",
+        "Chrysanthemum Flower Dangle Long .jpg",
+        "Chrysanthemum Flower Dangle Long (1).jpg",
+        "Chrysanthemum Flower Dangle Long(1).jpg",
+        "Chrysanthemum Flower Dangle Long(2).jpg",
+        "Chrysanthemum Flower Dangle Long(3).jpg",
+        "Chrysanthemum Flower Dangle Long(4).jpg",
+        "Chrysanthemum Flower Dangle Long(5).jpg",
+        "Chrysanthemum Flower Dangle Long(6).jpg",
+        "Chrysanthemum Flower Dangle Long(7).jpg"
+      ],
+      "_defaultSource": "Chrysanthemum Flower Dangle Long.jpg"
+    },
+    {
+      "slug": "dragonfly-baroque-pearl-earrings",
+      "name": "Dragonfly Baroque Pearl Earrings",
+      "collection": "pearls-of-nacre",
+      "category": "earrings",
+      "price": 4880,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Pearl",
+      "metal": [
+        "S925 Silver",
+        "Gold accent"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/dragonfly-baroque-pearl-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/dragonfly-baroque-pearl-earrings.jpg",
+        "/earrings/catalog/dragonfly-baroque-pearl-earrings-2.jpg",
+        "/earrings/catalog/dragonfly-baroque-pearl-earrings-3.jpg",
+        "/earrings/catalog/dragonfly-baroque-pearl-earrings-4.jpg",
+        "/earrings/catalog/dragonfly-baroque-pearl-earrings-5.jpg",
+        "/earrings/catalog/dragonfly-baroque-pearl-earrings-6.jpg",
+        "/earrings/catalog/dragonfly-baroque-pearl-earrings-7.jpg",
+        "/earrings/catalog/dragonfly-baroque-pearl-earrings-8.jpg",
+        "/earrings/catalog/wear-dragonfly-baroque-pearl-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-dragonfly-baroque-pearl-earrings.jpg",
+      "description": "Removable dragonfly forms with baroque pearls — assembleable, luminous, quietly dramatic.",
+      "story": "Wings and pearl, worn as a private sky.",
+      "details": [
+        "Baroque pearl",
+        "Dragonfly motif",
+        "Removable assembleable",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Dragonflyremovable assembleable baroque pearl.jpg",
+        "Dragonflyremovable assembleable baroque pear.jpg",
+        "Dragonflyremovable assembleable baroque pear(1).jpg",
+        "Dragonflyremovable assembleable baroque pearl(1).jpg",
+        "Dragonflyremovable assembleable baroque pearl(2).jpg",
+        "Dragonflyremovable assembleable baroque pearl(3).jpg",
+        "Dragonflyremovable assembleable baroque pearl(4).jpg",
+        "Dragonflyremovable assembleable baroque pearl(5).jpg"
+      ],
+      "_defaultSource": "Dragonflyremovable assembleable baroque pearl.jpg"
+    },
+    {
+      "slug": "dripping-honey-bee-earrings",
+      "name": "Dripping Honey & Bee Earrings",
+      "collection": "the-shell-edit",
+      "category": "earrings",
+      "price": 3680,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "18K Gold plated"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/dripping-honey-bee-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/dripping-honey-bee-earrings.jpg",
+        "/earrings/catalog/dripping-honey-bee-earrings-2.jpg",
+        "/earrings/catalog/dripping-honey-bee-earrings-3.jpg",
+        "/earrings/catalog/dripping-honey-bee-earrings-4.jpg",
+        "/earrings/catalog/dripping-honey-bee-earrings-5.jpg",
+        "/earrings/catalog/wear-dripping-honey-bee-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-dripping-honey-bee-earrings.jpg",
+      "description": "Honey-drip forms with a tiny bee — warm gold, playful precision.",
+      "story": "Sweetness, drawn in metal.",
+      "details": [
+        "Gold-toned metal",
+        "Bee and honey motif",
+        "Drop form",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Dripping honey &bee.jpg",
+        "Dripping honey &bee(1).jpg",
+        "Dripping honey &bee(2).jpg",
+        "Dripping honey &bee(3).jpg",
+        "Dripping honey &bee(4).jpg"
+      ],
+      "_defaultSource": "Dripping honey &bee.jpg"
+    },
+    {
+      "slug": "epipremnum-dangle-earrings",
+      "name": "Epipremnum Dangle Earrings",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 3380,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/epipremnum-dangle-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/epipremnum-dangle-earrings.jpg",
+        "/earrings/catalog/epipremnum-dangle-earrings-2.jpg",
+        "/earrings/catalog/epipremnum-dangle-earrings-3.jpg",
+        "/earrings/catalog/epipremnum-dangle-earrings-4.jpg",
+        "/earrings/catalog/wear-epipremnum-dangle-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-epipremnum-dangle-earrings.jpg",
+      "description": "Trailing epipremnum leaf drops — botanical silver, soft movement.",
+      "story": "A houseplant, made elegant.",
+      "details": [
+        "Leaf motif",
+        "Dangle drop",
+        "S925 silver",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Epipremnum Aureum Dangle Drop .jpg",
+        "Epipremnum Aureum Dangle Drop .png",
+        "Epipremnum Aureum Dangle Drop (1).png",
+        "Epipremnum Aureum Dangle Drop (2).png"
+      ],
+      "_defaultSource": "Epipremnum Aureum Dangle Drop .jpg"
+    },
+    {
+      "slug": "flower-design-dangle-earrings",
+      "name": "Flower Design Dangle Earrings",
+      "collection": "pearls-of-nacre",
+      "category": "earrings",
+      "price": 3180,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/flower-design-dangle-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/flower-design-dangle-earrings.jpg",
+        "/earrings/catalog/flower-design-dangle-earrings-2.jpg",
+        "/earrings/catalog/flower-design-dangle-earrings-3.jpg",
+        "/earrings/catalog/flower-design-dangle-earrings-4.jpg",
+        "/earrings/catalog/wear-flower-design-dangle-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-flower-design-dangle-earrings.jpg",
+      "description": "Sculpted flower dangles — clean petals, everyday silver light.",
+      "story": "A flower that learned to hang.",
+      "details": [
+        "Floral dangle",
+        "S925 silver",
+        "Everyday weight",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Flower Design Dangle Earring.jpg",
+        "Flower Design Dangle Earring.png",
+        "Flower Design Dangle Earring(1).png",
+        "Flower Design Dangle Earring(2).png"
+      ],
+      "_defaultSource": "Flower Design Dangle Earring.jpg"
+    },
+    {
+      "slug": "gold-flower-dangle-earrings",
+      "name": "Gold Flower Dangle Earrings",
+      "collection": "gilded-tide",
+      "category": "earrings",
+      "price": 3380,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "18K Gold plated"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/gold-flower-dangle-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/gold-flower-dangle-earrings.jpg",
+        "/earrings/catalog/gold-flower-dangle-earrings-2.jpg",
+        "/earrings/catalog/wear-gold-flower-dangle-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-gold-flower-dangle-earrings.jpg",
+      "description": "Gold-plated flower dangles — warmer light, same botanical line.",
+      "story": "Gold for softer evenings.",
+      "details": [
+        "Gold-plated finish",
+        "Floral dangle",
+        "Lightweight",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Gold Plated Flower Design Dangle Earring.png",
+        "Gold Plated Flower Design Dangle Earring(1).png"
+      ],
+      "_defaultSource": "Gold Plated Flower Design Dangle Earring.png"
+    },
+    {
+      "slug": "flower-earring-gold",
+      "name": "Flower Earrings — Gold",
+      "collection": "gilded-tide",
+      "category": "earrings",
+      "price": 2980,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "18K Gold plated"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/flower-earring-gold.jpg",
+      "gallery": [
+        "/earrings/catalog/flower-earring-gold.jpg",
+        "/earrings/catalog/flower-earring-gold-2.jpg",
+        "/earrings/catalog/wear-flower-earring-gold.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-flower-earring-gold.jpg",
+      "description": "Compact gold flower earrings — soft petals, warm polish.",
+      "story": "A bloom that stays close to the ear.",
+      "details": [
+        "Gold-toned",
+        "Floral form",
+        "Stud or drop",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Flower earring(gold).jpg",
+        "Flower earring(gold)(1).jpg"
+      ],
+      "_defaultSource": "Flower earring(gold).jpg"
+    },
+    {
+      "slug": "flower-earring-silver",
+      "name": "Flower Earrings — Silver",
+      "collection": "pearls-of-nacre",
+      "category": "earrings",
+      "price": 2880,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/flower-earring-silver.jpg",
+      "gallery": [
+        "/earrings/catalog/flower-earring-silver.jpg",
+        "/earrings/catalog/flower-earring-silver-2.jpg",
+        "/earrings/catalog/flower-earring-silver-3.jpg",
+        "/earrings/catalog/flower-earring-silver-4.jpg",
+        "/earrings/catalog/flower-earring-silver-5.jpg",
+        "/earrings/catalog/flower-earring-silver-6.jpg",
+        "/earrings/catalog/flower-earring-silver-7.jpg",
+        "/earrings/catalog/wear-flower-earring-silver.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-flower-earring-silver.jpg",
+      "description": "Silver flower earrings — cool petals, quiet shine.",
+      "story": "Silver bloom for daylight.",
+      "details": [
+        "S925 silver",
+        "Floral form",
+        "Everyday",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Flower earring(silver).jpg",
+        "Flower earring(silver)(1).jpg",
+        "Flower earring(silver)(2).jpg",
+        "Flower earring(silver)(3).jpg",
+        "Flower earring(silver)(4).jpg",
+        "Flower earring(silver)(5).jpg",
+        "Flower earring(silver)(6).jpg"
+      ],
+      "_defaultSource": "Flower earring(silver).jpg"
+    },
+    {
+      "slug": "forget-me-not-hoop-earrings",
+      "name": "Forget-Me-Not Flower Hoops",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 3980,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "18K Gold plated"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/forget-me-not-hoop-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/forget-me-not-hoop-earrings.jpg",
+        "/earrings/catalog/forget-me-not-hoop-earrings-2.jpg",
+        "/earrings/catalog/forget-me-not-hoop-earrings-3.jpg",
+        "/earrings/catalog/forget-me-not-hoop-earrings-4.jpg",
+        "/earrings/catalog/forget-me-not-hoop-earrings-5.jpg",
+        "/earrings/catalog/forget-me-not-hoop-earrings-6.jpg",
+        "/earrings/catalog/forget-me-not-hoop-earrings-7.jpg",
+        "/earrings/catalog/wear-forget-me-not-hoop-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-forget-me-not-hoop-earrings.jpg",
+      "description": "Curved gold hoops clustered with forget-me-not blooms — textured petals, soft curve.",
+      "story": "A garden along the ear.",
+      "details": [
+        "Gold-toned",
+        "Floral hoop",
+        "Organic texture",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Forget-me-not Flower Hoop.jpg",
+        "Forget-me-not Flower Hoop(1).jpg",
+        "Forget-me-not Flower Hoop(2).jpg",
+        "Forget-me-not Flower Hoop(3).jpg",
+        "Forget-me-not Flower Hoop(4).jpg",
+        "Forget-me-not Flower Hoop(5).jpg",
+        "Forget-me-not Flower Hoop(6).jpg"
+      ],
+      "_defaultSource": "Forget-me-not Flower Hoop.jpg"
+    },
+    {
+      "slug": "forget-me-not-flower-earrings",
+      "name": "Forget-Me-Not Flower Earrings",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 3480,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver",
+        "Gold accent"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/forget-me-not-flower-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/forget-me-not-flower-earrings.jpg",
+        "/earrings/catalog/forget-me-not-flower-earrings-2.jpg",
+        "/earrings/catalog/forget-me-not-flower-earrings-3.jpg",
+        "/earrings/catalog/forget-me-not-flower-earrings-4.jpg",
+        "/earrings/catalog/forget-me-not-flower-earrings-5.jpg",
+        "/earrings/catalog/forget-me-not-flower-earrings-6.jpg",
+        "/earrings/catalog/forget-me-not-flower-earrings-7.jpg",
+        "/earrings/catalog/forget-me-not-flower-earrings-8.jpg",
+        "/earrings/catalog/wear-forget-me-not-flower-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-forget-me-not-flower-earrings.jpg",
+      "description": "Forget-me-not blooms as earrings — delicate petals, botanical detail.",
+      "story": "Small flowers, serious craft.",
+      "details": [
+        "Forget-me-not motif",
+        "Lightweight",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Forget-me-not Flower .jpg",
+        "Forget-me-not Flower (1).jpg",
+        "Forget-me-not Flower (2).jpg",
+        "Forget-me-not Flower (3).jpg",
+        "Forget-me-not Flower (4).jpg",
+        "Forget-me-not Flower (5).jpg",
+        "Forget-me-not Flower (6).jpg",
+        "Forget-me-not Flower (7).jpg"
+      ],
+      "_defaultSource": "Forget-me-not Flower .jpg"
+    },
+    {
+      "slug": "french-iris-long-drop-earrings",
+      "name": "French Iris Long Drop Earrings",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 4280,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver",
+        "Gold accent"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/french-iris-long-drop-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/french-iris-long-drop-earrings.jpg",
+        "/earrings/catalog/french-iris-long-drop-earrings-2.jpg",
+        "/earrings/catalog/wear-french-iris-long-drop-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-french-iris-long-drop-earrings.jpg",
+      "description": "French-style iris long drops — elongated bloom, refined fall.",
+      "story": "Iris, drawn for evening.",
+      "details": [
+        "Iris motif",
+        "Long drop",
+        "French style",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "French Style Iris Flower Long Drop.jpg",
+        "French Style Iris Flower Long Drop(1).jpg"
+      ],
+      "_defaultSource": "French Style Iris Flower Long Drop.jpg"
+    },
+    {
+      "slug": "clover-pearl-dangle-earrings",
+      "name": "Four-Leaf Clover Pearl Drops",
+      "collection": "pearls-of-nacre",
+      "category": "earrings",
+      "price": 4680,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Pearl",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/clover-pearl-dangle-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/clover-pearl-dangle-earrings.jpg",
+        "/earrings/catalog/clover-pearl-dangle-earrings-2.jpg",
+        "/earrings/catalog/clover-pearl-dangle-earrings-3.jpg",
+        "/earrings/catalog/clover-pearl-dangle-earrings-4.jpg",
+        "/earrings/catalog/clover-pearl-dangle-earrings-5.jpg",
+        "/earrings/catalog/clover-pearl-dangle-earrings-6.jpg",
+        "/earrings/catalog/clover-pearl-dangle-earrings-7.jpg",
+        "/earrings/catalog/clover-pearl-dangle-earrings-8.jpg",
+        "/earrings/catalog/clover-pearl-dangle-earrings-9.jpg",
+        "/earrings/catalog/wear-clover-pearl-dangle-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-clover-pearl-dangle-earrings.jpg",
+      "description": "Classic four-leaf clover drops with freshwater pearls — luminous, lucky, light.",
+      "story": "Pearl and clover, held as light.",
+      "details": [
+        "Freshwater pearl",
+        "Clover motif",
+        "Dangle drop",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Freshwater Pearl Classic Four-leaf Clover Pear Dangle Drop Earrings .jpg",
+        "Freshwater Pearl Classic Four-leaf Clover Pear Dangle Drop Earrings (1).jpg",
+        "Freshwater Pearl Classic Four-leaf Clover Pear Dangle Drop Earrings .png",
+        "Freshwater Pearl Classic Four-leaf Clover Pear Dangle Drop Earrings (1).png",
+        "Freshwater Pearl Classic Four-leaf Clover Pear Dangle Drop Earrings (2).png",
+        "Freshwater Pearl Classic Four-leaf Clover Pear Dangle Drop Earrings (3).png",
+        "Freshwater Pearl Classic Four-leaf Clover Pear Dangle Drop Earrings (4).png",
+        "Freshwater Pearl Classic Four-leaf Clover Pear Dangle Drop Earrings (5).png",
+        "Freshwater Pearl Classic Four-leaf Clover Pear Dangle Drop Earrings (6).png"
+      ],
+      "_defaultSource": "Freshwater Pearl Classic Four-leaf Clover Pear Dangle Drop Earrings .jpg"
+    },
+    {
+      "slug": "honeybee-stud-earrings",
+      "name": "Honeybee Stud Earrings",
+      "collection": "the-shell-edit",
+      "category": "earrings",
+      "price": 2680,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "18K Gold plated"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/honeybee-stud-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/honeybee-stud-earrings.jpg",
+        "/earrings/catalog/honeybee-stud-earrings-2.jpg",
+        "/earrings/catalog/honeybee-stud-earrings-3.jpg",
+        "/earrings/catalog/wear-honeybee-stud-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-honeybee-stud-earrings.jpg",
+      "description": "Tiny honeybee studs — polished wings, frosted abdomen, everyday charm.",
+      "story": "A garden detail for every day.",
+      "details": [
+        "Bee stud",
+        "Gold-toned",
+        "Post and butterfly",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Honeybee stud.jpg",
+        "Honeybee stud(1).jpg",
+        "Honeybee stud(2).jpg"
+      ],
+      "_defaultSource": "Honeybee stud.jpg"
+    },
+    {
+      "slug": "honeybee-drop-earrings",
+      "name": "Honeybee Drop Earrings",
+      "collection": "the-shell-edit",
+      "category": "earrings",
+      "price": 3180,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "18K Gold plated",
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/honeybee-drop-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/honeybee-drop-earrings.jpg",
+        "/earrings/catalog/honeybee-drop-earrings-2.jpg",
+        "/earrings/catalog/honeybee-drop-earrings-3.jpg",
+        "/earrings/catalog/honeybee-drop-earrings-4.jpg",
+        "/earrings/catalog/honeybee-drop-earrings-5.jpg",
+        "/earrings/catalog/wear-honeybee-drop-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-honeybee-drop-earrings.jpg",
+      "description": "Honeybee drop earrings — golden bees with quiet movement at the ear.",
+      "story": "Flight, paused.",
+      "details": [
+        "Bee motif",
+        "Drop form",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "honey bee golden.jpg",
+        "honeybee earring.jpg",
+        "honey bee golden(silver).jpg",
+        "Honeybee earring(1).jpg",
+        "honeybee earring(2).jpg"
+      ],
+      "_defaultSource": "honey bee golden.jpg"
+    },
+    {
+      "slug": "iris-flower-dangle-earrings",
+      "name": "Iris Flower Dangle Earrings",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 4180,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver",
+        "Gold accent"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/iris-flower-dangle-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/iris-flower-dangle-earrings.jpg",
+        "/earrings/catalog/iris-flower-dangle-earrings-2.jpg",
+        "/earrings/catalog/iris-flower-dangle-earrings-3.jpg",
+        "/earrings/catalog/iris-flower-dangle-earrings-4.jpg",
+        "/earrings/catalog/iris-flower-dangle-earrings-5.jpg",
+        "/earrings/catalog/iris-flower-dangle-earrings-6.jpg",
+        "/earrings/catalog/iris-flower-dangle-earrings-7.jpg",
+        "/earrings/catalog/iris-flower-dangle-earrings-8.jpg",
+        "/earrings/catalog/wear-iris-flower-dangle-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-iris-flower-dangle-earrings.jpg",
+      "description": "Iris flower dangles — layered petals, soft fall, botanical silver work.",
+      "story": "Iris light for the ear.",
+      "details": [
+        "Iris motif",
+        "Dangle",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Iris Flower Dangle.jpg",
+        "Iris Flower Dangle(1).jpg",
+        "Iris Flower Dangle(2).jpg",
+        "Iris Flower Dangle(3).jpg",
+        "Iris Flower Dangle(4).jpg",
+        "Iris Flower Dangle(5).jpg",
+        "Iris Flower Dangle(6).jpg",
+        "Iris Flower Dangle(7).jpg"
+      ],
+      "_defaultSource": "Iris Flower Dangle.jpg"
+    },
+    {
+      "slug": "iris-flower-earrings",
+      "name": "Iris Flower Earrings",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 3480,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/iris-flower-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/iris-flower-earrings.jpg",
+        "/earrings/catalog/iris-flower-earrings-2.jpg",
+        "/earrings/catalog/iris-flower-earrings-3.jpg",
+        "/earrings/catalog/iris-flower-earrings-4.jpg",
+        "/earrings/catalog/iris-flower-earrings-5.jpg",
+        "/earrings/catalog/iris-flower-earrings-6.jpg",
+        "/earrings/catalog/wear-iris-flower-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-iris-flower-earrings.jpg",
+      "description": "Iris blooms as earrings — sculpted petals, cool silver.",
+      "story": "A single iris, twice.",
+      "details": [
+        "Iris motif",
+        "S925 silver",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Iris flower.jpg",
+        "Iris flower(1).jpg",
+        "Iris flower(2).jpg",
+        "Iris flower(3).jpg",
+        "Iris flower(4).jpg",
+        "Iris flower(5).jpg"
+      ],
+      "_defaultSource": "Iris flower.jpg"
+    },
+    {
+      "slug": "iris-long-drop-earrings",
+      "name": "Iris Flower Long Drop Earrings",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 4380,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver",
+        "Gold accent"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/iris-long-drop-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/iris-long-drop-earrings.jpg",
+        "/earrings/catalog/iris-long-drop-earrings-2.jpg",
+        "/earrings/catalog/iris-long-drop-earrings-3.jpg",
+        "/earrings/catalog/iris-long-drop-earrings-4.jpg",
+        "/earrings/catalog/iris-long-drop-earrings-5.jpg",
+        "/earrings/catalog/iris-long-drop-earrings-6.jpg",
+        "/earrings/catalog/iris-long-drop-earrings-7.jpg",
+        "/earrings/catalog/iris-long-drop-earrings-8.jpg",
+        "/earrings/catalog/iris-long-drop-earrings-9.jpg",
+        "/earrings/catalog/wear-iris-long-drop-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-iris-long-drop-earrings.jpg",
+      "description": "Long iris drops — elongated bloom and leaf, made to move.",
+      "story": "Length is the luxury.",
+      "details": [
+        "Long drop",
+        "Iris motif",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "iris flower long drop.jpg",
+        "iris flower long drop(1).jpg",
+        "iris flower long drop(2).jpg",
+        "iris flower long drop(3).jpg",
+        "iris flower long drop(4).jpg",
+        "iris flower long drop(5).jpg",
+        "iris flower long drop(6).jpg",
+        "Iris flower long drop(7).jpg",
+        "Iris Flower long drop(8).jpg"
+      ],
+      "_defaultSource": "iris flower long drop.jpg"
+    },
+    {
+      "slug": "leaf-hoop-earrings",
+      "name": "Leaf Hoop Earrings",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 3580,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/leaf-hoop-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/leaf-hoop-earrings.jpg",
+        "/earrings/catalog/leaf-hoop-earrings-2.jpg",
+        "/earrings/catalog/leaf-hoop-earrings-3.jpg",
+        "/earrings/catalog/leaf-hoop-earrings-4.jpg",
+        "/earrings/catalog/leaf-hoop-earrings-5.jpg",
+        "/earrings/catalog/leaf-hoop-earrings-6.jpg",
+        "/earrings/catalog/leaf-hoop-earrings-7.jpg",
+        "/earrings/catalog/leaf-hoop-earrings-8.jpg",
+        "/earrings/catalog/leaf-hoop-earrings-9.jpg",
+        "/earrings/catalog/leaf-hoop-earrings-10.jpg",
+        "/earrings/catalog/leaf-hoop-earrings-11.jpg",
+        "/earrings/catalog/wear-leaf-hoop-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-leaf-hoop-earrings.jpg",
+      "description": "Leaf-wrapped hoops — botanical silver, open circle, soft shine.",
+      "story": "A leaf that learned the shape of a hoop.",
+      "details": [
+        "Leaf hoop",
+        "S925 silver",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Leaf Hoop Earring.jpg",
+        "Leaf Hoop Earring(1).jpg",
+        "Leaf Hoop Earring(2).jpg",
+        "Leaf Hoop Earring(3).jpg",
+        "Leaf Hoop Earring(4).jpg",
+        "Leaf Hoop Earring(5).jpg",
+        "Leaf Hoop Earring(6).jpg",
+        "Leaf Hoop Earring(7).jpg",
+        "Leaf Hoop Earring(8).jpg",
+        "Leaf Hoop Earring(9).jpg",
+        "Leaf Hoop Earring(10).jpg"
+      ],
+      "_defaultSource": "Leaf Hoop Earring.jpg"
+    },
+    {
+      "slug": "lilac-designer-drop-earrings",
+      "name": "Lilac Flower Designer Drops",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 4480,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/lilac-designer-drop-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/lilac-designer-drop-earrings.jpg",
+        "/earrings/catalog/lilac-designer-drop-earrings-2.jpg",
+        "/earrings/catalog/lilac-designer-drop-earrings-3.jpg",
+        "/earrings/catalog/lilac-designer-drop-earrings-4.jpg",
+        "/earrings/catalog/lilac-designer-drop-earrings-5.jpg",
+        "/earrings/catalog/lilac-designer-drop-earrings-6.jpg",
+        "/earrings/catalog/lilac-designer-drop-earrings-7.jpg",
+        "/earrings/catalog/lilac-designer-drop-earrings-8.jpg",
+        "/earrings/catalog/wear-lilac-designer-drop-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-lilac-designer-drop-earrings.jpg",
+      "description": "Designer lilac drops — clustered blooms, refined fall.",
+      "story": "Lilac, held as architecture.",
+      "details": [
+        "Lilac motif",
+        "Designer drop",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Lilac Flower Designer Drop Earring .jpg",
+        "Lilac Flower Designer Drop Earring (1).jpg",
+        "Lilac Flower Designer Drop Earring (2).jpg",
+        "Lilac Flower Designer Drop Earring (3).jpg",
+        "Lilac Flower Designer Drop Earring (4).jpg",
+        "Lilac Flower Designer Drop Earring (5).jpg",
+        "Lilac Flower Designer Drop Earring (6).jpg",
+        "Lilac Flower Designer Drop Earring (7).jpg"
+      ],
+      "_defaultSource": "Lilac Flower Designer Drop Earring .jpg"
+    },
+    {
+      "slug": "pearl-leaf-stud-earrings",
+      "name": "Pearl & Crystal Leaf Studs",
+      "collection": "pearls-of-nacre",
+      "category": "earrings",
+      "price": 2780,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Pearl",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/pearl-leaf-stud-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/pearl-leaf-stud-earrings.jpg",
+        "/earrings/catalog/pearl-leaf-stud-earrings-2.jpg",
+        "/earrings/catalog/pearl-leaf-stud-earrings-3.jpg",
+        "/earrings/catalog/pearl-leaf-stud-earrings-4.jpg",
+        "/earrings/catalog/pearl-leaf-stud-earrings-5.jpg",
+        "/earrings/catalog/wear-pearl-leaf-stud-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-pearl-leaf-stud-earrings.jpg",
+      "description": "Minimalist pearl studs with crystal rhinestone leaf accents — light, luminous, precise.",
+      "story": "Pearl with a leaf of light.",
+      "details": [
+        "Pearl stud",
+        "Crystal leaf accent",
+        "Minimalist",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Minimalist Pearl Earrings Crystal Rhinestone Leaf Stud Earrings.jpg",
+        "Minimalist pearl earring crystal rhinstones leaf stud earring.jpg",
+        "Minimalist Pearl Earrings Crystal Rhinestone Leaf Stud Earrings(1).jpg",
+        "Minimalist Pearl Earrings Crystal Rhinestone Leaf Stud Earrings(2).jpg",
+        "Minimalist Pearl Earrings Crystal Rhinestone Leaf Stud Earrings(3).jpg"
+      ],
+      "_defaultSource": "Minimalist Pearl Earrings Crystal Rhinestone Leaf Stud Earrings.jpg"
+    },
+    {
+      "slug": "olive-leaf-earrings",
+      "name": "Olive Leaf Earrings",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 2980,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/olive-leaf-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/olive-leaf-earrings.jpg",
+        "/earrings/catalog/olive-leaf-earrings-2.jpg",
+        "/earrings/catalog/olive-leaf-earrings-3.jpg",
+        "/earrings/catalog/wear-olive-leaf-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-olive-leaf-earrings.jpg",
+      "description": "Olive leaves in silver — slender, Mediterranean, quietly classic.",
+      "story": "A leaf of peace, worn twice.",
+      "details": [
+        "Olive leaf motif",
+        "S925 silver",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Olives leaves.jpg",
+        "Olives leaves(1).jpg",
+        "Olives leaves(2).jpg"
+      ],
+      "_defaultSource": "Olives leaves.jpg"
+    },
+    {
+      "slug": "phalaenopsis-hoop-earrings",
+      "name": "Phalaenopsis Flower Hoops",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 4680,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/phalaenopsis-hoop-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/phalaenopsis-hoop-earrings.jpg",
+        "/earrings/catalog/phalaenopsis-hoop-earrings-2.jpg",
+        "/earrings/catalog/phalaenopsis-hoop-earrings-3.jpg",
+        "/earrings/catalog/phalaenopsis-hoop-earrings-4.jpg",
+        "/earrings/catalog/phalaenopsis-hoop-earrings-5.jpg",
+        "/earrings/catalog/phalaenopsis-hoop-earrings-6.jpg",
+        "/earrings/catalog/phalaenopsis-hoop-earrings-7.jpg",
+        "/earrings/catalog/phalaenopsis-hoop-earrings-8.jpg",
+        "/earrings/catalog/phalaenopsis-hoop-earrings-9.jpg",
+        "/earrings/catalog/wear-phalaenopsis-hoop-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-phalaenopsis-hoop-earrings.jpg",
+      "description": "Orchid blooms on silver hoops — phalaenopsis petals, open circle.",
+      "story": "Orchid stillness, circling the ear.",
+      "details": [
+        "Phalaenopsis motif",
+        "Hoop form",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Phalaenopsis Flower Hoop.jpg",
+        "Phalaenopsis Flower Hoop(1).jpg",
+        "Phalaenopsis Flower Hoop(2).jpg",
+        "Phalaenopsis Flower Hoop(3).jpg",
+        "Phalaenopsis Flower Hoop(4).jpg",
+        "Phalaenopsis Flower Hoop(5).jpg",
+        "Phalaenopsis Flower Hoop(6).jpg",
+        "Phalaenopsis Flower Hoop(7).jpg",
+        "Phalaenopsis Flower Hoop(8).jpg"
+      ],
+      "_defaultSource": "Phalaenopsis Flower Hoop.jpg"
+    },
+    {
+      "slug": "retro-circle-drop-earrings",
+      "name": "Retro Circle Drop Earrings",
+      "collection": "gilded-tide",
+      "category": "earrings",
+      "price": 3280,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Vintage",
+      "metal": [
+        "S925 Silver",
+        "Gold accent"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/retro-circle-drop-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/retro-circle-drop-earrings.jpg",
+        "/earrings/catalog/retro-circle-drop-earrings-2.jpg",
+        "/earrings/catalog/retro-circle-drop-earrings-3.jpg",
+        "/earrings/catalog/retro-circle-drop-earrings-4.jpg",
+        "/earrings/catalog/retro-circle-drop-earrings-5.jpg",
+        "/earrings/catalog/retro-circle-drop-earrings-6.jpg",
+        "/earrings/catalog/wear-retro-circle-drop-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-retro-circle-drop-earrings.jpg",
+      "description": "Retro French vintage circle drops — simple geometry, soft shine.",
+      "story": "A circle that remembers Paris.",
+      "details": [
+        "Circle drop",
+        "Vintage inspired",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Retro French Vintage Simple Circle Drop.jpg",
+        "Retro French Vintage Simple Circle Drop(1).jpg",
+        "Retro French Vintage Simple Circle Drop(2).jpg",
+        "Retro French Vintage Simple Circle Drop(3).jpg",
+        "Retro French Vintage Simple Circle Drop(4).jpg",
+        "Retro French Vintage Simple Circle Drop(5).jpg"
+      ],
+      "_defaultSource": "Retro French Vintage Simple Circle Drop.jpg"
+    },
+    {
+      "slug": "tulip-blossom-dangle-earrings",
+      "name": "Tulip Blossom Long Leaf Dangles",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 4080,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/tulip-blossom-dangle-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/tulip-blossom-dangle-earrings.jpg",
+        "/earrings/catalog/tulip-blossom-dangle-earrings-2.jpg",
+        "/earrings/catalog/tulip-blossom-dangle-earrings-3.jpg",
+        "/earrings/catalog/tulip-blossom-dangle-earrings-4.jpg",
+        "/earrings/catalog/tulip-blossom-dangle-earrings-5.jpg",
+        "/earrings/catalog/tulip-blossom-dangle-earrings-6.jpg",
+        "/earrings/catalog/wear-tulip-blossom-dangle-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-tulip-blossom-dangle-earrings.jpg",
+      "description": "Tulip blossoms with long leaf dangles — spring form, elongated line.",
+      "story": "Tulip and leaf, falling together.",
+      "details": [
+        "Tulip motif",
+        "Long leaf dangle",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "Tulip Blossom Long Leaf Dangle.jpg",
+        "Tulip Blossom Long Leaf Dangle(1).jpg",
+        "Tulip Blossom Long Leaf Dangle(2).jpg",
+        "Tulip Blossom Long Leaf Dangle(3).jpg",
+        "Tulip Blossom Long Leaf Dangle(4).jpg",
+        "Tulip Blossom Long Leaf Dangle(5).jpg"
+      ],
+      "_defaultSource": "Tulip Blossom Long Leaf Dangle.jpg"
+    },
+    {
+      "slug": "curved-branch-asymmetric-earrings",
+      "name": "Curved Branch Asymmetric Earrings",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 3880,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/curved-branch-asymmetric-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/curved-branch-asymmetric-earrings.jpg",
+        "/earrings/catalog/curved-branch-asymmetric-earrings-2.jpg",
+        "/earrings/catalog/curved-branch-asymmetric-earrings-3.jpg",
+        "/earrings/catalog/curved-branch-asymmetric-earrings-4.jpg",
+        "/earrings/catalog/curved-branch-asymmetric-earrings-5.jpg",
+        "/earrings/catalog/curved-branch-asymmetric-earrings-6.jpg",
+        "/earrings/catalog/curved-branch-asymmetric-earrings-7.jpg",
+        "/earrings/catalog/wear-curved-branch-asymmetric-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-curved-branch-asymmetric-earrings.jpg",
+      "description": "Asymmetric curved branches and leaves — two different falls, one language.",
+      "story": "Not a pair that mirrors — a pair that converses.",
+      "details": [
+        "Asymmetric pair",
+        "Branch and leaf",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "curved branches &leaves asymmetric.jpg",
+        "curved branches &leaves asymmetric(1).jpg",
+        "curved branches &leaves asymmetric(2).jpg",
+        "curved branches &leaves asymmetric(3).jpg",
+        "curved branches &leaves asymmetric(4).jpg",
+        "curved branches &leaves asymmetric(5).jpg",
+        "curved branches &leaves asymmetric(6).jpg"
+      ],
+      "_defaultSource": "curved branches &leaves asymmetric.jpg"
+    },
+    {
+      "slug": "wild-rose-stud-earrings",
+      "name": "Wild Rose Flower Studs",
+      "collection": "pearls-of-nacre",
+      "category": "earrings",
+      "price": 2580,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/wild-rose-stud-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/wild-rose-stud-earrings.jpg",
+        "/earrings/catalog/wild-rose-stud-earrings-2.jpg",
+        "/earrings/catalog/wear-wild-rose-stud-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-wild-rose-stud-earrings.jpg",
+      "description": "Wild rose studs — open petals, soft centre, everyday bloom.",
+      "story": "A rose that stays.",
+      "details": [
+        "Rose stud",
+        "S925 silver",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "wild Rose flower stud.jpg",
+        "wild Rose flower stud(1).jpg"
+      ],
+      "_defaultSource": "wild Rose flower stud.jpg"
+    },
+    {
+      "slug": "atelier-lfja-earrings",
+      "name": "Atelier LFJA Earrings",
+      "collection": "private-atelier",
+      "category": "earrings",
+      "price": 3680,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Atelier",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/earrings/catalog/atelier-lfja-earrings.jpg",
+      "gallery": [
+        "/earrings/catalog/atelier-lfja-earrings.jpg",
+        "/earrings/catalog/atelier-lfja-earrings-2.jpg",
+        "/earrings/catalog/atelier-lfja-earrings-3.jpg",
+        "/earrings/catalog/atelier-lfja-earrings-4.jpg",
+        "/earrings/catalog/wear-atelier-lfja-earrings.jpg"
+      ],
+      "hoverImage": "/earrings/catalog/wear-atelier-lfja-earrings.jpg",
+      "description": "Private atelier earring edits from the LFJA study — refined form, catalog light.",
+      "story": "A number that became a piece.",
+      "details": [
+        "Atelier edit",
+        "Limited angles",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store hanging or lying flat.",
+      "_sourceFiles": [
+        "800-LFJA0091 (15).jpg",
+        "800-LFJA0091 (16).jpg",
+        "白底-LFJA0091 (1).jpg",
+        "800-LFJA0088 (4).jpg"
+      ],
+      "_defaultSource": "800-LFJA0091 (15).jpg"
+    }
+  ],
+  "orphans": [],
+  "totalSource": 166
+}

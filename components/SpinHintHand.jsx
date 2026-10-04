@@ -13,7 +13,7 @@ export default function SpinHintHand({ className = '' }) {
       aria-hidden
     >
       <div className="relative flex flex-col items-center">
-        <svg width="120" height="72" viewBox="0 0 120 72" fill="none" className="text-ink/55">
+        <svg width="120" height="72" viewBox="0 0 120 72" fill="none" className="text-ink/85">
           {/* left arrow */}
           <motion.path
             d="M28 28 H14"

@@ -18,7 +18,7 @@ export default function SearchPage() {
           placeholder="Nacre, cuff, pearl…"
           className="font-display mt-10 w-full border-b border-cream bg-transparent pb-4 text-3xl outline-none placeholder:text-ink/20"
         />
-        <div className="mt-12 grid gap-x-6 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12 lg:grid-cols-4">
           {results.map((product, index) => (
             <ProductCard key={product.slug} product={product} index={index} />
           ))}

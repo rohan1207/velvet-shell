@@ -1,0 +1,208 @@
+{
+  "skus": [
+    {
+      "slug": "calla-lily-brooch-gold",
+      "name": "Calla Lily Brooch — Gold",
+      "collection": "gilded-tide",
+      "category": "cuffs",
+      "price": 2480,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Brooch",
+      "metal": [
+        "18K Gold plated"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/brooch/catalog/calla-lily-brooch-gold.jpg",
+      "gallery": [
+        "/brooch/catalog/calla-lily-brooch-gold.jpg",
+        "/brooch/catalog/calla-lily-brooch-gold-2.jpg",
+        "/brooch/catalog/calla-lily-brooch-gold-3.jpg",
+        "/brooch/catalog/wear-calla-lily-brooch-gold.jpg"
+      ],
+      "hoverImage": "/brooch/catalog/wear-calla-lily-brooch-gold.jpg",
+      "description": "A slender calla lily pin in gold — matte petal within, polished stem without, warm stamen detail.",
+      "story": "A single bloom, pinned with intention.",
+      "details": [
+        "Gold-toned finish",
+        "Lapel / hat pin",
+        "Matte and polish contrast",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Pin through fabric gently. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Calla Lilly(gold)1.jpg",
+        "Calla Lilly(gold)5.jpg",
+        "Calla Lilly(gold)7.jpg"
+      ],
+      "_defaultSource": "Calla Lilly(gold)1.jpg"
+    },
+    {
+      "slug": "calla-lily-brooch-silver",
+      "name": "Calla Lily Brooch — Silver",
+      "collection": "private-atelier",
+      "category": "cuffs",
+      "price": 2380,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Brooch",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/brooch/catalog/calla-lily-brooch-silver.jpg",
+      "gallery": [
+        "/brooch/catalog/calla-lily-brooch-silver.jpg",
+        "/brooch/catalog/calla-lily-brooch-silver-2.jpg",
+        "/brooch/catalog/wear-calla-lily-brooch-silver.jpg"
+      ],
+      "hoverImage": "/brooch/catalog/wear-calla-lily-brooch-silver.jpg",
+      "description": "A slender calla lily pin in silver — cool petal, polished stem, quiet botanical line.",
+      "story": "Silver calla for quieter cloth.",
+      "details": [
+        "S925 silver",
+        "Lapel / hat pin",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Pin through fabric gently. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Calla Lilly(silver)2.jpg",
+        "Calla Lilly(silver)3.jpg"
+      ],
+      "_defaultSource": "Calla Lilly(silver)2.jpg"
+    },
+    {
+      "slug": "calla-lily-brooch",
+      "name": "Calla Lily Brooch",
+      "collection": "private-atelier",
+      "category": "cuffs",
+      "price": 2280,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Brooch",
+      "metal": [
+        "S925 Silver",
+        "18K Gold accents"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/brooch/catalog/calla-lily-brooch.jpg",
+      "gallery": [
+        "/brooch/catalog/calla-lily-brooch.jpg",
+        "/brooch/catalog/calla-lily-brooch-2.jpg",
+        "/brooch/catalog/calla-lily-brooch-3.jpg",
+        "/brooch/catalog/calla-lily-brooch-4.jpg",
+        "/brooch/catalog/wear-calla-lily-brooch.jpg"
+      ],
+      "hoverImage": "/brooch/catalog/wear-calla-lily-brooch.jpg",
+      "description": "The calla lily pin — sculptural bloom and stem, made to sit lightly on lapel or scarf.",
+      "story": "One flower, held still.",
+      "details": [
+        "Calla lily form",
+        "Lapel / hat pin",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Pin through fabric gently. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Calla Lilly4.jpg",
+        "Calla lilly6.jpg",
+        "Calla lilly8.jpg",
+        "Calla lilly9.jpg"
+      ],
+      "_defaultSource": "Calla Lilly4.jpg"
+    },
+    {
+      "slug": "nandina-flower-brooch",
+      "name": "Nandina Flower Brooch",
+      "collection": "private-atelier",
+      "category": "cuffs",
+      "price": 2680,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Brooch",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/brooch/catalog/nandina-flower-brooch.jpg",
+      "gallery": [
+        "/brooch/catalog/nandina-flower-brooch.jpg",
+        "/brooch/catalog/nandina-flower-brooch-2.jpg",
+        "/brooch/catalog/nandina-flower-brooch-3.jpg",
+        "/brooch/catalog/nandina-flower-brooch-4.jpg",
+        "/brooch/catalog/wear-nandina-flower-brooch.jpg"
+      ],
+      "hoverImage": "/brooch/catalog/wear-nandina-flower-brooch.jpg",
+      "description": "A nandina bloom pin — layered petals, botanical silver, light enough for everyday cloth.",
+      "story": "Heavenly bamboo, worn as a flower.",
+      "details": [
+        "Nandina motif",
+        "Brooch pin",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Pin through fabric gently. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Nandina flower1.png",
+        "Nandina flower2.png",
+        "Nandina flower3.png",
+        "Nandina flower4.png"
+      ],
+      "_defaultSource": "Nandina flower1.png"
+    },
+    {
+      "slug": "sacred-bamboo-flower-brooch",
+      "name": "Sacred Bamboo Flower Brooch",
+      "collection": "private-atelier",
+      "category": "cuffs",
+      "price": 2780,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Brooch",
+      "metal": [
+        "S925 Silver",
+        "Gold accent"
+      ],
+      "sizes": [
+        "One size"
+      ],
+      "image": "/brooch/catalog/sacred-bamboo-flower-brooch.jpg",
+      "gallery": [
+        "/brooch/catalog/sacred-bamboo-flower-brooch.jpg",
+        "/brooch/catalog/sacred-bamboo-flower-brooch-2.jpg",
+        "/brooch/catalog/sacred-bamboo-flower-brooch-3.jpg",
+        "/brooch/catalog/sacred-bamboo-flower-brooch-4.jpg",
+        "/brooch/catalog/wear-sacred-bamboo-flower-brooch.jpg"
+      ],
+      "hoverImage": "/brooch/catalog/wear-sacred-bamboo-flower-brooch.jpg",
+      "description": "Sacred bamboo flower pin — delicate bloom, fine stem, quiet presence on the lapel.",
+      "story": "Bamboo light, pinned once.",
+      "details": [
+        "Sacred bamboo flower",
+        "Brooch pin",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Pin through fabric gently. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Sacred Bamboo Flower1.png",
+        "Sacred Bamboo Flower2.png",
+        "Sacred Bamboo Flower3.png",
+        "Sacred Bamboo Flower4.png"
+      ],
+      "_defaultSource": "Sacred Bamboo Flower1.png"
+    }
+  ],
+  "orphans": [],
+  "totalSource": 17
+}

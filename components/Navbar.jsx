@@ -8,16 +8,45 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { useStore } from '@/context/StoreContext';
 import MegaMenu from './MegaMenu';
 
-const links = [
-  { href: '/', label: 'Rings', match: 'rings' },
-  { href: '/', label: 'Earrings', match: 'earrings' },
-  { href: '/', label: 'Pendants', match: 'necklaces' },
-  { href: '/', label: 'Bracelets', match: 'bracelets' },
-  { href: '/', label: 'Brooches', match: 'cuffs' },
-  { href: '/', label: 'Shop', match: 'shop', mega: 'shop' },
-  { href: '/', label: 'Gifting', match: 'gifting' },
-  { href: '/', label: 'Brand', match: 'brand', mega: 'brand' },
+const leftLinks = [
+  { href: '/shop?category=rings', label: 'Rings', match: 'rings' },
+  { href: '/shop?category=earrings', label: 'Earrings', match: 'earrings' },
+  { href: '/shop?category=necklaces', label: 'Pendants', match: 'necklaces' },
+  { href: '/shop?category=bracelets', label: 'Bracelets', match: 'bracelets' },
+  { href: '/shop?category=cuffs', label: 'Brooches', match: 'cuffs' },
+  { href: '/gifting', label: 'Gifting', match: 'gifting' },
 ];
+
+const rightLinks = [
+  { href: '/shop', label: 'Shop', match: 'shop', mega: 'shop' },
+  { href: '/about', label: 'Brand', match: 'brand', mega: 'brand' },
+];
+
+const links = [...leftLinks, ...rightLinks];
+
+function NavLink({ link, active, onOpenMega, onCloseMega }) {
+  return (
+    <Link
+      href={link.href}
+      onMouseEnter={() => {
+        if (link.mega) onOpenMega(link.mega);
+        else onCloseMega();
+      }}
+      className={`relative px-2 py-1.5 text-[12px] font-semibold tracking-[0.1em] uppercase transition-colors duration-300 lg:px-2.5 lg:text-[13px] xl:text-[14px] ${
+        active ? 'text-white' : 'text-white/75 hover:text-white'
+      }`}
+    >
+      {link.label}
+      {active && (
+        <motion.span
+          layoutId="nav-underline"
+          className="absolute inset-x-2 -bottom-0.5 h-px bg-gold lg:inset-x-2.5"
+          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+        />
+      )}
+    </Link>
+  );
+}
 
 function IconSearch({ className = 'h-5 w-5' }) {
   return (
@@ -67,11 +96,25 @@ function IconBag({ className = 'h-5 w-5' }) {
   );
 }
 
+function IconWishlist({ className = 'h-5 w-5' }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <path
+        d="M12 20s-6.5-4.1-8.7-7.6C1.7 9.8 2.8 6.8 5.6 6.1c1.6-.4 3.3.2 4.4 1.5L12 9.4l1.9-1.8c1.2-1.3 2.9-1.9 4.5-1.5 2.8.7 3.9 3.7 2.3 6.3C18.5 15.9 12 20 12 20Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function Navbar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const category = searchParams.get('category');
-  const { cartCount, setCartOpen, setSearchOpen, menuOpen, setMenuOpen } = useStore();
+  const { cartCount, wishlist, setCartOpen, setSearchOpen, menuOpen, setMenuOpen } = useStore();
+  const wishlistCount = wishlist?.length ?? 0;
   const [scrolled, setScrolled] = useState(false);
   const [mega, setMega] = useState(null);
   const closeTimer = useRef(null);
@@ -105,7 +148,14 @@ export default function Navbar() {
 
   function isActive(link) {
     if (link.mega && mega === link.mega) return true;
-    if (link.match === 'brand') return pathname.startsWith('/about');
+    if (link.match === 'brand') {
+      return (
+        pathname.startsWith('/about') ||
+        pathname.startsWith('/blogs') ||
+        pathname.startsWith('/journal')
+      );
+    }
+    if (link.match === 'gifting') return pathname.startsWith('/gifting');
     if (link.match === 'shop') return pathname === '/shop' && !category;
     if (pathname.startsWith('/shop')) return category === link.match;
     return false;
@@ -114,8 +164,10 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 overflow-hidden transition-[box-shadow,border-radius] duration-500 ${
-          mega ? 'rounded-none' : 'rounded-b-[1.35rem] md:rounded-b-[1.6rem]'
+        className={`fixed inset-x-0 top-0 z-50 transition-[box-shadow,border-radius] duration-500 ${
+          mega
+            ? 'overflow-visible rounded-none'
+            : 'overflow-hidden rounded-b-[1.35rem] md:rounded-b-[1.6rem]'
         }`}
         style={{
           backgroundColor: '#5E062A',
@@ -127,50 +179,54 @@ export default function Navbar() {
         }}
         onMouseLeave={scheduleCloseMega}
       >
-        <div className="relative mx-auto flex h-[5.25rem] max-w-[1600px] items-center justify-between gap-4 px-4 md:h-[5.85rem] md:px-8">
-          <Link href="/" aria-label="Velvet Shell home" className="relative z-10 -ml-0.5 shrink-0">
+        <div className="relative mx-auto grid h-[5.25rem] max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 md:h-[5.85rem] md:gap-4 md:px-8">
+          {/* Left — product menus */}
+          <nav className="relative z-10 hidden min-w-0 items-center justify-start xl:flex">
+            {leftLinks.map((link) => (
+              <NavLink
+                key={link.label}
+                link={link}
+                active={isActive(link)}
+                onOpenMega={openMega}
+                onCloseMega={scheduleCloseMega}
+              />
+            ))}
+          </nav>
+          <div className="xl:hidden" aria-hidden />
+
+          {/* Center — logo */}
+          <Link
+            href="/"
+            aria-label="Velvet Shell home"
+            className="relative z-10 justify-self-center"
+            onMouseEnter={scheduleCloseMega}
+          >
             <span className="relative block h-[5.1rem] w-[5.1rem] overflow-visible md:h-[6.25rem] md:w-[6.25rem]">
               <Image
                 src="/logo-splash.png"
                 alt="Velvet Shell"
                 fill
                 priority
-                className="origin-center object-contain object-left scale-[1.36] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.42]"
+                className="origin-center object-contain scale-[1.36] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.42]"
                 sizes="(max-width: 768px) 100px, 120px"
                 style={{ mixBlendMode: 'screen' }}
               />
             </span>
           </Link>
 
-          <nav className="absolute top-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center xl:flex">
-            {links.map((link) => {
-              const active = isActive(link);
-              return (
-                <Link
+          {/* Right — Shop, Brand + icons */}
+          <div className="relative z-10 flex min-w-0 items-center justify-end gap-0.5 sm:gap-1">
+            <nav className="mr-1 hidden items-center xl:flex">
+              {rightLinks.map((link) => (
+                <NavLink
                   key={link.label}
-                  href={link.href}
-                  onMouseEnter={() => {
-                    if (link.mega) openMega(link.mega);
-                    else scheduleCloseMega();
-                  }}
-                  className={`relative px-2.5 py-1.5 text-[13px] font-semibold tracking-[0.1em] uppercase transition-colors duration-300 lg:px-3 lg:text-[14px] ${
-                    active ? 'text-white' : 'text-white/75 hover:text-white'
-                  }`}
-                >
-                  {link.label}
-                  {active && (
-                    <motion.span
-                      layoutId="nav-underline"
-                      className="absolute inset-x-2.5 -bottom-0.5 h-px bg-gold lg:inset-x-3"
-                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                    />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="relative z-10 flex items-center gap-1 sm:gap-2">
+                  link={link}
+                  active={isActive(link)}
+                  onOpenMega={openMega}
+                  onCloseMega={scheduleCloseMega}
+                />
+              ))}
+            </nav>
             <button
               type="button"
               aria-label="Search"
@@ -180,7 +236,19 @@ export default function Navbar() {
               <IconSearch className="h-[1.35rem] w-[1.35rem]" />
             </button>
             <Link
-              href="/"
+              href="/wishlist"
+              aria-label={`Wishlist (${wishlistCount})`}
+              className="relative inline-flex h-11 w-11 items-center justify-center text-white/85 transition-colors hover:text-white"
+            >
+              <IconWishlist className="h-[1.35rem] w-[1.35rem]" />
+              {wishlistCount > 0 && (
+                <span className="absolute top-1.5 right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-white px-1 text-[10px] font-semibold text-[#5E062A]">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+            <Link
+              href="/account"
               aria-label="Account"
               className="inline-flex h-11 w-11 items-center justify-center text-white/85 transition-colors hover:text-white"
             >
@@ -285,7 +353,10 @@ export default function Navbar() {
                 >
                   <IconSearch className="h-6 w-6" />
                 </button>
-                <Link href="/" aria-label="Account" onClick={() => setMenuOpen(false)}>
+                <Link href="/wishlist" aria-label="Wishlist" onClick={() => setMenuOpen(false)}>
+                  <IconWishlist className="h-6 w-6" />
+                </Link>
+                <Link href="/account" aria-label="Account" onClick={() => setMenuOpen(false)}>
                   <IconAccount className="h-6 w-6" />
                 </Link>
                 <button

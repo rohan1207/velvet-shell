@@ -16,14 +16,14 @@ export default function AtelierChapter() {
       <div className="mx-auto max-w-[1600px] px-5 py-20 md:px-10 md:py-28">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-ink/10 pb-6">
           <div>
-            <p className="text-[11px] font-semibold tracking-[0.18em] text-ink/45 uppercase">
+            <p className="text-[11px] font-semibold tracking-[0.18em] text-ink/85 uppercase">
               Atelier · 01
             </p>
             <h2 className="font-display mt-3 max-w-2xl text-4xl font-semibold tracking-[-0.04em] text-ink md:text-6xl">
               Daylight, and no hurry.
             </h2>
           </div>
-          <p className="max-w-xs text-[11px] font-medium tracking-[0.16em] text-ink/40 uppercase">
+          <p className="max-w-xs text-[11px] font-medium tracking-[0.16em] text-ink/80 uppercase">
             Jaipur atelier — bench work in natural light
           </p>
         </div>
@@ -51,10 +51,10 @@ export default function AtelierChapter() {
             </div>
 
             <div className="border border-ink/10 bg-pearl px-6 py-7 md:px-8 md:py-8">
-              <p className="text-[11px] font-semibold tracking-[0.16em] text-ink/40 uppercase">
+              <p className="text-[11px] font-semibold tracking-[0.16em] text-ink/80 uppercase">
                 Jaipur atelier
               </p>
-              <p className="mt-4 max-w-sm text-[15px] leading-[1.65] text-ink/70">
+              <p className="mt-4 max-w-sm text-[15px] leading-[1.65] text-ink/80">
                 The bench waits for daylight. Tools stay few. Each piece is finished for the body —
                 never for a tray — in a room that refuses hurry.
               </p>
@@ -62,7 +62,7 @@ export default function AtelierChapter() {
               <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-ink/10 pt-6">
                 {facts.map((fact) => (
                   <div key={fact.label}>
-                    <dt className="text-[10px] font-semibold tracking-[0.16em] text-ink/35 uppercase">
+                    <dt className="text-[10px] font-semibold tracking-[0.16em] text-ink/85 uppercase">
                       {fact.label}
                     </dt>
                     <dd className="mt-1.5 text-sm text-ink">{fact.value}</dd>

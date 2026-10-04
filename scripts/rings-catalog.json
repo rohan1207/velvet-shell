@@ -1,0 +1,865 @@
+{
+  "skus": [
+    {
+      "slug": "agate-bee-honey-ring",
+      "name": "Agate Bee & Honey Ring",
+      "collection": "private-atelier",
+      "category": "rings",
+      "price": 3480,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "18K Gold plated"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/agate-bee-honey-ring.jpg",
+      "gallery": [
+        "/rings/catalog/agate-bee-honey-ring.jpg",
+        "/rings/catalog/agate-bee-honey-ring-2.jpg",
+        "/rings/catalog/agate-bee-honey-ring-3.jpg",
+        "/rings/catalog/agate-bee-honey-ring-4.jpg",
+        "/rings/catalog/agate-bee-honey-ring-5.jpg",
+        "/rings/catalog/agate-bee-honey-ring-6.jpg",
+        "/rings/catalog/agate-bee-honey-ring-7.jpg",
+        "/rings/catalog/wear-agate-bee-honey-ring.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-agate-bee-honey-ring.jpg",
+      "description": "A gold twig band crowned with a striped bee — black enamel abdomen, open wings, and honey-warm polish.",
+      "story": "A garden visitor, held still on the hand.",
+      "details": [
+        "Gold-toned metal",
+        "Enamel bee body",
+        "Organic twig band",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Agate Stone Bee and Honey.jpg",
+        "Agate Stone Bee and Honey(1).jpg",
+        "Agate Stone Bee and Honey(2).jpg",
+        "Agate Stone Bee and Honey(3).jpg",
+        "Agate Stone Bee and Honey(4).jpg",
+        "Agate Stone Bee and Honey(5).jpg",
+        "Agate Stone Bee and Honey(6).jpg"
+      ],
+      "_defaultSource": "Agate Stone Bee and Honey.jpg"
+    },
+    {
+      "slug": "aquamarine-butterfly-ring",
+      "name": "Aquamarine Butterfly Ring",
+      "collection": "private-atelier",
+      "category": "rings",
+      "price": 4280,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Stone",
+      "metal": [
+        "S925 Silver",
+        "Gold accent"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/aquamarine-butterfly-ring.jpg",
+      "gallery": [
+        "/rings/catalog/aquamarine-butterfly-ring.jpg",
+        "/rings/catalog/aquamarine-butterfly-ring-2.jpg",
+        "/rings/catalog/aquamarine-butterfly-ring-3.jpg",
+        "/rings/catalog/aquamarine-butterfly-ring-4.jpg",
+        "/rings/catalog/aquamarine-butterfly-ring-5.jpg",
+        "/rings/catalog/aquamarine-butterfly-ring-6.jpg",
+        "/rings/catalog/aquamarine-butterfly-ring-7.jpg",
+        "/rings/catalog/aquamarine-butterfly-ring-8.jpg",
+        "/rings/catalog/wear-aquamarine-butterfly-ring.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-aquamarine-butterfly-ring.jpg",
+      "description": "A raw aquamarine crystal on a silver branch band, with a tiny gold butterfly perched at the crest.",
+      "story": "Stone, wing, and silver twig — quiet flight.",
+      "details": [
+        "S925 silver band",
+        "Raw aquamarine",
+        "Gold butterfly accent",
+        "Adjustable",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Aquamarine Stone butterfly Ring.jpg",
+        "Aquamarine Stone butterfly Ring(1).jpg",
+        "Aquamarine Stone butterfly Ring(2).jpg",
+        "Aquamarine Stone butterfly Ring(3).jpg",
+        "Aquamarine Stone butterfly Ring(4).jpg",
+        "Aquamarine Stone butterfly Ring(5).jpg",
+        "Aquamarine Stone butterfly Ring(6).jpg",
+        "Aquamarine Stone butterfly Ring(7).jpg"
+      ],
+      "_defaultSource": "Aquamarine Stone butterfly Ring.jpg"
+    },
+    {
+      "slug": "bees-kissing-roses-ring",
+      "name": "Bees Kissing Roses Ring",
+      "collection": "private-atelier",
+      "category": "rings",
+      "price": 3980,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "S925 Silver",
+        "Gold accent"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/bees-kissing-roses-ring.jpg",
+      "gallery": [
+        "/rings/catalog/bees-kissing-roses-ring.jpg",
+        "/rings/catalog/bees-kissing-roses-ring-2.jpg",
+        "/rings/catalog/bees-kissing-roses-ring-3.jpg",
+        "/rings/catalog/bees-kissing-roses-ring-4.jpg",
+        "/rings/catalog/bees-kissing-roses-ring-5.jpg",
+        "/rings/catalog/bees-kissing-roses-ring-6.jpg",
+        "/rings/catalog/bees-kissing-roses-ring-7.jpg",
+        "/rings/catalog/bees-kissing-roses-ring-8.jpg",
+        "/rings/catalog/bees-kissing-roses-ring-9.jpg",
+        "/rings/catalog/wear-bees-kissing-roses-ring.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-bees-kissing-roses-ring.jpg",
+      "description": "Twin bees meet at a rose bloom — detailed wings, soft petals, and a botanical silver setting.",
+      "story": "Two bees, one rose — a small romance in metal.",
+      "details": [
+        "Botanical setting",
+        "Bee and rose motif",
+        "Adjustable",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Bees Kissing Roses.jpg",
+        "Bees kissing roses_.jpg",
+        "Bees Kissing Roses(1).jpg",
+        "Bees Kissing Roses(2).jpg",
+        "Bees Kissing Roses(3).jpg",
+        "Bees Kissing Roses(4).jpg",
+        "Bees Kissing Roses(5).jpg",
+        "Bees Kissing Roses(6).jpg",
+        "Bees Kissing Roses(7).jpg"
+      ],
+      "_defaultSource": "Bees Kissing Roses.jpg"
+    },
+    {
+      "slug": "crystal-flower-in-rain-ring",
+      "name": "Crystal Flower In Rain Ring",
+      "collection": "pearls-of-nacre",
+      "category": "rings",
+      "price": 3680,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/crystal-flower-in-rain-ring.jpg",
+      "gallery": [
+        "/rings/catalog/crystal-flower-in-rain-ring.jpg",
+        "/rings/catalog/crystal-flower-in-rain-ring-2.jpg",
+        "/rings/catalog/crystal-flower-in-rain-ring-3.jpg",
+        "/rings/catalog/crystal-flower-in-rain-ring-4.jpg",
+        "/rings/catalog/crystal-flower-in-rain-ring-5.jpg",
+        "/rings/catalog/crystal-flower-in-rain-ring-6.jpg",
+        "/rings/catalog/crystal-flower-in-rain-ring-7.jpg",
+        "/rings/catalog/crystal-flower-in-rain-ring-8.jpg",
+        "/rings/catalog/crystal-flower-in-rain-ring-9.jpg",
+        "/rings/catalog/wear-crystal-flower-in-rain-ring.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-crystal-flower-in-rain-ring.jpg",
+      "description": "A frosted translucent flower on a silver branch band — soft petals, silver stamens, cool light.",
+      "story": "A bloom after rain, worn close to the hand.",
+      "details": [
+        "S925 silver",
+        "Frosted crystal flower",
+        "Branch band",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Crystal Flower in Rain.jpg",
+        "Crystal Flower in Rain(1).jpg",
+        "Crystal Flower in Rain(2).jpg",
+        "Crystal Flower in Rain(3).jpg",
+        "Crystal Flower in Rain(4).jpg",
+        "Crystal Flower in Rain(5).jpg",
+        "Crystal Flower in Rain(6).jpg",
+        "Crystal Flower in Rain(7).jpg",
+        "Crystal Flower in Rain(8).jpg"
+      ],
+      "_defaultSource": "Crystal Flower in Rain.jpg"
+    },
+    {
+      "slug": "flower-adjustable-ring",
+      "name": "Flower Adjustable Ring",
+      "collection": "pearls-of-nacre",
+      "category": "rings",
+      "price": 2980,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/flower-adjustable-ring.jpg",
+      "gallery": [
+        "/rings/catalog/flower-adjustable-ring.jpg",
+        "/rings/catalog/flower-adjustable-ring-2.jpg",
+        "/rings/catalog/flower-adjustable-ring-3.jpg",
+        "/rings/catalog/flower-adjustable-ring-4.jpg",
+        "/rings/catalog/flower-adjustable-ring-5.jpg",
+        "/rings/catalog/flower-adjustable-ring-6.jpg",
+        "/rings/catalog/flower-adjustable-ring-7.jpg",
+        "/rings/catalog/flower-adjustable-ring-8.jpg",
+        "/rings/catalog/wear-flower-adjustable-ring.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-flower-adjustable-ring.jpg",
+      "description": "An open adjustable ring with a sculpted flower centre — light on the finger, full of quiet detail.",
+      "story": "A bloom that finds its size.",
+      "details": [
+        "Adjustable open form",
+        "Floral centre",
+        "Everyday weight",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Flower adjustable ring.jpg",
+        "Flower adjustable ring(1).jpg",
+        "Flower adjustable ring(2).jpg",
+        "Flower adjustable ring(3).jpg",
+        "Flower adjustable ring(4).jpg",
+        "Flower adjustable ring(5).jpg",
+        "Flower adjustable ring(6).jpg",
+        "Flower adjustable ring(7).jpg"
+      ],
+      "_defaultSource": "Flower adjustable ring.jpg"
+    },
+    {
+      "slug": "flower-adjustable-ring-gold",
+      "name": "Flower Adjustable Ring — Gold",
+      "collection": "gilded-tide",
+      "category": "rings",
+      "price": 3180,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "18K Gold plated"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/flower-adjustable-ring-gold.jpg",
+      "gallery": [
+        "/rings/catalog/flower-adjustable-ring-gold.jpg",
+        "/rings/catalog/wear-flower-adjustable-ring-gold.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-flower-adjustable-ring-gold.jpg",
+      "description": "The flower adjustable ring in warm gold — same open form, richer light.",
+      "story": "Gold for the days that want warmth.",
+      "details": [
+        "Gold-toned finish",
+        "Adjustable",
+        "Floral centre",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Flower adjustable ring(gold).jpg"
+      ],
+      "_defaultSource": "Flower adjustable ring(gold).jpg"
+    },
+    {
+      "slug": "flower-adjustable-ring-silver",
+      "name": "Flower Adjustable Ring — Silver",
+      "collection": "pearls-of-nacre",
+      "category": "rings",
+      "price": 3080,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/flower-adjustable-ring-silver.jpg",
+      "gallery": [
+        "/rings/catalog/flower-adjustable-ring-silver.jpg",
+        "/rings/catalog/flower-adjustable-ring-silver-2.jpg",
+        "/rings/catalog/wear-flower-adjustable-ring-silver.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-flower-adjustable-ring-silver.jpg",
+      "description": "The flower adjustable ring in cool silver — open band, crisp bloom.",
+      "story": "Silver for quieter light.",
+      "details": [
+        "S925 silver",
+        "Adjustable",
+        "Floral centre",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Flower adjustable ring(silver).jpg",
+        "Flower adjustable ring(silver)(1).jpg"
+      ],
+      "_defaultSource": "Flower adjustable ring(silver).jpg"
+    },
+    {
+      "slug": "flying-swallow-ring",
+      "name": "Flying Swallow Ring",
+      "collection": "private-atelier",
+      "category": "rings",
+      "price": 3380,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/flying-swallow-ring.jpg",
+      "gallery": [
+        "/rings/catalog/flying-swallow-ring.jpg",
+        "/rings/catalog/flying-swallow-ring-2.jpg",
+        "/rings/catalog/flying-swallow-ring-3.jpg",
+        "/rings/catalog/flying-swallow-ring-4.jpg",
+        "/rings/catalog/flying-swallow-ring-5.jpg",
+        "/rings/catalog/flying-swallow-ring-6.jpg",
+        "/rings/catalog/flying-swallow-ring-7.jpg",
+        "/rings/catalog/wear-flying-swallow-ring.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-flying-swallow-ring.jpg",
+      "description": "A swallow in mid-flight across an adjustable silver band — light wings, decisive line.",
+      "story": "A bird that never lands.",
+      "details": [
+        "S925 silver",
+        "Swallow motif",
+        "Adjustable",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Flying Swallow Adjustable Ring.jpg",
+        "Flying Swallow Adjustable Ring(1).jpg",
+        "Flying Swallow Adjustable Ring(2).jpg",
+        "Flying Swallow Adjustable Ring(3).jpg",
+        "Flying Swallow Adjustable Ring(4).jpg",
+        "Flying Swallow Adjustable Ring(5).jpg",
+        "Flying Swallow Adjustable Ring(6).jpg"
+      ],
+      "_defaultSource": "Flying Swallow Adjustable Ring.jpg"
+    },
+    {
+      "slug": "lily-of-the-valley-ring",
+      "name": "Lily Of The Valley Ring",
+      "collection": "pearls-of-nacre",
+      "category": "rings",
+      "price": 4120,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Crystal",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/lily-of-the-valley-ring.jpg",
+      "gallery": [
+        "/rings/catalog/lily-of-the-valley-ring.jpg",
+        "/rings/catalog/lily-of-the-valley-ring-2.jpg",
+        "/rings/catalog/lily-of-the-valley-ring-3.jpg",
+        "/rings/catalog/lily-of-the-valley-ring-4.jpg",
+        "/rings/catalog/lily-of-the-valley-ring-5.jpg",
+        "/rings/catalog/lily-of-the-valley-ring-6.jpg",
+        "/rings/catalog/wear-lily-of-the-valley-ring.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-lily-of-the-valley-ring.jpg",
+      "description": "Natural crystal bells along a silver stem — lily of the valley, held as a ring.",
+      "story": "Spring, cast in crystal and silver.",
+      "details": [
+        "Natural crystal drops",
+        "S925 silver",
+        "Botanical stem",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Lily of the Valley Flower Natural Crystal Ring.jpg",
+        "Lily of the Valley Flower Natural Crystal Ring(1).jpg",
+        "Lily of the Valley Flower Natural Crystal Ring(2).jpg",
+        "Lily of the Valley Flower Natural Crystal Ring(3).jpg",
+        "Lily of the Valley Flower Natural Crystal Ring(4).jpg",
+        "Lily of the Valley Flower Natural Crystal Ring(5).jpg"
+      ],
+      "_defaultSource": "Lily of the Valley Flower Natural Crystal Ring.jpg"
+    },
+    {
+      "slug": "lotus-natural-stone-ring",
+      "name": "Lotus Natural Stone Ring",
+      "collection": "private-atelier",
+      "category": "rings",
+      "price": 4480,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Stone",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/lotus-natural-stone-ring.jpg",
+      "gallery": [
+        "/rings/catalog/lotus-natural-stone-ring.jpg",
+        "/rings/catalog/lotus-natural-stone-ring-2.jpg",
+        "/rings/catalog/lotus-natural-stone-ring-3.jpg",
+        "/rings/catalog/lotus-natural-stone-ring-4.jpg",
+        "/rings/catalog/lotus-natural-stone-ring-5.jpg",
+        "/rings/catalog/lotus-natural-stone-ring-6.jpg",
+        "/rings/catalog/lotus-natural-stone-ring-7.jpg",
+        "/rings/catalog/lotus-natural-stone-ring-8.jpg",
+        "/rings/catalog/lotus-natural-stone-ring-9.jpg",
+        "/rings/catalog/lotus-natural-stone-ring-10.jpg",
+        "/rings/catalog/wear-lotus-natural-stone-ring.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-lotus-natural-stone-ring.jpg",
+      "description": "A lotus bloom set with natural stone — layered petals, cool silver, quiet weight.",
+      "story": "Lotus light for the hand.",
+      "details": [
+        "Natural stone centre",
+        "Lotus motif",
+        "S925 silver",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Lotus Natural Stone Ring.jpg",
+        "Lotus Natural Stone Ring(1).jpg",
+        "Lotus Natural Stone Ring(2).jpg",
+        "Lotus Natural Stone Ring(3).jpg",
+        "Lotus Natural Stone Ring(4).jpg",
+        "Lotus Natural Stone Ring(5).jpg",
+        "Lotus Natural Stone Ring(6).jpg",
+        "Lotus Natural Stone Ring(7).jpg",
+        "Lotus Natural Stone Ring(8).jpg",
+        "Lotus Natural Stone Ring(9).jpg"
+      ],
+      "_defaultSource": "Lotus Natural Stone Ring.jpg"
+    },
+    {
+      "slug": "lotus-natural-stone-ring-pink",
+      "name": "Lotus Natural Stone Ring — Pink",
+      "collection": "private-atelier",
+      "category": "rings",
+      "price": 4580,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Stone",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/lotus-natural-stone-ring-pink.jpg",
+      "gallery": [
+        "/rings/catalog/lotus-natural-stone-ring-pink.jpg",
+        "/rings/catalog/wear-lotus-natural-stone-ring-pink.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-lotus-natural-stone-ring-pink.jpg",
+      "description": "The lotus natural stone ring in a soft pink stone — same petal architecture, warmer heart.",
+      "story": "Pink lotus, quieter fire.",
+      "details": [
+        "Pink natural stone",
+        "Lotus motif",
+        "S925 silver",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Lotus Natural Stone Ring(pink).jpg"
+      ],
+      "_defaultSource": "Lotus Natural Stone Ring(pink).jpg"
+    },
+    {
+      "slug": "pencil-shaving-ring-gold",
+      "name": "Pencil Shaving Ring — Gold",
+      "collection": "the-shell-edit",
+      "category": "rings",
+      "price": 3280,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Sculptural",
+      "metal": [
+        "18K Gold plated"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/pencil-shaving-ring-gold.jpg",
+      "gallery": [
+        "/rings/catalog/pencil-shaving-ring-gold.jpg",
+        "/rings/catalog/pencil-shaving-ring-gold-2.jpg",
+        "/rings/catalog/pencil-shaving-ring-gold-3.jpg",
+        "/rings/catalog/wear-pencil-shaving-ring-gold.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-pencil-shaving-ring-gold.jpg",
+      "description": "A sculptural gold band coiled like a pencil shaving — continuous ribbon, soft spiral.",
+      "story": "A line that learned to turn.",
+      "details": [
+        "Gold-toned metal",
+        "Spiral ribbon form",
+        "Statement band",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Pencil shaving shape(gold).jpg",
+        "Pencil shaving shape(gold)(1).jpg",
+        "Pencil shaving shape(gold)(2).jpg"
+      ],
+      "_defaultSource": "Pencil shaving shape(gold).jpg"
+    },
+    {
+      "slug": "pencil-shaving-ring-silver",
+      "name": "Pencil Shaving Ring — Silver",
+      "collection": "the-shell-edit",
+      "category": "rings",
+      "price": 3180,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Sculptural",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/pencil-shaving-ring-silver.jpg",
+      "gallery": [
+        "/rings/catalog/pencil-shaving-ring-silver.jpg",
+        "/rings/catalog/pencil-shaving-ring-silver-2.jpg",
+        "/rings/catalog/pencil-shaving-ring-silver-3.jpg",
+        "/rings/catalog/pencil-shaving-ring-silver-4.jpg",
+        "/rings/catalog/wear-pencil-shaving-ring-silver.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-pencil-shaving-ring-silver.jpg",
+      "description": "The pencil-shaving spiral in silver — cool ribbon, continuous coil.",
+      "story": "Silver that turns once, then again.",
+      "details": [
+        "S925 silver",
+        "Spiral ribbon form",
+        "Statement band",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Pencil shaving shape(silver).jpg",
+        "Pencil shaving shape.jpg",
+        "Pencil shaving shape(silver)(1).jpg",
+        "Pencil shaving shape(silver)(2).jpg"
+      ],
+      "_defaultSource": "Pencil shaving shape(silver).jpg"
+    },
+    {
+      "slug": "phalaenopsis-flower-ring",
+      "name": "Phalaenopsis Flower Ring",
+      "collection": "private-atelier",
+      "category": "rings",
+      "price": 4380,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver",
+        "Gold accent"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/phalaenopsis-flower-ring.jpg",
+      "gallery": [
+        "/rings/catalog/phalaenopsis-flower-ring.jpg",
+        "/rings/catalog/phalaenopsis-flower-ring-2.jpg",
+        "/rings/catalog/phalaenopsis-flower-ring-3.jpg",
+        "/rings/catalog/phalaenopsis-flower-ring-4.jpg",
+        "/rings/catalog/phalaenopsis-flower-ring-5.jpg",
+        "/rings/catalog/phalaenopsis-flower-ring-6.jpg",
+        "/rings/catalog/wear-phalaenopsis-flower-ring.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-phalaenopsis-flower-ring.jpg",
+      "description": "An orchid bloom ring — broad phalaenopsis petals, fine centre, botanical silver work.",
+      "story": "Orchid stillness, worn.",
+      "details": [
+        "Phalaenopsis motif",
+        "Detailed petals",
+        "Adjustable",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Phalaenopsis Flower Ring.jpg",
+        "Phalaenopsis Flower Ring(1).jpg",
+        "Phalaenopsis Flower Ring(2).jpg",
+        "Phalaenopsis Flower Ring(3).jpg",
+        "Phalaenopsis Flower Ring(4).jpg",
+        "Phalaenopsis Flower Ring(5).jpg"
+      ],
+      "_defaultSource": "Phalaenopsis Flower Ring.jpg"
+    },
+    {
+      "slug": "phalaenopsis-flower-ring-silver",
+      "name": "Phalaenopsis Flower Ring — Silver",
+      "collection": "private-atelier",
+      "category": "rings",
+      "price": 4280,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Floral",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/phalaenopsis-flower-ring-silver.jpg",
+      "gallery": [
+        "/rings/catalog/phalaenopsis-flower-ring-silver.jpg",
+        "/rings/catalog/wear-phalaenopsis-flower-ring-silver.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-phalaenopsis-flower-ring-silver.jpg",
+      "description": "The phalaenopsis orchid ring in full silver — cool petals, precise veins.",
+      "story": "Silver orchid for quieter rooms.",
+      "details": [
+        "S925 silver",
+        "Orchid motif",
+        "Adjustable",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Phalaenopsis Flower Ring(silver).jpg"
+      ],
+      "_defaultSource": "Phalaenopsis Flower Ring(silver).jpg"
+    },
+    {
+      "slug": "pink-gems-stone-ring",
+      "name": "Pink Gems Stone Ring",
+      "collection": "pearls-of-nacre",
+      "category": "rings",
+      "price": 3920,
+      "limited": false,
+      "madeToOrder": false,
+      "badge": "Stone",
+      "metal": [
+        "S925 Silver"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/pink-gems-stone-ring.jpg",
+      "gallery": [
+        "/rings/catalog/pink-gems-stone-ring.jpg",
+        "/rings/catalog/pink-gems-stone-ring-2.jpg",
+        "/rings/catalog/pink-gems-stone-ring-3.jpg",
+        "/rings/catalog/pink-gems-stone-ring-4.jpg",
+        "/rings/catalog/pink-gems-stone-ring-5.jpg",
+        "/rings/catalog/pink-gems-stone-ring-6.jpg",
+        "/rings/catalog/wear-pink-gems-stone-ring.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-pink-gems-stone-ring.jpg",
+      "description": "A silver setting holding soft pink gemstones — luminous, feminine, made for stacking or alone.",
+      "story": "Pink light, held in silver.",
+      "details": [
+        "Pink gemstones",
+        "S925 silver",
+        "Everyday luxury",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Pink gems stone rings.jpg",
+        "Pink gems stone rings(1).jpg",
+        "Pink gems stone rings(2).jpg",
+        "Pink gems stone rings(3).jpg",
+        "Pink gems stone rings(4).jpg",
+        "Pink gems stone rings(5).jpg"
+      ],
+      "_defaultSource": "Pink gems stone rings.jpg"
+    },
+    {
+      "slug": "pomegranate-branch-ring",
+      "name": "Pomegranate Branch Ring",
+      "collection": "private-atelier",
+      "category": "rings",
+      "price": 4680,
+      "limited": true,
+      "madeToOrder": false,
+      "badge": "Nature",
+      "metal": [
+        "S925 Silver",
+        "Gold accent"
+      ],
+      "sizes": [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "Adjustable"
+      ],
+      "image": "/rings/catalog/pomegranate-branch-ring.jpg",
+      "gallery": [
+        "/rings/catalog/pomegranate-branch-ring.jpg",
+        "/rings/catalog/pomegranate-branch-ring-2.jpg",
+        "/rings/catalog/pomegranate-branch-ring-3.jpg",
+        "/rings/catalog/pomegranate-branch-ring-4.jpg",
+        "/rings/catalog/pomegranate-branch-ring-5.jpg",
+        "/rings/catalog/pomegranate-branch-ring-6.jpg",
+        "/rings/catalog/pomegranate-branch-ring-7.jpg",
+        "/rings/catalog/pomegranate-branch-ring-8.jpg",
+        "/rings/catalog/wear-pomegranate-branch-ring.jpg"
+      ],
+      "hoverImage": "/rings/catalog/wear-pomegranate-branch-ring.jpg",
+      "description": "Pomegranate fruit and leaves on a branch band — ripe form, fine leaf work, botanical weight.",
+      "story": "Fruit of the branch, worn as a seal.",
+      "details": [
+        "Pomegranate motif",
+        "Leaf and branch detail",
+        "Adjustable",
+        "Handmade",
+        "Handmade in Jaipur"
+      ],
+      "care": "Remove before bathing. Wipe dry after wear. Store alone in the pouch.",
+      "_sourceFiles": [
+        "Pomegranate Fruits Leaves Branch .jpg",
+        "Pomegranate Fruits Leaves Branch (1).jpg",
+        "Pomegranate Fruits Leaves Branch (2).jpg",
+        "Pomegranate Fruits Leaves Branch (3).jpg",
+        "Pomegranate Fruits Leaves Branch (4).jpg",
+        "Pomegranate Fruits Leaves Branch (5).jpg",
+        "Pomegranate Fruits Leaves Branch (6).jpg",
+        "Pomegranate Fruits Leaves Branch (7).jpg"
+      ],
+      "_defaultSource": "Pomegranate Fruits Leaves Branch .jpg"
+    }
+  ],
+  "orphans": [],
+  "totalSource": 96
+}

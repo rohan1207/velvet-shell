@@ -68,7 +68,7 @@ export default function LookbookPage() {
                 style={look.src.includes('collar') ? { objectPosition: 'center 70%' } : undefined}
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-velvet/70 to-transparent p-5">
-                <p className="text-[10px] tracking-[0.28em] text-ivory/70 uppercase">{look.name}</p>
+                <p className="text-[10px] tracking-[0.28em] text-ivory/80 uppercase">{look.name}</p>
                 <p className="font-display text-2xl text-ivory">{look.title}</p>
               </div>
             </div>

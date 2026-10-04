@@ -84,7 +84,7 @@ const items = [
 
 export default function TrustStrip() {
   return (
-    <section className="bg-burgundy" aria-label="Shopping promises">
+    <section className="bg-velvet-texture" aria-label="Shopping promises">
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 divide-y divide-ivory/15 sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x lg:divide-ivory/15">
         {items.map((item) => (
           <div

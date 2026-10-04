@@ -4,54 +4,51 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 
-/** Temporary: all destinations point home while only the homepage is live. */
-const HOME = '/';
-
 const shopMenu = {
   columns: [
     {
       title: 'Categories',
       links: [
-        { href: HOME, label: 'Rings' },
-        { href: HOME, label: 'Earrings' },
-        { href: HOME, label: 'Necklaces' },
-        { href: HOME, label: 'Pendants' },
-        { href: HOME, label: 'Bracelets' },
-        { href: HOME, label: 'Brooches' },
+        { href: '/shop?category=rings', label: 'Rings' },
+        { href: '/shop?category=earrings', label: 'Earrings' },
+        { href: '/shop?category=necklaces', label: 'Pendants' },
+        { href: '/shop?category=bracelets', label: 'Bracelets' },
+        { href: '/shop?category=cuffs', label: 'Brooches' },
+        { href: '/shop', label: 'View all' },
       ],
     },
     {
       title: 'Collections',
       links: [
-        { href: HOME, label: 'The Shell Edit' },
-        { href: HOME, label: 'Lumen Line' },
-        { href: HOME, label: 'Gilded Tide' },
-        { href: HOME, label: 'Private Atelier' },
-        { href: HOME, label: 'Lookbook' },
-        { href: HOME, label: 'View all' },
+        { href: '/shop?collection=the-shell-edit', label: 'The Shell Edit' },
+        { href: '/shop?collection=pearls-of-nacre', label: 'Lumen Line' },
+        { href: '/shop?collection=gilded-tide', label: 'Gilded Tide' },
+        { href: '/shop?collection=private-atelier', label: 'Private Atelier' },
+        { href: '/lookbook', label: 'Lookbook' },
+        { href: '/gifting', label: 'Gifting' },
       ],
     },
     {
       title: 'The edit',
       links: [
-        { href: HOME, label: 'New arrivals' },
-        { href: HOME, label: 'Limited pieces' },
-        { href: HOME, label: 'Atelier made' },
-        { href: HOME, label: 'Saved pieces' },
-        { href: HOME, label: 'Gifting' },
-        { href: HOME, label: 'Private appointment' },
+        { href: '/shop', label: 'New arrivals' },
+        { href: '/shop', label: 'Best of Velvet Shell' },
+        { href: '/wishlist', label: 'Saved pieces' },
+        { href: '/blogs', label: 'Blogs' },
+        { href: '/contact', label: 'Private appointment' },
+        { href: '/faq', label: 'FAQs' },
       ],
     },
   ],
   features: [
     {
-      href: HOME,
-      image: '/images/product-nacre-collar.png',
+      href: '/shop?collection=the-shell-edit',
+      image: '/images/category-banner-rings.jpg',
       label: 'The Shell Edit',
     },
     {
-      href: HOME,
-      image: '/images/product-tide-drops.png',
+      href: '/shop?collection=gilded-tide',
+      image: '/images/category-banner-earrings.jpg',
       label: 'Gilded Tide',
     },
   ],
@@ -62,46 +59,46 @@ const brandMenu = {
     {
       title: 'About us',
       links: [
-        { href: HOME, label: 'Our story' },
-        { href: HOME, label: 'The atelier' },
-        { href: HOME, label: 'Journal' },
-        { href: HOME, label: 'Contact' },
-        { href: HOME, label: 'Shipping' },
-        { href: HOME, label: 'FAQs' },
+        { href: '/about', label: 'Our story' },
+        { href: '/about#mission', label: 'Our mission' },
+        { href: '/blogs', label: 'Blogs' },
+        { href: '/lookbook', label: 'Lookbook' },
+        { href: '/contact', label: 'Contact us' },
+        { href: '/faq', label: 'FAQs' },
       ],
     },
     {
-      title: 'The house',
+      title: 'Brand themes',
       links: [
-        { href: HOME, label: 'Materials' },
-        { href: HOME, label: 'Craft' },
-        { href: HOME, label: 'Floral theme' },
-        { href: HOME, label: 'Lookbook' },
-        { href: HOME, label: 'Notes from Jaipur' },
-        { href: HOME, label: 'Appointments' },
+        { href: '/shop', label: 'Floral' },
+        { href: '/shop', label: 'Botanical' },
+        { href: '/shop?collection=the-shell-edit', label: 'Shell & nacre' },
+        { href: '/shop?collection=pearls-of-nacre', label: 'Pearls' },
+        { href: '/shop?collection=private-atelier', label: 'Atelier made' },
+        { href: '/gifting', label: 'Festive gifting' },
       ],
     },
     {
       title: 'Materials',
       links: [
-        { href: HOME, label: 'S925 silver' },
-        { href: HOME, label: '18k gold' },
-        { href: HOME, label: 'Champagne finish' },
-        { href: HOME, label: 'Diamonds' },
-        { href: HOME, label: 'Care guide' },
-        { href: HOME, label: 'Returns' },
+        { href: '/about', label: '925 silver' },
+        { href: '/about', label: '18K gold-plated' },
+        { href: '/about', label: 'Freshwater pearls' },
+        { href: '/shipping', label: 'Care guide' },
+        { href: '/returns', label: 'Returns' },
+        { href: '/shipping', label: 'Shipping' },
       ],
     },
   ],
   features: [
     {
-      href: HOME,
-      image: '/images/look-neck-ears.png',
-      label: 'Our journal',
+      href: '/blogs',
+      image: '/images/look-collar-lapel.jpg',
+      label: 'Our blogs',
     },
     {
-      href: HOME,
-      image: '/images/banner-bracelets.jpg',
+      href: '/about',
+      image: '/images/gifting-gesture.jpg',
       label: 'Our story',
     },
   ],
@@ -109,29 +106,18 @@ const brandMenu = {
 
 function MegaPanel({ menu, onNavigate }) {
   return (
-    <div className="relative overflow-hidden border-t border-ink/6 bg-ivory">
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <Image
-          src="/images/hero-floral.png"
-          alt=""
-          fill
-          className="object-contain object-[92%_60%] opacity-[0.12]"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-ivory via-ivory/90 to-ivory/55" />
-      </div>
-
-      <div className="relative mx-auto grid max-w-[1600px] grid-cols-12 gap-8 px-8 py-10 lg:gap-10 lg:px-10 lg:py-12">
+    <div className="border-t border-ink/8 bg-ivory shadow-[0_24px_48px_rgba(40,20,24,0.12)]">
+      <div className="mx-auto grid max-w-[1600px] grid-cols-12 gap-8 px-6 py-10 md:px-10 lg:gap-10 lg:py-12">
         {menu.columns.map((col) => (
-          <div key={col.title} className="col-span-2">
-            <p className="font-label text-[10px] text-ink/40">{col.title}</p>
-            <ul className="mt-5 space-y-3">
+          <div key={col.title} className="col-span-12 sm:col-span-4 lg:col-span-2">
+            <p className="font-label text-[10px] tracking-[0.22em] text-ink/80">{col.title}</p>
+            <ul className="mt-5 space-y-3.5">
               {col.links.map((link) => (
                 <li key={`${col.title}-${link.label}`}>
                   <Link
                     href={link.href}
                     onClick={onNavigate}
-                    className="text-[14px] font-light tracking-[-0.01em] text-ink/75 transition-colors duration-300 hover:text-burgundy"
+                    className="text-[14px] font-light tracking-[-0.01em] text-ink/80 transition-colors duration-300 hover:text-burgundy"
                   >
                     {link.label}
                   </Link>
@@ -141,10 +127,15 @@ function MegaPanel({ menu, onNavigate }) {
           </div>
         ))}
 
-        <div className="col-span-6 grid grid-cols-2 gap-5 pl-4">
+        <div className="col-span-12 grid grid-cols-2 gap-5 lg:col-span-6 lg:pl-6">
           {menu.features.map((feature) => (
-            <Link key={feature.label} href={feature.href} onClick={onNavigate} className="group block">
-              <span className="relative block aspect-[4/3] overflow-hidden rounded-[1.1rem] bg-pearl">
+            <Link
+              key={feature.label}
+              href={feature.href}
+              onClick={onNavigate}
+              className="group block"
+            >
+              <span className="relative block aspect-[4/5] overflow-hidden bg-pearl sm:aspect-[5/6]">
                 <Image
                   src={feature.image}
                   alt=""
@@ -153,7 +144,7 @@ function MegaPanel({ menu, onNavigate }) {
                   className="object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
                 />
               </span>
-              <span className="mt-4 block text-center font-label text-[10px] tracking-[0.2em] text-ink/70 transition-colors group-hover:text-burgundy">
+              <span className="mt-4 block text-center font-label text-[10px] tracking-[0.22em] text-ink/85 transition-colors group-hover:text-burgundy">
                 {feature.label}
               </span>
             </Link>
@@ -172,10 +163,10 @@ export default function MegaMenu({ open, onOpen, onClose }) {
       {menu && (
         <motion.div
           key={open}
-          initial={{ opacity: 0, y: -8 }}
+          initial={{ opacity: 0, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          exit={{ opacity: 0, y: -4 }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-x-0 top-full z-40"
           onMouseEnter={() => onOpen(open)}
           onMouseLeave={onClose}

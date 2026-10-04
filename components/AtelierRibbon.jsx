@@ -78,14 +78,14 @@ export default function AtelierRibbon() {
         <div className="flex items-center justify-between gap-6 border-b border-ink/6 px-5 py-3.5 md:px-10">
           <div className="flex items-center gap-3">
             <span className="h-px w-6 bg-gold" />
-            <p className="text-[10px] font-medium tracking-[0.32em] text-ink/45 uppercase">House notes</p>
+            <p className="text-[10px] font-medium tracking-[0.32em] text-ink/85 uppercase">House notes</p>
           </div>
           <p className="hidden text-[10px] tracking-[0.22em] text-stone uppercase sm:block">
             Materials · Ateliers · Appointment
           </p>
           <Link
             href="/about"
-            className="text-[10px] font-medium tracking-[0.22em] text-ink/55 uppercase transition-colors duration-500 hover:text-[#5E062A]"
+            className="text-[10px] font-medium tracking-[0.22em] text-ink/85 uppercase transition-colors duration-500 hover:text-[#5E062A]"
           >
             The house →
           </Link>
@@ -108,14 +108,14 @@ export default function AtelierRibbon() {
               >
                 <span
                   className={`text-[10px] tracking-[0.28em] uppercase transition-colors duration-500 ${
-                    isActive ? 'text-gold' : 'text-ink/30'
+                    isActive ? 'text-gold' : 'text-ink/80'
                   }`}
                 >
                   {note.index}
                 </span>
                 <span
                   className={`font-display text-[1.2rem] font-semibold leading-none tracking-[-0.03em] transition-colors duration-500 md:text-[1.35rem] ${
-                    isActive ? 'text-[#5E062A]' : 'text-ink/40 group-hover:text-ink/70'
+                    isActive ? 'text-[#5E062A]' : 'text-ink/80 group-hover:text-ink/80'
                   }`}
                 >
                   {note.title}
@@ -141,7 +141,7 @@ export default function AtelierRibbon() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.4, ease: EASE }}
-              className="max-w-2xl text-[13px] leading-relaxed text-ink/65 md:text-sm"
+              className="max-w-2xl text-[13px] leading-relaxed text-ink/85 md:text-sm"
             >
               <span className="mr-2 font-display text-[15px] font-semibold tracking-[-0.02em] text-[#5E062A]">
                 {current.title}.
@@ -152,7 +152,7 @@ export default function AtelierRibbon() {
 
           <Link
             href={current.href}
-            className="shrink-0 text-[10px] font-medium tracking-[0.2em] text-ink/50 uppercase transition-colors duration-500 hover:text-[#5E062A]"
+            className="shrink-0 text-[10px] font-medium tracking-[0.2em] text-ink/80 uppercase transition-colors duration-500 hover:text-[#5E062A]"
           >
             Explore
           </Link>

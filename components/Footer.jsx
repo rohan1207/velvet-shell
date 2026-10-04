@@ -1,13 +1,15 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { ShellMark } from './ShellMark';
 
 const columns = [
   {
     title: 'House',
     links: [
       { href: '/shop', label: 'The Shop' },
+      { href: '/gifting', label: 'Corporate Gifting' },
       { href: '/lookbook', label: 'Lookbook' },
       { href: '/about', label: 'Atelier' },
+      { href: '/blogs', label: 'Blogs' },
       { href: '/journal', label: 'Journal' },
     ],
   },
@@ -23,8 +25,9 @@ const columns = [
   {
     title: 'Notes',
     links: [
+      { href: '/faq', label: 'FAQs' },
       { href: '/returns', label: 'Returns' },
-      { href: '/privacy', label: 'Privacy' },
+      { href: '/privacy', label: 'Privacy Policy' },
       { href: '/terms', label: 'Terms' },
     ],
   },
@@ -32,26 +35,33 @@ const columns = [
 
 export default function Footer() {
   return (
-    <footer className="box-border flex min-h-[100svh] flex-col bg-velvet text-ivory">
-      <div className="mx-auto flex w-full max-w-[1600px] flex-1 flex-col px-5 py-10 md:px-10 md:py-12">
-        <div className="grid flex-1 content-center gap-10 md:grid-cols-2 md:gap-12 lg:grid-cols-12">
+    <footer className="bg-velvet-texture text-ivory">
+      <div className="mx-auto max-w-[1600px] px-5 py-14 md:px-10 md:py-16">
+        <div className="grid gap-10 md:grid-cols-2 md:gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <div className="flex items-center gap-3 text-gold">
-              <ShellMark className="h-8 w-8" />
-              <span className="font-display text-3xl tracking-[-0.03em] text-ivory">Velvet Shell</span>
-            </div>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-ivory/60 md:mt-6">
-              A treasure in every reveal. Jewellery, gifting and lifestyle creations designed for
-              curiosity, discovery, delight and memory.
+            <Link href="/" className="inline-block" aria-label="Velvet Shell home">
+              <Image
+                src="/logo-splash.png"
+                alt="Velvet Shell"
+                width={200}
+                height={200}
+                className="h-[5.5rem] w-[5.5rem] object-contain md:h-[6.5rem] md:w-[6.5rem]"
+              />
+            </Link>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-ivory/85">
+              Jewellery, gifting & lifestyle creations, shaped by considered design and quiet intrigue.
             </p>
-            <form className="mt-8 max-w-sm md:mt-10" action="/contact">
-              <label className="font-label text-gold">Private notes</label>
+            <form className="mt-8 max-w-sm" action="/contact">
+              <label className="font-label text-gold">Private Notes</label>
+              <p className="mt-2 text-sm leading-relaxed text-ivory/80">
+                A little from Velvet Shell, occasionally.
+              </p>
               <div className="mt-3 flex border-b border-ivory/20 pb-2">
                 <input
                   type="email"
                   name="email"
                   placeholder="Your email"
-                  className="w-full bg-transparent text-sm text-ivory outline-none placeholder:text-ivory/30"
+                  className="w-full bg-transparent text-sm text-ivory outline-none placeholder:text-ivory/80"
                 />
                 <button type="submit" className="font-label text-gold">
                   Join
@@ -62,10 +72,10 @@ export default function Footer() {
           {columns.map((col) => (
             <div key={col.title} className="lg:col-span-2">
               <p className="font-label text-gold">{col.title}</p>
-              <ul className="mt-4 space-y-3 md:mt-5">
+              <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-ivory/70 transition-colors hover:text-ivory">
+                    <Link href={link.href} className="text-sm text-ivory/80 transition-colors hover:text-ivory">
                       {link.label}
                     </Link>
                   </li>
@@ -75,11 +85,11 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-10 shrink-0 overflow-hidden border-t border-ivory/10 pt-6 md:mt-12 md:pt-8">
-          <p className="font-display text-[clamp(3.5rem,16vw,12rem)] leading-[0.8] tracking-[-0.04em] text-ivory/[0.06] select-none">
+        <div className="mt-12 overflow-hidden border-t border-ivory/10 pt-6 md:mt-14 md:pt-7">
+          <p className="font-display text-[clamp(2.5rem,10vw,5.5rem)] leading-[0.85] tracking-[-0.04em] text-ivory/[0.08] uppercase select-none">
             Velvet Shell
           </p>
-          <div className="mt-6 flex flex-col justify-between gap-3 text-[10px] tracking-[0.22em] text-ivory/40 uppercase sm:flex-row md:mt-8">
+          <div className="mt-5 flex flex-col justify-between gap-3 text-[10px] tracking-[0.22em] text-ivory/80 uppercase sm:flex-row">
             <span>© {new Date().getFullYear()} Velvet Shell. All rights reserved.</span>
             <span>Jaipur · Paris · By appointment</span>
           </div>

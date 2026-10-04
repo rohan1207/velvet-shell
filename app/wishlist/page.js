@@ -1,47 +1,70 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useStore } from '@/context/StoreContext';
 import { products } from '@/lib/products';
-import { money } from '@/lib/format';
+import ProductCard from '@/components/ProductCard';
 
 export default function WishlistPage() {
-  const { wishlist, toggleWishlist, addToCart } = useStore();
+  const { wishlist, addToCart, toggleWishlist } = useStore();
   const saved = products.filter((item) => wishlist.includes(item.slug));
+
+  function addAllToBag() {
+    saved.forEach((product) => addToCart(product.slug));
+  }
 
   return (
     <div className="bg-ivory pt-28 pb-24 md:pt-36">
       <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-        <h1 className="font-display text-5xl md:text-7xl">Saved</h1>
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p className="font-label text-gold">Wishlist</p>
+            <h1 className="font-display mt-4 text-5xl md:text-7xl">Saved</h1>
+            {saved.length > 0 && (
+              <p className="mt-3 text-sm font-light text-ink/85">
+                {saved.length} {saved.length === 1 ? 'piece' : 'pieces'}
+              </p>
+            )}
+          </div>
+          {saved.length > 0 && (
+            <button
+              type="button"
+              onClick={addAllToBag}
+              className="bg-velvet-texture inline-flex h-12 items-center rounded-full px-6 font-label text-[11px] tracking-[0.18em] text-ivory"
+            >
+              Add all to bag
+            </button>
+          )}
+        </div>
+
         {saved.length === 0 ? (
-          <p className="mt-10 text-stone">Nothing kept yet. The heart on a piece will hold it here.</p>
+          <div className="mt-12 max-w-md">
+            <p className="text-[15px] font-light leading-relaxed text-ink/85">
+              Nothing kept yet. Use the heart on a piece to hold it here.
+            </p>
+            <Link
+              href="/shop"
+              className="mt-6 inline-flex items-center gap-3 font-label text-[11px] tracking-[0.18em] text-burgundy"
+            >
+              Browse the shop
+              <span aria-hidden>→</span>
+            </Link>
+          </div>
         ) : (
-          <ul className="mt-12 divide-y divide-cream border-y border-cream">
-            {saved.map((product) => (
-              <li key={product.slug} className="flex flex-col gap-6 py-8 sm:flex-row sm:items-center">
-                <Link href={`/shop/${product.slug}`} className="relative h-32 w-24 shrink-0 overflow-hidden bg-cream">
-                  <Image src={product.image} alt={product.name} fill className="object-cover" sizes="96px" />
-                </Link>
-                <div className="flex-1">
-                  <p className="font-display text-2xl">{product.name}</p>
-                  <p className="mt-1 text-sm text-stone">{money(product.price)}</p>
-                </div>
-                <div className="flex gap-3">
-                  <button
-                    type="button"
-                    onClick={() => addToCart(product.slug, { size: product.sizes[0], metal: product.metal[0] })}
-                    className="h-11 bg-ink px-6 text-[10px] tracking-[0.24em] text-ivory uppercase"
-                  >
-                    Add to bag
-                  </button>
-                  <button type="button" onClick={() => toggleWishlist(product.slug)} className="text-[10px] tracking-[0.24em] uppercase">
-                    Remove
-                  </button>
-                </div>
-              </li>
+          <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12 lg:grid-cols-4">
+            {saved.map((product, index) => (
+              <div key={product.slug} className="relative">
+                <ProductCard product={product} index={index} />
+                <button
+                  type="button"
+                  onClick={() => toggleWishlist(product.slug)}
+                  className="mt-2 font-label text-[10px] tracking-[0.14em] text-ink/80 hover:text-burgundy"
+                >
+                  Remove
+                </button>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
     </div>

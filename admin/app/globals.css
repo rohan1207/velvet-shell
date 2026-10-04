@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --burgundy: #5e062a;
+  --ivory: #f5eee8;
+  --pearl: #faf7f2;
+  --cream: #ebe3da;
+  --ink: #2d2b2b;
+  --gold: #d4af64;
+  --stone: #7a736c;
+  --font-display: 'Playfair Display', ui-serif, Georgia, serif;
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --font-label: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+}
+
+html,
+body {
+  background: var(--ivory);
+  color: var(--ink);
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-label {
+  font-family: var(--font-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex h-11 items-center justify-center rounded-full px-6 text-[11px] font-semibold tracking-[0.16em] uppercase transition disabled:opacity-50;
+    background: var(--burgundy);
+    color: var(--ivory);
+  }
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+  .btn-ghost {
+    @apply inline-flex h-11 items-center justify-center rounded-full px-5 text-[11px] font-semibold tracking-[0.14em] uppercase transition;
+    border: 1px solid rgba(45, 43, 43, 0.15);
+    color: var(--ink);
+  }
+  .btn-ghost:hover {
+    border-color: rgba(94, 6, 42, 0.4);
+    color: var(--burgundy);
+  }
+  .input {
+    @apply w-full rounded-full bg-white px-4 py-3 text-sm outline-none transition;
+    border: 1px solid rgba(45, 43, 43, 0.12);
+  }
+  .input:focus {
+    border-color: rgba(94, 6, 42, 0.4);
+  }
+  .card {
+    @apply rounded-2xl bg-white/80;
+    border: 1px solid rgba(45, 43, 43, 0.08);
+    box-shadow: 0 10px 40px rgba(45, 43, 43, 0.04);
+  }
+  .table-wrap {
+    @apply overflow-x-auto rounded-2xl bg-white;
+    border: 1px solid rgba(45, 43, 43, 0.08);
+  }
+}

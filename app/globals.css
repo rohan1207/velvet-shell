@@ -16,7 +16,7 @@
   --color-ink-soft: #3a3838;
   --color-gold: #d4af64;
   --color-gold-light: #e2c78a;
-  --color-stone: #7a736c;
+  --color-stone: #524c45;
   --color-shell: #273f27;
   --color-blush: #c9b5a4;
   --color-velvet: #5e062a;
@@ -27,7 +27,8 @@ html,
 body {
   background: var(--color-ivory);
   color: var(--color-ink);
-  overflow-x: hidden;
+  /* clip (not hidden) so position:sticky still works sitewide */
+  overflow-x: clip;
   max-width: 100%;
 }
 
@@ -63,6 +64,15 @@ body::before {
   color: var(--color-ivory);
 }
 
+/* Same velvet fabric as the navbar — pills, footer, maroon surfaces */
+.bg-velvet-texture {
+  background-color: #5e062a;
+  background-image: url('/images/navbar-velvet.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 @media (hover: hover) and (pointer: fine) {
   html.has-cursor,
   html.has-cursor * {
@@ -80,6 +90,14 @@ a,
 button {
   transition: color 0.5s var(--ease-luxe), opacity 0.5s var(--ease-luxe), background 0.5s var(--ease-luxe),
     border-color 0.5s var(--ease-luxe), transform 0.5s var(--ease-luxe);
+}
+
+/* Pill CTAs — solid action buttons sitewide */
+button.bg-velvet-texture,
+a.bg-velvet-texture,
+button.bg-ink,
+a.bg-ink {
+  border-radius: 9999px;
 }
 
 img {
@@ -123,6 +141,17 @@ img {
   line-height: 1.15;
 }
 
+/* Prices & numbers — simple sans, never display/serif */
+.font-num {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  letter-spacing: 0.01em;
+  font-synthesis: none;
+}
+
 /* Labels — Montserrat Bold */
 .font-label,
 .font-meta {
@@ -142,7 +171,11 @@ img {
 }
 
 .marquee-track {
-  animation: marquee 42s linear infinite;
+  animation: marquee 36s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
 }
 
 @keyframes marquee {

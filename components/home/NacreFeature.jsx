@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function NacreFeature() {
   return (
     <section className="grid min-h-[90vh] md:grid-cols-2">
-      <div className="relative min-h-[70vh] overflow-hidden bg-velvet">
+      <div className="bg-velvet-texture relative min-h-[70vh] overflow-hidden">
         <Image
           src="/images/look-lumen.png"
           alt="Lumen choker on a limestone wall"

@@ -1,0 +1,94 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { listCustomers, listOrders } from '@/lib/repository';
+import { money } from '@/lib/format';
+
+export default function CustomersPage() {
+  const [rows, setRows] = useState([]);
+  const [selected, setSelected] = useState(null);
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    setRows(listCustomers());
+  }, []);
+
+  function openCustomer(c) {
+    setSelected(c);
+    setHistory(listOrders({ q: c.email }));
+  }
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <p className="font-label text-[10px] text-[#d4af64]">Audience</p>
+        <h1 className="font-display mt-2 text-4xl">Customers</h1>
+        <p className="mt-1 text-sm text-[#7a736c]">
+          Contact list for campaigns — email and phone ready to export later.
+        </p>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+        <div className="table-wrap">
+          <table className="min-w-full text-left text-sm">
+            <thead className="border-b border-[#2d2b2b]/8 bg-[#faf7f2] text-[10px] tracking-[0.14em] text-[#7a736c] uppercase">
+              <tr>
+                <th className="px-4 py-3">Name</th>
+                <th className="px-4 py-3">Email</th>
+                <th className="px-4 py-3">Phone</th>
+                <th className="px-4 py-3">Orders</th>
+                <th className="px-4 py-3">Spent</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#2d2b2b]/6">
+              {rows.map((c) => (
+                <tr
+                  key={c.email}
+                  className="cursor-pointer hover:bg-[#faf7f2]/80"
+                  onClick={() => openCustomer(c)}
+                >
+                  <td className="px-4 py-3 font-medium">
+                    {c.firstName} {c.lastName}
+                  </td>
+                  <td className="px-4 py-3">{c.email}</td>
+                  <td className="px-4 py-3">{c.phone}</td>
+                  <td className="px-4 py-3">{c.orderCount}</td>
+                  <td className="px-4 py-3">{money(c.totalSpent)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="card p-5">
+          {!selected ? (
+            <p className="text-sm text-[#7a736c]">Select a customer to see order history.</p>
+          ) : (
+            <>
+              <p className="font-label text-[10px] text-[#7a736c]">Customer</p>
+              <h2 className="font-display mt-2 text-2xl">
+                {selected.firstName} {selected.lastName}
+              </h2>
+              <p className="mt-2 text-sm">{selected.email}</p>
+              <p className="text-sm text-[#7a736c]">{selected.phone}</p>
+              <p className="mt-4 text-sm">
+                {selected.orderCount} orders · {money(selected.totalSpent)} spent
+              </p>
+              <ul className="mt-6 space-y-3 border-t border-[#2d2b2b]/8 pt-4">
+                {history.map((o) => (
+                  <li key={o.id} className="flex justify-between text-sm">
+                    <span>
+                      {o.orderNumber}
+                      <span className="mt-0.5 block text-xs text-[#7a736c]">{o.status}</span>
+                    </span>
+                    <span>{money(o.total)}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
