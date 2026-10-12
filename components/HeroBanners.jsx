@@ -19,8 +19,8 @@ const slides = [
     description: 'Sculptural drops in champagne gold and baroque pearl — worn like a soft pulse of light.',
     cta: 'Shop earrings',
     href: '/shop?category=earrings',
-    image: '/images/slide-earrings.png',
-    alt: 'Campaign banner — gold and pearl earrings',
+    image: '/images/category-banner-earrings.jpg',
+    alt: 'Nature storytelling — gold orchid earrings among white blooms',
   },
   {
     id: 'necklace',
@@ -32,8 +32,8 @@ const slides = [
     description: 'Architectural gold and irregular nacre — a quiet architecture for the collarbone.',
     cta: 'Shop necklaces',
     href: '/shop?category=necklaces',
-    image: '/images/slide-necklace.png',
-    alt: 'Campaign banner — gold and pearl collar necklace',
+    image: '/images/category-banner-necklaces.jpg',
+    alt: 'Nature storytelling — silver floral pendant on a white lily',
   },
   {
     id: 'rings',
@@ -45,8 +45,8 @@ const slides = [
     description: 'Signets and stacks with weight you feel — never noise, only presence.',
     cta: 'Shop rings',
     href: '/shop?category=rings',
-    image: '/images/slide-rings.png',
-    alt: 'Campaign banner — champagne gold rings',
+    image: '/images/category-banner-rings.jpg',
+    alt: 'Nature storytelling — floral rings on living branches',
   },
   {
     id: 'bracelets',
@@ -58,8 +58,8 @@ const slides = [
     description: 'Pearl lines and sculptural cuffs — a soft conversation for the wrist.',
     cta: 'Shop bracelets',
     href: '/shop?category=bracelets',
-    image: '/images/slide-bracelets.png',
-    alt: 'Campaign banner — pearl bracelet and gold cuff',
+    image: '/images/category-banner-bracelets.jpg',
+    alt: 'Nature storytelling — clover leaves in soft forest light',
   },
 ];
 
@@ -195,10 +195,10 @@ export default function HeroBanners() {
                     {slide.cta}
                   </Link>
                   <Link
-                    href="/lookbook"
+                    href="/about"
                     className="inline-flex items-center gap-2 rounded-full border border-[#2D2B2B]/12 bg-white/40 px-6 py-3.5 text-[12px] font-medium tracking-[0.14em] text-[#2D2B2B] uppercase transition-colors duration-500 hover:bg-white/70"
                   >
-                    The lookbook
+                    About us
                     <span aria-hidden className="text-[#D4AF64]">
                       →
                     </span>

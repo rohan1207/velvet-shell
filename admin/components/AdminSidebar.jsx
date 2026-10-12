@@ -8,6 +8,8 @@ import { pendingOrderCount } from '@/lib/repository';
 const links = [
   { href: '/', label: 'Dashboard' },
   { href: '/products', label: 'Products' },
+  { href: '/categories', label: 'Categories' },
+  { href: '/discounts', label: 'Discounts' },
   { href: '/orders', label: 'Orders', badge: true },
   { href: '/customers', label: 'Customers' },
   { href: '/looks', label: 'Shop by look' },

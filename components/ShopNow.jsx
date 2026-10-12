@@ -1,29 +1,52 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
-import { products, categories as productCategories } from '@/lib/products';
+import { categories as fallbackCategories } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
-
-const tabs = [{ slug: 'all', name: 'All' }, ...productCategories];
 
 export default function ShopNow() {
   const [activeTab, setActiveTab] = useState('all');
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState(fallbackCategories);
+  const [colorFamilies, setColorFamilies] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/catalog')
+      .then((r) => r.json())
+      .then((d) => {
+        if (cancelled || !d.products?.length) return;
+        setProducts(d.products);
+        setAllProducts(d.allProducts || d.products);
+        setColorFamilies(d.colorFamilies || []);
+        if (d.categories?.length) setCategories(d.categories);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const tabs = useMemo(
+    () => [{ slug: 'all', name: 'All' }, ...categories.map((c) => ({ slug: c.slug, name: c.name }))],
+    [categories]
+  );
 
   const filtered = useMemo(() => {
     if (activeTab === 'all') return products.slice(0, 8);
-    // Category tabs show every piece in that form (e.g. all bracelets)
-    return products.filter((product) => product.category === activeTab);
-  }, [activeTab]);
+    return products.filter((product) => product.category === activeTab).slice(0, 8);
+  }, [activeTab, products]);
 
   return (
     <section className="bg-pearl">
-      <div className="mx-auto max-w-[1600px] px-5 py-16 md:px-10 md:py-24">
-        <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+      <div className="mx-auto max-w-[1600px] px-5 py-10 md:px-10 md:py-12">
+        <div className="flex flex-col items-start justify-between gap-5 md:flex-row md:items-end">
           <div>
             <p className="font-label text-gold">Shop now</p>
-            <h2 className="font-display mt-3 text-4xl text-ink md:text-5xl">The collection, edited.</h2>
+            <h2 className="font-display mt-2 text-4xl text-ink md:text-5xl">The collection, edited.</h2>
           </div>
 
           <div className="flex w-full max-w-xl flex-wrap gap-1.5 md:justify-end">
@@ -47,7 +70,7 @@ export default function ShopNow() {
           </div>
         </div>
 
-        <div className="relative mt-12 min-h-[28rem]">
+        <div className="relative mt-8 min-h-[28rem]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -55,10 +78,16 @@ export default function ShopNow() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12 lg:grid-cols-4"
+              className="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10 lg:grid-cols-4"
             >
               {filtered.map((product, index) => (
-                <ProductCard key={product.slug} product={product} index={index} />
+                <ProductCard
+                  key={product.slug}
+                  product={product}
+                  index={index}
+                  colorFamilies={colorFamilies}
+                  catalogProducts={allProducts}
+                />
               ))}
             </motion.div>
           </AnimatePresence>
@@ -70,7 +99,7 @@ export default function ShopNow() {
           )}
         </div>
 
-        <div className="mt-14 flex justify-center md:mt-16">
+        <div className="mt-10 flex justify-center md:mt-12">
           <Link
             href={activeTab === 'all' ? '/shop' : `/shop?category=${activeTab}`}
             className="bg-velvet-texture inline-flex items-center rounded-full px-8 py-3.5 font-label text-[11px] text-ivory transition-opacity hover:opacity-90"

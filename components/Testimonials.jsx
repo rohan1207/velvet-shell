@@ -10,7 +10,7 @@ const testimonials = [
     name: 'Ananya Mehra',
     place: 'Jaipur',
     // Worn — wrist / hand, Indian skin tone (crop keeps focus on the piece)
-    image: '/bracelets/catalog/wear-flower-rain-pink.jpg',
+    image: '/bracelets/flower-in-the-rain-pink-wear.jpg',
     imageClass: 'object-cover object-[center_72%]',
     quote:
       'I ordered the Flower In The Rain bracelet for my sister’s birthday. The box arrived looking like a gift from a private atelier — and the piece itself is even quieter and prettier in person.',
@@ -21,7 +21,7 @@ const testimonials = [
     name: 'Meera Kapoor',
     place: 'Mumbai',
     // Product only
-    image: '/earrings/catalog/phalaenopsis-hoop-earrings.jpg',
+    image: '/earrings/phalaenopsis-hoop-earrings-hero.jpg',
     imageClass: 'object-cover object-center',
     quote:
       'I wear the phalaenopsis hoops almost every day now. They feel light, look expensive, and somehow still soft enough for work. Velvet Shell has ruined ordinary jewellery for me.',
@@ -32,7 +32,7 @@ const testimonials = [
     name: 'Arjun Desai',
     place: 'Bengaluru',
     // Worn — lapel / cloth, no face
-    image: '/brooch/catalog/wear-calla-lily-brooch-gold.jpg',
+    image: '/brooch/calla-lily-brooch-gold-wear.jpg',
     imageClass: 'object-cover object-[center_40%]',
     quote:
       'Bought the calla lily brooch for my mother. She pinned it on her saree blouse the same evening. Packaging, note, everything felt considered — not like a website order.',
@@ -43,7 +43,7 @@ const testimonials = [
     name: 'Isha Nair',
     place: 'Kochi',
     // Worn — hand only
-    image: '/rings/catalog/wear-aquamarine-butterfly-ring.jpg',
+    image: '/rings/aquamarine-butterfly-ring-hero.jpg',
     imageClass: 'object-cover object-center',
     quote:
       'The aquamarine butterfly ring looks exactly like the photos — which almost never happens. I get asked about it every time I step out. Worth every rupee.',
@@ -54,7 +54,7 @@ const testimonials = [
     name: 'Priya Shah',
     place: 'Ahmedabad',
     // Product only
-    image: '/bracelets/catalog/lotus-whisper-pink-v3.jpg',
+    image: '/bracelets/lotus-whisper-pink-hero.jpg',
     imageClass: 'object-cover object-center',
     quote:
       'I stacked the lotus whisper with a simple chain and it felt like my own edit. The craftsmanship is the kind you notice when you hold it close — petals, finish, weight.',
@@ -74,21 +74,21 @@ export default function Testimonials() {
   }, [active]);
 
   return (
-    <section className="box-border flex h-[100svh] flex-col justify-center overflow-y-auto overscroll-contain bg-ivory md:overflow-hidden">
-      <div className="mx-auto flex min-h-full w-full max-w-[1600px] flex-col justify-center px-5 py-8 md:h-full md:px-10 md:py-10">
+    <section id="testimonials" className="box-border scroll-mt-28 bg-ivory">
+      <div className="mx-auto flex w-full max-w-[1600px] flex-col px-5 py-10 md:px-10 md:py-12">
         <div className="mx-auto max-w-3xl shrink-0 text-center">
           <p className="font-label text-gold">From the house guests</p>
-          <h2 className="font-display mt-2 text-3xl leading-[1.08] text-ink md:mt-3 md:text-5xl">
+          <h2 className="font-display mt-2 text-3xl leading-[1.08] text-ink md:text-5xl">
             Worn, kept, spoken for.
           </h2>
-          <p className="mx-auto mt-3 max-w-lg text-sm font-light leading-relaxed text-ink/80">
+          <p className="mx-auto mt-2 max-w-lg text-sm font-light leading-relaxed text-ink/80">
             Real notes from guests across India — the pieces as they live on the wrist, the hand, the
             blouse.
           </p>
         </div>
 
-        <div className="mx-auto mt-6 grid w-full max-w-5xl min-h-0 flex-1 items-center gap-6 md:mt-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-12 lg:gap-16">
-          <div className="relative mx-auto aspect-[4/5] h-auto max-h-[min(36svh,300px)] w-full max-w-[240px] overflow-hidden rounded-[1.5rem] bg-pearl md:max-h-[min(42svh,380px)] md:max-w-[320px] md:justify-self-end lg:max-h-[min(44svh,400px)]">
+        <div className="mx-auto mt-7 grid w-full max-w-5xl items-center gap-6 md:mt-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-10 lg:gap-12">
+          <div className="relative mx-auto aspect-[4/5] h-auto max-h-[min(36svh,280px)] w-full max-w-[220px] overflow-hidden rounded-[1.5rem] bg-pearl md:max-h-[min(42svh,340px)] md:max-w-[300px] md:justify-self-end lg:max-h-[min(44svh,360px)]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current.id}
@@ -123,7 +123,7 @@ export default function Testimonials() {
                 <p className="font-display text-[1.35rem] leading-[1.35] tracking-[-0.02em] text-ink md:text-[1.85rem] lg:text-[2rem]">
                   “{current.quote}”
                 </p>
-                <footer className="mt-5 md:mt-7">
+                <footer className="mt-4 md:mt-5">
                   <p className="text-[15px] font-medium tracking-[-0.01em] text-ink">{current.name}</p>
                   <p className="mt-1 text-sm font-light text-ink/85">
                     {current.place}
@@ -134,7 +134,7 @@ export default function Testimonials() {
               </motion.blockquote>
             </AnimatePresence>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3 md:mt-8">
+            <div className="mt-5 flex flex-wrap items-center gap-3 md:mt-6">
               {testimonials.map((item, index) => {
                 const selected = index === active;
                 return (

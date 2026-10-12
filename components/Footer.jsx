@@ -3,32 +3,53 @@ import Link from 'next/link';
 
 const columns = [
   {
-    title: 'House',
+    title: 'Shop',
     links: [
-      { href: '/shop', label: 'The Shop' },
+      { href: '/shop?category=rings', label: 'Rings' },
+      { href: '/shop?category=earrings', label: 'Earrings' },
+      { href: '/shop?category=necklaces', label: 'Necklaces' },
+      { href: '/shop?category=pendants', label: 'Pendants' },
+      { href: '/shop?category=chains', label: 'Chains' },
+      { href: '/shop?category=chokers', label: 'Chokers' },
+      { href: '/shop?category=bracelets', label: 'Bracelets' },
+      { href: '/shop?category=anklets', label: 'Anklets' },
+      { href: '/shop?category=sets', label: 'Sets' },
+      { href: '/shop', label: 'Shop all' },
+    ],
+  },
+  {
+    title: 'Collections',
+    links: [
+      { href: '/shop?collection=the-shell-edit', label: 'The Shell Edit' },
+      { href: '/shop?collection=pearls-of-nacre', label: 'Lumen Line' },
+      { href: '/shop?collection=gilded-tide', label: 'Gilded Tide' },
+      { href: '/shop?collection=private-atelier', label: 'Private Atelier' },
+      { href: '/shop?collection=lotus-whispers', label: 'Lotus Whispers' },
+      { href: '/shop?collection=soft-rain-garden', label: 'Soft Rain Garden' },
+      { href: '/#festive-edit', label: 'Festive Edit' },
+      { href: '/#best-of', label: 'Best of Velvet Shell' },
       { href: '/gifting', label: 'Corporate Gifting' },
-      { href: '/lookbook', label: 'Lookbook' },
-      { href: '/about', label: 'Atelier' },
+    ],
+  },
+  {
+    title: 'Brand',
+    links: [
+      { href: '/about', label: 'About us' },
       { href: '/blogs', label: 'Blogs' },
-      { href: '/journal', label: 'Journal' },
-    ],
-  },
-  {
-    title: 'Client',
-    links: [
-      { href: '/account', label: 'Account' },
-      { href: '/wishlist', label: 'Saved' },
-      { href: '/contact', label: 'Private appointment' },
-      { href: '/shipping', label: 'Shipping' },
-    ],
-  },
-  {
-    title: 'Notes',
-    links: [
+      { href: '/#testimonials', label: 'Testimonials' },
+      { href: '/contact', label: 'Contact us' },
       { href: '/faq', label: 'FAQs' },
-      { href: '/returns', label: 'Returns' },
+      { href: '/wishlist', label: 'Saved' },
+      { href: '/account', label: 'Account' },
+    ],
+  },
+  {
+    title: 'Policies',
+    links: [
       { href: '/privacy', label: 'Privacy Policy' },
-      { href: '/terms', label: 'Terms' },
+      { href: '/terms', label: 'Terms & Conditions' },
+      { href: '/returns', label: 'Returns & Refunds' },
+      { href: '/shipping', label: 'Shipping' },
     ],
   },
 ];
@@ -38,7 +59,7 @@ export default function Footer() {
     <footer className="bg-velvet-texture text-ivory">
       <div className="mx-auto max-w-[1600px] px-5 py-14 md:px-10 md:py-16">
         <div className="grid gap-10 md:grid-cols-2 md:gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-4">
             <Link href="/" className="inline-block" aria-label="Velvet Shell home">
               <Image
                 src="/logo-splash.png"
@@ -52,7 +73,7 @@ export default function Footer() {
               Jewellery, gifting & lifestyle creations, shaped by considered design and quiet intrigue.
             </p>
             <form className="mt-8 max-w-sm" action="/contact">
-              <label className="font-label text-gold">Private Notes</label>
+              <label className="font-label text-gold">Stay in touch</label>
               <p className="mt-2 text-sm leading-relaxed text-ivory/80">
                 A little from Velvet Shell, occasionally.
               </p>
@@ -74,7 +95,7 @@ export default function Footer() {
               <p className="font-label text-gold">{col.title}</p>
               <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
-                  <li key={link.href}>
+                  <li key={`${col.title}-${link.label}`}>
                     <Link href={link.href} className="text-sm text-ivory/80 transition-colors hover:text-ivory">
                       {link.label}
                     </Link>
@@ -91,7 +112,7 @@ export default function Footer() {
           </p>
           <div className="mt-5 flex flex-col justify-between gap-3 text-[10px] tracking-[0.22em] text-ivory/80 uppercase sm:flex-row">
             <span>© {new Date().getFullYear()} Velvet Shell. All rights reserved.</span>
-            <span>Jaipur · Paris · By appointment</span>
+            <span>Jewellery · Gifting · Lifestyle</span>
           </div>
         </div>
       </div>

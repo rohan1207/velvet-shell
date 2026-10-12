@@ -56,7 +56,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preload" as="image" href="/logo-splash.png" fetchPriority="high" />
       </head>
-      <body className={`${poppins.className} bg-ivory font-sans text-ink antialiased`}>
+      <body className={`${poppins.className} bg-white font-sans text-ink antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>

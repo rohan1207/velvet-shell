@@ -19,7 +19,7 @@ export default function PanelLayout({ children }) {
             Menu
           </button>
           <p className="font-label text-[10px] tracking-[0.18em] text-[#7a736c]">House operations</p>
-          <p className="text-xs text-[#7a736c]">Mock data · Supabase-ready</p>
+          <p className="text-xs text-[#7a736c]">Products → Supabase · media → Cloudflare</p>
         </header>
         <main className="flex-1 px-4 py-6 md:px-8 md:py-8">{children}</main>
       </div>

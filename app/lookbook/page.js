@@ -33,7 +33,7 @@ const looks = [
     name: 'Nacre Collar',
   },
   {
-    src: '/images/hero-campaign.png',
+    src: '/images/hero-campaign.jpg',
     title: 'Autumn 2027',
     piece: 'nacre-collar',
     name: 'Nacre Collar',

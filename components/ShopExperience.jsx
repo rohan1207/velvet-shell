@@ -4,8 +4,9 @@ import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { categories, collections, products, shopHero } from '@/lib/products';
+import { shopHero as defaultShopHero } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
+import CategoryHeroSlider from '@/components/CategoryHeroSlider';
 
 function buildShopHref({ category = 'all', collection = 'all' } = {}) {
   const next = new URLSearchParams();
@@ -15,19 +16,68 @@ function buildShopHref({ category = 'all', collection = 'all' } = {}) {
   return q ? `/shop?${q}` : '/shop';
 }
 
-export default function ShopExperience() {
+export default function ShopExperience({
+  initialProducts = [],
+  initialCollections = [],
+  initialCategories = [],
+  initialColorFamilies = [],
+  shopHeroData = defaultShopHero,
+  catalogSource = 'dummy',
+} = {}) {
   const params = useSearchParams();
   const router = useRouter();
   const [collection, setCollection] = useState(params.get('collection') || 'all');
   const [category, setCategory] = useState(params.get('category') || 'all');
   const [sort, setSort] = useState('featured');
+  const [products, setProducts] = useState(initialProducts);
+  const [collections, setCollections] = useState(initialCollections);
+  const [categories, setCategories] = useState(initialCategories);
+  const [colorFamilies, setColorFamilies] = useState(initialColorFamilies);
+  const [source, setSource] = useState(catalogSource);
 
   useEffect(() => {
     setCollection(params.get('collection') || 'all');
     setCategory(params.get('category') || 'all');
   }, [params]);
 
+  useEffect(() => {
+    setProducts(initialProducts);
+    setCollections(initialCollections);
+    setCategories(initialCategories);
+    setColorFamilies(initialColorFamilies);
+    setSource(catalogSource);
+  }, [initialProducts, initialCollections, initialCategories, initialColorFamilies, catalogSource]);
+
+  // Client refresh so admin edits appear without a full rebuild
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/catalog')
+      .then((r) => r.json())
+      .then((d) => {
+        if (cancelled || !d.products?.length) return;
+        setProducts(d.products);
+        if (d.collections?.length) setCollections(d.collections);
+        if (d.categories?.length) setCategories(d.categories);
+        if (d.colorFamilies) setColorFamilies(d.colorFamilies);
+        setSource(d.source || 'supabase');
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const shopHero = shopHeroData || defaultShopHero;
   const activeCategory = categories.find((item) => item.slug === category) ?? null;
+  const heroSlides = useMemo(() => {
+    if (activeCategory?.banners?.length) return activeCategory.banners;
+    if (activeCategory?.banner) {
+      return [{ src: activeCategory.banner, alt: activeCategory.name }];
+    }
+    if (shopHero.banners?.length) return shopHero.banners;
+    return [{ src: shopHero.banner, alt: shopHero.name }];
+  }, [activeCategory, shopHero]);
+
   const hero = activeCategory
     ? {
         name: activeCategory.name,
@@ -46,7 +96,7 @@ export default function ShopExperience() {
     if (sort === 'price-desc') next = [...next].sort((a, b) => b.price - a.price);
     if (sort === 'name') next = [...next].sort((a, b) => a.name.localeCompare(b.name));
     return next;
-  }, [collection, category, sort]);
+  }, [products, collection, category, sort]);
 
   const updateFilters = (nextCategory, nextCollection) => {
     setCategory(nextCategory);
@@ -54,57 +104,15 @@ export default function ShopExperience() {
     router.replace(buildShopHref({ category: nextCategory, collection: nextCollection }), { scroll: false });
   };
 
-  const scrollToEdit = () => {
-    document.getElementById('shop-edit')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
   return (
-    <div className="bg-ivory">
-      <section className="relative h-[100svh] w-full overflow-hidden bg-ink">
-        <Image
-          key={hero.banner}
-          src={hero.banner}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center animate-[fade-up_1.1s_var(--ease-luxe)_both]"
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-ink/45 via-ink/10 to-transparent md:from-ink/40"
-          aria-hidden
-        />
-        <div
-          className="absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-ink/35 to-transparent"
-          aria-hidden
-        />
+    <div className="bg-white">
+      <CategoryHeroSlider
+        key={activeCategory?.slug || 'shop'}
+        slides={heroSlides}
+        label={`${hero.name} banners`}
+      />
 
-        <div className="relative z-10 flex h-full items-end pb-20 pt-28 md:items-center md:pb-0 md:pt-24">
-          <div className="mx-auto w-full max-w-[1600px] px-5 md:px-10">
-            <div className="max-w-xl animate-[fade-up_1.2s_var(--ease-luxe)_both]">
-              <p className="font-label text-[11px] tracking-[0.28em] text-gold">Velvet Shell</p>
-              <h1 className="font-display mt-4 text-[clamp(3.2rem,8vw,6.5rem)] leading-[0.92] tracking-[-0.03em] text-ivory drop-shadow-[0_2px_24px_rgba(0,0,0,0.35)]">
-                {hero.name}
-              </h1>
-              <p className="mt-5 max-w-md text-[15px] font-light leading-relaxed text-ivory/85 md:text-base">
-                {hero.line}
-              </p>
-              <button
-                type="button"
-                onClick={scrollToEdit}
-                className="mt-8 inline-flex items-center gap-3 font-label text-[11px] tracking-[0.22em] text-ivory transition-colors duration-500 hover:text-gold"
-              >
-                Explore the edit
-                <span aria-hidden className="text-gold">
-                  →
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="shop-edit" className="scroll-mt-4 bg-pearl pb-24 pt-14 md:pt-20">
+      <section id="shop-edit" className="scroll-mt-4 bg-white pb-24 pt-14 md:pt-20">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10">
           <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
             <div>
@@ -190,12 +198,23 @@ export default function ShopExperience() {
           ) : (
             <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12 lg:grid-cols-4">
               {list.map((product, index) => (
-                <ProductCard key={product.slug} product={product} index={index} />
+                <ProductCard
+                  key={product.slug}
+                  product={product}
+                  index={index}
+                  colorFamilies={colorFamilies}
+                  catalogProducts={products}
+                />
               ))}
             </div>
           )}
 
+          <p className="sr-only" data-catalog-source={source}>
+            Catalog source {source}
+          </p>
+
           <PairUpWith
+            categories={categories}
             currentCategory={category}
             onSelect={(slug) => updateFilters(slug, 'all')}
           />
@@ -205,8 +224,8 @@ export default function ShopExperience() {
   );
 }
 
-function PairUpWith({ currentCategory, onSelect }) {
-  const others = categories.filter((item) => item.slug !== currentCategory);
+function PairUpWith({ categories = [], currentCategory, onSelect }) {
+  const others = categories.filter((item) => item.slug !== currentCategory && item.banner);
   if (others.length === 0) return null;
 
   return (

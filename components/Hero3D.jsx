@@ -45,16 +45,16 @@ export default function Hero3D() {
               </Link>
             </Magnetic>
             <Link
-              href="/lookbook"
+              href="/gifting"
               className="inline-flex items-center rounded-full border border-ink/15 bg-white/60 px-6 py-3.5 text-[13px] font-medium tracking-[0.04em] text-ink transition-colors hover:border-ink/30 hover:bg-white"
             >
-              View lookbook
+              Corporate gifting
             </Link>
             <Link
-              href="/contact"
+              href="/about"
               className="inline-flex items-center rounded-full border border-transparent px-5 py-3.5 text-[13px] font-medium tracking-[0.04em] text-stone transition-colors hover:text-ink"
             >
-              Book a viewing
+              About us
             </Link>
           </div>
 
@@ -62,7 +62,7 @@ export default function Hero3D() {
             {[
               { href: '/shop?category=rings', label: 'Rings' },
               { href: '/shop?category=earrings', label: 'Earrings' },
-              { href: '/shop?category=necklaces', label: 'Pendants' },
+              { href: '/shop?category=pendants', label: 'Pendants' },
               { href: '/shop?category=bracelets', label: 'Bracelets' },
             ].map((item) => (
               <Link

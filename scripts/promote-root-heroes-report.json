@@ -1,0 +1,666 @@
+{
+  "updates": [
+    {
+      "slug": "autumn-tree-branch-earrings",
+      "image": "/earrings/autumn-tree-branch-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/autumn-tree-branch-earrings-hero.jpg",
+        "/earrings/autumn-tree-branch-earrings-2.jpg",
+        "/earrings/autumn-tree-branch-earrings-3.jpg",
+        "/earrings/autumn-tree-branch-earrings-4.jpg",
+        "/earrings/autumn-tree-branch-earrings-5.jpg",
+        "/earrings/autumn-tree-branch-earrings-6.jpg"
+      ],
+      "hoverImage": "/earrings/autumn-tree-branch-earrings-2.jpg",
+      "white": 1
+    },
+    {
+      "slug": "chrysanthemum-dangle-earrings",
+      "image": "/earrings/chrysanthemum-dangle-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/chrysanthemum-dangle-earrings-hero.jpg",
+        "/earrings/chrysanthemum-dangle-earrings-2.jpg",
+        "/earrings/chrysanthemum-dangle-earrings-3.jpg",
+        "/earrings/chrysanthemum-dangle-earrings-4.jpg",
+        "/earrings/chrysanthemum-dangle-earrings-5.jpg",
+        "/earrings/chrysanthemum-dangle-earrings-6.jpg",
+        "/earrings/chrysanthemum-dangle-earrings-7.jpg",
+        "/earrings/chrysanthemum-dangle-earrings-8.jpg",
+        "/earrings/chrysanthemum-dangle-earrings-9.jpg",
+        "/earrings/chrysanthemum-dangle-earrings-10.jpg"
+      ],
+      "hoverImage": "/earrings/chrysanthemum-dangle-earrings-2.jpg",
+      "white": 0.010822510822510822
+    },
+    {
+      "slug": "dragonfly-baroque-pearl-earrings",
+      "image": "/earrings/dragonfly-baroque-pearl-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/dragonfly-baroque-pearl-earrings-hero.jpg",
+        "/earrings/dragonfly-baroque-pearl-earrings-2.jpg",
+        "/earrings/dragonfly-baroque-pearl-earrings-3.jpg",
+        "/earrings/dragonfly-baroque-pearl-earrings-4.jpg",
+        "/earrings/dragonfly-baroque-pearl-earrings-5.jpg",
+        "/earrings/dragonfly-baroque-pearl-earrings-6.jpg",
+        "/earrings/dragonfly-baroque-pearl-earrings-7.jpg",
+        "/earrings/dragonfly-baroque-pearl-earrings-8.jpg"
+      ],
+      "hoverImage": "/earrings/dragonfly-baroque-pearl-earrings-2.jpg",
+      "white": 0.006493506493506494
+    },
+    {
+      "slug": "dripping-honey-bee-earrings",
+      "image": "/earrings/dripping-honey-bee-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/dripping-honey-bee-earrings-hero.jpg",
+        "/earrings/dripping-honey-bee-earrings-2.jpg",
+        "/earrings/dripping-honey-bee-earrings-3.jpg",
+        "/earrings/dripping-honey-bee-earrings-4.jpg",
+        "/earrings/dripping-honey-bee-earrings-5.jpg"
+      ],
+      "hoverImage": "/earrings/dripping-honey-bee-earrings-2.jpg",
+      "white": 0.9956709956709957
+    },
+    {
+      "slug": "epipremnum-dangle-earrings",
+      "image": "/earrings/epipremnum-dangle-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/epipremnum-dangle-earrings-hero.jpg",
+        "/earrings/epipremnum-dangle-earrings-2.png",
+        "/earrings/epipremnum-dangle-earrings-3.png",
+        "/earrings/epipremnum-dangle-earrings-4.png"
+      ],
+      "hoverImage": "/earrings/epipremnum-dangle-earrings-2.png",
+      "white": 0.9978354978354979
+    },
+    {
+      "slug": "flower-design-dangle-earrings",
+      "image": "/earrings/flower-design-dangle-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/flower-design-dangle-earrings-hero.jpg",
+        "/earrings/flower-design-dangle-earrings-2.png",
+        "/earrings/flower-design-dangle-earrings-3.png",
+        "/earrings/flower-design-dangle-earrings-4.png"
+      ],
+      "hoverImage": "/earrings/flower-design-dangle-earrings-2.png",
+      "white": 0
+    },
+    {
+      "slug": "gold-flower-dangle-earrings",
+      "image": "/earrings/gold-flower-dangle-earrings-hero.png",
+      "gallery": [
+        "/earrings/gold-flower-dangle-earrings-hero.png",
+        "/earrings/gold-flower-dangle-earrings-2.png"
+      ],
+      "hoverImage": "/earrings/gold-flower-dangle-earrings-2.png",
+      "white": 0
+    },
+    {
+      "slug": "flower-earring-gold",
+      "image": "/earrings/flower-earring-gold-hero.jpg",
+      "gallery": [
+        "/earrings/flower-earring-gold-hero.jpg",
+        "/earrings/flower-earring-gold-2.jpg"
+      ],
+      "hoverImage": "/earrings/flower-earring-gold-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "flower-earring-silver",
+      "image": "/earrings/flower-earring-silver-hero.jpg",
+      "gallery": [
+        "/earrings/flower-earring-silver-hero.jpg",
+        "/earrings/flower-earring-silver-2.jpg",
+        "/earrings/flower-earring-silver-3.jpg",
+        "/earrings/flower-earring-silver-4.jpg",
+        "/earrings/flower-earring-silver-5.jpg",
+        "/earrings/flower-earring-silver-6.jpg",
+        "/earrings/flower-earring-silver-7.jpg"
+      ],
+      "hoverImage": "/earrings/flower-earring-silver-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "forget-me-not-hoop-earrings",
+      "image": "/earrings/forget-me-not-hoop-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/forget-me-not-hoop-earrings-hero.jpg",
+        "/earrings/forget-me-not-hoop-earrings-2.jpg",
+        "/earrings/forget-me-not-hoop-earrings-3.jpg",
+        "/earrings/forget-me-not-hoop-earrings-4.jpg",
+        "/earrings/forget-me-not-hoop-earrings-5.jpg",
+        "/earrings/forget-me-not-hoop-earrings-6.jpg",
+        "/earrings/forget-me-not-hoop-earrings-7.jpg"
+      ],
+      "hoverImage": "/earrings/forget-me-not-hoop-earrings-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "forget-me-not-flower-earrings",
+      "image": "/earrings/forget-me-not-flower-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/forget-me-not-flower-earrings-hero.jpg",
+        "/earrings/forget-me-not-flower-earrings-2.jpg",
+        "/earrings/forget-me-not-flower-earrings-3.jpg",
+        "/earrings/forget-me-not-flower-earrings-4.jpg",
+        "/earrings/forget-me-not-flower-earrings-5.jpg",
+        "/earrings/forget-me-not-flower-earrings-6.jpg",
+        "/earrings/forget-me-not-flower-earrings-7.jpg",
+        "/earrings/forget-me-not-flower-earrings-8.jpg"
+      ],
+      "hoverImage": "/earrings/forget-me-not-flower-earrings-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "french-iris-long-drop-earrings",
+      "image": "/earrings/french-iris-long-drop-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/french-iris-long-drop-earrings-hero.jpg",
+        "/earrings/french-iris-long-drop-earrings-2.jpg"
+      ],
+      "hoverImage": "/earrings/french-iris-long-drop-earrings-2.jpg",
+      "white": 1
+    },
+    {
+      "slug": "clover-pearl-dangle-earrings",
+      "image": "/earrings/clover-pearl-dangle-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/clover-pearl-dangle-earrings-hero.jpg",
+        "/earrings/clover-pearl-dangle-earrings-2.jpg",
+        "/earrings/clover-pearl-dangle-earrings-3.png",
+        "/earrings/clover-pearl-dangle-earrings-4.png",
+        "/earrings/clover-pearl-dangle-earrings-5.png",
+        "/earrings/clover-pearl-dangle-earrings-6.png",
+        "/earrings/clover-pearl-dangle-earrings-7.png",
+        "/earrings/clover-pearl-dangle-earrings-8.png",
+        "/earrings/clover-pearl-dangle-earrings-9.png"
+      ],
+      "hoverImage": "/earrings/clover-pearl-dangle-earrings-2.jpg",
+      "white": 1
+    },
+    {
+      "slug": "honeybee-stud-earrings",
+      "image": "/earrings/honeybee-stud-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/honeybee-stud-earrings-hero.jpg",
+        "/earrings/honeybee-stud-earrings-2.jpg",
+        "/earrings/honeybee-stud-earrings-3.jpg"
+      ],
+      "hoverImage": "/earrings/honeybee-stud-earrings-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "honeybee-drop-earrings",
+      "image": "/earrings/honeybee-drop-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/honeybee-drop-earrings-hero.jpg",
+        "/earrings/honeybee-drop-earrings-2.jpg",
+        "/earrings/honeybee-drop-earrings-3.jpg",
+        "/earrings/honeybee-drop-earrings-4.jpg",
+        "/earrings/honeybee-drop-earrings-5.jpg"
+      ],
+      "hoverImage": "/earrings/honeybee-drop-earrings-2.jpg",
+      "white": 1
+    },
+    {
+      "slug": "iris-flower-dangle-earrings",
+      "image": "/earrings/iris-flower-dangle-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/iris-flower-dangle-earrings-hero.jpg",
+        "/earrings/iris-flower-dangle-earrings-2.jpg",
+        "/earrings/iris-flower-dangle-earrings-3.jpg",
+        "/earrings/iris-flower-dangle-earrings-4.jpg",
+        "/earrings/iris-flower-dangle-earrings-5.jpg",
+        "/earrings/iris-flower-dangle-earrings-6.jpg",
+        "/earrings/iris-flower-dangle-earrings-7.jpg",
+        "/earrings/iris-flower-dangle-earrings-8.jpg"
+      ],
+      "hoverImage": "/earrings/iris-flower-dangle-earrings-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "iris-flower-earrings",
+      "image": "/earrings/iris-flower-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/iris-flower-earrings-hero.jpg",
+        "/earrings/iris-flower-earrings-2.jpg",
+        "/earrings/iris-flower-earrings-3.jpg",
+        "/earrings/iris-flower-earrings-4.jpg",
+        "/earrings/iris-flower-earrings-5.jpg",
+        "/earrings/iris-flower-earrings-6.jpg"
+      ],
+      "hoverImage": "/earrings/iris-flower-earrings-2.jpg",
+      "white": 0.022727272727272728
+    },
+    {
+      "slug": "iris-long-drop-earrings",
+      "image": "/earrings/iris-long-drop-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/iris-long-drop-earrings-hero.jpg",
+        "/earrings/iris-long-drop-earrings-2.jpg",
+        "/earrings/iris-long-drop-earrings-3.jpg",
+        "/earrings/iris-long-drop-earrings-4.jpg",
+        "/earrings/iris-long-drop-earrings-5.jpg",
+        "/earrings/iris-long-drop-earrings-6.jpg",
+        "/earrings/iris-long-drop-earrings-7.jpg",
+        "/earrings/iris-long-drop-earrings-8.jpg",
+        "/earrings/iris-long-drop-earrings-9.jpg"
+      ],
+      "hoverImage": "/earrings/iris-long-drop-earrings-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "leaf-hoop-earrings",
+      "image": "/earrings/leaf-hoop-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/leaf-hoop-earrings-hero.jpg",
+        "/earrings/leaf-hoop-earrings-2.jpg",
+        "/earrings/leaf-hoop-earrings-3.jpg",
+        "/earrings/leaf-hoop-earrings-4.jpg",
+        "/earrings/leaf-hoop-earrings-5.jpg",
+        "/earrings/leaf-hoop-earrings-6.jpg",
+        "/earrings/leaf-hoop-earrings-7.jpg",
+        "/earrings/leaf-hoop-earrings-8.jpg",
+        "/earrings/leaf-hoop-earrings-9.jpg",
+        "/earrings/leaf-hoop-earrings-10.jpg",
+        "/earrings/leaf-hoop-earrings-11.jpg"
+      ],
+      "hoverImage": "/earrings/leaf-hoop-earrings-2.jpg",
+      "white": 0.9967532467532467
+    },
+    {
+      "slug": "lilac-designer-drop-earrings",
+      "image": "/earrings/lilac-designer-drop-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/lilac-designer-drop-earrings-hero.jpg",
+        "/earrings/lilac-designer-drop-earrings-2.jpg",
+        "/earrings/lilac-designer-drop-earrings-3.jpg",
+        "/earrings/lilac-designer-drop-earrings-4.jpg",
+        "/earrings/lilac-designer-drop-earrings-5.jpg",
+        "/earrings/lilac-designer-drop-earrings-6.jpg",
+        "/earrings/lilac-designer-drop-earrings-7.jpg",
+        "/earrings/lilac-designer-drop-earrings-8.jpg"
+      ],
+      "hoverImage": "/earrings/lilac-designer-drop-earrings-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "pearl-leaf-stud-earrings",
+      "image": "/earrings/pearl-leaf-stud-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/pearl-leaf-stud-earrings-hero.jpg",
+        "/earrings/pearl-leaf-stud-earrings-2.jpg",
+        "/earrings/pearl-leaf-stud-earrings-3.jpg",
+        "/earrings/pearl-leaf-stud-earrings-4.jpg",
+        "/earrings/pearl-leaf-stud-earrings-5.jpg"
+      ],
+      "hoverImage": "/earrings/pearl-leaf-stud-earrings-2.jpg",
+      "white": 1
+    },
+    {
+      "slug": "olive-leaf-earrings",
+      "image": "/earrings/olive-leaf-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/olive-leaf-earrings-hero.jpg",
+        "/earrings/olive-leaf-earrings-2.jpg",
+        "/earrings/olive-leaf-earrings-3.jpg"
+      ],
+      "hoverImage": "/earrings/olive-leaf-earrings-2.jpg",
+      "white": 0.011904761904761904
+    },
+    {
+      "slug": "phalaenopsis-hoop-earrings",
+      "image": "/earrings/phalaenopsis-hoop-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/phalaenopsis-hoop-earrings-hero.jpg",
+        "/earrings/phalaenopsis-hoop-earrings-2.jpg",
+        "/earrings/phalaenopsis-hoop-earrings-3.jpg",
+        "/earrings/phalaenopsis-hoop-earrings-4.jpg",
+        "/earrings/phalaenopsis-hoop-earrings-5.jpg",
+        "/earrings/phalaenopsis-hoop-earrings-6.jpg",
+        "/earrings/phalaenopsis-hoop-earrings-7.jpg",
+        "/earrings/phalaenopsis-hoop-earrings-8.jpg",
+        "/earrings/phalaenopsis-hoop-earrings-9.jpg"
+      ],
+      "hoverImage": "/earrings/phalaenopsis-hoop-earrings-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "retro-circle-drop-earrings",
+      "image": "/earrings/retro-circle-drop-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/retro-circle-drop-earrings-hero.jpg",
+        "/earrings/retro-circle-drop-earrings-2.jpg",
+        "/earrings/retro-circle-drop-earrings-3.jpg",
+        "/earrings/retro-circle-drop-earrings-4.jpg",
+        "/earrings/retro-circle-drop-earrings-5.jpg",
+        "/earrings/retro-circle-drop-earrings-6.jpg"
+      ],
+      "hoverImage": "/earrings/retro-circle-drop-earrings-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "tulip-blossom-dangle-earrings",
+      "image": "/earrings/tulip-blossom-dangle-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/tulip-blossom-dangle-earrings-hero.jpg",
+        "/earrings/tulip-blossom-dangle-earrings-2.jpg",
+        "/earrings/tulip-blossom-dangle-earrings-3.jpg",
+        "/earrings/tulip-blossom-dangle-earrings-4.jpg",
+        "/earrings/tulip-blossom-dangle-earrings-5.jpg",
+        "/earrings/tulip-blossom-dangle-earrings-6.jpg"
+      ],
+      "hoverImage": "/earrings/tulip-blossom-dangle-earrings-2.jpg",
+      "white": 0.0010822510822510823
+    },
+    {
+      "slug": "curved-branch-asymmetric-earrings",
+      "image": "/earrings/curved-branch-asymmetric-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/curved-branch-asymmetric-earrings-hero.jpg",
+        "/earrings/curved-branch-asymmetric-earrings-2.jpg",
+        "/earrings/curved-branch-asymmetric-earrings-3.jpg",
+        "/earrings/curved-branch-asymmetric-earrings-4.jpg",
+        "/earrings/curved-branch-asymmetric-earrings-5.jpg",
+        "/earrings/curved-branch-asymmetric-earrings-6.jpg",
+        "/earrings/curved-branch-asymmetric-earrings-7.jpg"
+      ],
+      "hoverImage": "/earrings/curved-branch-asymmetric-earrings-2.jpg",
+      "white": 0.006493506493506494
+    },
+    {
+      "slug": "wild-rose-stud-earrings",
+      "image": "/earrings/wild-rose-stud-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/wild-rose-stud-earrings-hero.jpg",
+        "/earrings/wild-rose-stud-earrings-2.jpg"
+      ],
+      "hoverImage": "/earrings/wild-rose-stud-earrings-2.jpg",
+      "white": 1
+    },
+    {
+      "slug": "atelier-lfja-earrings",
+      "image": "/earrings/atelier-lfja-earrings-hero.jpg",
+      "gallery": [
+        "/earrings/atelier-lfja-earrings-hero.jpg",
+        "/earrings/atelier-lfja-earrings-2.jpg",
+        "/earrings/atelier-lfja-earrings-3.jpg",
+        "/earrings/atelier-lfja-earrings-4.jpg"
+      ],
+      "hoverImage": "/earrings/atelier-lfja-earrings-2.jpg",
+      "white": 0.9891774891774892
+    },
+    {
+      "slug": "bamboo-charm-necklace",
+      "image": "/necklace/bamboo-charm-necklace-hero.jpg",
+      "gallery": [
+        "/necklace/bamboo-charm-necklace-hero.jpg",
+        "/necklace/bamboo-charm-necklace-2.jpg",
+        "/necklace/bamboo-charm-necklace-3.jpg"
+      ],
+      "hoverImage": "/necklace/bamboo-charm-necklace-2.jpg",
+      "white": 0.0010822510822510823
+    },
+    {
+      "slug": "bamboo-charm-necklace-gold",
+      "image": "/necklace/bamboo-charm-necklace-gold-hero.jpg",
+      "gallery": [
+        "/necklace/bamboo-charm-necklace-gold-hero.jpg",
+        "/necklace/bamboo-charm-necklace-gold-2.jpg",
+        "/necklace/bamboo-charm-necklace-gold-3.jpg"
+      ],
+      "hoverImage": "/necklace/bamboo-charm-necklace-gold-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "bamboo-charm-necklace-silver",
+      "image": "/necklace/bamboo-charm-necklace-silver-hero.jpg",
+      "gallery": [
+        "/necklace/bamboo-charm-necklace-silver-hero.jpg"
+      ],
+      "hoverImage": "/necklace/bamboo-charm-necklace-silver-hero.jpg",
+      "white": 0
+    },
+    {
+      "slug": "flower-in-the-rain-necklace-pink",
+      "image": "/necklace/flower-in-the-rain-necklace-pink-hero.jpg",
+      "gallery": [
+        "/necklace/flower-in-the-rain-necklace-pink-hero.jpg",
+        "/necklace/flower-in-the-rain-necklace-pink-2.jpg",
+        "/necklace/flower-in-the-rain-necklace-pink-3.jpg",
+        "/necklace/flower-in-the-rain-necklace-pink-4.jpg"
+      ],
+      "hoverImage": "/necklace/flower-in-the-rain-necklace-pink-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "flower-in-the-rain-necklace-white",
+      "image": "/necklace/flower-in-the-rain-necklace-white-hero.jpg",
+      "gallery": [
+        "/necklace/flower-in-the-rain-necklace-white-hero.jpg",
+        "/necklace/flower-in-the-rain-necklace-white-2.jpg",
+        "/necklace/flower-in-the-rain-necklace-white-3.jpg",
+        "/necklace/flower-in-the-rain-necklace-white-4.jpg",
+        "/necklace/flower-in-the-rain-necklace-white-5.jpg",
+        "/necklace/flower-in-the-rain-necklace-white-6.jpg"
+      ],
+      "hoverImage": "/necklace/flower-in-the-rain-necklace-white-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "fresh-redbud-bell-necklace",
+      "image": "/necklace/fresh-redbud-bell-necklace-hero.jpg",
+      "gallery": [
+        "/necklace/fresh-redbud-bell-necklace-hero.jpg",
+        "/necklace/fresh-redbud-bell-necklace-2.jpg",
+        "/necklace/fresh-redbud-bell-necklace-3.jpg",
+        "/necklace/fresh-redbud-bell-necklace-4.jpg",
+        "/necklace/fresh-redbud-bell-necklace-5.jpg",
+        "/necklace/fresh-redbud-bell-necklace-6.jpg",
+        "/necklace/fresh-redbud-bell-necklace-7.jpg",
+        "/necklace/fresh-redbud-bell-necklace-8.png",
+        "/necklace/fresh-redbud-bell-necklace-9.png",
+        "/necklace/fresh-redbud-bell-necklace-10.png",
+        "/necklace/fresh-redbud-bell-necklace-11.png"
+      ],
+      "hoverImage": "/necklace/fresh-redbud-bell-necklace-2.jpg",
+      "white": 0.9891774891774892
+    },
+    {
+      "slug": "hollow-butterfly-pendant-gold",
+      "image": "/necklace/hollow-butterfly-pendant-gold-hero.jpg",
+      "gallery": [
+        "/necklace/hollow-butterfly-pendant-gold-hero.jpg",
+        "/necklace/hollow-butterfly-pendant-gold-2.jpg",
+        "/necklace/hollow-butterfly-pendant-gold-3.jpg"
+      ],
+      "hoverImage": "/necklace/hollow-butterfly-pendant-gold-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "hollow-butterfly-pendant-silver",
+      "image": "/necklace/hollow-butterfly-pendant-silver-hero.jpg",
+      "gallery": [
+        "/necklace/hollow-butterfly-pendant-silver-hero.jpg",
+        "/necklace/hollow-butterfly-pendant-silver-2.jpg",
+        "/necklace/hollow-butterfly-pendant-silver-3.jpg",
+        "/necklace/hollow-butterfly-pendant-silver-4.jpg"
+      ],
+      "hoverImage": "/necklace/hollow-butterfly-pendant-silver-2.jpg",
+      "white": 0.0021645021645021645
+    },
+    {
+      "slug": "calla-lily-brooch-gold",
+      "image": "/brooch/calla-lily-brooch-gold-hero.jpg",
+      "gallery": [
+        "/brooch/calla-lily-brooch-gold-hero.jpg",
+        "/brooch/calla-lily-brooch-gold-2.jpg",
+        "/brooch/calla-lily-brooch-gold-3.jpg"
+      ],
+      "hoverImage": "/brooch/calla-lily-brooch-gold-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "calla-lily-brooch-silver",
+      "image": "/brooch/calla-lily-brooch-silver-hero.jpg",
+      "gallery": [
+        "/brooch/calla-lily-brooch-silver-hero.jpg",
+        "/brooch/calla-lily-brooch-silver-2.jpg"
+      ],
+      "hoverImage": "/brooch/calla-lily-brooch-silver-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "calla-lily-brooch",
+      "image": "/brooch/calla-lily-brooch-hero.jpg",
+      "gallery": [
+        "/brooch/calla-lily-brooch-hero.jpg",
+        "/brooch/calla-lily-brooch-2.jpg",
+        "/brooch/calla-lily-brooch-3.jpg",
+        "/brooch/calla-lily-brooch-4.jpg"
+      ],
+      "hoverImage": "/brooch/calla-lily-brooch-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "nandina-flower-brooch",
+      "image": "/brooch/nandina-flower-brooch-hero.png",
+      "gallery": [
+        "/brooch/nandina-flower-brooch-hero.png",
+        "/brooch/nandina-flower-brooch-2.png",
+        "/brooch/nandina-flower-brooch-3.png",
+        "/brooch/nandina-flower-brooch-4.png"
+      ],
+      "hoverImage": "/brooch/nandina-flower-brooch-2.png",
+      "white": 0.14285714285714285
+    },
+    {
+      "slug": "sacred-bamboo-flower-brooch",
+      "image": "/brooch/sacred-bamboo-flower-brooch-hero.png",
+      "gallery": [
+        "/brooch/sacred-bamboo-flower-brooch-hero.png",
+        "/brooch/sacred-bamboo-flower-brooch-2.png",
+        "/brooch/sacred-bamboo-flower-brooch-3.png",
+        "/brooch/sacred-bamboo-flower-brooch-4.png"
+      ],
+      "hoverImage": "/brooch/sacred-bamboo-flower-brooch-2.png",
+      "white": 0
+    },
+    {
+      "slug": "flower-in-the-rain-pink",
+      "image": "/bracelets/flower-in-the-rain-pink-hero.jpg",
+      "gallery": [
+        "/bracelets/flower-in-the-rain-pink-hero.jpg",
+        "/bracelets/flower-in-the-rain-pink-2.jpg",
+        "/bracelets/flower-in-the-rain-pink-3.jpg"
+      ],
+      "hoverImage": "/bracelets/flower-in-the-rain-pink-2.jpg",
+      "white": 0.9945887445887446
+    },
+    {
+      "slug": "flower-in-the-rain-white",
+      "image": "/bracelets/flower-in-the-rain-white-hero.jpg",
+      "gallery": [
+        "/bracelets/flower-in-the-rain-white-hero.jpg"
+      ],
+      "hoverImage": "/bracelets/flower-in-the-rain-white-hero.jpg",
+      "white": 0.0010822510822510823
+    },
+    {
+      "slug": "flower-in-the-rain-edit",
+      "image": "/bracelets/flower-in-the-rain-edit-hero.jpg",
+      "gallery": [
+        "/bracelets/flower-in-the-rain-edit-hero.jpg",
+        "/bracelets/flower-in-the-rain-edit-2.jpg",
+        "/bracelets/flower-in-the-rain-edit-3.jpg",
+        "/bracelets/flower-in-the-rain-edit-4.jpg",
+        "/bracelets/flower-in-the-rain-edit-5.jpg",
+        "/bracelets/flower-in-the-rain-edit-6.jpg"
+      ],
+      "hoverImage": "/bracelets/flower-in-the-rain-edit-2.jpg",
+      "white": 1
+    },
+    {
+      "slug": "forget-me-not-bangles",
+      "image": "/bracelets/forget-me-not-bangles-hero.jpg",
+      "gallery": [
+        "/bracelets/forget-me-not-bangles-hero.jpg",
+        "/bracelets/forget-me-not-bangles-2.jpg",
+        "/bracelets/forget-me-not-bangles-3.jpg",
+        "/bracelets/forget-me-not-bangles-4.jpg",
+        "/bracelets/forget-me-not-bangles-5.jpg"
+      ],
+      "hoverImage": "/bracelets/forget-me-not-bangles-2.jpg",
+      "white": 0.0010822510822510823
+    },
+    {
+      "slug": "forget-me-not-cuff",
+      "image": "/bracelets/forget-me-not-cuff-hero.jpg",
+      "gallery": [
+        "/bracelets/forget-me-not-cuff-hero.jpg",
+        "/bracelets/forget-me-not-cuff-2.jpg",
+        "/bracelets/forget-me-not-cuff-3.jpg",
+        "/bracelets/forget-me-not-cuff-4.jpg"
+      ],
+      "hoverImage": "/bracelets/forget-me-not-cuff-2.jpg",
+      "white": 0
+    },
+    {
+      "slug": "lotus-whisper-bangle-pink",
+      "image": "/bracelets/lotus-whisper-bangle-pink-hero.jpg",
+      "gallery": [
+        "/bracelets/lotus-whisper-bangle-pink-hero.jpg",
+        "/bracelets/lotus-whisper-bangle-pink-2.jpg"
+      ],
+      "hoverImage": "/bracelets/lotus-whisper-bangle-pink-2.jpg",
+      "white": 1
+    },
+    {
+      "slug": "lotus-whisper-bangle-green",
+      "image": "/bracelets/lotus-whisper-bangle-green-hero.jpg",
+      "gallery": [
+        "/bracelets/lotus-whisper-bangle-green-hero.jpg",
+        "/bracelets/lotus-whisper-bangle-green-2.jpg"
+      ],
+      "hoverImage": "/bracelets/lotus-whisper-bangle-green-2.jpg",
+      "white": 1
+    },
+    {
+      "slug": "lotus-whisper-pink",
+      "image": "/bracelets/lotus-whisper-pink-hero.jpg",
+      "gallery": [
+        "/bracelets/lotus-whisper-pink-hero.jpg",
+        "/bracelets/lotus-whisper-pink-2.jpg",
+        "/bracelets/lotus-whisper-pink-3.jpg",
+        "/bracelets/lotus-whisper-pink-4.jpg",
+        "/bracelets/lotus-whisper-pink-5.jpg"
+      ],
+      "hoverImage": "/bracelets/lotus-whisper-pink-2.jpg",
+      "white": 0.0021645021645021645
+    },
+    {
+      "slug": "lotus-whisper-green",
+      "image": "/bracelets/lotus-whisper-green-hero.jpg",
+      "gallery": [
+        "/bracelets/lotus-whisper-green-hero.jpg",
+        "/bracelets/lotus-whisper-green-2.jpg",
+        "/bracelets/lotus-whisper-green-3.jpg",
+        "/bracelets/lotus-whisper-green-4.jpg",
+        "/bracelets/lotus-whisper-green-5.jpg",
+        "/bracelets/lotus-whisper-green-6.jpg",
+        "/bracelets/lotus-whisper-green-7.jpg"
+      ],
+      "hoverImage": "/bracelets/lotus-whisper-green-2.jpg",
+      "white": 0.0021645021645021645
+    },
+    {
+      "slug": "lotus-whisper-edit",
+      "image": "/bracelets/lotus-whisper-edit-hero.jpg",
+      "gallery": [
+        "/bracelets/lotus-whisper-edit-hero.jpg"
+      ],
+      "hoverImage": "/bracelets/lotus-whisper-edit-hero.jpg",
+      "white": 0
+    }
+  ]
+}

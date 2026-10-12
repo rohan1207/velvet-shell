@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" fill="none">
+  <rect width="800" height="1000" fill="#F3EDE4"/>
+  <path d="M400 320c-70 0-120 48-120 110 0 82 70 140 120 190 50-50 120-108 120-190 0-62-50-110-120-110Z" stroke="#C9B8A0" stroke-width="2" fill="none"/>
+  <circle cx="400" cy="430" r="18" fill="#D4AF64" fill-opacity="0.45"/>
+  <text x="400" y="720" text-anchor="middle" fill="#8A7A68" font-family="Georgia, serif" font-size="28" letter-spacing="4">VELVET SHELL</text>
+  <text x="400" y="760" text-anchor="middle" fill="#A89888" font-family="Georgia, serif" font-size="16">Image coming soon</text>
+</svg>

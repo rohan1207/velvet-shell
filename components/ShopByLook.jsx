@@ -10,8 +10,6 @@ import { money } from '@/lib/format';
 const looks = [
   {
     id: 'ear-wrist-edit',
-    title: 'The Soft Bloom Edit',
-    line: 'Earrings, bracelet and ring — one quiet language.',
     image: '/images/look-ear-wrist.jpg',
     alt: 'Indian model wearing phalaenopsis earrings, flower bracelet and floral ring',
     hotspots: [
@@ -22,8 +20,6 @@ const looks = [
   },
   {
     id: 'collar-lapel-edit',
-    title: 'The Collar & Lapel Edit',
-    line: 'Necklace, brooch and ring — worn as one thought.',
     image: '/images/look-collar-lapel.jpg',
     alt: 'Indian model wearing pink flower necklace, calla lily brooch and floral ring',
     hotspots: [
@@ -149,7 +145,6 @@ function LookCard({ look }) {
           className="object-cover object-center transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
           priority
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent" />
 
         {look.hotspots.map((spot) => (
           <Hotspot
@@ -160,12 +155,6 @@ function LookCard({ look }) {
             onDeactivate={scheduleDeactivate}
           />
         ))}
-
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5 md:p-7">
-          <p className="font-label text-[10px] text-ivory/80">Shop by look</p>
-          <h3 className="font-display mt-1.5 text-2xl text-ivory md:text-3xl lg:text-4xl">{look.title}</h3>
-          <p className="mt-1.5 max-w-xs text-sm text-ivory/85">{look.line}</p>
-        </div>
       </div>
     </article>
   );
@@ -173,9 +162,9 @@ function LookCard({ look }) {
 
 export default function ShopByLook() {
   return (
-    <section className="box-border flex h-[100svh] flex-col bg-ivory px-5 py-5 md:px-10 md:py-6">
+    <section className="box-border flex min-h-[min(100svh,52rem)] flex-col bg-ivory px-5 py-8 md:min-h-[min(100svh,40rem)] md:px-10 md:py-10">
       <div className="mx-auto flex min-h-0 w-full max-w-[1600px] flex-1 flex-col">
-        <div className="mb-4 flex shrink-0 flex-col justify-between gap-3 md:mb-5 md:flex-row md:items-end">
+        <div className="mb-4 flex shrink-0 flex-col justify-between gap-2 md:mb-5 md:flex-row md:items-end">
           <div>
             <p className="font-label text-gold">Shop by look</p>
             <h2 className="font-display mt-2 max-w-2xl text-3xl leading-[1.08] text-ink md:text-5xl">
@@ -187,7 +176,7 @@ export default function ShopByLook() {
           </p>
         </div>
 
-        <div className="grid min-h-0 flex-1 grid-rows-2 gap-3 md:grid-cols-2 md:grid-rows-1 md:gap-4">
+        <div className="grid min-h-[22rem] flex-1 grid-rows-2 gap-3 md:min-h-[26rem] md:grid-cols-2 md:grid-rows-1 md:gap-4">
           {looks.map((look) => (
             <LookCard key={look.id} look={look} />
           ))}

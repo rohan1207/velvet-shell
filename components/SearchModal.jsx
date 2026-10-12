@@ -5,13 +5,24 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from '@/context/StoreContext';
-import { searchProducts } from '@/lib/products';
 import { money } from '@/lib/format';
 
 export default function SearchModal() {
-  const { searchOpen, setSearchOpen } = useStore();
+  const { searchOpen, setSearchOpen, catalog } = useStore();
   const [query, setQuery] = useState('');
-  const results = useMemo(() => searchProducts(query).slice(0, 6), [query]);
+  const results = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    const pool = catalog.products?.length ? catalog.products : [];
+    return pool
+      .filter((item) =>
+        [item.name, item.description, item.category, item.collection]
+          .join(' ')
+          .toLowerCase()
+          .includes(q)
+      )
+      .slice(0, 6);
+  }, [query, catalog.products]);
 
   return (
     <AnimatePresence>

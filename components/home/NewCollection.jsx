@@ -1,13 +1,14 @@
 import Link from 'next/link';
-import { collections, products } from '@/lib/products';
+import { collections, getListingProducts, products } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
 
 const featuredCollection = collections.find((c) => c.slug === 'the-shell-edit') ?? collections[0];
+const listing = getListingProducts(products);
 
-const fromCollection = products.filter((product) => product.collection === featuredCollection.slug);
+const fromCollection = listing.filter((product) => product.collection === featuredCollection.slug);
 const featured = [
   ...fromCollection,
-  ...products.filter((product) => product.collection !== featuredCollection.slug),
+  ...listing.filter((product) => product.collection !== featuredCollection.slug),
 ].slice(0, 4);
 
 export default function NewCollection() {

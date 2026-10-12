@@ -1,7 +1,9 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import { useStore } from '@/context/StoreContext';
 import { getProduct } from '@/lib/products';
 import { money } from '@/lib/format';
@@ -28,12 +30,36 @@ const emptyAddress = {
 };
 
 export default function AccountPage() {
+  return (
+    <Suspense fallback={<AccountShell />}>
+      <AccountInner />
+    </Suspense>
+  );
+}
+
+function AccountShell() {
+  return (
+    <div className="bg-ivory pt-28 pb-24 md:pt-36">
+      <div className="mx-auto max-w-md px-5">
+        <p className="font-label text-gold">Account</p>
+        <h1 className="font-display mt-3 text-5xl text-ink">Welcome</h1>
+      </div>
+    </div>
+  );
+}
+
+function AccountInner() {
+  const search = useSearchParams();
   const {
     user,
+    ready,
     login,
+    register,
     logout,
     updateProfile,
     changePassword,
+    requestPasswordReset,
+    resetPassword,
     orders,
     addresses,
     selectedAddressId,
@@ -44,13 +70,18 @@ export default function AccountPage() {
     wishlist,
   } = useStore();
 
-  const [mode, setMode] = useState('enter');
+  const initialMode = search.get('mode') === 'reset' ? 'reset' : 'enter';
+  const [mode, setMode] = useState(initialMode);
   const [tab, setTab] = useState('overview');
   const [authForm, setAuthForm] = useState({
+    fullName: '',
     email: '',
+    phone: '',
+    identifier: '',
     password: '',
-    firstName: '',
-    lastName: '',
+    code: '',
+    newPassword: '',
+    confirmPassword: '',
   });
   const [profileForm, setProfileForm] = useState(null);
   const [passwordForm, setPasswordForm] = useState({
@@ -62,6 +93,15 @@ export default function AccountPage() {
   const [editingAddressId, setEditingAddressId] = useState(null);
   const [notice, setNotice] = useState('');
   const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [resetStep, setResetStep] = useState('request');
+
+  useEffect(() => {
+    if (search.get('mode') === 'reset') {
+      setMode('reset');
+      setResetStep('code');
+    }
+  }, [search]);
 
   const displayProfile = useMemo(() => {
     if (!user) return null;
@@ -69,74 +109,282 @@ export default function AccountPage() {
       profileForm || {
         firstName: user.firstName || '',
         lastName: user.lastName || '',
+        fullName: user.fullName || [user.firstName, user.lastName].filter(Boolean).join(' '),
         email: user.email || '',
         phone: user.phone || '',
       }
     );
   }, [user, profileForm]);
 
+  async function onAuthSubmit(event) {
+    event.preventDefault();
+    setError('');
+    setNotice('');
+    setBusy(true);
+    try {
+      if (mode === 'enter') {
+        await login({
+          identifier: authForm.identifier,
+          password: authForm.password,
+        });
+        setNotice('Signed in.');
+      } else if (mode === 'create') {
+        await register({
+          fullName: authForm.fullName,
+          email: authForm.email,
+          phone: authForm.phone,
+          password: authForm.password,
+        });
+        setNotice('Welcome — your account is ready.');
+      } else if (mode === 'reset' && resetStep === 'request') {
+        await requestPasswordReset(authForm.identifier);
+        setResetStep('code');
+        setNotice('If that account exists, we emailed a 6-digit code. Enter it below.');
+      } else if (mode === 'reset' && resetStep === 'code') {
+        if (authForm.newPassword !== authForm.confirmPassword) {
+          throw new Error('New passwords do not match.');
+        }
+        const data = await resetPassword({
+          identifier: authForm.identifier,
+          code: authForm.code,
+          password: authForm.newPassword,
+          signIn: true,
+        });
+        setNotice(data.message || 'Password updated.');
+        setMode('enter');
+        setResetStep('request');
+      }
+    } catch (err) {
+      setError(err.message || 'Something went wrong.');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (!ready) {
+    return <AccountShell />;
+  }
+
   if (!user) {
+    const titles = {
+      enter: 'Welcome back',
+      create: 'Create account',
+      reset: 'Reset password',
+    };
+    const copy = {
+      enter: 'Sign in with your email or phone number and password.',
+      create: 'Join Velvet Shell with your name, email, phone, and a secure password.',
+      reset:
+        resetStep === 'request'
+          ? 'Enter the email or phone on your account. We will send a one-time code.'
+          : 'Enter the code from your email and choose a new password. You will be signed in after a successful reset.',
+    };
+
     return (
       <div className="bg-ivory pt-28 pb-24 md:pt-36">
         <div className="mx-auto max-w-md px-5">
           <p className="font-label text-gold">Account</p>
-          <h1 className="font-display mt-3 text-5xl text-ink">
-            {mode === 'enter' ? 'Welcome back' : 'Create account'}
-          </h1>
-          <p className="mt-4 text-sm font-light text-ink/80">
-            Demo sign-in: any email and any password will work. Your session stays in this browser.
-          </p>
-          <form
-            className="mt-10 space-y-5"
-            onSubmit={(event) => {
-              event.preventDefault();
-              login(authForm);
-              setNotice('Signed in.');
-              setError('');
-            }}
-          >
+          <h1 className="font-display mt-3 text-5xl text-ink">{titles[mode]}</h1>
+          <p className="mt-4 text-sm font-light text-ink/80">{copy[mode]}</p>
+
+          <form className="mt-10 space-y-5" onSubmit={onAuthSubmit}>
             {mode === 'create' && (
-              <div className="grid gap-5 sm:grid-cols-2">
+              <>
                 <Field
-                  label="First name"
-                  value={authForm.firstName}
-                  onChange={(v) => setAuthForm((f) => ({ ...f, firstName: v }))}
+                  label="Full name"
+                  required
+                  value={authForm.fullName}
+                  onChange={(v) => setAuthForm((f) => ({ ...f, fullName: v }))}
+                  autoComplete="name"
                 />
                 <Field
-                  label="Last name"
-                  value={authForm.lastName}
-                  onChange={(v) => setAuthForm((f) => ({ ...f, lastName: v }))}
+                  label="Email"
+                  type="email"
+                  required
+                  value={authForm.email}
+                  onChange={(v) => setAuthForm((f) => ({ ...f, email: v }))}
+                  autoComplete="email"
                 />
-              </div>
+                <Field
+                  label="Phone"
+                  type="tel"
+                  required
+                  value={authForm.phone}
+                  onChange={(v) => setAuthForm((f) => ({ ...f, phone: v }))}
+                  autoComplete="tel"
+                  placeholder="10-digit mobile"
+                />
+                <Field
+                  label="Password"
+                  type="password"
+                  required
+                  value={authForm.password}
+                  onChange={(v) => setAuthForm((f) => ({ ...f, password: v }))}
+                  autoComplete="new-password"
+                  hint="At least 8 characters, with letters and a number."
+                />
+              </>
             )}
-            <Field
-              label="Email"
-              type="email"
-              required
-              value={authForm.email}
-              onChange={(v) => setAuthForm((f) => ({ ...f, email: v }))}
-            />
-            <Field
-              label="Password"
-              type="password"
-              required
-              value={authForm.password}
-              onChange={(v) => setAuthForm((f) => ({ ...f, password: v }))}
-            />
+
+            {mode === 'enter' && (
+              <>
+                <Field
+                  label="Email or phone"
+                  required
+                  value={authForm.identifier}
+                  onChange={(v) => setAuthForm((f) => ({ ...f, identifier: v }))}
+                  autoComplete="username"
+                />
+                <Field
+                  label="Password"
+                  type="password"
+                  required
+                  value={authForm.password}
+                  onChange={(v) => setAuthForm((f) => ({ ...f, password: v }))}
+                  autoComplete="current-password"
+                />
+              </>
+            )}
+
+            {mode === 'reset' && resetStep === 'request' && (
+              <Field
+                label="Email or phone"
+                required
+                value={authForm.identifier}
+                onChange={(v) => setAuthForm((f) => ({ ...f, identifier: v }))}
+                autoComplete="username"
+              />
+            )}
+
+            {mode === 'reset' && resetStep === 'code' && (
+              <>
+                <Field
+                  label="Email or phone"
+                  required
+                  value={authForm.identifier}
+                  onChange={(v) => setAuthForm((f) => ({ ...f, identifier: v }))}
+                />
+                <Field
+                  label="6-digit code"
+                  required
+                  value={authForm.code}
+                  onChange={(v) => setAuthForm((f) => ({ ...f, code: v.replace(/\D/g, '').slice(0, 6) }))}
+                  inputMode="numeric"
+                  autoComplete="one-time-code"
+                />
+                <Field
+                  label="New password"
+                  type="password"
+                  required
+                  value={authForm.newPassword}
+                  onChange={(v) => setAuthForm((f) => ({ ...f, newPassword: v }))}
+                  autoComplete="new-password"
+                />
+                <Field
+                  label="Confirm new password"
+                  type="password"
+                  required
+                  value={authForm.confirmPassword}
+                  onChange={(v) => setAuthForm((f) => ({ ...f, confirmPassword: v }))}
+                  autoComplete="new-password"
+                />
+              </>
+            )}
+
+            {(notice || error) && (
+              <p className={`text-sm ${error ? 'text-burgundy' : 'text-ink/85'}`}>
+                {error || notice}
+              </p>
+            )}
+
             <button
               type="submit"
-              className="bg-velvet-texture h-12 w-full rounded-full font-label text-[11px] tracking-[0.2em] text-ivory"
+              disabled={busy}
+              className="bg-velvet-texture h-12 w-full rounded-full font-label text-[11px] tracking-[0.2em] text-ivory disabled:opacity-60"
             >
-              {mode === 'enter' ? 'Sign in' : 'Create account'}
+              {busy
+                ? 'Please wait…'
+                : mode === 'enter'
+                  ? 'Sign in'
+                  : mode === 'create'
+                    ? 'Create account'
+                    : resetStep === 'request'
+                      ? 'Send reset code'
+                      : 'Reset & sign in'}
             </button>
           </form>
-          <button
-            type="button"
-            className="mt-8 font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
-            onClick={() => setMode(mode === 'enter' ? 'create' : 'enter')}
-          >
-            {mode === 'enter' ? 'Need an account? Create one' : 'Already with us? Sign in'}
-          </button>
+
+          <div className="mt-8 space-y-3">
+            {mode === 'enter' && (
+              <>
+                <button
+                  type="button"
+                  className="block font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
+                  onClick={() => {
+                    setMode('reset');
+                    setResetStep('request');
+                    setError('');
+                    setNotice('');
+                  }}
+                >
+                  Forgot password?
+                </button>
+                <button
+                  type="button"
+                  className="block font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
+                  onClick={() => {
+                    setMode('create');
+                    setError('');
+                    setNotice('');
+                  }}
+                >
+                  Need an account? Create one
+                </button>
+              </>
+            )}
+            {mode === 'create' && (
+              <button
+                type="button"
+                className="font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
+                onClick={() => {
+                  setMode('enter');
+                  setError('');
+                  setNotice('');
+                }}
+              >
+                Already with us? Sign in
+              </button>
+            )}
+            {mode === 'reset' && (
+              <div className="space-y-3">
+                {resetStep === 'code' && (
+                  <button
+                    type="button"
+                    className="block font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
+                    onClick={() => {
+                      setResetStep('request');
+                      setNotice('');
+                      setError('');
+                    }}
+                  >
+                    Resend a new code
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className="block font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
+                  onClick={() => {
+                    setMode('enter');
+                    setResetStep('request');
+                    setError('');
+                    setNotice('');
+                  }}
+                >
+                  Back to sign in
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -149,14 +397,14 @@ export default function AccountPage() {
           <div>
             <p className="font-label text-gold">My account</p>
             <h1 className="font-display mt-3 text-4xl text-ink md:text-5xl">
-              Hello, {user.firstName || 'there'}
+              Hello, {user.firstName || user.fullName?.split(' ')[0] || 'there'}
             </h1>
             <p className="mt-2 text-sm font-light text-ink/85">{user.email}</p>
           </div>
           <button
             type="button"
-            onClick={() => {
-              logout();
+            onClick={async () => {
+              await logout();
               setNotice('');
             }}
             className="font-label text-[11px] tracking-[0.18em] text-ink/80 hover:text-burgundy"
@@ -250,52 +498,59 @@ export default function AccountPage() {
             {tab === 'profile' && displayProfile && (
               <form
                 className="max-w-xl space-y-5"
-                onSubmit={(event) => {
+                onSubmit={async (event) => {
                   event.preventDefault();
-                  updateProfile({
-                    firstName: displayProfile.firstName,
-                    lastName: displayProfile.lastName,
-                    phone: displayProfile.phone,
-                    email: displayProfile.email.trim().toLowerCase(),
-                  });
-                  setProfileForm(null);
-                  setNotice('Personal details saved.');
+                  setError('');
+                  setBusy(true);
+                  try {
+                    await updateProfile({
+                      fullName:
+                        displayProfile.fullName ||
+                        [displayProfile.firstName, displayProfile.lastName]
+                          .filter(Boolean)
+                          .join(' '),
+                      phone: displayProfile.phone,
+                    });
+                    setProfileForm(null);
+                    setNotice('Personal details saved.');
+                  } catch (err) {
+                    setError(err.message || 'Could not save details.');
+                  } finally {
+                    setBusy(false);
+                  }
                 }}
               >
                 <h2 className="font-display text-3xl text-ink">Personal details</h2>
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <Field
-                    label="First name"
-                    value={displayProfile.firstName}
-                    onChange={(v) =>
-                      setProfileForm({ ...displayProfile, firstName: v })
-                    }
-                    required
-                  />
-                  <Field
-                    label="Last name"
-                    value={displayProfile.lastName}
-                    onChange={(v) => setProfileForm({ ...displayProfile, lastName: v })}
-                  />
-                </div>
+                <Field
+                  label="Full name"
+                  value={
+                    displayProfile.fullName ||
+                    [displayProfile.firstName, displayProfile.lastName].filter(Boolean).join(' ')
+                  }
+                  onChange={(v) => setProfileForm({ ...displayProfile, fullName: v })}
+                  required
+                />
                 <Field
                   label="Email"
                   type="email"
                   value={displayProfile.email}
-                  onChange={(v) => setProfileForm({ ...displayProfile, email: v })}
-                  required
+                  onChange={() => {}}
+                  disabled
+                  hint="Email is used for login and cannot be changed here."
                 />
                 <Field
                   label="Phone"
                   type="tel"
                   value={displayProfile.phone}
                   onChange={(v) => setProfileForm({ ...displayProfile, phone: v })}
+                  required
                 />
                 <button
                   type="submit"
-                  className="bg-velvet-texture h-12 rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory"
+                  disabled={busy}
+                  className="bg-velvet-texture h-12 rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory disabled:opacity-60"
                 >
-                  Save details
+                  {busy ? 'Saving…' : 'Save details'}
                 </button>
               </form>
             )}
@@ -502,7 +757,7 @@ export default function AccountPage() {
             {tab === 'password' && (
               <form
                 className="max-w-md space-y-5"
-                onSubmit={(event) => {
+                onSubmit={async (event) => {
                   event.preventDefault();
                   setError('');
                   setNotice('');
@@ -510,18 +765,20 @@ export default function AccountPage() {
                     setError('New passwords do not match.');
                     return;
                   }
-                  const result = changePassword(passwordForm.current, passwordForm.next);
+                  setBusy(true);
+                  const result = await changePassword(passwordForm.current, passwordForm.next);
+                  setBusy(false);
                   if (!result.ok) {
                     setError(result.error);
                     return;
                   }
                   setPasswordForm({ current: '', next: '', confirm: '' });
-                  setNotice('Password updated for this demo account.');
+                  setNotice('Password updated.');
                 }}
               >
                 <h2 className="font-display text-3xl text-ink">Manage password</h2>
                 <p className="text-sm font-light text-ink/80">
-                  Demo only — passwords are stored locally in this browser.
+                  Choose a strong password (8+ characters, letters and a number).
                 </p>
                 <Field
                   label="Current password"
@@ -529,6 +786,7 @@ export default function AccountPage() {
                   required
                   value={passwordForm.current}
                   onChange={(v) => setPasswordForm((f) => ({ ...f, current: v }))}
+                  autoComplete="current-password"
                 />
                 <Field
                   label="New password"
@@ -536,6 +794,7 @@ export default function AccountPage() {
                   required
                   value={passwordForm.next}
                   onChange={(v) => setPasswordForm((f) => ({ ...f, next: v }))}
+                  autoComplete="new-password"
                 />
                 <Field
                   label="Confirm new password"
@@ -543,12 +802,14 @@ export default function AccountPage() {
                   required
                   value={passwordForm.confirm}
                   onChange={(v) => setPasswordForm((f) => ({ ...f, confirm: v }))}
+                  autoComplete="new-password"
                 />
                 <button
                   type="submit"
-                  className="bg-velvet-texture h-12 rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory"
+                  disabled={busy}
+                  className="bg-velvet-texture h-12 rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory disabled:opacity-60"
                 >
-                  Update password
+                  {busy ? 'Updating…' : 'Update password'}
                 </button>
               </form>
             )}
@@ -615,17 +876,33 @@ function OrderRow({ order, detailed = false }) {
   );
 }
 
-function Field({ label, value, onChange, type = 'text', required }) {
+function Field({
+  label,
+  value,
+  onChange,
+  type = 'text',
+  required,
+  disabled,
+  hint,
+  autoComplete,
+  placeholder,
+  inputMode,
+}) {
   return (
     <label className="block">
       <span className="font-label text-[10px] text-ink/80">{label}</span>
       <input
         type={type}
         required={required}
+        disabled={disabled}
         value={value}
-        onChange={(event) => onChange(event.target.value)}
-        className="mt-2 w-full border-b border-ink/15 bg-transparent py-3 text-[15px] font-light text-ink outline-none"
+        placeholder={placeholder}
+        autoComplete={autoComplete}
+        inputMode={inputMode}
+        onChange={(event) => onChange?.(event.target.value)}
+        className="mt-2 w-full border-b border-ink/15 bg-transparent py-3 text-[15px] font-light text-ink outline-none disabled:opacity-60"
       />
+      {hint && <span className="mt-2 block text-xs font-light text-ink/70">{hint}</span>}
     </label>
   );
 }

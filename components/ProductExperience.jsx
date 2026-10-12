@@ -1,28 +1,101 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { collectionName } from '@/lib/products';
+import { useRouter } from 'next/navigation';
+import { collectionName as dummyCollectionName } from '@/lib/products';
 import { money } from '@/lib/format';
 import { useStore } from '@/context/StoreContext';
 import ProductCard from './ProductCard';
 
-export default function ProductExperience({ product, related }) {
+function labelCollection(slug, collections = []) {
+  return collections.find((c) => c.slug === slug)?.name || dummyCollectionName(slug) || slug;
+}
+
+function displayTitle(name = '') {
+  return name.replace(/\s*[—–-]\s*.+$/, '').trim() || name;
+}
+
+export default function ProductExperience({
+  product,
+  related = [],
+  collections = [],
+  colorFamily = null,
+  variants = [],
+}) {
+  const router = useRouter();
   const { addToCart, wishlist, toggleWishlist } = useStore();
+
+  const colorOptions = useMemo(() => {
+    if (Array.isArray(variants) && variants.length > 1) return variants;
+    return [];
+  }, [variants]);
+
+  const [activeSlug, setActiveSlug] = useState(product.slug);
+  const activeProduct =
+    colorOptions.find((v) => v.slug === activeSlug)?.product || product;
+
+  const gallery =
+    activeProduct.gallery?.length > 0
+      ? activeProduct.gallery
+      : [activeProduct.image || '/images/product-placeholder.svg'];
+  const sizeOptions = activeProduct.sizes?.length ? activeProduct.sizes : ['One size'];
+  const metalOptions = activeProduct.metal?.length ? activeProduct.metal : [];
+
   const [active, setActive] = useState(0);
-  const [size, setSize] = useState(product.sizes[0]);
-  const [metal, setMetal] = useState(product.metal[0]);
+  const [size, setSize] = useState(sizeOptions[0]);
+  const [metal, setMetal] = useState(metalOptions[0] || '');
   const [qty, setQty] = useState(1);
   const [open, setOpen] = useState('story');
 
+  useEffect(() => {
+    setActiveSlug(product.slug);
+  }, [product.slug]);
+
+  useEffect(() => {
+    setActive(0);
+    setSize(activeProduct.sizes?.[0] || 'One size');
+    setMetal(activeProduct.metal?.[0] || '');
+    setQty(1);
+  }, [activeProduct.slug]);
+
+  function selectColor(slug) {
+    if (slug === activeSlug) return;
+    setActiveSlug(slug);
+    router.replace(`/shop/${slug}`, { scroll: false });
+  }
+
+  const detailsList = (activeProduct.details || []).filter(Boolean);
+  const storyCopy =
+    activeProduct.story ||
+    `${displayTitle(activeProduct.name)} is shaped for everyday wear — a quiet motif with considered proportions, easy to style alone or with pieces you already love.`;
+  const careCopy =
+    activeProduct.care ||
+    'Remove before bathing or swimming. Wipe gently with a soft dry cloth after wear. Store flat in the pouch, away from harsh chemicals and humidity.';
+  const detailsCopy = detailsList.length
+    ? detailsList.join(' · ')
+    : [
+        activeProduct.metal?.[0] || '925 sterling silver',
+        activeProduct.colorLabel && activeProduct.colorLabel !== 'Default'
+          ? `Colour: ${activeProduct.colorLabel}`
+          : null,
+        activeProduct.sizes?.[0] || 'One size',
+        'Ships within India in 5–7 working days',
+      ]
+        .filter(Boolean)
+        .join(' · ');
+
+  const title =
+    colorOptions.length > 1 ? displayTitle(activeProduct.name) : activeProduct.name;
+
   return (
-    <div className="bg-ivory pt-24 md:pt-28">
-      <div className="mx-auto grid max-w-[1600px] gap-10 px-5 pb-24 md:px-10 lg:grid-cols-12 lg:gap-16">
-        <div className="order-2 lg:sticky lg:top-28 lg:order-1 lg:col-span-7 lg:self-start">
-          <div className="flex h-[min(100svh-7.5rem,920px)] gap-2.5 md:gap-3">
+    <div className="bg-ivory pt-site-chrome">
+      <div className="mx-auto grid max-w-[1600px] gap-10 px-5 pt-6 pb-24 md:px-10 md:pt-8 lg:grid-cols-12 lg:gap-16">
+        <div className="order-2 lg:sticky lg:top-[calc(var(--site-promo-h)+var(--site-nav-h)+1rem)] lg:order-1 lg:col-span-7 lg:self-start">
+          <div className="flex h-[min(100svh-var(--site-promo-h)-var(--site-nav-h)-3rem,920px)] gap-2.5 md:gap-3">
             <div className="flex w-14 shrink-0 flex-col gap-2.5 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] md:w-16 lg:w-[4.5rem] [&::-webkit-scrollbar]:hidden">
-              {product.gallery.map((src, index) => (
+              {gallery.map((src, index) => (
                 <button
                   key={`${src}-${index}`}
                   type="button"
@@ -40,8 +113,8 @@ export default function ProductExperience({ product, related }) {
 
             <div className="relative min-h-0 min-w-0 flex-1 overflow-hidden rounded-[1.25rem] bg-cream md:rounded-[1.5rem]">
               <Image
-                src={product.gallery[active]}
-                alt={product.name}
+                src={gallery[active] || gallery[0]}
+                alt={activeProduct.name}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 55vw"
@@ -52,15 +125,67 @@ export default function ProductExperience({ product, related }) {
         </div>
 
         <div className="order-1 lg:sticky lg:top-32 lg:order-2 lg:col-span-5 lg:self-start">
-          <p className="text-[11px] tracking-[0.28em] text-gold uppercase">{collectionName(product.collection)}</p>
-          <h1 className="font-display mt-3 text-5xl md:text-6xl">{product.name}</h1>
-          <p className="font-num mt-4 text-lg text-ink/90">{money(product.price)}</p>
-          <p className="mt-8 max-w-md text-base leading-relaxed text-stone">{product.description}</p>
+          <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
+            {labelCollection(activeProduct.collection, collections)}
+          </p>
+          <h1 className="font-display mt-3 text-5xl md:text-6xl">{title}</h1>
+          <p className="font-num mt-4 text-lg text-ink/90">{money(activeProduct.price)}</p>
+          <p className="mt-8 max-w-md text-base leading-relaxed text-stone">
+            {activeProduct.description}
+          </p>
+
+          {colorOptions.length > 1 && (
+            <div className="mt-10">
+              <p className="text-[10px] tracking-[0.28em] uppercase">
+                Colour
+                <span className="ml-2 tracking-normal normal-case text-ink/70">
+                  {activeProduct.colorLabel ||
+                    colorOptions.find((v) => v.slug === activeSlug)?.label ||
+                    ''}
+                </span>
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2.5">
+                {colorOptions.map((variant) => {
+                  const selected = variant.slug === activeSlug;
+                  const swatch =
+                    variant.swatch ||
+                    variant.product?.colorSwatch ||
+                    '#C5C5C5';
+                  const label = variant.label || variant.product?.colorLabel || 'Colour';
+                  return (
+                    <button
+                      key={variant.slug}
+                      type="button"
+                      title={label}
+                      aria-label={label}
+                      aria-pressed={selected}
+                      onClick={() => selectColor(variant.slug)}
+                      className={`flex h-9 w-9 items-center justify-center rounded-full transition-transform duration-300 ${
+                        selected
+                          ? 'scale-110 ring-2 ring-gold/80 ring-offset-2 ring-offset-ivory'
+                          : 'hover:scale-105'
+                      }`}
+                    >
+                      <span
+                        className="h-7 w-7 rounded-full border border-ink/10 shadow-sm"
+                        style={{ backgroundColor: swatch }}
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+              {colorFamily?.id ? (
+                <p className="mt-2 text-xs font-light text-ink/60">
+                  {colorOptions.length} colours in this piece
+                </p>
+              ) : null}
+            </div>
+          )}
 
           <div className="mt-10">
             <p className="text-[10px] tracking-[0.28em] uppercase">Measure</p>
             <div className="mt-3 flex flex-wrap gap-2">
-              {product.sizes.map((option) => (
+              {sizeOptions.map((option) => (
                 <button
                   key={option}
                   type="button"
@@ -75,11 +200,11 @@ export default function ProductExperience({ product, related }) {
             </div>
           </div>
 
-          {product.metal?.length > 0 && (
+          {metalOptions.length > 0 && (
             <div className="mt-8">
               <p className="text-[10px] tracking-[0.28em] uppercase">Finish</p>
               <div className="mt-3 flex flex-wrap gap-2">
-                {product.metal.map((option) => (
+                {metalOptions.map((option) => (
                   <button
                     key={option}
                     type="button"
@@ -111,31 +236,38 @@ export default function ProductExperience({ product, related }) {
           <div className="mt-10 flex gap-3">
             <button
               type="button"
-              onClick={() => addToCart(product.slug, { size, metal, qty })}
+              onClick={() => addToCart(activeProduct.slug, { size, metal, qty })}
               className="flex h-[52px] flex-1 items-center justify-center rounded-full bg-ink text-[11px] tracking-[0.28em] text-ivory uppercase"
             >
-              Add to bag · <span className="font-num">{money(product.price * qty)}</span>
+              Add to bag · <span className="font-num">{money(activeProduct.price * qty)}</span>
             </button>
             <button
               type="button"
-              onClick={() => toggleWishlist(product.slug)}
+              onClick={() => toggleWishlist(activeProduct.slug)}
               className="flex h-[52px] w-[52px] items-center justify-center rounded-full border border-cream text-lg"
               aria-label="Save"
             >
-              {wishlist.includes(product.slug) ? '♥' : '♡'}
+              {wishlist.includes(activeProduct.slug) ? '♥' : '♡'}
             </button>
           </div>
-          {product.madeToOrder && (
-            <p className="mt-4 text-xs text-stone">Made to order. Allow two to three weeks in the atelier.</p>
+          {activeProduct.madeToOrder && (
+            <p className="mt-4 text-xs text-stone">
+              Made to order. Allow two to three weeks in the atelier.
+            </p>
           )}
 
           <div className="mt-12 divide-y divide-cream border-y border-cream">
             {[
-              ['story', 'The piece', product.story],
-              ['details', 'Details', product.details.join(' · ')],
-              ['care', 'Care', product.care],
+              ['story', 'The piece', storyCopy],
+              ['details', 'Details', detailsCopy],
+              ['care', 'Care', careCopy],
             ].map(([id, label, copy]) => (
-              <button key={id} type="button" onClick={() => setOpen(open === id ? '' : id)} className="w-full py-5 text-left">
+              <button
+                key={id}
+                type="button"
+                onClick={() => setOpen(open === id ? '' : id)}
+                className="w-full py-5 text-left"
+              >
                 <div className="flex items-center justify-between text-[11px] tracking-[0.24em] uppercase">
                   <span>{label}</span>
                   <span>{open === id ? '–' : '+'}</span>

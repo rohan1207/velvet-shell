@@ -177,7 +177,7 @@ export default function ScrollFrameStory() {
   return (
     <section
       ref={rootRef}
-      className="relative z-[1] isolate box-border flex h-[100svh] flex-col overflow-hidden bg-[#ffffff] pt-[6.25rem] md:pt-[7.1rem]"
+      className="pt-site-chrome relative z-[1] isolate box-border flex h-[100svh] flex-col overflow-hidden bg-[#ffffff]"
       style={{ backgroundColor: '#ffffff' }}
     >
       <div className="mx-auto grid h-full min-h-0 w-full max-w-[1600px] grid-cols-1 bg-[#ffffff] lg:grid-cols-2">
@@ -216,7 +216,7 @@ export default function ScrollFrameStory() {
             className="pointer-events-none absolute top-[2.65rem] right-[2.65rem] h-12 w-12 rounded-full border border-gold/10 md:top-[3.35rem] md:right-[4.1rem] md:h-16 md:w-16"
           />
 
-          <div className="relative mt-[4vh] mb-auto w-full max-w-md lg:mt-[5vh] lg:max-w-lg">
+          <div className="relative mt-6 mb-auto w-full max-w-md md:mt-8 lg:max-w-lg">
             <div className="flex items-center gap-3">
               <span className="h-px w-7 bg-gold/80" />
               <p className="font-label text-gold">The house</p>

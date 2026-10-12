@@ -19,7 +19,7 @@ const emptyForm = {
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { cart, cartTotal, cartCount, user, selectedAddress, placeOrder, login } = useStore();
+  const { cart, cartTotal, cartCount, user, selectedAddress, placeOrder } = useStore();
   const [form, setForm] = useState(emptyForm);
   const [error, setError] = useState('');
   const [paying, setPaying] = useState(false);
@@ -82,15 +82,6 @@ export default function CheckoutPage() {
       postal,
       country: 'India',
     };
-
-    if (!user) {
-      login({
-        email: form.email,
-        password: 'demo',
-        firstName,
-        lastName,
-      });
-    }
 
     const order = placeOrder({
       id: `VS${Date.now().toString().slice(-8)}`,

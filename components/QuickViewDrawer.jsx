@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from '@/context/StoreContext';
-import { getProduct } from '@/lib/products';
 import { money } from '@/lib/format';
 
 export default function QuickViewDrawer() {
@@ -15,11 +14,12 @@ export default function QuickViewDrawer() {
     addToCart,
     toggleWishlist,
     wishlist,
+    getProduct,
   } = useStore();
 
   const product = useMemo(
     () => (quickViewSlug ? getProduct(quickViewSlug) : null),
-    [quickViewSlug]
+    [quickViewSlug, getProduct]
   );
 
   const [size, setSize] = useState('');

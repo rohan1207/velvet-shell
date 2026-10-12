@@ -1,13 +1,14 @@
+import NatureStoryHero from '@/components/NatureStoryHero';
 import Hero3 from '@/components/Hero3';
-import PromoMarquee from '@/components/PromoMarquee';
 import CategoryCircles from '@/components/CategoryCircles';
 import BestOfVelvetShell from '@/components/BestOfVelvetShell';
 import NewArrivals from '@/components/NewArrivals';
 import ShopByLook from '@/components/ShopByLook';
 import FullBleedVideo from '@/components/FullBleedVideo';
 import ShopNow from '@/components/ShopNow';
-import ScrollFrameStory from '@/components/ScrollFrameStory';
-import TrustStrip from '@/components/TrustStrip';
+// import ScrollFrameStory from '@/components/ScrollFrameStory';
+import TheHouse from '@/components/TheHouse';
+// import TrustStrip from '@/components/TrustStrip';
 import BannerShowcase from '@/components/BannerShowcase';
 import Testimonials from '@/components/Testimonials';
 
@@ -24,17 +25,18 @@ export const metadata = {
 export default function HomePage() {
   return (
     <>
+      <NatureStoryHero />
+      {/* <TrustStrip /> */}
       <Hero3 />
-      <PromoMarquee />
       <CategoryCircles />
-      <BestOfVelvetShell />
       <NewArrivals />
-      <ScrollFrameStory />
-      <ShopByLook />
-      <FullBleedVideo />
+      <BestOfVelvetShell />
       <ShopNow />
-      <TrustStrip />
+      <FullBleedVideo />
+      <ShopByLook />
       <BannerShowcase />
+      {/* <ScrollFrameStory /> */}
+      <TheHouse />
       <Testimonials />
     </>
   );

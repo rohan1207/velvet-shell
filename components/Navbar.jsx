@@ -11,13 +11,17 @@ import MegaMenu from './MegaMenu';
 const leftLinks = [
   { href: '/shop?category=rings', label: 'Rings', match: 'rings' },
   { href: '/shop?category=earrings', label: 'Earrings', match: 'earrings' },
-  { href: '/shop?category=necklaces', label: 'Pendants', match: 'necklaces' },
+  { href: '/shop?category=necklaces', label: 'Necklace', match: 'necklaces' },
+  { href: '/shop?category=pendants', label: 'Pendant', match: 'pendants' },
+  { href: '/shop?category=chains', label: 'Chain', match: 'chains' },
+  { href: '/shop?category=chokers', label: 'Choker', match: 'chokers' },
   { href: '/shop?category=bracelets', label: 'Bracelets', match: 'bracelets' },
-  { href: '/shop?category=cuffs', label: 'Brooches', match: 'cuffs' },
-  { href: '/gifting', label: 'Gifting', match: 'gifting' },
 ];
 
 const rightLinks = [
+  { href: '/shop?category=anklets', label: 'Anklet', match: 'anklets' },
+  { href: '/shop?category=sets', label: 'Sets', match: 'sets' },
+  { href: '/gifting', label: 'Gifting', match: 'gifting', mega: 'gifting' },
   { href: '/shop', label: 'Shop', match: 'shop', mega: 'shop' },
   { href: '/about', label: 'Brand', match: 'brand', mega: 'brand' },
 ];
@@ -155,7 +159,9 @@ export default function Navbar() {
         pathname.startsWith('/journal')
       );
     }
-    if (link.match === 'gifting') return pathname.startsWith('/gifting');
+    if (link.match === 'gifting') {
+      return pathname.startsWith('/gifting');
+    }
     if (link.match === 'shop') return pathname === '/shop' && !category;
     if (pathname.startsWith('/shop')) return category === link.match;
     return false;
@@ -164,7 +170,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-[box-shadow,border-radius] duration-500 ${
+        className={`relative w-full transition-[box-shadow,border-radius] duration-500 ${
           mega
             ? 'overflow-visible rounded-none'
             : 'overflow-hidden rounded-b-[1.35rem] md:rounded-b-[1.6rem]'
@@ -214,7 +220,7 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Right — Shop, Brand + icons */}
+          {/* Right — Gifting, Shop, Brand + icons */}
           <div className="relative z-10 flex min-w-0 items-center justify-end gap-0.5 sm:gap-1">
             <nav className="mr-1 hidden items-center xl:flex">
               {rightLinks.map((link) => (
@@ -332,12 +338,29 @@ export default function Navbar() {
                   >
                     <Link
                       href={link.href}
+                      onClick={() => setMenuOpen(false)}
                       className={`block py-2.5 text-3xl font-semibold tracking-[0.04em] uppercase sm:text-4xl ${
                         isActive(link) ? 'text-white' : 'text-white/75'
                       }`}
                     >
                       {link.label}
                     </Link>
+                    {link.children?.length > 0 && (
+                      <div className="mb-2 ml-1 flex flex-col border-l border-white/20 pl-4">
+                        {link.children.map((child) => (
+                          <Link
+                            key={child.label}
+                            href={child.href}
+                            onClick={() => setMenuOpen(false)}
+                            className={`py-2 text-lg font-medium tracking-[0.06em] uppercase ${
+                              category === child.match ? 'text-white' : 'text-white/65'
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </motion.div>
                 ))}
               </nav>

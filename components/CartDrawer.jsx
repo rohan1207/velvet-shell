@@ -4,12 +4,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from '@/context/StoreContext';
-import { getProduct } from '@/lib/products';
 import { money } from '@/lib/format';
 
 export default function CartDrawer() {
-  const { cart, cartOpen, setCartOpen, updateQty, removeFromCart, cartTotal, cartCount } =
-    useStore();
+  const {
+    cart,
+    cartOpen,
+    setCartOpen,
+    updateQty,
+    removeFromCart,
+    cartTotal,
+    cartCount,
+    getProduct,
+  } = useStore();
 
   return (
     <AnimatePresence>

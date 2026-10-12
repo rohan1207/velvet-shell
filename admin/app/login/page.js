@@ -45,7 +45,7 @@ function LoginForm() {
         <p className="font-label text-[10px] tracking-[0.22em] text-[#d4af64]">Velvet Shell</p>
         <h1 className="font-display mt-3 text-4xl text-[#2d2b2b]">Admin access</h1>
         <p className="mt-3 text-sm font-light text-[#7a736c]">
-          Private house console. Authorized operators only.
+          Private house console. Sign in with your Supabase admin account.
         </p>
         <form onSubmit={onSubmit} className="mt-8 space-y-4">
           <label className="block">

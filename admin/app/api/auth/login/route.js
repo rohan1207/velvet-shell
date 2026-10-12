@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import {
   createSessionToken,
-  safeEqualString,
   sessionCookieOptions,
 } from '@/lib/session';
+import { createAdminSupabase, createAnonSupabase } from '@/lib/supabase';
 
 const attempts = new Map();
 
@@ -29,24 +29,69 @@ export async function POST(request) {
   const email = String(body.email || '').trim().toLowerCase();
   const password = String(body.password || '');
 
-  const adminEmail = String(process.env.ADMIN_EMAIL || '').trim().toLowerCase();
-  const adminPassword = String(process.env.ADMIN_PASSWORD || '');
-
-  if (!adminEmail || !adminPassword) {
-    return NextResponse.json(
-      { error: 'Admin credentials are not configured on the server.' },
-      { status: 500 }
-    );
+  if (!email || !password) {
+    return NextResponse.json({ error: 'Email and password are required.' }, { status: 400 });
   }
 
-  const emailOk = safeEqualString(email, adminEmail);
-  const passOk = safeEqualString(password, adminPassword);
-  if (!emailOk || !passOk) {
-    return NextResponse.json({ error: 'Invalid email or password.' }, { status: 401 });
-  }
+  try {
+    const anon = createAnonSupabase();
+    const { data, error } = await anon.auth.signInWithPassword({ email, password });
 
-  const token = createSessionToken(email);
-  const response = NextResponse.json({ ok: true, email });
-  response.cookies.set(sessionCookieOptions(token));
-  return response;
+    if (error || !data.user) {
+      const detail = `${error?.message || ''} ${error?.cause?.message || ''}`;
+      if (/certificate|UNABLE_TO_VERIFY|fetch failed/i.test(detail)) {
+        return NextResponse.json(
+          {
+            error:
+              'TLS to Supabase failed. Set SUPABASE_INSECURE_TLS=1 in admin/.env.local and restart.',
+          },
+          { status: 503 }
+        );
+      }
+      return NextResponse.json({ error: 'Invalid email or password.' }, { status: 401 });
+    }
+
+    const admin = createAdminSupabase();
+    const { data: profile, error: profileError } = await admin
+      .from('profiles')
+      .select('role, email, full_name')
+      .eq('id', data.user.id)
+      .maybeSingle();
+
+    if (profileError) {
+      console.error('[admin login] profile', profileError);
+      return NextResponse.json({ error: 'Could not verify admin role.' }, { status: 500 });
+    }
+
+    if (profile?.role !== 'admin') {
+      await anon.auth.signOut();
+      return NextResponse.json(
+        { error: 'This account does not have admin access.' },
+        { status: 403 }
+      );
+    }
+
+    // End the Supabase browser session — admin console uses its own signed cookie.
+    await anon.auth.signOut();
+
+    const token = createSessionToken(email);
+    const response = NextResponse.json({
+      ok: true,
+      email,
+      name: profile.full_name || '',
+    });
+    response.cookies.set(sessionCookieOptions(token));
+    return response;
+  } catch (err) {
+    console.error('[admin login]', err);
+    const detail = `${err?.message || ''} ${err?.cause?.message || ''}`;
+    let message = 'Login failed. Please try again.';
+    if (/not configured/i.test(detail)) {
+      message = 'Supabase is not configured on the admin server.';
+    } else if (/certificate|UNABLE_TO_VERIFY|fetch failed/i.test(detail)) {
+      message =
+        'TLS to Supabase failed. Set SUPABASE_INSECURE_TLS=1 in admin/.env.local and restart the admin server.';
+    }
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }

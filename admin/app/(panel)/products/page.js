@@ -5,8 +5,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
-import { getMeta, listProducts } from '@/lib/repository';
+import { getMeta } from '@/lib/repository';
 import { labelCategory, labelCollection, money } from '@/lib/format';
+
+function toRow(family) {
+  const primary =
+    family.variants?.find((v) => v.isPrimary) || family.variants?.[0] || {};
+  return {
+    id: family.id,
+    slug: family.slug,
+    name: family.name,
+    category: family.category,
+    collection: family.collection,
+    status: family.status,
+    price: primary.price || 0,
+    stock: primary.stock || 0,
+    outOfStock: !!primary.outOfStock,
+    image: primary.heroUrl || '',
+    colors: family.hasColorVariants ? family.variants?.length || 0 : 0,
+  };
+}
 
 function ProductsInner() {
   const searchParams = useSearchParams();
@@ -14,21 +32,80 @@ function ProductsInner() {
   const [category, setCategory] = useState(searchParams.get('category') || '');
   const [collection, setCollection] = useState('');
   const [status, setStatus] = useState(searchParams.get('status') || '');
-  const [stock, setStock] = useState(searchParams.get('stock') || '');
   const [meta, setMeta] = useState({ categories: [], collections: [] });
   const [rows, setRows] = useState([]);
+  const [source, setSource] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     setMeta(getMeta());
+    fetch('/api/catalog/products')
+      .then((r) => r.json())
+      .then((d) => {
+        setRows((d.products || []).map(toRow));
+        setSource(d.source || '');
+        if (d.error) setError(d.error);
+      })
+      .catch((err) => setError(err.message));
+    fetch('/api/catalog/categories')
+      .then((r) => r.json())
+      .then((d) => {
+        if (d.categories?.length) {
+          setMeta((m) => ({
+            ...m,
+            categories: d.categories.map((c) => ({ slug: c.slug, name: c.name })),
+          }));
+        }
+      })
+      .catch(() => {});
+    fetch('/api/catalog/collections')
+      .then((r) => r.json())
+      .then((d) => {
+        if (d.collections?.length) {
+          setMeta((m) => ({ ...m, collections: d.collections }));
+        }
+      })
+      .catch(() => {});
   }, []);
 
-  useEffect(() => {
-    setRows(listProducts({ q, category, collection, status, stock }));
-  }, [q, category, collection, status, stock]);
+  const filtered = useMemo(() => {
+    let list = rows;
+    const query = q.trim().toLowerCase();
+    if (query) {
+      list = list.filter((p) =>
+        [p.name, p.slug, p.category, p.collection].join(' ').toLowerCase().includes(query)
+      );
+    }
+    if (category) list = list.filter((p) => p.category === category);
+    if (collection) list = list.filter((p) => p.collection === collection);
+    if (status) list = list.filter((p) => p.status === status);
+    return list;
+  }, [rows, q, category, collection, status]);
 
-  const filters = useMemo(
-    () => (
-      <div className="flex flex-wrap items-end gap-3">
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="font-label text-[10px] text-[#d4af64]">Catalogue</p>
+          <h1 className="font-display mt-2 text-4xl">Products</h1>
+          <p className="mt-1 text-sm text-[#7a736c]">
+            {filtered.length} families
+            {source ? ` · ${source}` : ''}
+          </p>
+          {error && (
+            <p className="mt-2 max-w-xl text-sm text-[#5e062a]">
+              {error.includes('schema') || error.includes('relation') || error.includes('does not exist')
+                ? 'Run supabase/migrations/003_catalog_families.sql (or npm run db:migrate after adding DB password).'
+                : error}
+            </p>
+          )}
+        </div>
+        <Link href="/products/new" className="btn-primary">
+          Add product
+        </Link>
+      </div>
+
+      <div className="card flex flex-wrap items-end gap-3 p-4 md:p-5">
         <label className="block min-w-[180px] flex-1">
           <span className="text-xs text-[#7a736c]">Search</span>
           <input
@@ -72,34 +149,7 @@ function ProductsInner() {
             <option value="draft">Draft</option>
           </select>
         </label>
-        <label className="block">
-          <span className="text-xs text-[#7a736c]">Stock</span>
-          <select className="input mt-1" value={stock} onChange={(e) => setStock(e.target.value)}>
-            <option value="">All</option>
-            <option value="in">In stock</option>
-            <option value="low">Low</option>
-            <option value="out">Out</option>
-          </select>
-        </label>
       </div>
-    ),
-    [q, category, collection, status, stock, meta]
-  );
-
-  return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="font-label text-[10px] text-[#d4af64]">Catalogue</p>
-          <h1 className="font-display mt-2 text-4xl">Products</h1>
-          <p className="mt-1 text-sm text-[#7a736c]">{rows.length} pieces</p>
-        </div>
-        <Link href="/products/new" className="btn-primary">
-          Add product
-        </Link>
-      </div>
-
-      <div className="card p-4 md:p-5">{filters}</div>
 
       <div className="table-wrap">
         <table className="min-w-full text-left text-sm">
@@ -109,12 +159,13 @@ function ProductsInner() {
               <th className="px-4 py-3 font-semibold">Price</th>
               <th className="px-4 py-3 font-semibold">Category</th>
               <th className="px-4 py-3 font-semibold">Collection</th>
+              <th className="px-4 py-3 font-semibold">Colors</th>
               <th className="px-4 py-3 font-semibold">Status</th>
               <th className="px-4 py-3 font-semibold">Stock</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[#2d2b2b]/6">
-            {rows.map((p) => (
+            {filtered.map((p) => (
               <tr key={p.slug} className="hover:bg-[#faf7f2]/80">
                 <td className="px-4 py-3">
                   <Link href={`/products/${p.slug}`} className="flex items-center gap-3">
@@ -132,6 +183,7 @@ function ProductsInner() {
                 <td className="px-4 py-3">{money(p.price)}</td>
                 <td className="px-4 py-3">{labelCategory(p.category, meta.categories)}</td>
                 <td className="px-4 py-3">{labelCollection(p.collection, meta.collections)}</td>
+                <td className="px-4 py-3">{p.colors || '—'}</td>
                 <td className="px-4 py-3">
                   <span
                     className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${
@@ -154,6 +206,16 @@ function ProductsInner() {
                 </td>
               </tr>
             ))}
+            {!filtered.length && (
+              <tr>
+                <td colSpan={7} className="px-4 py-10 text-center text-sm text-[#7a736c]">
+                  No products yet.{' '}
+                  <Link href="/products/new" className="text-[#5e062a]">
+                    Add the first piece
+                  </Link>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

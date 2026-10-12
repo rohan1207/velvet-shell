@@ -1,22 +1,38 @@
 import { notFound } from 'next/navigation';
 import ProductExperience from '@/components/ProductExperience';
-import { getProduct, getRelated, products } from '@/lib/products';
+import {
+  loadCatalog,
+  productFromCatalog,
+  relatedFromCatalog,
+  colorFamilyFromCatalog,
+  variantsFromCatalog,
+} from '@/lib/catalog';
 
-export function generateStaticParams() {
-  return products.map((product) => ({ slug: product.slug }));
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const catalog = await loadCatalog();
+  const product = productFromCatalog(catalog, slug);
   if (!product) return { title: 'Piece' };
   return { title: product.name, description: product.description };
 }
 
 export default async function ProductPage({ params }) {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const catalog = await loadCatalog();
+  const product = productFromCatalog(catalog, slug);
   if (!product) notFound();
-  const related = getRelated(slug);
-  return <ProductExperience product={product} related={related} />;
+  const related = relatedFromCatalog(catalog, slug);
+  const colorFamily = colorFamilyFromCatalog(catalog, slug);
+  const variants = variantsFromCatalog(catalog, slug);
+  return (
+    <ProductExperience
+      product={product}
+      related={related}
+      colorFamily={colorFamily}
+      variants={variants}
+      collections={catalog.collections || []}
+    />
+  );
 }

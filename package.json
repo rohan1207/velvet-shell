@@ -9,7 +9,10 @@
     "lint": "eslint",
     "admin:dev": "npm --prefix admin run dev",
     "admin:seed": "npm --prefix admin run seed",
-    "admin:build": "npm --prefix admin run build"
+    "admin:build": "npm --prefix admin run build",
+    "seed:admin": "node --env-file=.env.local scripts/seed-admin.mjs",
+    "seed:ywje": "node --env-file=.env.local scripts/seed-ywje-catalog.mjs",
+    "db:migrate": "node --env-file=.env.local scripts/run-migrations.mjs"
   },
   "dependencies": {
     "@google/model-viewer": "^4.3.1",
@@ -21,15 +24,18 @@
     "gsap": "^3.15.0",
     "lenis": "^1.3.17",
     "next": "16.3.4",
+    "pg": "^8.23.1",
     "razorpay": "^2.9.8",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "resend": "^6.32.0"
+    "resend": "^6.32.0",
+    "ws": "^8.22.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
-    "tailwindcss": "^4"
+    "tailwindcss": "^4",
+    "ws": "^8.22.0"
   }
 }

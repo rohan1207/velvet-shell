@@ -38,12 +38,12 @@ export default function CorporateGifting() {
       <section className="relative box-border h-[100svh] w-full overflow-hidden bg-[#f3ebe3] pt-[5.25rem] md:pt-[5.85rem]">
         <div className="relative h-full w-full">
           <Image
-            src="/images/hero-gift.png"
-            alt="Velvet Shell gifting"
+            src="/images/category-banner-gifting.jpg"
+            alt="Velvet Shell gifting — white orchids in soft natural light"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[center_28%]"
+            className="object-cover object-center"
           />
         </div>
       </section>

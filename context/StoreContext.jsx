@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { getProduct } from '@/lib/products';
+import { getProduct as getDummyProduct } from '@/lib/products';
 
 const StoreContext = createContext(null);
 
@@ -22,6 +22,23 @@ function loadJson(key, fallback) {
   }
 }
 
+async function authFetch(path, body) {
+  const res = await fetch(path, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'same-origin',
+    body: JSON.stringify(body || {}),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const err = new Error(data.error || 'Request failed');
+    err.status = res.status;
+    err.data = data;
+    throw err;
+  }
+  return data;
+}
+
 export function StoreProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
@@ -34,23 +51,68 @@ export function StoreProvider({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [quickViewSlug, setQuickViewSlug] = useState(null);
   const [ready, setReady] = useState(false);
+  const [catalog, setCatalog] = useState({
+    products: [],
+    allProducts: [],
+    colorFamilies: [],
+    collections: [],
+    source: 'dummy',
+  });
 
   useEffect(() => {
-    const savedCart = loadJson(CART_KEY, []);
-    const savedWish = loadJson(WISH_KEY, []);
-    const savedUser = loadJson(USER_KEY, null);
-    const savedOrders = loadJson(ORDERS_KEY, []);
-    const savedAddresses = loadJson(ADDR_KEY, []);
-    const savedSelected = localStorage.getItem(SELECTED_ADDR_KEY);
+    let cancelled = false;
 
-    if (Array.isArray(savedCart)) setCart(savedCart);
-    if (Array.isArray(savedWish)) setWishlist(savedWish);
-    if (savedUser && typeof savedUser === 'object') setUser(savedUser);
-    if (Array.isArray(savedOrders)) setOrders(savedOrders);
-    if (Array.isArray(savedAddresses)) setAddresses(savedAddresses);
-    if (savedSelected) setSelectedAddressId(savedSelected);
+    async function hydrate() {
+      const savedCart = loadJson(CART_KEY, []);
+      const savedWish = loadJson(WISH_KEY, []);
+      const savedOrders = loadJson(ORDERS_KEY, []);
+      const savedAddresses = loadJson(ADDR_KEY, []);
+      const savedSelected = localStorage.getItem(SELECTED_ADDR_KEY);
 
-    setReady(true);
+      if (Array.isArray(savedCart)) setCart(savedCart);
+      if (Array.isArray(savedWish)) setWishlist(savedWish);
+      if (Array.isArray(savedOrders)) setOrders(savedOrders);
+      if (Array.isArray(savedAddresses)) setAddresses(savedAddresses);
+      if (savedSelected) setSelectedAddressId(savedSelected);
+
+      // Drop legacy local demo user (may contain plaintext password)
+      try {
+        localStorage.removeItem(USER_KEY);
+      } catch {
+        /* ignore */
+      }
+
+      try {
+        const res = await fetch('/api/auth/me', { credentials: 'same-origin' });
+        const data = await res.json().catch(() => ({}));
+        if (!cancelled && data.user) setUser(data.user);
+      } catch {
+        /* offline / misconfigured — stay signed out */
+      }
+
+      try {
+        const res = await fetch('/api/catalog');
+        const data = await res.json().catch(() => ({}));
+        if (!cancelled && (data.products?.length || data.allProducts?.length)) {
+          setCatalog({
+            products: data.products || [],
+            allProducts: data.allProducts || data.products || [],
+            colorFamilies: data.colorFamilies || [],
+            collections: data.collections || [],
+            source: data.source || 'supabase',
+          });
+        }
+      } catch {
+        /* keep dummy fallback via getDummyProduct */
+      }
+
+      if (!cancelled) setReady(true);
+    }
+
+    hydrate();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
@@ -62,12 +124,6 @@ export function StoreProvider({ children }) {
     if (!ready) return;
     localStorage.setItem(WISH_KEY, JSON.stringify(wishlist));
   }, [wishlist, ready]);
-
-  useEffect(() => {
-    if (!ready) return;
-    if (user) localStorage.setItem(USER_KEY, JSON.stringify(user));
-    else localStorage.removeItem(USER_KEY);
-  }, [user, ready]);
 
   useEffect(() => {
     if (!ready) return;
@@ -94,6 +150,14 @@ export function StoreProvider({ children }) {
   }, [menuOpen, cartOpen, searchOpen, quickViewSlug]);
 
   const value = useMemo(() => {
+    function getProduct(slug) {
+      return (
+        catalog.allProducts.find((p) => p.slug === slug) ||
+        catalog.products.find((p) => p.slug === slug) ||
+        getDummyProduct(slug)
+      );
+    }
+
     const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
     const cartTotal = cart.reduce((sum, item) => {
       const product = getProduct(item.slug);
@@ -152,38 +216,62 @@ export function StoreProvider({ children }) {
       setQuickViewSlug(null);
     }
 
-    function login({ email, password, firstName = '', lastName = '' }) {
-      const existing = loadJson(USER_KEY, null);
-      const next = {
-        email: String(email).trim().toLowerCase(),
-        password: String(password),
-        firstName: firstName || existing?.firstName || email.split('@')[0] || 'Guest',
-        lastName: lastName || existing?.lastName || '',
-        phone: existing?.phone || '',
-        createdAt: existing?.createdAt || new Date().toISOString(),
-      };
-      setUser(next);
-      return next;
+    async function login({ identifier, email, phone, password }) {
+      const data = await authFetch('/api/auth/login', {
+        identifier: identifier || email || phone,
+        password,
+      });
+      setUser(data.user || null);
+      return data.user;
     }
 
-    function logout() {
+    async function register(payload) {
+      const data = await authFetch('/api/auth/register', payload);
+      setUser(data.user || null);
+      return data;
+    }
+
+    async function logout() {
+      try {
+        await authFetch('/api/auth/logout', {});
+      } catch {
+        /* still clear local session */
+      }
       setUser(null);
     }
 
-    function updateProfile(patch) {
-      setUser((current) => (current ? { ...current, ...patch } : current));
+    async function updateProfile(patch) {
+      const data = await authFetch('/api/auth/update-profile', patch);
+      if (data.user) setUser(data.user);
+      return data.user;
     }
 
-    function changePassword(currentPassword, nextPassword) {
-      if (!user) return { ok: false, error: 'Please sign in first.' };
-      if (user.password !== currentPassword) {
-        return { ok: false, error: 'Current password does not match.' };
+    async function changePassword(currentPassword, nextPassword) {
+      try {
+        const data = await authFetch('/api/auth/change-password', {
+          currentPassword,
+          nextPassword,
+        });
+        if (data.user) setUser(data.user);
+        return { ok: true };
+      } catch (err) {
+        return { ok: false, error: err.message || 'Could not change password.' };
       }
-      if (!nextPassword || nextPassword.length < 4) {
-        return { ok: false, error: 'New password should be at least 4 characters.' };
-      }
-      setUser((current) => ({ ...current, password: nextPassword }));
-      return { ok: true };
+    }
+
+    async function requestPasswordReset(identifier) {
+      return authFetch('/api/auth/forgot-password', { identifier });
+    }
+
+    async function resetPassword({ identifier, code, password, signIn = true }) {
+      const data = await authFetch('/api/auth/reset-password', {
+        identifier,
+        code,
+        password,
+        signIn,
+      });
+      if (data.user) setUser(data.user);
+      return data;
     }
 
     function addAddress(address) {
@@ -247,6 +335,8 @@ export function StoreProvider({ children }) {
 
     return {
       ready,
+      catalog,
+      getProduct,
       cart,
       wishlist,
       user,
@@ -271,9 +361,12 @@ export function StoreProvider({ children }) {
       clearCart,
       toggleWishlist,
       login,
+      register,
       logout,
       updateProfile,
       changePassword,
+      requestPasswordReset,
+      resetPassword,
       addAddress,
       updateAddress,
       removeAddress,
@@ -292,6 +385,7 @@ export function StoreProvider({ children }) {
     menuOpen,
     quickViewSlug,
     ready,
+    catalog,
   ]);
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
