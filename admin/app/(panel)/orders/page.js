@@ -3,7 +3,6 @@
 import { Suspense, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { listOrders } from '@/lib/repository';
 import { money } from '@/lib/format';
 
 const STATUSES = ['pending', 'accepted', 'packed', 'dispatched', 'delivered', 'cancelled'];
@@ -13,9 +12,36 @@ function OrdersInner() {
   const [q, setQ] = useState('');
   const [status, setStatus] = useState(searchParams.get('status') || '');
   const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    setRows(listOrders({ q, status }));
+    let cancelled = false;
+    async function load() {
+      setLoading(true);
+      setError('');
+      try {
+        const params = new URLSearchParams();
+        if (q) params.set('q', q);
+        if (status) params.set('status', status);
+        const res = await fetch(`/api/orders?${params}`, { credentials: 'same-origin' });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || 'Could not load orders');
+        if (!cancelled) setRows(data.orders || []);
+      } catch (err) {
+        if (!cancelled) {
+          setError(err.message || 'Could not load orders');
+          setRows([]);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+    const t = setTimeout(load, 200);
+    return () => {
+      cancelled = true;
+      clearTimeout(t);
+    };
   }, [q, status]);
 
   return (
@@ -48,6 +74,9 @@ function OrdersInner() {
         </label>
       </div>
 
+      {error && <p className="text-sm text-[#5e062a]">{error}</p>}
+      {loading && <p className="text-sm text-[#7a736c]">Loading orders…</p>}
+
       <div className="table-wrap">
         <table className="min-w-full text-left text-sm">
           <thead className="border-b border-[#2d2b2b]/8 bg-[#faf7f2] text-[10px] tracking-[0.14em] text-[#7a736c] uppercase">
@@ -61,6 +90,13 @@ function OrdersInner() {
             </tr>
           </thead>
           <tbody className="divide-y divide-[#2d2b2b]/6">
+            {!loading && rows.length === 0 && (
+              <tr>
+                <td colSpan={6} className="px-4 py-8 text-center text-[#7a736c]">
+                  No orders yet.
+                </td>
+              </tr>
+            )}
             {rows.map((o) => (
               <tr key={o.id} className="hover:bg-[#faf7f2]/80">
                 <td className="px-4 py-3">

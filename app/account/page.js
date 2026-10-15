@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { Suspense } from 'react';
 import { useStore } from '@/context/StoreContext';
 import { getProduct } from '@/lib/products';
 import { money } from '@/lib/format';
+import AuthFlow from '@/components/auth/AuthFlow';
 
 const tabs = [
   { id: 'overview', label: 'Overview' },
@@ -39,7 +39,7 @@ export default function AccountPage() {
 
 function AccountShell() {
   return (
-    <div className="bg-ivory pt-28 pb-24 md:pt-36">
+    <div className="relative min-h-[70svh] overflow-hidden bg-gradient-to-b from-[#faf6f1] to-ivory pt-28 pb-24 md:pt-36">
       <div className="mx-auto max-w-md px-5">
         <p className="font-label text-gold">Account</p>
         <h1 className="font-display mt-3 text-5xl text-ink">Welcome</h1>
@@ -53,13 +53,9 @@ function AccountInner() {
   const {
     user,
     ready,
-    login,
-    register,
     logout,
     updateProfile,
     changePassword,
-    requestPasswordReset,
-    resetPassword,
     orders,
     addresses,
     selectedAddressId,
@@ -68,21 +64,12 @@ function AccountInner() {
     removeAddress,
     selectAddress,
     wishlist,
+    refreshOrders,
   } = useStore();
 
+  const returnUrl = search.get('next') || '';
   const initialMode = search.get('mode') === 'reset' ? 'reset' : 'enter';
-  const [mode, setMode] = useState(initialMode);
-  const [tab, setTab] = useState('overview');
-  const [authForm, setAuthForm] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    identifier: '',
-    password: '',
-    code: '',
-    newPassword: '',
-    confirmPassword: '',
-  });
+  const [tab, setTab] = useState(search.get('tab') || 'overview');
   const [profileForm, setProfileForm] = useState(null);
   const [passwordForm, setPasswordForm] = useState({
     current: '',
@@ -94,14 +81,17 @@ function AccountInner() {
   const [notice, setNotice] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
-  const [resetStep, setResetStep] = useState('request');
 
   useEffect(() => {
-    if (search.get('mode') === 'reset') {
-      setMode('reset');
-      setResetStep('code');
-    }
+    const t = search.get('tab');
+    if (t && tabs.some((x) => x.id === t)) setTab(t);
   }, [search]);
+
+  useEffect(() => {
+    if (user && tab === 'orders' && refreshOrders) {
+      refreshOrders();
+    }
+  }, [user, tab, refreshOrders]);
 
   const displayProfile = useMemo(() => {
     if (!user) return null;
@@ -116,290 +106,32 @@ function AccountInner() {
     );
   }, [user, profileForm]);
 
-  async function onAuthSubmit(event) {
-    event.preventDefault();
-    setError('');
-    setNotice('');
-    setBusy(true);
-    try {
-      if (mode === 'enter') {
-        await login({
-          identifier: authForm.identifier,
-          password: authForm.password,
-        });
-        setNotice('Signed in.');
-      } else if (mode === 'create') {
-        await register({
-          fullName: authForm.fullName,
-          email: authForm.email,
-          phone: authForm.phone,
-          password: authForm.password,
-        });
-        setNotice('Welcome — your account is ready.');
-      } else if (mode === 'reset' && resetStep === 'request') {
-        await requestPasswordReset(authForm.identifier);
-        setResetStep('code');
-        setNotice('If that account exists, we emailed a 6-digit code. Enter it below.');
-      } else if (mode === 'reset' && resetStep === 'code') {
-        if (authForm.newPassword !== authForm.confirmPassword) {
-          throw new Error('New passwords do not match.');
-        }
-        const data = await resetPassword({
-          identifier: authForm.identifier,
-          code: authForm.code,
-          password: authForm.newPassword,
-          signIn: true,
-        });
-        setNotice(data.message || 'Password updated.');
-        setMode('enter');
-        setResetStep('request');
-      }
-    } catch (err) {
-      setError(err.message || 'Something went wrong.');
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  if (!ready) {
-    return <AccountShell />;
-  }
+  if (!ready) return <AccountShell />;
 
   if (!user) {
-    const titles = {
-      enter: 'Welcome back',
-      create: 'Create account',
-      reset: 'Reset password',
-    };
-    const copy = {
-      enter: 'Sign in with your email or phone number and password.',
-      create: 'Join Velvet Shell with your name, email, phone, and a secure password.',
-      reset:
-        resetStep === 'request'
-          ? 'Enter the email or phone on your account. We will send a one-time code.'
-          : 'Enter the code from your email and choose a new password. You will be signed in after a successful reset.',
-    };
-
     return (
-      <div className="bg-ivory pt-28 pb-24 md:pt-36">
-        <div className="mx-auto max-w-md px-5">
-          <p className="font-label text-gold">Account</p>
-          <h1 className="font-display mt-3 text-5xl text-ink">{titles[mode]}</h1>
-          <p className="mt-4 text-sm font-light text-ink/80">{copy[mode]}</p>
-
-          <form className="mt-10 space-y-5" onSubmit={onAuthSubmit}>
-            {mode === 'create' && (
-              <>
-                <Field
-                  label="Full name"
-                  required
-                  value={authForm.fullName}
-                  onChange={(v) => setAuthForm((f) => ({ ...f, fullName: v }))}
-                  autoComplete="name"
-                />
-                <Field
-                  label="Email"
-                  type="email"
-                  required
-                  value={authForm.email}
-                  onChange={(v) => setAuthForm((f) => ({ ...f, email: v }))}
-                  autoComplete="email"
-                />
-                <Field
-                  label="Phone"
-                  type="tel"
-                  required
-                  value={authForm.phone}
-                  onChange={(v) => setAuthForm((f) => ({ ...f, phone: v }))}
-                  autoComplete="tel"
-                  placeholder="10-digit mobile"
-                />
-                <Field
-                  label="Password"
-                  type="password"
-                  required
-                  value={authForm.password}
-                  onChange={(v) => setAuthForm((f) => ({ ...f, password: v }))}
-                  autoComplete="new-password"
-                  hint="At least 8 characters, with letters and a number."
-                />
-              </>
-            )}
-
-            {mode === 'enter' && (
-              <>
-                <Field
-                  label="Email or phone"
-                  required
-                  value={authForm.identifier}
-                  onChange={(v) => setAuthForm((f) => ({ ...f, identifier: v }))}
-                  autoComplete="username"
-                />
-                <Field
-                  label="Password"
-                  type="password"
-                  required
-                  value={authForm.password}
-                  onChange={(v) => setAuthForm((f) => ({ ...f, password: v }))}
-                  autoComplete="current-password"
-                />
-              </>
-            )}
-
-            {mode === 'reset' && resetStep === 'request' && (
-              <Field
-                label="Email or phone"
-                required
-                value={authForm.identifier}
-                onChange={(v) => setAuthForm((f) => ({ ...f, identifier: v }))}
-                autoComplete="username"
-              />
-            )}
-
-            {mode === 'reset' && resetStep === 'code' && (
-              <>
-                <Field
-                  label="Email or phone"
-                  required
-                  value={authForm.identifier}
-                  onChange={(v) => setAuthForm((f) => ({ ...f, identifier: v }))}
-                />
-                <Field
-                  label="6-digit code"
-                  required
-                  value={authForm.code}
-                  onChange={(v) => setAuthForm((f) => ({ ...f, code: v.replace(/\D/g, '').slice(0, 6) }))}
-                  inputMode="numeric"
-                  autoComplete="one-time-code"
-                />
-                <Field
-                  label="New password"
-                  type="password"
-                  required
-                  value={authForm.newPassword}
-                  onChange={(v) => setAuthForm((f) => ({ ...f, newPassword: v }))}
-                  autoComplete="new-password"
-                />
-                <Field
-                  label="Confirm new password"
-                  type="password"
-                  required
-                  value={authForm.confirmPassword}
-                  onChange={(v) => setAuthForm((f) => ({ ...f, confirmPassword: v }))}
-                  autoComplete="new-password"
-                />
-              </>
-            )}
-
-            {(notice || error) && (
-              <p className={`text-sm ${error ? 'text-burgundy' : 'text-ink/85'}`}>
-                {error || notice}
-              </p>
-            )}
-
-            <button
-              type="submit"
-              disabled={busy}
-              className="bg-velvet-texture h-12 w-full rounded-full font-label text-[11px] tracking-[0.2em] text-ivory disabled:opacity-60"
-            >
-              {busy
-                ? 'Please wait…'
-                : mode === 'enter'
-                  ? 'Sign in'
-                  : mode === 'create'
-                    ? 'Create account'
-                    : resetStep === 'request'
-                      ? 'Send reset code'
-                      : 'Reset & sign in'}
-            </button>
-          </form>
-
-          <div className="mt-8 space-y-3">
-            {mode === 'enter' && (
-              <>
-                <button
-                  type="button"
-                  className="block font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
-                  onClick={() => {
-                    setMode('reset');
-                    setResetStep('request');
-                    setError('');
-                    setNotice('');
-                  }}
-                >
-                  Forgot password?
-                </button>
-                <button
-                  type="button"
-                  className="block font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
-                  onClick={() => {
-                    setMode('create');
-                    setError('');
-                    setNotice('');
-                  }}
-                >
-                  Need an account? Create one
-                </button>
-              </>
-            )}
-            {mode === 'create' && (
-              <button
-                type="button"
-                className="font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
-                onClick={() => {
-                  setMode('enter');
-                  setError('');
-                  setNotice('');
-                }}
-              >
-                Already with us? Sign in
-              </button>
-            )}
-            {mode === 'reset' && (
-              <div className="space-y-3">
-                {resetStep === 'code' && (
-                  <button
-                    type="button"
-                    className="block font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
-                    onClick={() => {
-                      setResetStep('request');
-                      setNotice('');
-                      setError('');
-                    }}
-                  >
-                    Resend a new code
-                  </button>
-                )}
-                <button
-                  type="button"
-                  className="block font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
-                  onClick={() => {
-                    setMode('enter');
-                    setResetStep('request');
-                    setError('');
-                    setNotice('');
-                  }}
-                >
-                  Back to sign in
-                </button>
-              </div>
-            )}
-          </div>
+      <div className="relative min-h-[100svh] overflow-hidden bg-gradient-to-br from-[#faf6f1] via-[#f5eee8] to-[#ebe3da] pt-28 pb-24 md:pt-36">
+        <div className="pointer-events-none absolute inset-0 opacity-40">
+          <div className="absolute top-20 left-[10%] h-64 w-64 rounded-full bg-blush/30 blur-3xl" />
+          <div className="absolute right-[8%] bottom-32 h-72 w-72 rounded-full bg-burgundy/5 blur-3xl" />
+        </div>
+        <div className="relative mx-auto max-w-lg px-5">
+          <AuthFlow initialMode={initialMode} returnUrl={returnUrl} />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-ivory pt-28 pb-24 md:pt-36">
-      <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-        <div className="flex flex-wrap items-end justify-between gap-6 border-b border-ink/10 pb-8">
+    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-28 pb-24 md:pt-36">
+      <div className="mx-auto max-w-[1200px] px-5 md:px-10">
+        <div className="flex flex-wrap items-end justify-between gap-6 border-b border-burgundy/10 pb-8">
           <div>
-            <p className="font-label text-gold">My account</p>
-            <h1 className="font-display mt-3 text-4xl text-ink md:text-5xl">
+            <p className="font-label text-[10px] tracking-[0.24em] text-gold uppercase">My account</p>
+            <h1 className="font-display mt-3 text-4xl tracking-[-0.03em] text-burgundy md:text-5xl">
               Hello, {user.firstName || user.fullName?.split(' ')[0] || 'there'}
             </h1>
-            <p className="mt-2 text-sm font-light text-ink/85">{user.email}</p>
+            <p className="mt-2 text-sm font-light text-ink/70">{user.email}</p>
           </div>
           <button
             type="button"
@@ -407,15 +139,15 @@ function AccountInner() {
               await logout();
               setNotice('');
             }}
-            className="font-label text-[11px] tracking-[0.18em] text-ink/80 hover:text-burgundy"
+            className="rounded-full border border-ink/12 px-5 py-2.5 font-label text-[11px] tracking-[0.18em] text-ink/70 hover:border-burgundy/30 hover:text-burgundy"
           >
             Log out
           </button>
         </div>
 
-        <div className="mt-10 grid gap-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+        <div className="mt-10 grid gap-10 lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-14">
           <aside>
-            <nav className="flex gap-2 overflow-x-auto lg:flex-col lg:gap-1">
+            <nav className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:gap-1">
               {tabs.map((item) => (
                 <button
                   key={item.id}
@@ -428,19 +160,19 @@ function AccountInner() {
                   }}
                   className={`whitespace-nowrap rounded-full px-4 py-2.5 text-left text-sm transition-colors lg:w-full ${
                     tab === item.id
-                      ? 'bg-ink text-ivory'
-                      : 'text-ink/80 hover:bg-pearl hover:text-ink'
+                      ? 'bg-burgundy text-ivory'
+                      : 'text-ink/70 hover:bg-cream/80 hover:text-ink'
                   }`}
                 >
                   {item.label}
                 </button>
               ))}
             </nav>
-            <div className="mt-8 hidden space-y-3 border-t border-ink/10 pt-6 text-sm lg:block">
-              <Link href="/wishlist" className="block text-ink/85 hover:text-burgundy">
+            <div className="mt-8 hidden space-y-3 border-t border-ink/8 pt-6 text-sm lg:block">
+              <Link href="/wishlist" className="block text-ink/70 hover:text-burgundy">
                 Wishlist ({wishlist.length})
               </Link>
-              <Link href="/shop" className="block text-ink/85 hover:text-burgundy">
+              <Link href="/shop" className="block text-ink/70 hover:text-burgundy">
                 Continue shopping
               </Link>
             </div>
@@ -448,22 +180,35 @@ function AccountInner() {
 
           <div>
             {(notice || error) && (
-              <p className={`mb-6 text-sm ${error ? 'text-burgundy' : 'text-ink/85'}`}>
+              <p
+                className={`mb-6 rounded-2xl px-4 py-3 text-sm ${
+                  error ? 'bg-burgundy/8 text-burgundy' : 'bg-shell/10 text-shell'
+                }`}
+              >
                 {error || notice}
               </p>
             )}
 
             {tab === 'overview' && (
-              <div className="space-y-8">
+              <div className="space-y-10">
                 <section className="grid gap-4 sm:grid-cols-3">
                   <Stat label="Orders" value={String(orders.length)} />
                   <Stat label="Saved pieces" value={String(wishlist.length)} />
                   <Stat label="Addresses" value={String(addresses.length)} />
                 </section>
                 <section>
-                  <h2 className="font-display text-3xl text-ink">Recent orders</h2>
+                  <div className="flex items-end justify-between gap-4">
+                    <h2 className="font-display text-3xl text-ink">Recent orders</h2>
+                    <button
+                      type="button"
+                      className="font-label text-[10px] tracking-[0.16em] text-burgundy"
+                      onClick={() => setTab('orders')}
+                    >
+                      View all
+                    </button>
+                  </div>
                   {orders.length === 0 ? (
-                    <p className="mt-4 text-sm font-light text-ink/80">
+                    <p className="mt-4 text-sm font-light text-ink/70">
                       No orders yet.{' '}
                       <Link href="/shop" className="text-burgundy">
                         Browse the shop
@@ -483,8 +228,11 @@ function AccountInner() {
             {tab === 'orders' && (
               <div>
                 <h2 className="font-display text-3xl text-ink">Order history</h2>
+                <p className="mt-2 text-sm font-light text-ink/70">
+                  Confirmation emails are sent when each order is placed.
+                </p>
                 {orders.length === 0 ? (
-                  <p className="mt-4 text-sm font-light text-ink/80">You have no orders yet.</p>
+                  <p className="mt-6 text-sm font-light text-ink/70">You have no orders yet.</p>
                 ) : (
                   <ul className="mt-8 space-y-5">
                     {orders.map((order) => (
@@ -545,11 +293,7 @@ function AccountInner() {
                   onChange={(v) => setProfileForm({ ...displayProfile, phone: v })}
                   required
                 />
-                <button
-                  type="submit"
-                  disabled={busy}
-                  className="bg-velvet-texture h-12 rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory disabled:opacity-60"
-                >
+                <button type="submit" disabled={busy} className={pillBtn}>
                   {busy ? 'Saving…' : 'Save details'}
                 </button>
               </form>
@@ -559,11 +303,11 @@ function AccountInner() {
               <div className="space-y-10">
                 <div>
                   <h2 className="font-display text-3xl text-ink">Saved addresses</h2>
-                  <p className="mt-2 text-sm font-light text-ink/80">
-                    Select a default address for faster checkout.
+                  <p className="mt-2 text-sm font-light text-ink/70">
+                    Select a default for faster checkout — you can change it anytime.
                   </p>
                   {addresses.length === 0 ? (
-                    <p className="mt-6 text-sm font-light text-ink/85">No addresses saved yet.</p>
+                    <p className="mt-6 text-sm font-light text-ink/70">No addresses saved yet.</p>
                   ) : (
                     <ul className="mt-6 grid gap-4 md:grid-cols-2">
                       {addresses.map((address) => {
@@ -571,36 +315,39 @@ function AccountInner() {
                         return (
                           <li
                             key={address.id}
-                            className={`border px-5 py-5 ${
-                              selected ? 'border-burgundy bg-pearl' : 'border-ink/10'
+                            className={`rounded-2xl border px-5 py-5 ${
+                              selected
+                                ? 'border-burgundy/40 bg-white shadow-[0_8px_30px_rgba(94,6,42,0.06)]'
+                                : 'border-ink/8 bg-white/60'
                             }`}
                           >
                             <div className="flex items-start justify-between gap-3">
                               <div>
-                                <p className="font-label text-[10px] text-gold">{address.label}</p>
+                                <p className="font-label text-[10px] tracking-[0.16em] text-gold uppercase">
+                                  {address.label}
+                                </p>
                                 <p className="mt-2 text-sm text-ink">{address.fullName}</p>
-                                <p className="mt-1 text-sm font-light text-ink/85">
+                                <p className="mt-1 text-sm font-light text-ink/70">
                                   {address.line1}
                                   {address.line2 ? `, ${address.line2}` : ''}
                                 </p>
-                                <p className="text-sm font-light text-ink/85">
+                                <p className="text-sm font-light text-ink/70">
                                   {address.city}, {address.state} {address.postal}
                                 </p>
-                                <p className="text-sm font-light text-ink/85">{address.country}</p>
-                                <p className="mt-2 text-xs text-ink/80">{address.phone}</p>
+                                <p className="mt-2 text-xs text-ink/60">{address.phone}</p>
                               </div>
                               {selected && (
-                                <span className="font-label text-[9px] tracking-[0.14em] text-burgundy">
-                                  Selected
+                                <span className="rounded-full bg-burgundy/8 px-2.5 py-1 font-label text-[9px] tracking-[0.14em] text-burgundy">
+                                  Default
                                 </span>
                               )}
                             </div>
-                            <div className="mt-4 flex flex-wrap gap-3 text-[11px] tracking-[0.14em] uppercase">
+                            <div className="mt-4 flex flex-wrap gap-3 font-label text-[10px] tracking-[0.14em] uppercase">
                               {!selected && (
                                 <button
                                   type="button"
                                   onClick={() => selectAddress(address.id)}
-                                  className="text-ink/80 hover:text-burgundy"
+                                  className="text-ink/60 hover:text-burgundy"
                                 >
                                   Use this
                                 </button>
@@ -622,14 +369,21 @@ function AccountInner() {
                                     isDefault: Boolean(address.isDefault),
                                   });
                                 }}
-                                className="text-ink/80 hover:text-burgundy"
+                                className="text-ink/60 hover:text-burgundy"
                               >
                                 Edit
                               </button>
                               <button
                                 type="button"
-                                onClick={() => removeAddress(address.id)}
-                                className="text-ink/80 hover:text-burgundy"
+                                onClick={async () => {
+                                  try {
+                                    await removeAddress(address.id);
+                                    setNotice('Address removed.');
+                                  } catch (err) {
+                                    setError(err.message || 'Could not remove.');
+                                  }
+                                }}
+                                className="text-ink/60 hover:text-burgundy"
                               >
                                 Remove
                               </button>
@@ -642,18 +396,26 @@ function AccountInner() {
                 </div>
 
                 <form
-                  className="max-w-2xl space-y-5 border-t border-ink/10 pt-8"
-                  onSubmit={(event) => {
+                  className="max-w-2xl space-y-5 rounded-3xl border border-ink/8 bg-white/70 p-6 md:p-8"
+                  onSubmit={async (event) => {
                     event.preventDefault();
-                    if (editingAddressId) {
-                      updateAddress(editingAddressId, addressForm);
-                      setNotice('Address updated.');
-                    } else {
-                      addAddress(addressForm);
-                      setNotice('Address saved.');
+                    setError('');
+                    setBusy(true);
+                    try {
+                      if (editingAddressId) {
+                        await updateAddress(editingAddressId, addressForm);
+                        setNotice('Address updated.');
+                      } else {
+                        await addAddress(addressForm);
+                        setNotice('Address saved.');
+                      }
+                      setEditingAddressId(null);
+                      setAddressForm(emptyAddress);
+                    } catch (err) {
+                      setError(err.message || 'Could not save address.');
+                    } finally {
+                      setBusy(false);
                     }
-                    setEditingAddressId(null);
-                    setAddressForm(emptyAddress);
                   }}
                 >
                   <h3 className="font-display text-2xl text-ink">
@@ -720,7 +482,7 @@ function AccountInner() {
                       required
                     />
                   </div>
-                  <label className="flex items-center gap-3 text-sm text-ink/80">
+                  <label className="flex items-center gap-3 text-sm text-ink/70">
                     <input
                       type="checkbox"
                       checked={addressForm.isDefault}
@@ -728,14 +490,15 @@ function AccountInner() {
                         setAddressForm((f) => ({ ...f, isDefault: event.target.checked }))
                       }
                     />
-                    Set as default / selected address
+                    Set as default address
                   </label>
                   <div className="flex flex-wrap gap-3">
-                    <button
-                      type="submit"
-                      className="bg-velvet-texture h-12 rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory"
-                    >
-                      {editingAddressId ? 'Update address' : 'Save address'}
+                    <button type="submit" disabled={busy} className={pillBtn}>
+                      {busy
+                        ? 'Saving…'
+                        : editingAddressId
+                          ? 'Update address'
+                          : 'Save address'}
                     </button>
                     {editingAddressId && (
                       <button
@@ -744,7 +507,7 @@ function AccountInner() {
                           setEditingAddressId(null);
                           setAddressForm(emptyAddress);
                         }}
-                        className="h-12 px-4 font-label text-[11px] tracking-[0.16em] text-ink/85"
+                        className="h-12 px-4 font-label text-[11px] tracking-[0.16em] text-ink/60"
                       >
                         Cancel
                       </button>
@@ -777,7 +540,7 @@ function AccountInner() {
                 }}
               >
                 <h2 className="font-display text-3xl text-ink">Manage password</h2>
-                <p className="text-sm font-light text-ink/80">
+                <p className="text-sm font-light text-ink/70">
                   Choose a strong password (8+ characters, letters and a number).
                 </p>
                 <Field
@@ -804,11 +567,7 @@ function AccountInner() {
                   onChange={(v) => setPasswordForm((f) => ({ ...f, confirm: v }))}
                   autoComplete="new-password"
                 />
-                <button
-                  type="submit"
-                  disabled={busy}
-                  className="bg-velvet-texture h-12 rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory disabled:opacity-60"
-                >
+                <button type="submit" disabled={busy} className={pillBtn}>
                   {busy ? 'Updating…' : 'Update password'}
                 </button>
               </form>
@@ -820,21 +579,28 @@ function AccountInner() {
   );
 }
 
+const pillBtn =
+  'bg-velvet-texture inline-flex h-12 items-center justify-center rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory disabled:opacity-60';
+
 function Stat({ label, value }) {
   return (
-    <div className="border border-ink/10 bg-pearl px-5 py-6">
-      <p className="font-label text-[10px] text-ink/80">{label}</p>
-      <p className="font-display mt-2 text-3xl text-ink">{value}</p>
+    <div className="rounded-2xl border border-ink/8 bg-white/80 px-5 py-6">
+      <p className="font-label text-[10px] tracking-[0.14em] text-ink/50 uppercase">{label}</p>
+      <p className="font-display mt-2 text-3xl text-burgundy">{value}</p>
     </div>
   );
 }
 
 function OrderRow({ order, detailed = false }) {
+  const label = order.orderNumber || order.id;
+  const ship = order.shipping || {};
   return (
-    <li className="border border-ink/10 px-5 py-5">
+    <li className="rounded-2xl border border-ink/8 bg-white/80 px-5 py-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="font-label text-[10px] text-gold">Order {order.id}</p>
+          <p className="font-label text-[10px] tracking-[0.16em] text-gold uppercase">
+            Order {label}
+          </p>
           <p className="mt-2 text-sm text-ink">
             {new Date(order.createdAt).toLocaleDateString('en-IN', {
               day: 'numeric',
@@ -842,33 +608,36 @@ function OrderRow({ order, detailed = false }) {
               year: 'numeric',
             })}
           </p>
-          <p className="mt-1 text-xs font-light text-ink/85">
-            {order.status} · {order.paymentMethod}
+          <p className="mt-1 text-xs font-light text-ink/60">
+            {order.status} · {order.paymentMethod || 'Razorpay'}
           </p>
         </div>
         <p className="font-num text-2xl text-ink">{money(order.total)}</p>
       </div>
       {detailed && (
-        <ul className="mt-4 space-y-2 border-t border-ink/8 pt-4 text-sm text-ink/80">
-          {order.items.map((item) => {
+        <ul className="mt-4 space-y-2 border-t border-ink/8 pt-4 text-sm text-ink/70">
+          {(order.items || []).map((item, idx) => {
             const product = getProduct(item.slug);
+            const name = item.name || product?.name || item.slug;
+            const line = item.lineTotal ?? (product ? product.price * item.qty : null);
             return (
-              <li key={item.id} className="flex justify-between gap-3">
+              <li key={item.id || `${item.slug}-${idx}`} className="flex justify-between gap-3">
                 <span>
-                  {product?.name || item.slug} · {item.size} · Qty {item.qty}
+                  {name} · {item.size} · Qty {item.qty}
                 </span>
-                {product && <span className="font-num">{money(product.price * item.qty)}</span>}
+                {line != null && <span className="font-num">{money(line)}</span>}
               </li>
             );
           })}
-          {order.shipping && (
-            <li className="pt-2 text-xs text-ink/80">
-              Ship to {order.shipping.firstName} {order.shipping.lastName}, {order.shipping.address},{' '}
-              {order.shipping.city}
+          {(ship.fullName || ship.firstName || ship.line1 || ship.address) && (
+            <li className="pt-2 text-xs text-ink/60">
+              Ship to {ship.fullName || `${ship.firstName || ''} ${ship.lastName || ''}`.trim()},{' '}
+              {ship.line1 || ship.address}
+              {ship.city ? `, ${ship.city}` : ''}
             </li>
           )}
           {order.paymentId && (
-            <li className="text-xs text-ink/80">Payment ID: {order.paymentId}</li>
+            <li className="text-xs text-ink/50">Payment ID: {order.paymentId}</li>
           )}
         </ul>
       )}
@@ -886,11 +655,10 @@ function Field({
   hint,
   autoComplete,
   placeholder,
-  inputMode,
 }) {
   return (
     <label className="block">
-      <span className="font-label text-[10px] text-ink/80">{label}</span>
+      <span className="font-label text-[10px] tracking-[0.14em] text-ink/50 uppercase">{label}</span>
       <input
         type={type}
         required={required}
@@ -898,11 +666,10 @@ function Field({
         value={value}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        inputMode={inputMode}
         onChange={(event) => onChange?.(event.target.value)}
-        className="mt-2 w-full border-b border-ink/15 bg-transparent py-3 text-[15px] font-light text-ink outline-none disabled:opacity-60"
+        className="mt-2 w-full rounded-2xl border border-ink/10 bg-white/80 px-4 py-3.5 text-[15px] font-light text-ink outline-none transition focus:border-burgundy/35 disabled:opacity-60"
       />
-      {hint && <span className="mt-2 block text-xs font-light text-ink/70">{hint}</span>}
+      {hint && <span className="mt-2 block text-xs font-light text-ink/55">{hint}</span>}
     </label>
   );
 }

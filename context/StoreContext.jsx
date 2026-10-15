@@ -39,6 +39,30 @@ async function authFetch(path, body) {
   return data;
 }
 
+async function syncAccountData(setAddresses, setSelectedAddressId, setOrders) {
+  try {
+    const [addrRes, orderRes] = await Promise.all([
+      fetch('/api/addresses', { credentials: 'same-origin' }),
+      fetch('/api/orders', { credentials: 'same-origin' }),
+    ]);
+    const addrData = await addrRes.json().catch(() => ({}));
+    const orderData = await orderRes.json().catch(() => ({}));
+    if (addrRes.ok && Array.isArray(addrData.addresses)) {
+      setAddresses(addrData.addresses);
+      const def =
+        addrData.addresses.find((a) => a.isDefault)?.id ||
+        addrData.addresses[0]?.id ||
+        null;
+      if (def) setSelectedAddressId(def);
+    }
+    if (orderRes.ok && Array.isArray(orderData.orders)) {
+      setOrders(orderData.orders);
+    }
+  } catch {
+    /* keep local cache */
+  }
+}
+
 export function StoreProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
@@ -85,7 +109,10 @@ export function StoreProvider({ children }) {
       try {
         const res = await fetch('/api/auth/me', { credentials: 'same-origin' });
         const data = await res.json().catch(() => ({}));
-        if (!cancelled && data.user) setUser(data.user);
+        if (!cancelled && data.user) {
+          setUser(data.user);
+          await syncAccountData(setAddresses, setSelectedAddressId, setOrders);
+        }
       } catch {
         /* offline / misconfigured — stay signed out */
       }
@@ -222,12 +249,14 @@ export function StoreProvider({ children }) {
         password,
       });
       setUser(data.user || null);
+      await syncAccountData(setAddresses, setSelectedAddressId, setOrders);
       return data.user;
     }
 
     async function register(payload) {
       const data = await authFetch('/api/auth/register', payload);
       setUser(data.user || null);
+      await syncAccountData(setAddresses, setSelectedAddressId, setOrders);
       return data;
     }
 
@@ -238,6 +267,9 @@ export function StoreProvider({ children }) {
         /* still clear local session */
       }
       setUser(null);
+      setAddresses([]);
+      setOrders([]);
+      setSelectedAddressId(null);
     }
 
     async function updateProfile(patch) {
@@ -274,7 +306,22 @@ export function StoreProvider({ children }) {
       return data;
     }
 
-    function addAddress(address) {
+    async function addAddress(address) {
+      // Prefer API when session cookies exist (works right after register before re-render)
+      try {
+        const data = await authFetch('/api/addresses', address);
+        const saved = data.address;
+        setAddresses((current) => {
+          const list = saved.isDefault
+            ? current.map((item) => ({ ...item, isDefault: false }))
+            : current;
+          return [...list.filter((a) => a.id !== saved.id), saved];
+        });
+        if (saved.isDefault || !selectedAddressId) setSelectedAddressId(saved.id);
+        return saved.id;
+      } catch (err) {
+        if (err.status !== 401) throw err;
+      }
       const id = `addr-${Date.now()}`;
       const next = { id, ...address };
       setAddresses((current) => {
@@ -287,19 +334,49 @@ export function StoreProvider({ children }) {
       return id;
     }
 
-    function updateAddress(id, patch) {
+    async function updateAddress(id, patch) {
+      if (user && !String(id).startsWith('addr-')) {
+        const existing = addresses.find((a) => a.id === id) || {};
+        const res = await fetch(`/api/addresses/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ ...existing, ...patch }),
+        });
+        const payload = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(payload.error || 'Could not update address.');
+        const saved = payload.address;
+        setAddresses((current) =>
+          current.map((item) => {
+            if (item.id !== id) {
+              return saved.isDefault ? { ...item, isDefault: false } : item;
+            }
+            return saved;
+          }),
+        );
+        if (saved.isDefault) setSelectedAddressId(id);
+        return;
+      }
       setAddresses((current) =>
         current.map((item) => {
           if (item.id !== id) {
             return patch.isDefault ? { ...item, isDefault: false } : item;
           }
           return { ...item, ...patch };
-        })
+        }),
       );
       if (patch.isDefault) setSelectedAddressId(id);
     }
 
-    function removeAddress(id) {
+    async function removeAddress(id) {
+      if (user && !String(id).startsWith('addr-')) {
+        const res = await fetch(`/api/addresses/${id}`, {
+          method: 'DELETE',
+          credentials: 'same-origin',
+        });
+        const payload = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(payload.error || 'Could not remove address.');
+      }
       setAddresses((current) => current.filter((item) => item.id !== id));
       setSelectedAddressId((current) => (current === id ? null : current));
     }
@@ -307,17 +384,62 @@ export function StoreProvider({ children }) {
     function selectAddress(id) {
       setSelectedAddressId(id);
       setAddresses((current) =>
-        current.map((item) => ({ ...item, isDefault: item.id === id }))
+        current.map((item) => ({ ...item, isDefault: item.id === id })),
       );
+      if (user && !String(id).startsWith('addr-')) {
+        fetch(`/api/addresses/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify(
+            addresses.find((a) => a.id === id)
+              ? { ...addresses.find((a) => a.id === id), isDefault: true }
+              : { isDefault: true },
+          ),
+        }).catch(() => {});
+      }
     }
 
-    function placeOrder(order) {
+    async function placeOrder(order) {
+      const cartItems = order.items || [];
+      const enriched = cartItems.map((item) => {
+        const product = getProduct(item.slug);
+        return {
+          ...item,
+          name: product?.name || item.name || item.slug,
+          image: product?.image || product?.image_url || item.image,
+          price: product?.price ?? item.price,
+        };
+      });
+
+      try {
+        const data = await authFetch('/api/orders', {
+          items: enriched,
+          shipping: order.shipping,
+          email: order.email || user?.email,
+          paymentId: order.paymentId,
+          razorpayOrderId: order.razorpayOrderId,
+          razorpaySignature: order.razorpaySignature,
+          demo: order.demo,
+          subtotal: order.subtotal ?? order.total,
+          shippingFee: order.shippingFee || 0,
+          total: order.total,
+        });
+        const next = data.order;
+        setOrders((current) => [next, ...current.filter((o) => o.id !== next.id)]);
+        clearCart();
+        return next;
+      } catch (err) {
+        if (err.status !== 401) throw err;
+      }
+
       const next = {
-        id: order.id,
+        id: order.id || `VS${Date.now().toString().slice(-8)}`,
+        orderNumber: order.id,
         createdAt: order.createdAt || new Date().toISOString(),
         status: order.status || 'Confirmed',
         total: order.total,
-        items: order.items,
+        items: enriched,
         shipping: order.shipping,
         paymentId: order.paymentId || null,
         paymentMethod: order.paymentMethod || 'Razorpay',
@@ -326,6 +448,10 @@ export function StoreProvider({ children }) {
       setOrders((current) => [next, ...current]);
       clearCart();
       return next;
+    }
+
+    async function refreshOrders() {
+      await syncAccountData(setAddresses, setSelectedAddressId, setOrders);
     }
 
     const selectedAddress =
@@ -372,6 +498,7 @@ export function StoreProvider({ children }) {
       removeAddress,
       selectAddress,
       placeOrder,
+      refreshOrders,
     };
   }, [
     cart,

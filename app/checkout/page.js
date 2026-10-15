@@ -13,33 +13,59 @@ const emptyForm = {
   fullName: '',
   email: '',
   phone: '',
-  address: '',
-  cityPin: '',
+  line1: '',
+  line2: '',
+  city: '',
+  state: '',
+  postal: '',
+  country: 'India',
 };
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { cart, cartTotal, cartCount, user, selectedAddress, placeOrder } = useStore();
+  const {
+    cart,
+    cartTotal,
+    cartCount,
+    user,
+    ready,
+    addresses,
+    selectedAddress,
+    selectedAddressId,
+    selectAddress,
+    addAddress,
+    placeOrder,
+  } = useStore();
+
   const [form, setForm] = useState(emptyForm);
   const [error, setError] = useState('');
   const [paying, setPaying] = useState(false);
+  const [successOrder, setSuccessOrder] = useState(null);
+  const [showNewAddress, setShowNewAddress] = useState(false);
+  const [savingAddr, setSavingAddr] = useState(false);
 
   useEffect(() => {
-    const nameFromAddress = selectedAddress?.fullName || '';
+    if (!ready) return;
+    if (!user) {
+      router.replace('/account?next=/checkout');
+    }
+  }, [ready, user, router]);
+
+  useEffect(() => {
+    if (!user) return;
+    const a = selectedAddress;
     const nameFromUser = [user?.firstName, user?.lastName].filter(Boolean).join(' ');
     setForm((current) => ({
       ...current,
-      fullName: nameFromAddress || nameFromUser || current.fullName,
+      fullName: a?.fullName || nameFromUser || current.fullName,
       email: user?.email || current.email,
-      phone: user?.phone || selectedAddress?.phone || current.phone,
-      address: selectedAddress
-        ? [selectedAddress.line1, selectedAddress.line2].filter(Boolean).join(', ')
-        : current.address,
-      cityPin: selectedAddress
-        ? [selectedAddress.city, selectedAddress.state, selectedAddress.postal]
-            .filter(Boolean)
-            .join(', ')
-        : current.cityPin,
+      phone: a?.phone || user?.phone || current.phone,
+      line1: a?.line1 || current.line1,
+      line2: a?.line2 || current.line2,
+      city: a?.city || current.city,
+      state: a?.state || current.state,
+      postal: a?.postal || current.postal,
+      country: a?.country || current.country || 'India',
     }));
   }, [user, selectedAddress]);
 
@@ -52,7 +78,7 @@ export default function CheckoutPage() {
           return { item, product, lineTotal: product.price * item.qty };
         })
         .filter(Boolean),
-    [cart]
+    [cart],
   );
 
   function updateField(key, value) {
@@ -67,43 +93,90 @@ export default function CheckoutPage() {
     };
   }
 
-  async function finalizeOrder({ paymentId, paymentMethod, demo = false }) {
+  async function saveAsNewAddress() {
+    setSavingAddr(true);
+    setError('');
+    try {
+      await addAddress({
+        label: 'Home',
+        fullName: form.fullName,
+        phone: form.phone,
+        line1: form.line1,
+        line2: form.line2,
+        city: form.city,
+        state: form.state,
+        postal: form.postal,
+        country: form.country,
+        isDefault: true,
+      });
+      setShowNewAddress(false);
+    } catch (err) {
+      setError(err.message || 'Could not save address.');
+    } finally {
+      setSavingAddr(false);
+    }
+  }
+
+  async function finalizeOrder({
+    paymentId,
+    paymentMethod,
+    demo = false,
+    razorpayOrderId,
+    razorpaySignature,
+  }) {
     const { firstName, lastName } = splitName(form.fullName);
-    const [city = '', state = '', postal = ''] = form.cityPin.split(',').map((s) => s.trim());
 
     const shipping = {
       firstName,
       lastName,
+      fullName: form.fullName,
       email: form.email,
       phone: form.phone,
-      address: form.address,
-      city,
-      state,
-      postal,
-      country: 'India',
+      line1: form.line1,
+      line2: form.line2,
+      address: [form.line1, form.line2].filter(Boolean).join(', '),
+      city: form.city,
+      state: form.state,
+      postal: form.postal,
+      country: form.country || 'India',
+      addressId: selectedAddressId || null,
     };
 
-    const order = placeOrder({
-      id: `VS${Date.now().toString().slice(-8)}`,
+    const order = await placeOrder({
       total: cartTotal,
+      subtotal: cartTotal,
       items: cart,
       shipping,
       paymentId,
       paymentMethod: demo ? 'Demo (Razorpay pending keys)' : paymentMethod,
       email: form.email,
       status: 'Confirmed',
+      demo,
+      razorpayOrderId,
+      razorpaySignature,
     });
 
     sessionStorage.setItem('vs-order', JSON.stringify(order));
-    router.push('/order-confirmation');
+    setSuccessOrder(order);
+    setPaying(false);
   }
 
   async function onPay(event) {
     event.preventDefault();
     setError('');
 
+    if (!user) {
+      router.replace('/account?next=/checkout');
+      return;
+    }
+
     if (!cart.length) {
       setError('Your bag is empty.');
+      return;
+    }
+
+    if (!form.fullName || !form.email || !form.phone || !form.line1 || !form.city || !form.postal) {
+      setError('Please complete your delivery details.');
       return;
     }
 
@@ -130,8 +203,8 @@ export default function CheckoutPage() {
         return;
       }
 
-      const ready = await loadRazorpayScript();
-      if (!ready || !window.Razorpay) {
+      const scriptReady = await loadRazorpayScript();
+      if (!scriptReady || !window.Razorpay) {
         throw new Error('Razorpay failed to load. Check your connection.');
       }
 
@@ -148,7 +221,7 @@ export default function CheckoutPage() {
           email: form.email,
           contact: form.phone,
         },
-        notes: { address: form.address },
+        notes: { address: form.line1 },
         theme: { color: '#5E062A' },
         handler: async (response) => {
           try {
@@ -164,6 +237,8 @@ export default function CheckoutPage() {
             await finalizeOrder({
               paymentId: response.razorpay_payment_id,
               paymentMethod: 'Razorpay',
+              razorpayOrderId: response.razorpay_order_id,
+              razorpaySignature: response.razorpay_signature,
             });
           } catch (err) {
             setError(err.message || 'Payment could not be verified');
@@ -187,13 +262,27 @@ export default function CheckoutPage() {
     }
   }
 
-  if (!cart.length) {
+  if (!ready || !user) {
+    return (
+      <div className="bg-ivory pt-28 pb-24 md:pt-36">
+        <div className="mx-auto max-w-md px-5 text-center">
+          <p className="font-label text-gold">Checkout</p>
+          <h1 className="font-display mt-3 text-4xl text-ink">Signing you in…</h1>
+          <p className="mt-3 text-sm font-light text-ink/70">
+            You’ll return here with your bag intact.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!cart.length && !successOrder) {
     return (
       <div className="bg-ivory pt-28 pb-24 md:pt-36">
         <div className="mx-auto max-w-xl px-5 text-center md:px-10">
           <p className="font-label text-gold">Checkout</p>
           <h1 className="font-display mt-3 text-5xl text-ink">Your bag is empty</h1>
-          <p className="mt-4 text-sm font-light text-ink/80">Add a piece before checkout.</p>
+          <p className="mt-4 text-sm font-light text-ink/70">Add a piece before checkout.</p>
           <Link
             href="/shop"
             className="bg-velvet-texture mt-8 inline-flex h-12 items-center rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory"
@@ -206,84 +295,191 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-[100svh] bg-ivory pt-28 pb-20 md:pt-32">
-      {/* items-stretch so the summary column matches form height — sticky then releases before footer */}
+    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-28 pb-20 md:pt-32">
+      {successOrder && (
+        <SuccessModal
+          order={successOrder}
+          onContinue={() => router.push('/account?tab=orders')}
+        />
+      )}
+
       <div className="mx-auto grid max-w-[1400px] gap-10 px-5 md:grid-cols-12 md:gap-12 md:px-10 lg:gap-16">
-        {/* Form */}
         <form onSubmit={onPay} className="md:col-span-6 lg:col-span-5">
-          <p className="font-label text-gold">Checkout</p>
-          <h1 className="font-display mt-3 text-4xl tracking-[-0.03em] text-ink md:text-5xl">
+          <p className="font-label text-[10px] tracking-[0.24em] text-gold uppercase">Checkout</p>
+          <h1 className="font-display mt-3 text-4xl tracking-[-0.03em] text-burgundy md:text-5xl">
             Almost yours.
           </h1>
-          <p className="mt-3 max-w-sm text-sm font-light text-ink/80">
-            A short form — then Razorpay. Complimentary insured shipping across India.
+          <p className="mt-3 max-w-sm text-sm font-light text-ink/70">
+            Confirm delivery, then pay securely with Razorpay. Complimentary insured shipping across
+            India.
           </p>
 
-          {selectedAddress && (
-            <div className="mt-8 rounded-2xl border border-gold/30 bg-pearl px-5 py-4">
-              <p className="font-label text-[10px] text-gold">Delivering to saved address</p>
-              <p className="mt-2 text-sm text-ink">{selectedAddress.fullName}</p>
-              <p className="mt-1 text-xs font-light text-ink/80">
-                {selectedAddress.line1}
-                {selectedAddress.city ? `, ${selectedAddress.city}` : ''}
-              </p>
-              <Link
-                href="/account"
-                className="mt-2 inline-block font-label text-[10px] tracking-[0.14em] text-burgundy"
-              >
-                Change in account
-              </Link>
+          {addresses.length > 0 && (
+            <div className="mt-8 space-y-3">
+              <div className="flex items-center justify-between gap-3">
+                <p className="font-label text-[10px] tracking-[0.16em] text-ink/50 uppercase">
+                  Deliver to
+                </p>
+                <button
+                  type="button"
+                  className="font-label text-[10px] tracking-[0.14em] text-burgundy"
+                  onClick={() => setShowNewAddress((v) => !v)}
+                >
+                  {showNewAddress ? 'Use saved' : 'Add new address'}
+                </button>
+              </div>
+              {!showNewAddress && (
+                <div className="space-y-2">
+                  {addresses.map((addr) => {
+                    const active = addr.id === selectedAddressId;
+                    return (
+                      <button
+                        key={addr.id}
+                        type="button"
+                        onClick={() => selectAddress(addr.id)}
+                        className={`w-full rounded-2xl border px-4 py-3.5 text-left transition ${
+                          active
+                            ? 'border-burgundy/40 bg-white shadow-[0_8px_24px_rgba(94,6,42,0.06)]'
+                            : 'border-ink/8 bg-white/50 hover:border-ink/15'
+                        }`}
+                      >
+                        <p className="text-sm text-ink">
+                          <span className="font-label text-[10px] tracking-[0.12em] text-gold uppercase">
+                            {addr.label}
+                          </span>
+                          <span className="mt-1 block">{addr.fullName}</span>
+                        </p>
+                        <p className="mt-1 text-xs font-light text-ink/60">
+                          {addr.line1}
+                          {addr.city ? `, ${addr.city}` : ''} · {addr.postal}
+                        </p>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
 
-          <div className="mt-8 space-y-5 rounded-3xl border border-ink/8 bg-pearl/60 p-6 md:p-8">
-            <Field
-              label="Full name"
-              value={form.fullName}
-              onChange={(v) => updateField('fullName', v)}
-              required
-              placeholder="As on the parcel"
-            />
-            <div className="grid gap-5 sm:grid-cols-2">
+          {(showNewAddress || addresses.length === 0) && (
+            <div className="mt-8 space-y-5 rounded-3xl border border-ink/8 bg-white/70 p-6 md:p-8">
+              <p className="font-label text-[10px] tracking-[0.16em] text-ink/50 uppercase">
+                Delivery details
+              </p>
               <Field
-                label="Email"
-                type="email"
-                value={form.email}
-                onChange={(v) => updateField('email', v)}
+                label="Full name"
+                value={form.fullName}
+                onChange={(v) => updateField('fullName', v)}
                 required
-                placeholder="you@email.com"
+              />
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field
+                  label="Email"
+                  type="email"
+                  value={form.email}
+                  onChange={(v) => updateField('email', v)}
+                  required
+                />
+                <Field
+                  label="Phone"
+                  type="tel"
+                  value={form.phone}
+                  onChange={(v) => updateField('phone', v)}
+                  required
+                />
+              </div>
+              <Field
+                label="Street address"
+                value={form.line1}
+                onChange={(v) => updateField('line1', v)}
+                required
+                placeholder="House, street, landmark"
               />
               <Field
-                label="Phone"
-                type="tel"
-                value={form.phone}
-                onChange={(v) => updateField('phone', v)}
-                required
-                placeholder="+91 …"
+                label="Apartment / floor"
+                value={form.line2}
+                onChange={(v) => updateField('line2', v)}
               />
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field
+                  label="City"
+                  value={form.city}
+                  onChange={(v) => updateField('city', v)}
+                  required
+                />
+                <Field
+                  label="State"
+                  value={form.state}
+                  onChange={(v) => updateField('state', v)}
+                  required
+                />
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field
+                  label="PIN code"
+                  value={form.postal}
+                  onChange={(v) => updateField('postal', v)}
+                  required
+                />
+                <Field
+                  label="Country"
+                  value={form.country}
+                  onChange={(v) => updateField('country', v)}
+                  required
+                />
+              </div>
+              {showNewAddress && (
+                <button
+                  type="button"
+                  disabled={savingAddr}
+                  onClick={saveAsNewAddress}
+                  className="font-label text-[11px] tracking-[0.14em] text-burgundy disabled:opacity-60"
+                >
+                  {savingAddr ? 'Saving…' : 'Save this address to my account'}
+                </button>
+              )}
             </div>
-            <Field
-              label="Street address"
-              value={form.address}
-              onChange={(v) => updateField('address', v)}
-              required
-              placeholder="House, street, landmark"
-            />
-            <Field
-              label="City, state & PIN"
-              value={form.cityPin}
-              onChange={(v) => updateField('cityPin', v)}
-              required
-              placeholder="Jaipur, Rajasthan, 302001"
-            />
-          </div>
+          )}
 
-          {error && <p className="mt-5 text-sm text-burgundy">{error}</p>}
+          {!showNewAddress && addresses.length > 0 && (
+            <div className="mt-6 rounded-2xl border border-ink/8 bg-white/50 px-5 py-4">
+              <p className="text-xs font-light text-ink/60">
+                Shipping to the selected address. Need a tweak?{' '}
+                <button
+                  type="button"
+                  className="text-burgundy"
+                  onClick={() => setShowNewAddress(true)}
+                >
+                  Edit details
+                </button>
+              </p>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                <Field
+                  label="Email"
+                  type="email"
+                  value={form.email}
+                  onChange={(v) => updateField('email', v)}
+                  required
+                />
+                <Field
+                  label="Phone"
+                  type="tel"
+                  value={form.phone}
+                  onChange={(v) => updateField('phone', v)}
+                  required
+                />
+              </div>
+            </div>
+          )}
+
+          {error && (
+            <p className="mt-5 rounded-2xl bg-burgundy/8 px-4 py-3 text-sm text-burgundy">{error}</p>
+          )}
 
           <button
             type="submit"
-            disabled={paying}
-            className="bg-velvet-texture mt-8 inline-flex h-13 w-full items-center justify-center rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory disabled:opacity-60 sm:w-auto sm:min-w-[260px]"
+            disabled={paying || Boolean(successOrder)}
+            className="bg-velvet-texture mt-8 inline-flex w-full items-center justify-center rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory disabled:opacity-60 sm:w-auto sm:min-w-[260px]"
             style={{ height: 52 }}
           >
             {paying ? (
@@ -294,19 +490,14 @@ export default function CheckoutPage() {
               </>
             )}
           </button>
-          <p className="mt-3 text-xs font-light text-ink/80">
+          <p className="mt-3 text-xs font-light text-ink/55">
             Card details are collected by Razorpay — never on this page.
           </p>
         </form>
 
-        {/* Sticky under navbar while scrolling the form; unsticks at column end (before footer) */}
         <aside className="md:col-span-6 lg:col-span-7">
           <div className="md:sticky md:top-[7.25rem]">
-            <OrderSummaryCard
-              lines={lines}
-              cartCount={cartCount}
-              cartTotal={cartTotal}
-            />
+            <OrderSummaryCard lines={lines} cartCount={cartCount} cartTotal={cartTotal} />
           </div>
         </aside>
       </div>
@@ -314,79 +505,93 @@ export default function CheckoutPage() {
   );
 }
 
+function SuccessModal({ order, onContinue }) {
+  useEffect(() => {
+    const t = setTimeout(onContinue, 3200);
+    return () => clearTimeout(t);
+  }, [onContinue]);
+
+  return (
+    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-ink/40 p-5 backdrop-blur-sm">
+      <div className="relative w-full max-w-md overflow-hidden rounded-[2rem] border border-burgundy/10 bg-gradient-to-br from-[#faf6f1] to-[#efe4da] p-8 text-center shadow-[0_30px_80px_rgba(40,20,24,0.25)]">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-burgundy text-ivory">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path
+              d="M5 12.5l4.5 4.5L19 7.5"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+        <p className="font-label mt-6 text-[10px] tracking-[0.24em] text-gold uppercase">
+          Order confirmed
+        </p>
+        <h2 className="font-display mt-3 text-3xl text-burgundy">Thank you</h2>
+        <p className="mt-3 text-sm font-light text-ink/70">
+          {order.orderNumber || order.id} · {money(order.total)}
+        </p>
+        <p className="mt-2 text-xs font-light text-ink/55">
+          A confirmation email is on its way. Taking you to order history…
+        </p>
+        <button
+          type="button"
+          onClick={onContinue}
+          className="bg-velvet-texture mt-8 inline-flex h-12 w-full items-center justify-center rounded-full font-label text-[11px] tracking-[0.2em] text-ivory"
+        >
+          View orders
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function OrderSummaryCard({ lines, cartCount, cartTotal }) {
   return (
-    <div className="flex max-h-[calc(100svh-8.5rem)] flex-col overflow-hidden rounded-[1.75rem] border border-ink/8 bg-pearl shadow-[0_20px_60px_rgba(40,20,24,0.06)]">
-      <div className="shrink-0 border-b border-ink/8 px-6 py-5 md:px-8">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <p className="font-label text-[11px] text-ink/80">Order summary</p>
-            <p className="font-num mt-2 text-xl text-ink md:text-2xl">
-              {cartCount} {cartCount === 1 ? 'piece' : 'pieces'}
-            </p>
-          </div>
-          <Link href="/cart" className="font-label text-[10px] tracking-[0.14em] text-burgundy">
-            Edit bag
-          </Link>
-        </div>
+    <div className="flex max-h-[calc(100svh-8.5rem)] flex-col overflow-hidden rounded-[1.75rem] border border-ink/8 bg-white/80 shadow-[0_20px_60px_rgba(40,20,24,0.06)]">
+      <div className="border-b border-ink/8 px-6 py-5">
+        <p className="font-label text-[10px] tracking-[0.18em] text-gold uppercase">Your bag</p>
+        <p className="mt-1 text-sm text-ink/70">
+          {cartCount} {cartCount === 1 ? 'piece' : 'pieces'}
+        </p>
       </div>
-
-      <ul className="min-h-0 flex-1 space-y-0 overflow-y-auto overscroll-contain px-6 md:px-8">
+      <ul className="flex-1 space-y-4 overflow-y-auto px-6 py-5">
         {lines.map(({ item, product, lineTotal }) => (
-          <li key={item.id} className="flex gap-4 border-b border-ink/6 py-5 last:border-b-0">
-            <Link
-              href={`/shop/${product.slug}`}
-              className="relative h-24 w-20 shrink-0 overflow-hidden rounded-xl bg-ivory"
-            >
+          <li key={item.id} className="flex gap-4">
+            <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-xl bg-cream">
               <Image
-                src={product.image}
+                src={product.image || product.image_url}
                 alt={product.name}
                 fill
                 className="object-cover"
-                sizes="80px"
+                sizes="64px"
               />
-            </Link>
-            <div className="min-w-0 flex-1">
-              <p className="font-label text-[9px] text-gold">
-                {collectionName(product.collection) || product.category}
-              </p>
-              <Link
-                href={`/shop/${product.slug}`}
-                className="font-display mt-1 block text-xl leading-tight text-ink hover:text-burgundy"
-              >
-                {product.name}
-              </Link>
-              <p className="mt-1.5 text-xs font-light text-ink/85">
-                {item.metal} · Size {item.size}
-              </p>
-              <div className="mt-2 flex items-center justify-between gap-3">
-                <span className="font-num text-xs font-light text-ink/80">
-                  Qty {item.qty} · {money(product.price)} each
-                </span>
-                <span className="font-num text-sm text-ink">{money(lineTotal)}</span>
-              </div>
             </div>
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm text-ink">{product.name}</p>
+              <p className="mt-0.5 text-[11px] font-light text-ink/55">
+                {collectionName(
+                  typeof product.collection === 'string'
+                    ? product.collection
+                    : product.collection_slug || product.collection?.slug || '',
+                )}{' '}
+                · {item.metal} · {item.size}
+              </p>
+              <p className="mt-1 text-xs text-ink/60">Qty {item.qty}</p>
+            </div>
+            <p className="font-num text-sm text-ink">{money(lineTotal)}</p>
           </li>
         ))}
       </ul>
-
-      <div className="shrink-0 space-y-3 border-t border-ink/8 bg-ivory/50 px-6 py-6 md:px-8">
-        <div className="flex justify-between text-sm text-ink/85">
-          <span>Subtotal</span>
-          <span className="font-num">{money(cartTotal)}</span>
+      <div className="border-t border-ink/8 px-6 py-5">
+        <div className="flex items-center justify-between">
+          <span className="font-label text-[10px] tracking-[0.16em] text-ink/50 uppercase">
+            Total
+          </span>
+          <span className="font-num text-2xl text-burgundy">{money(cartTotal)}</span>
         </div>
-        <div className="flex justify-between text-sm text-ink/85">
-          <span>Shipping</span>
-          <span className="text-gold">Complimentary</span>
-        </div>
-        <div className="flex justify-between text-sm text-ink/85">
-          <span>Duties & taxes</span>
-          <span>Included where applicable</span>
-        </div>
-        <div className="flex items-end justify-between border-t border-ink/8 pt-4">
-          <span className="text-sm text-ink">Total due</span>
-          <span className="font-num text-2xl text-ink md:text-3xl">{money(cartTotal)}</span>
-        </div>
+        <p className="mt-2 text-xs font-light text-ink/50">Incl. complimentary shipping</p>
       </div>
     </div>
   );
@@ -395,14 +600,14 @@ function OrderSummaryCard({ lines, cartCount, cartTotal }) {
 function Field({ label, value, onChange, type = 'text', required, placeholder }) {
   return (
     <label className="block">
-      <span className="font-label text-[10px] text-ink/80">{label}</span>
+      <span className="font-label text-[10px] tracking-[0.14em] text-ink/50 uppercase">{label}</span>
       <input
         type={type}
         required={required}
         value={value}
         placeholder={placeholder}
-        onChange={(event) => onChange(event.target.value)}
-        className="mt-2 w-full rounded-full border border-ink/10 bg-ivory px-4 py-3.5 text-[15px] font-light text-ink outline-none placeholder:text-ink/80 focus:border-burgundy/40"
+        onChange={(e) => onChange(e.target.value)}
+        className="mt-2 w-full rounded-2xl border border-ink/10 bg-white/80 px-4 py-3.5 text-sm text-ink outline-none transition focus:border-burgundy/35"
       />
     </label>
   );

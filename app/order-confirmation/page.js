@@ -53,10 +53,10 @@ export default function ConfirmationPage() {
         )}
         <div className="mt-10 flex flex-wrap gap-6">
           <Link
-            href="/account"
+            href="/account?tab=orders"
             className="font-label text-[11px] tracking-[0.18em] text-burgundy"
           >
-            View in account
+            View order history
           </Link>
           <Link href="/shop" className="font-label text-[11px] tracking-[0.18em] text-ink/80">
             Continue shopping

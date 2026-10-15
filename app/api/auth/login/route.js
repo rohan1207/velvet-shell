@@ -28,8 +28,12 @@ export async function POST(request) {
     const email = await resolveEmailFromIdentifier(identifier);
     if (!email) {
       return NextResponse.json(
-        { error: 'Invalid email/phone or password.' },
-        { status: 401 }
+        {
+          error: 'No account found with that email or phone.',
+          code: 'NO_ACCOUNT',
+          identifier,
+        },
+        { status: 404 }
       );
     }
 
@@ -38,7 +42,7 @@ export async function POST(request) {
 
     if (error || !data.user) {
       return NextResponse.json(
-        { error: 'Invalid email/phone or password.' },
+        { error: 'Incorrect password. Please try again.', code: 'BAD_PASSWORD' },
         { status: 401 }
       );
     }
