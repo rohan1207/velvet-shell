@@ -107,13 +107,15 @@ export default function OrderDetailPage() {
                   {item.metal} · {item.size} · Qty {item.qty}
                 </p>
               </div>
-              <p className="text-sm">{money(item.lineTotal)}</p>
+              <p className="font-num text-sm">{money(item.lineTotal)}</p>
             </li>
           ))}
         </ul>
         <div className="flex justify-between border-t border-[#2d2b2b]/8 px-5 py-4">
           <span>Total</span>
-          <span className="font-display text-2xl">{money(order.total)}</span>
+          <span className="font-num text-2xl font-semibold tracking-tight">
+            {money(order.total)}
+          </span>
         </div>
       </div>
     </div>

@@ -8,7 +8,9 @@ function Stat({ label, value, hint }) {
   return (
     <div className="card px-5 py-5">
       <p className="font-label text-[10px] text-[#7a736c]">{label}</p>
-      <p className="font-display mt-2 text-3xl text-[#2d2b2b]">{value}</p>
+      <p className="font-num mt-2 text-3xl font-semibold tracking-tight text-[#2d2b2b]">
+        {value}
+      </p>
       {hint && <p className="mt-1 text-xs text-[#7a736c]">{hint}</p>}
     </div>
   );
@@ -149,9 +151,9 @@ export default function DiscountsPage() {
                   </span>
                 </td>
                 <td className="max-w-[200px] truncate px-4 py-3 text-[#7a736c]">{scopeLabel(row)}</td>
-                <td className="px-4 py-3">{row.timesUsed}</td>
-                <td className="px-4 py-3">{moneyINR(row.revenue)}</td>
-                <td className="px-4 py-3">{moneyINR(row.discountGiven)}</td>
+                <td className="font-num px-4 py-3">{row.timesUsed}</td>
+                <td className="font-num px-4 py-3">{moneyINR(row.revenue)}</td>
+                <td className="font-num px-4 py-3">{moneyINR(row.discountGiven)}</td>
                 <td className="px-4 py-3">
                   <span
                     className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${statusTone(row.status)}`}

@@ -46,7 +46,7 @@ function ProductPicker({ onPick, onClose }) {
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm font-medium">{p.name}</span>
                   <span className="block text-xs text-[#7a736c]">
-                    {p.slug} · {money(p.price)}
+                    <span className="font-num">{p.slug} · {money(p.price)}</span>
                   </span>
                 </span>
               </button>

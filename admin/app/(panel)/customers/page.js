@@ -52,8 +52,8 @@ export default function CustomersPage() {
                   </td>
                   <td className="px-4 py-3">{c.email}</td>
                   <td className="px-4 py-3">{c.phone}</td>
-                  <td className="px-4 py-3">{c.orderCount}</td>
-                  <td className="px-4 py-3">{money(c.totalSpent)}</td>
+                  <td className="font-num px-4 py-3">{c.orderCount}</td>
+                  <td className="font-num px-4 py-3">{money(c.totalSpent)}</td>
                 </tr>
               ))}
             </tbody>
@@ -71,17 +71,17 @@ export default function CustomersPage() {
               </h2>
               <p className="mt-2 text-sm">{selected.email}</p>
               <p className="text-sm text-[#7a736c]">{selected.phone}</p>
-              <p className="mt-4 text-sm">
+              <p className="font-num mt-4 text-sm">
                 {selected.orderCount} orders · {money(selected.totalSpent)} spent
               </p>
               <ul className="mt-6 space-y-3 border-t border-[#2d2b2b]/8 pt-4">
                 {history.map((o) => (
                   <li key={o.id} className="flex justify-between text-sm">
                     <span>
-                      {o.orderNumber}
+                      <span className="font-num">{o.orderNumber}</span>
                       <span className="mt-0.5 block text-xs text-[#7a736c]">{o.status}</span>
                     </span>
-                    <span>{money(o.total)}</span>
+                    <span className="font-num">{money(o.total)}</span>
                   </li>
                 ))}
               </ul>

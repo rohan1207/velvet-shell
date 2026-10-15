@@ -1,12 +1,17 @@
 import { NextResponse } from 'next/server';
 import { readSessionFromRequest } from '@/lib/session';
+import { allowInsecureTlsIfConfigured } from '@/lib/tls';
+import { r2Configured, uploadToR2 } from '@/lib/r2';
+
+const MAX_BYTES = 40 * 1024 * 1024; // 40MB
 
 /**
  * Media upload endpoint.
- * When Cloudflare R2 env vars are present, files will stream to R2.
- * Until then, accepts a public URL (paste) so the form stays usable.
+ * - JSON { url, kind }: register an existing public URL
+ * - multipart/form-data { file }: upload to Cloudflare R2
  */
 export async function POST(request) {
+  allowInsecureTlsIfConfigured();
   if (!readSessionFromRequest(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -24,29 +29,46 @@ export async function POST(request) {
     return NextResponse.json({ ok: true, url, kind, source: 'url' });
   }
 
-  // Multipart file — requires R2 (wired when you send Cloudflare credentials)
-  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
-  const keyId = process.env.CLOUDFLARE_R2_ACCESS_KEY_ID;
-  const secret = process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY;
-  const bucket = process.env.CLOUDFLARE_R2_BUCKET;
-  const publicBase = process.env.CLOUDFLARE_R2_PUBLIC_BASE_URL;
-
-  if (!accountId || !keyId || !secret || !bucket || !publicBase) {
+  if (!r2Configured()) {
     return NextResponse.json(
       {
         error:
-          'File upload needs Cloudflare R2. Paste a public URL for now, or add R2 keys to admin/.env.local (see docs/PRODUCT_CATALOG_PLAN.md).',
+          'Cloudflare R2 is not configured. Add CLOUDFLARE_R2_* keys to admin/.env.local (Access Key ID + Secret from R2 → Manage R2 API Tokens).',
         code: 'R2_NOT_CONFIGURED',
       },
       { status: 503 }
     );
   }
 
-  return NextResponse.json(
-    {
-      error: 'R2 direct upload is ready to wire — send Cloudflare keys and we will finish this route.',
-      code: 'R2_PENDING_WIRE',
-    },
-    { status: 501 }
-  );
+  try {
+    const form = await request.formData();
+    const file = form.get('file');
+    if (!file || typeof file === 'string' || !file.arrayBuffer) {
+      return NextResponse.json({ error: 'Choose a file to upload.' }, { status: 400 });
+    }
+    if (file.size > MAX_BYTES) {
+      return NextResponse.json({ error: 'File is too large (max 40MB).' }, { status: 400 });
+    }
+    const mime = file.type || '';
+    if (!mime.startsWith('image/') && !mime.startsWith('video/')) {
+      return NextResponse.json({ error: 'Only image or video files are allowed.' }, { status: 400 });
+    }
+
+    const folder = String(form.get('folder') || 'products').replace(/[^a-z0-9/_-]/gi, '') || 'products';
+    const uploaded = await uploadToR2(file, { folder });
+
+    return NextResponse.json({
+      ok: true,
+      url: uploaded.url,
+      key: uploaded.key,
+      kind: uploaded.kind,
+      source: 'r2',
+    });
+  } catch (err) {
+    console.error('[upload/r2]', err);
+    return NextResponse.json(
+      { error: err.message || 'Upload to Cloudflare R2 failed.' },
+      { status: 500 }
+    );
+  }
 }

@@ -88,10 +88,11 @@ export default function ProductForm({
   const [featuresText, setFeaturesText] = useState(() =>
     featuresToText(form.variants[0]?.features)
   );
-  const [mediaUrl, setMediaUrl] = useState('');
-  const [mediaKind, setMediaKind] = useState('image');
+  const [uploadingHero, setUploadingHero] = useState(false);
+  const [uploadingGallery, setUploadingGallery] = useState(false);
   const [notice, setNotice] = useState('');
   const [error, setError] = useState('');
+  const mediaBusy = uploadingHero || uploadingGallery;
 
   const autoSlug = useMemo(() => slugify(form.name), [form.name]);
   const familySlug = lockSlug ? form.slug : autoSlug;
@@ -146,45 +147,70 @@ export default function ProductForm({
     setNotice('Copied details from that color. Images/videos were left empty for this swatch.');
   }
 
-  async function addMediaFromUrl(asHero = false) {
-    setError('');
-    const url = mediaUrl.trim();
-    if (!url) {
-      setError('Paste an image or video URL first.');
-      return;
-    }
-    try {
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url, kind: mediaKind }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Upload failed');
-      const item = { url: data.url, kind: data.kind || mediaKind, alt: form.name };
-      const idx = form.activeVariantIndex;
-      if (asHero || !variant.heroUrl) {
-        patchVariant(idx, {
-          heroUrl: data.url,
-          gallery: [...(variant.gallery || []), item],
-        });
-      } else {
-        patchVariant(idx, { gallery: [...(variant.gallery || []), item] });
-      }
-      setMediaUrl('');
-      setNotice(asHero ? 'Hero media set.' : 'Added to gallery.');
-    } catch (err) {
-      setError(err.message);
-    }
+  async function uploadFile(file) {
+    const body = new FormData();
+    body.append('file', file);
+    body.append('folder', 'products');
+    const res = await fetch('/api/upload', { method: 'POST', body });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Upload failed');
+    return {
+      url: data.url,
+      kind: data.kind || (file.type.startsWith('video/') ? 'video' : 'image'),
+      alt: form.name,
+    };
   }
 
-  function onFileSelected(event) {
+  async function onHeroFileSelected(event) {
     const file = event.target.files?.[0];
     event.target.value = '';
     if (!file) return;
-    setError(
-      'Direct file upload needs Cloudflare R2 keys. For now paste a public image/video URL below — send R2 credentials and we will enable drag-and-drop upload.'
-    );
+    setError('');
+    setNotice('');
+    setUploadingHero(true);
+    try {
+      const item = await uploadFile(file);
+      const idx = form.activeVariantIndex;
+      const gallery = [...(variant.gallery || [])];
+      const withoutOldHero = gallery.filter((g) => g.url !== variant.heroUrl);
+      patchVariant(idx, {
+        heroUrl: item.url,
+        gallery: [item, ...withoutOldHero.filter((g) => g.url !== item.url)],
+      });
+      setNotice('Hero image uploaded.');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setUploadingHero(false);
+    }
+  }
+
+  async function onGalleryFilesSelected(event) {
+    const files = Array.from(event.target.files || []);
+    event.target.value = '';
+    if (!files.length) return;
+    setError('');
+    setNotice('');
+    setUploadingGallery(true);
+    try {
+      const uploaded = [];
+      for (const file of files) {
+        uploaded.push(await uploadFile(file));
+      }
+      const idx = form.activeVariantIndex;
+      patchVariant(idx, {
+        gallery: [...(variant.gallery || []), ...uploaded],
+      });
+      setNotice(
+        uploaded.length === 1
+          ? 'Gallery image uploaded.'
+          : `${uploaded.length} gallery images uploaded.`
+      );
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setUploadingGallery(false);
+    }
   }
 
   function submit(event) {
@@ -217,7 +243,27 @@ export default function ProductForm({
   }
 
   return (
-    <form onSubmit={submit} className="space-y-8">
+    <form onSubmit={submit} className="relative space-y-8">
+      {saving && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#2d2b2b]/45 backdrop-blur-[2px]"
+          role="status"
+          aria-live="polite"
+          aria-busy="true"
+        >
+          <div className="mx-4 flex max-w-sm flex-col items-center gap-4 rounded-2xl bg-white px-8 py-7 shadow-lg">
+            <span
+              className="h-10 w-10 animate-spin rounded-full border-[3px] border-[#5e062a]/20 border-t-[#5e062a]"
+              aria-hidden
+            />
+            <div className="text-center">
+              <p className="text-sm font-medium text-[#2d2b2b]">Saving product…</p>
+              <p className="mt-1 text-xs text-[#7a736c]">Please wait — this may take a moment.</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {(notice || error) && (
         <p className={`text-sm ${error ? 'text-[#5e062a]' : 'text-[#7a736c]'}`}>{error || notice}</p>
       )}
@@ -672,71 +718,142 @@ export default function ProductForm({
       </section>
 
       {/* Media */}
-      <section className="card space-y-4 p-6">
-        <p className="font-label text-[10px] text-[#7a736c]">Hero & gallery</p>
-        <p className="text-sm font-light text-[#7a736c]">
-          Unlimited images + video. Cloudflare file upload unlocks after you send R2 keys; paste
-          URLs work now.
-        </p>
-        {variant.heroUrl && (
-          <div className="rounded-2xl border border-[#2d2b2b]/8 p-3">
-            <p className="text-xs text-[#7a736c]">Hero</p>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={variant.heroUrl} alt="" className="mt-2 max-h-48 rounded-xl object-cover" />
+      <section className="card space-y-5 p-6">
+        <div>
+          <p className="font-label text-[10px] text-[#7a736c]">Hero & gallery</p>
+          <p className="mt-1 text-sm font-light text-[#7a736c]">
+            Upload files to Cloudflare R2. Hero and gallery are separate.
+          </p>
+        </div>
+
+        <div className="space-y-3 rounded-2xl border border-[#2d2b2b]/8 p-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-xs font-medium text-[#2d2b2b]">Hero image</p>
+            {uploadingHero && (
+              <span className="inline-flex items-center gap-2 text-xs text-[#7a736c]">
+                <span
+                  className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-[#5e062a]/20 border-t-[#5e062a]"
+                  aria-hidden
+                />
+                Uploading hero…
+              </span>
+            )}
           </div>
-        )}
-        <div className="grid gap-3 sm:grid-cols-3">
-          {(variant.gallery || []).map((item, i) => (
-            <div key={`${item.url}-${i}`} className="relative rounded-xl border border-[#2d2b2b]/8 p-2">
-              {item.kind === 'video' ? (
-                <video src={item.url} className="h-28 w-full rounded-lg object-cover" muted />
-              ) : (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={item.url} alt="" className="h-28 w-full rounded-lg object-cover" />
-              )}
+          {variant.heroUrl ? (
+            <div className="relative max-w-md">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={variant.heroUrl}
+                alt=""
+                className="max-h-56 w-full rounded-xl object-cover"
+              />
               <button
                 type="button"
-                className="mt-2 text-[10px] uppercase tracking-wider text-[#5e062a]"
+                disabled={mediaBusy || saving}
+                className="mt-2 text-[10px] uppercase tracking-wider text-[#5e062a] disabled:opacity-50"
                 onClick={() =>
                   patchVariant(form.activeVariantIndex, {
-                    gallery: variant.gallery.filter((_, j) => j !== i),
-                    heroUrl: variant.heroUrl === item.url ? '' : variant.heroUrl,
+                    heroUrl: '',
+                    gallery: (variant.gallery || []).filter((g) => g.url !== variant.heroUrl),
                   })
                 }
               >
-                Remove
+                Remove hero
               </button>
             </div>
-          ))}
+          ) : (
+            <p className="text-sm text-[#7a736c]">No hero image yet.</p>
+          )}
+          <label className="block">
+            <span className="text-xs text-[#7a736c]">
+              {variant.heroUrl ? 'Replace hero' : 'Upload hero'}
+            </span>
+            <input
+              className="mt-2 block w-full text-sm disabled:opacity-50"
+              type="file"
+              accept="image/*,video/*"
+              disabled={mediaBusy || saving}
+              onChange={onHeroFileSelected}
+            />
+          </label>
         </div>
-        <div className="grid gap-3 md:grid-cols-[1fr_120px_auto_auto]">
-          <input
-            className="input"
-            placeholder="https://… image or video URL"
-            value={mediaUrl}
-            onChange={(e) => setMediaUrl(e.target.value)}
-          />
-          <select className="input" value={mediaKind} onChange={(e) => setMediaKind(e.target.value)}>
-            <option value="image">Image</option>
-            <option value="video">Video</option>
-          </select>
-          <button type="button" className="btn-secondary" onClick={() => addMediaFromUrl(false)}>
-            Add to gallery
-          </button>
-          <button type="button" className="btn-primary" onClick={() => addMediaFromUrl(true)}>
-            Set as hero
-          </button>
+
+        <div className="space-y-3 rounded-2xl border border-[#2d2b2b]/8 p-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-xs font-medium text-[#2d2b2b]">Gallery images</p>
+            {uploadingGallery && (
+              <span className="inline-flex items-center gap-2 text-xs text-[#7a736c]">
+                <span
+                  className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-[#5e062a]/20 border-t-[#5e062a]"
+                  aria-hidden
+                />
+                Uploading gallery…
+              </span>
+            )}
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {(variant.gallery || [])
+              .filter((item) => item.url !== variant.heroUrl)
+              .map((item, i) => (
+                <div
+                  key={`${item.url}-${i}`}
+                  className="relative rounded-xl border border-[#2d2b2b]/8 p-2"
+                >
+                  {item.kind === 'video' ? (
+                    <video src={item.url} className="h-28 w-full rounded-lg object-cover" muted />
+                  ) : (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={item.url} alt="" className="h-28 w-full rounded-lg object-cover" />
+                  )}
+                  <button
+                    type="button"
+                    disabled={mediaBusy || saving}
+                    className="mt-2 text-[10px] uppercase tracking-wider text-[#5e062a] disabled:opacity-50"
+                    onClick={() =>
+                      patchVariant(form.activeVariantIndex, {
+                        gallery: (variant.gallery || []).filter((g) => g.url !== item.url),
+                      })
+                    }
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+          </div>
+          {!(variant.gallery || []).some((g) => g.url !== variant.heroUrl) && (
+            <p className="text-sm text-[#7a736c]">No gallery images yet.</p>
+          )}
+          <label className="block">
+            <span className="text-xs text-[#7a736c]">Upload gallery (one or more files)</span>
+            <input
+              className="mt-2 block w-full text-sm disabled:opacity-50"
+              type="file"
+              accept="image/*,video/*"
+              multiple
+              disabled={mediaBusy || saving}
+              onChange={onGalleryFilesSelected}
+            />
+          </label>
         </div>
-        <label className="block">
-          <span className="text-xs text-[#7a736c]">Or choose file (needs Cloudflare R2)</span>
-          <input className="mt-2 block w-full text-sm" type="file" accept="image/*,video/*" onChange={onFileSelected} />
-        </label>
       </section>
 
-      <div className="flex flex-wrap gap-3">
-        <button type="submit" disabled={saving} className="btn-primary">
-          {saving ? 'Saving…' : 'Save product'}
+      <div className="flex flex-wrap items-center gap-3">
+        <button
+          type="submit"
+          disabled={saving || mediaBusy}
+          className="btn-primary inline-flex items-center gap-2"
+        >
+          {saving && (
+            <span
+              className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/30 border-t-white"
+              aria-hidden
+            />
+          )}
+          {saving ? 'Saving product…' : mediaBusy ? 'Wait for upload…' : 'Save product'}
         </button>
+        {saving && (
+          <span className="text-xs text-[#7a736c]">Product is being saved — please wait.</span>
+        )}
       </div>
     </form>
   );

@@ -60,10 +60,10 @@ export default function Hero3D() {
 
           <div className="mt-10 flex flex-wrap gap-2.5">
             {[
-              { href: '/shop?category=rings', label: 'Rings' },
               { href: '/shop?category=earrings', label: 'Earrings' },
-              { href: '/shop?category=pendants', label: 'Pendants' },
               { href: '/shop?category=bracelets', label: 'Bracelets' },
+              { href: '/shop?category=necklaces', label: 'Necklaces' },
+              { href: '/shop?category=rings', label: 'Rings' },
             ].map((item) => (
               <Link
                 key={item.href}

@@ -5,13 +5,11 @@ const columns = [
   {
     title: 'Shop',
     links: [
-      { href: '/shop?category=rings', label: 'Rings' },
       { href: '/shop?category=earrings', label: 'Earrings' },
-      { href: '/shop?category=necklaces', label: 'Necklaces' },
-      { href: '/shop?category=pendants', label: 'Pendants' },
-      { href: '/shop?category=chains', label: 'Chains' },
-      { href: '/shop?category=chokers', label: 'Chokers' },
       { href: '/shop?category=bracelets', label: 'Bracelets' },
+      { href: '/shop?category=necklaces', label: 'Necklaces' },
+      { href: '/shop?category=rings', label: 'Rings' },
+      { href: '/shop?category=cuffs', label: 'Brooches' },
       { href: '/shop?category=anklets', label: 'Anklets' },
       { href: '/shop?category=sets', label: 'Sets' },
       { href: '/shop', label: 'Shop all' },

@@ -9,6 +9,8 @@ const links = [
   { href: '/', label: 'Dashboard' },
   { href: '/products', label: 'Products' },
   { href: '/categories', label: 'Categories' },
+  { href: '/homepage/festive-edit', label: 'Festive Edit' },
+  { href: '/homepage/best-sellers', label: 'Best sellers' },
   { href: '/discounts', label: 'Discounts' },
   { href: '/orders', label: 'Orders', badge: true },
   { href: '/customers', label: 'Customers' },
@@ -69,7 +71,7 @@ export default function AdminSidebar({ open, onClose }) {
               >
                 <span>{link.label}</span>
                 {link.badge && pending > 0 && (
-                  <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-[#d4af64] px-1.5 text-[10px] font-semibold text-[#5e062a]">
+                  <span className="font-num flex h-5 min-w-5 items-center justify-center rounded-full bg-[#d4af64] px-1.5 text-[10px] font-semibold text-[#5e062a]">
                     {pending}
                   </span>
                 )}

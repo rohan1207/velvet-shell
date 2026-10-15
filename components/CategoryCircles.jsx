@@ -10,34 +10,34 @@ const categories = [
     image: '/categories/earrings.png',
   },
   {
-    label: 'Ring',
-    href: '/shop?category=rings',
-    image: '/categories/ring.png',
-  },
-  {
-    label: 'Necklace',
-    href: '/shop?category=necklaces',
-    image: '/categories/necklace.png',
-  },
-  {
-    label: 'Pendant',
-    href: '/shop?category=pendants',
-    image: '/categories/pendant.png',
-  },
-  {
-    label: 'Chain',
-    href: '/shop?category=chains',
-    image: '/categories/chain.png',
-  },
-  {
-    label: 'Bracelet',
+    label: 'Bracelets',
     href: '/shop?category=bracelets',
     image: '/categories/bracelate.png',
   },
   {
-    label: 'Anklet',
+    label: 'Necklaces',
+    href: '/shop?category=necklaces',
+    image: '/categories/necklace.png',
+  },
+  {
+    label: 'Rings',
+    href: '/shop?category=rings',
+    image: '/categories/ring.png',
+  },
+  {
+    label: 'Brooches',
+    href: '/shop?category=cuffs',
+    image: '/categories/ring.png',
+  },
+  {
+    label: 'Anklets',
     href: '/shop?category=anklets',
     image: '/categories/anklet.png',
+  },
+  {
+    label: 'Sets',
+    href: '/shop?category=sets',
+    image: '/categories/necklace.png',
   },
 ];
 
@@ -58,7 +58,7 @@ export default function CategoryCircles() {
           </Link>
         </div>
 
-        <ul className="grid grid-cols-2 gap-x-5 gap-y-7 sm:grid-cols-4 lg:grid-cols-7 lg:gap-x-4 lg:gap-y-6">
+        <ul className="grid grid-cols-2 gap-x-5 gap-y-7 sm:grid-cols-3 lg:grid-cols-6 lg:gap-x-4 lg:gap-y-6">
           {categories.map((category) => (
             <li key={category.label} className="flex justify-center">
               <Link

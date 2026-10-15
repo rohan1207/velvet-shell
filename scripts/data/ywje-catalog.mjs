@@ -472,7 +472,7 @@ export const FAMILIES = [
   family({
     slug: 'meadow-flower-necklace',
     name: 'Meadow Flower Necklace',
-    category: 'chains',
+    category: 'necklaces',
     collection: 'garden-path',
     badge: 'Floral',
     design: 'Flower',
@@ -484,7 +484,7 @@ export const FAMILIES = [
   family({
     slug: 'geometry-pendant',
     name: 'Geometry Pendant',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'serpentine-bar',
     badge: '',
     design: 'Geometric',
@@ -586,7 +586,7 @@ export const FAMILIES = [
   family({
     slug: 'high-heel-charm-necklace',
     name: 'High Heel Charm Necklace',
-    category: 'chains',
+    category: 'necklaces',
     collection: 'tea-garden',
     badge: 'Playful',
     design: 'High heel',
@@ -598,7 +598,7 @@ export const FAMILIES = [
   family({
     slug: 'lotus-chain-necklace',
     name: 'Lotus Chain Necklace',
-    category: 'chains',
+    category: 'necklaces',
     collection: 'lotus-whispers',
     badge: 'Lotus',
     design: 'Lotus flower',
@@ -612,7 +612,7 @@ export const FAMILIES = [
   family({
     slug: 'pine-cone-choker',
     name: 'Pine Cone Choker',
-    category: 'chokers',
+    category: 'necklaces',
     collection: 'tea-garden',
     badge: 'Nature',
     design: 'Pine cone',
@@ -624,7 +624,7 @@ export const FAMILIES = [
   family({
     slug: 'flower-shell-pearl-necklace',
     name: 'Flower Shell Pearl Necklace',
-    category: 'chains',
+    category: 'necklaces',
     collection: 'shell-shore',
     badge: 'Pearl',
     design: 'Flower shell pearl',
@@ -656,7 +656,7 @@ export const FAMILIES = [
   family({
     slug: 'clover-pearl-pendant',
     name: 'Clover Pearl Pendant',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'clover-lumen',
     badge: 'Clover',
     design: 'Clover',
@@ -742,7 +742,7 @@ export const FAMILIES = [
   family({
     slug: 'flower-branch-bird-pendant',
     name: 'Flower Branch Bird Pendant',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'birds-on-branch',
     badge: 'Nature',
     design: 'Flower branch bird',
@@ -874,7 +874,7 @@ export const FAMILIES = [
   family({
     slug: 'pearl-pendant-necklace',
     name: 'Pearl Pendant Necklace',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'nacre-line',
     badge: 'Pearl',
     design: 'Pearl',
@@ -894,7 +894,7 @@ export const FAMILIES = [
   family({
     slug: 'round-pearl-pendant',
     name: 'Round Pearl Pendant',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'nacre-line',
     badge: 'Pearl',
     design: 'Round pearl',
@@ -978,7 +978,7 @@ export const FAMILIES = [
   family({
     slug: 'daisy-series-pendant',
     name: 'Daisy Series Pendant',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'garden-path',
     badge: 'Daisy',
     design: 'Daisy flower',
@@ -1074,7 +1074,7 @@ export const FAMILIES = [
   family({
     slug: 'princess-cut-pendant',
     name: 'Princess Cut Pendant',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'crystal-berry',
     badge: 'Zircon',
     design: 'Zircon princess cut',
@@ -1134,7 +1134,7 @@ export const FAMILIES = [
   family({
     slug: 'daisy-pendant-necklace',
     name: 'Daisy Pendant Necklace',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'garden-path',
     badge: 'Daisy',
     design: 'Daisy',
@@ -1164,7 +1164,7 @@ export const FAMILIES = [
   family({
     slug: 'snowflake-pendant',
     name: 'Snowflake Pendant',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'frost-bloom',
     badge: 'Snowflake',
     design: 'Snowflake',
@@ -1214,7 +1214,7 @@ export const FAMILIES = [
   family({
     slug: 'strawberry-crystal-pendant',
     name: 'Strawberry Crystal Pendant',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'crystal-berry',
     badge: 'Crystal',
     design: 'Crystal',
@@ -1254,7 +1254,7 @@ export const FAMILIES = [
   family({
     slug: 'feather-dreamcatcher-pendant',
     name: 'Feather Dreamcatcher Pendant',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'feather-sky',
     badge: 'Feather',
     design: 'Feather dreamcatcher',
@@ -1294,7 +1294,7 @@ export const FAMILIES = [
   family({
     slug: 'honeybee-pendant',
     name: 'Honeybee Pendant',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'honey-atelier',
     badge: 'Bee',
     design: 'Honeybee',
@@ -1334,7 +1334,7 @@ export const FAMILIES = [
   family({
     slug: 'snowflake-pendant-alt',
     name: 'Snowflake Pendant Necklace',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'frost-bloom',
     badge: 'Snowflake',
     design: 'Snowflake',
@@ -1354,7 +1354,7 @@ export const FAMILIES = [
   family({
     slug: 'sweet-flower-pendant',
     name: 'Sweet Flower Pendant',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'garden-path',
     badge: 'Floral',
     design: 'Sweet flower',
@@ -1404,7 +1404,7 @@ export const FAMILIES = [
   family({
     slug: 'green-leaves-pendant',
     name: 'Green Leaves Pendant',
-    category: 'pendants',
+    category: 'necklaces',
     collection: 'leaf-whisper',
     badge: 'Leaf',
     design: 'Green leaves',
@@ -1444,7 +1444,7 @@ export const FAMILIES = [
   family({
     slug: 'shell-ear-clip-set',
     name: 'Shell Ear Clip Set',
-    category: 'sets',
+    category: 'earrings',
     collection: 'shell-shore',
     badge: 'Set',
     design: 'Shell',
@@ -1500,7 +1500,7 @@ export const FAMILIES = [
   family({
     slug: 'starry-mermaid-pearl-choker',
     name: 'Starry Mermaid Pearl Choker',
-    category: 'chokers',
+    category: 'necklaces',
     collection: 'nacre-line',
     badge: 'Pearl',
     design: 'Imitation pearl',

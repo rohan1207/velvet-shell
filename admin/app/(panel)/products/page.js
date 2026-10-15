@@ -32,6 +32,7 @@ function ProductsInner() {
   const [category, setCategory] = useState(searchParams.get('category') || '');
   const [collection, setCollection] = useState('');
   const [status, setStatus] = useState(searchParams.get('status') || '');
+  const [stock, setStock] = useState(searchParams.get('stock') || '');
   const [meta, setMeta] = useState({ categories: [], collections: [] });
   const [rows, setRows] = useState([]);
   const [source, setSource] = useState('');
@@ -79,8 +80,15 @@ function ProductsInner() {
     if (category) list = list.filter((p) => p.category === category);
     if (collection) list = list.filter((p) => p.collection === collection);
     if (status) list = list.filter((p) => p.status === status);
+    if (stock === 'low') {
+      list = list.filter((p) => !p.outOfStock && p.stock > 0 && p.stock <= 3);
+    } else if (stock === 'out') {
+      list = list.filter((p) => p.outOfStock || p.stock <= 0);
+    } else if (stock === 'in') {
+      list = list.filter((p) => !p.outOfStock && p.stock > 3);
+    }
     return list;
-  }, [rows, q, category, collection, status]);
+  }, [rows, q, category, collection, status, stock]);
 
   return (
     <div className="space-y-6">
@@ -88,7 +96,7 @@ function ProductsInner() {
         <div>
           <p className="font-label text-[10px] text-[#d4af64]">Catalogue</p>
           <h1 className="font-display mt-2 text-4xl">Products</h1>
-          <p className="mt-1 text-sm text-[#7a736c]">
+          <p className="font-num mt-1 text-sm text-[#7a736c]">
             {filtered.length} families
             {source ? ` · ${source}` : ''}
           </p>
@@ -149,6 +157,15 @@ function ProductsInner() {
             <option value="draft">Draft</option>
           </select>
         </label>
+        <label className="block">
+          <span className="text-xs text-[#7a736c]">Stock</span>
+          <select className="input mt-1" value={stock} onChange={(e) => setStock(e.target.value)}>
+            <option value="">All</option>
+            <option value="low">Low (≤ 3)</option>
+            <option value="out">Out of stock</option>
+            <option value="in">In stock</option>
+          </select>
+        </label>
       </div>
 
       <div className="table-wrap">
@@ -180,10 +197,10 @@ function ProductsInner() {
                     </span>
                   </Link>
                 </td>
-                <td className="px-4 py-3">{money(p.price)}</td>
+                <td className="font-num px-4 py-3">{money(p.price)}</td>
                 <td className="px-4 py-3">{labelCategory(p.category, meta.categories)}</td>
                 <td className="px-4 py-3">{labelCollection(p.collection, meta.collections)}</td>
-                <td className="px-4 py-3">{p.colors || '—'}</td>
+                <td className="font-num px-4 py-3">{p.colors || '—'}</td>
                 <td className="px-4 py-3">
                   <span
                     className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${
@@ -195,7 +212,7 @@ function ProductsInner() {
                     {p.status}
                   </span>
                 </td>
-                <td className="px-4 py-3">
+                <td className="font-num px-4 py-3">
                   {p.outOfStock || p.stock <= 0 ? (
                     <span className="text-[#5e062a]">Out</span>
                   ) : p.stock <= 3 ? (

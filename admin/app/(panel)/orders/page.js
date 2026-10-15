@@ -81,8 +81,8 @@ function OrdersInner() {
                   </div>
                   <div className="text-xs text-[#7a736c]">{o.email}</div>
                 </td>
-                <td className="px-4 py-3">{o.items?.length || 0}</td>
-                <td className="px-4 py-3">{money(o.total)}</td>
+                <td className="font-num px-4 py-3">{o.items?.length || 0}</td>
+                <td className="font-num px-4 py-3">{money(o.total)}</td>
                 <td className="px-4 py-3">
                   <span
                     className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${

@@ -9,18 +9,16 @@ import { useStore } from '@/context/StoreContext';
 import MegaMenu from './MegaMenu';
 
 const leftLinks = [
-  { href: '/shop?category=rings', label: 'Rings', match: 'rings' },
   { href: '/shop?category=earrings', label: 'Earrings', match: 'earrings' },
-  { href: '/shop?category=necklaces', label: 'Necklace', match: 'necklaces' },
-  { href: '/shop?category=pendants', label: 'Pendant', match: 'pendants' },
-  { href: '/shop?category=chains', label: 'Chain', match: 'chains' },
-  { href: '/shop?category=chokers', label: 'Choker', match: 'chokers' },
   { href: '/shop?category=bracelets', label: 'Bracelets', match: 'bracelets' },
+  { href: '/shop?category=necklaces', label: 'Necklaces', match: 'necklaces' },
+  { href: '/shop?category=rings', label: 'Rings', match: 'rings' },
+  { href: '/shop?category=cuffs', label: 'Brooches', match: 'cuffs' },
+  { href: '/shop?category=anklets', label: 'Anklets', match: 'anklets' },
+  { href: '/shop?category=sets', label: 'Sets', match: 'sets' },
 ];
 
 const rightLinks = [
-  { href: '/shop?category=anklets', label: 'Anklet', match: 'anklets' },
-  { href: '/shop?category=sets', label: 'Sets', match: 'sets' },
   { href: '/gifting', label: 'Gifting', match: 'gifting', mega: 'gifting' },
   { href: '/shop', label: 'Shop', match: 'shop', mega: 'shop' },
   { href: '/about', label: 'Brand', match: 'brand', mega: 'brand' },
