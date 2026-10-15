@@ -107,6 +107,16 @@ export default function ProductCard({
     variants[0]?.product ||
     product;
 
+  const primaryImage = active.image || '';
+  const hoverImage = useMemo(() => {
+    const gallery = Array.isArray(active.gallery) ? active.gallery.filter(Boolean) : [];
+    const candidates = [
+      active.hoverImage,
+      ...gallery,
+    ].filter(Boolean);
+    return candidates.find((src) => src !== primaryImage) || null;
+  }, [active.gallery, active.hoverImage, primaryImage]);
+
   const wished = wishlist.includes(active.slug);
   const href = `/shop/${active.slug}`;
   const title = displayName(product.name);
@@ -133,13 +143,27 @@ export default function ProductCard({
     >
       <div className="relative isolate aspect-square overflow-hidden rounded-2xl bg-white md:rounded-[1.25rem]">
         <Image
-          key={active.image}
-          src={active.image}
+          key={`hero-${primaryImage}`}
+          src={primaryImage}
           alt={active.name}
           fill
           sizes={sizes}
-          className="pointer-events-none object-contain object-center p-5 transition-transform duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] [@media(hover:hover)]:group-hover:scale-[1.03]"
+          className={`pointer-events-none object-contain object-center p-5 transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+            hoverImage
+              ? '[@media(hover:hover)]:group-hover:opacity-0'
+              : '[@media(hover:hover)]:group-hover:scale-[1.03]'
+          }`}
         />
+        {hoverImage ? (
+          <Image
+            key={`hover-${hoverImage}`}
+            src={hoverImage}
+            alt=""
+            fill
+            sizes={sizes}
+            className="pointer-events-none object-contain object-center p-5 opacity-0 transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] [@media(hover:hover)]:group-hover:scale-[1.03] [@media(hover:hover)]:group-hover:opacity-100"
+          />
+        ) : null}
 
         <Link href={href} className="absolute inset-0 z-10" aria-label={`View ${active.name}`} />
 

@@ -8,13 +8,37 @@ import { shopHero as defaultShopHero } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
 import { ProductGridSkeleton } from '@/components/ProductCardSkeleton';
 import CategoryHeroSlider from '@/components/CategoryHeroSlider';
+import ShopFilters, {
+  colorKey,
+  emptyFilterState,
+  filtersEqual,
+  normalizeMaterialTags,
+} from '@/components/ShopFilters';
 
-function buildShopHref({ category = 'all', collection = 'all' } = {}) {
+function buildShopHref({ category = 'all', collection = 'all', q = '' } = {}) {
   const next = new URLSearchParams();
   if (collection !== 'all') next.set('collection', collection);
   if (category !== 'all') next.set('category', category);
-  const q = next.toString();
-  return q ? `/shop?${q}` : '/shop';
+  if (q.trim()) next.set('q', q.trim());
+  const query = next.toString();
+  return query ? `/shop?${query}` : '/shop';
+}
+
+function IconSearch({ className = 'h-4 w-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <circle cx="11" cy="11" r="6.25" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M16.2 16.2L20 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconFilters({ className = 'h-4 w-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <path d="M4 7h16M7 12h10M10 17h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
 }
 
 export default function ShopExperience({
@@ -27,19 +51,24 @@ export default function ShopExperience({
 } = {}) {
   const params = useSearchParams();
   const router = useRouter();
-  const [collection, setCollection] = useState(params.get('collection') || 'all');
   const [category, setCategory] = useState(params.get('category') || 'all');
   const [sort, setSort] = useState('featured');
+  const [query, setQuery] = useState(params.get('q') || '');
   const [products, setProducts] = useState(initialProducts);
   const [collections, setCollections] = useState(initialCollections);
   const [categories, setCategories] = useState(initialCategories);
   const [colorFamilies, setColorFamilies] = useState(initialColorFamilies);
   const [source, setSource] = useState(catalogSource);
   const [catalogLoading, setCatalogLoading] = useState(!initialProducts?.length);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  const [draft, setDraft] = useState(() => emptyFilterState());
+  const [applied, setApplied] = useState(() => emptyFilterState());
 
   useEffect(() => {
-    setCollection(params.get('collection') || 'all');
     setCategory(params.get('category') || 'all');
+    setQuery(params.get('q') || '');
   }, [params]);
 
   useEffect(() => {
@@ -51,7 +80,6 @@ export default function ShopExperience({
     if (initialProducts?.length) setCatalogLoading(false);
   }, [initialProducts, initialCollections, initialCategories, initialColorFamilies, catalogSource]);
 
-  // Client refresh so admin edits appear without a full rebuild
   useEffect(() => {
     let cancelled = false;
     if (!initialProducts?.length) setCatalogLoading(true);
@@ -95,22 +123,171 @@ export default function ShopExperience({
       }
     : shopHero;
 
+  /** Products in the active category (basis for filter options). */
+  const categoryProducts = useMemo(() => {
+    if (category === 'all') return products;
+    return products.filter((p) => p.category === category);
+  }, [products, category]);
+
+  const priceBounds = useMemo(() => {
+    const prices = categoryProducts.map((p) => Number(p.price) || 0).filter((n) => n > 0);
+    if (!prices.length) return { min: 0, max: 10000 };
+    const min = Math.floor(Math.min(...prices) / 50) * 50;
+    const max = Math.ceil(Math.max(...prices) / 50) * 50;
+    return { min, max: Math.max(max, min + 50) };
+  }, [categoryProducts]);
+
+  const filterOptions = useMemo(() => {
+    const collectionCounts = new Map();
+    const materialCounts = new Map();
+    const colorCounts = new Map();
+    const colorSwatches = new Map();
+
+    for (const p of categoryProducts) {
+      if (p.collection) {
+        collectionCounts.set(p.collection, (collectionCounts.get(p.collection) || 0) + 1);
+      }
+      const mats = [
+        ...normalizeMaterialTags(p.metal?.[0] || p.material || ''),
+        ...(Array.isArray(p.metal)
+          ? p.metal.flatMap((m) => normalizeMaterialTags(m))
+          : []),
+      ];
+      for (const tag of [...new Set(mats)]) {
+        materialCounts.set(tag, (materialCounts.get(tag) || 0) + 1);
+      }
+      const ck = colorKey(p);
+      colorCounts.set(ck, (colorCounts.get(ck) || 0) + 1);
+      if (p.colorSwatch && !colorSwatches.has(ck)) colorSwatches.set(ck, p.colorSwatch);
+    }
+
+    const collectionMeta = new Map(collections.map((c) => [c.slug, c]));
+    const collectionOptions = [...collectionCounts.entries()]
+      .map(([slug, count]) => ({
+        slug,
+        name: collectionMeta.get(slug)?.name || slug.replace(/-/g, ' '),
+        count,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    const materials = [...materialCounts.entries()]
+      .map(([key, count]) => ({ key, count }))
+      .sort((a, b) => a.key.localeCompare(b.key));
+
+    const colors = [...colorCounts.entries()]
+      .map(([key, count]) => ({
+        key,
+        count,
+        swatch: colorSwatches.get(key) || '#C5C5C5',
+      }))
+      .sort((a, b) => a.key.localeCompare(b.key));
+
+    const { min, max } = priceBounds;
+    const mid = Math.round((min + max) / 2 / 50) * 50;
+    const pricePresets = [
+      { label: 'All', min, max },
+      { label: `Under ${Math.round((min + mid) / 2 / 100) * 100 || min + 500}`, min, max: Math.max(min + 500, mid) },
+      { label: 'Mid range', min: Math.max(min, mid - 500), max: Math.min(max, mid + 1000) },
+      { label: 'Premium', min: mid, max },
+    ];
+
+    return { collections: collectionOptions, materials, colors, pricePresets };
+  }, [categoryProducts, collections, priceBounds]);
+
+  // When category / price bounds change, reset filters to sensible defaults
+  useEffect(() => {
+    const next = emptyFilterState(priceBounds);
+    const urlCollection = params.get('collection');
+    if (
+      urlCollection &&
+      urlCollection !== 'all' &&
+      filterOptions.collections.some((c) => c.slug === urlCollection)
+    ) {
+      next.collections = [urlCollection];
+    }
+    setDraft(next);
+    setApplied(next);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, priceBounds.min, priceBounds.max, filterOptions.collections.map((c) => c.slug).join(',')]);
+
+  const dirty = !filtersEqual(draft, applied);
+  const hasActive = useMemo(() => {
+    const base = emptyFilterState(priceBounds);
+    return !filtersEqual(applied, base);
+  }, [applied, priceBounds]);
+
   const list = useMemo(() => {
-    let next = products.filter((item) => {
-      const colOk = collection === 'all' || item.collection === collection;
-      const catOk = category === 'all' || item.category === category;
-      return colOk && catOk;
+    const q = query.trim().toLowerCase();
+    let next = categoryProducts.filter((item) => {
+      if (applied.collections.length && !applied.collections.includes(item.collection)) {
+        return false;
+      }
+      if (applied.colors.length && !applied.colors.includes(colorKey(item))) {
+        return false;
+      }
+      if (applied.materials.length) {
+        const tags = [
+          ...normalizeMaterialTags(item.metal?.[0] || item.material || ''),
+          ...(Array.isArray(item.metal)
+            ? item.metal.flatMap((m) => normalizeMaterialTags(m))
+            : []),
+        ];
+        if (!applied.materials.some((m) => tags.includes(m))) return false;
+      }
+      const price = Number(item.price) || 0;
+      if (price < applied.priceMin || price > applied.priceMax) return false;
+      if (q) {
+        const hay = [item.name, item.description, item.collection, item.category, item.metal?.join(' ')]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
     });
+
     if (sort === 'price-asc') next = [...next].sort((a, b) => a.price - b.price);
     if (sort === 'price-desc') next = [...next].sort((a, b) => b.price - a.price);
     if (sort === 'name') next = [...next].sort((a, b) => a.name.localeCompare(b.name));
     return next;
-  }, [products, collection, category, sort]);
+  }, [categoryProducts, applied, query, sort]);
 
-  const updateFilters = (nextCategory, nextCollection) => {
+  const updateCategory = (nextCategory) => {
     setCategory(nextCategory);
-    setCollection(nextCollection);
-    router.replace(buildShopHref({ category: nextCategory, collection: nextCollection }), { scroll: false });
+    setMobileFiltersOpen(false);
+    router.replace(buildShopHref({ category: nextCategory, q: query }), { scroll: false });
+  };
+
+  const applyFilters = () => {
+    setApplied({ ...draft, collections: [...draft.collections], materials: [...draft.materials], colors: [...draft.colors] });
+    const primaryCollection =
+      draft.collections.length === 1 ? draft.collections[0] : 'all';
+    router.replace(
+      buildShopHref({ category, collection: primaryCollection, q: query }),
+      { scroll: false },
+    );
+    setMobileFiltersOpen(false);
+  };
+
+  const clearFilters = () => {
+    const next = emptyFilterState(priceBounds);
+    setDraft(next);
+    setApplied(next);
+    router.replace(buildShopHref({ category, q: query }), { scroll: false });
+    setMobileFiltersOpen(false);
+  };
+
+  const onSearchChange = (value) => {
+    setQuery(value);
+  };
+
+  const commitSearch = () => {
+    const primaryCollection =
+      applied.collections.length === 1 ? applied.collections[0] : 'all';
+    router.replace(
+      buildShopHref({ category, collection: primaryCollection, q: query }),
+      { scroll: false },
+    );
   };
 
   return (
@@ -121,9 +298,10 @@ export default function ShopExperience({
         label={`${hero.name} banners`}
       />
 
-      <section id="shop-edit" className="scroll-mt-4 bg-white pb-24 pt-14 md:pt-20">
+      <section id="shop-edit" className="scroll-mt-4 bg-white pb-24 pt-12 md:pt-16">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-          <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+          {/* Title + category pills */}
+          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="font-label text-gold">Shop now</p>
               <h2 className="font-display mt-3 text-4xl text-ink md:text-5xl">
@@ -136,93 +314,174 @@ export default function ShopExperience({
               </p>
             </div>
 
-            <div className="flex w-full max-w-xl flex-wrap gap-1.5 md:justify-end">
-              <FilterPill
-                href={buildShopHref({ category: 'all', collection })}
-                active={category === 'all'}
-                onNavigate={() => updateFilters('all', collection)}
-              >
+            <div className="flex w-full max-w-2xl flex-wrap gap-1.5 md:justify-end">
+              <CategoryPill active={category === 'all'} onClick={() => updateCategory('all')}>
                 All
-              </FilterPill>
+              </CategoryPill>
               {categories.map((item) => (
-                <FilterPill
+                <CategoryPill
                   key={item.slug}
-                  href={buildShopHref({ category: item.slug, collection })}
                   active={category === item.slug}
-                  onNavigate={() => updateFilters(item.slug, collection)}
+                  onClick={() => updateCategory(item.slug)}
                 >
                   {item.name}
-                </FilterPill>
+                </CategoryPill>
               ))}
             </div>
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap gap-1.5">
-              <FilterPill
-                href={buildShopHref({ category, collection: 'all' })}
-                active={collection === 'all'}
-                onNavigate={() => updateFilters(category, 'all')}
-              >
-                All collections
-              </FilterPill>
-              {collections.map((item) => (
-                <FilterPill
-                  key={item.slug}
-                  href={buildShopHref({ category, collection: item.slug })}
-                  active={collection === item.slug}
-                  onNavigate={() => updateFilters(category, item.slug)}
+          {/* Sticky strip: filters · search · count — sits under fixed site header */}
+          <div
+            className="sticky z-40 mt-8 border-b border-ink/8 bg-white/95 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-white/90"
+            style={{ top: 'calc(var(--site-promo-h) + var(--site-nav-h))' }}
+          >
+            <div className="grid grid-cols-1 items-center gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_minmax(0,1fr)] md:gap-4">
+              <div className="flex flex-wrap items-center gap-2 md:justify-start">
+                <button
+                  type="button"
+                  onClick={() => setSidebarOpen(true)}
+                  className={`hidden items-center gap-2 rounded-full border px-3.5 py-2 font-label text-[10px] tracking-[0.14em] uppercase transition-all lg:inline-flex ${
+                    sidebarOpen
+                      ? 'pointer-events-none border-transparent text-ink/30'
+                      : 'border-ink/12 text-ink/75 hover:border-burgundy/30 hover:text-burgundy'
+                  }`}
                 >
-                  {item.name}
-                </FilterPill>
-              ))}
-            </div>
-            <div className="flex items-center gap-4">
-              <p className="font-label text-[10px] text-ink/80">
-                {catalogLoading
-                  ? 'Loading…'
-                  : `${list.length} ${list.length === 1 ? 'piece' : 'pieces'}`}
-              </p>
-              <label className="flex items-center gap-3 font-label text-[10px] text-ink/80">
-                <span className="sr-only">Sort</span>
-                <select
-                  value={sort}
-                  onChange={(event) => setSort(event.target.value)}
-                  className="rounded-full border border-ink/10 bg-ivory px-3 py-2 text-[10px] tracking-[0.14em] text-ink/85 uppercase outline-none"
+                  <IconFilters />
+                  Show filters
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMobileFiltersOpen(true)}
+                  className="inline-flex items-center gap-2 rounded-full border border-ink/12 px-3.5 py-2 font-label text-[10px] tracking-[0.14em] text-ink/75 uppercase lg:hidden"
                 >
-                  <option value="featured">Featured</option>
-                  <option value="price-asc">Price, rising</option>
-                  <option value="price-desc">Price, descending</option>
-                  <option value="name">Name</option>
-                </select>
-              </label>
-            </div>
-          </div>
+                  <IconFilters />
+                  Filters
+                  {hasActive ? (
+                    <span className="ml-0.5 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-burgundy px-1 text-[9px] text-ivory">
+                      •
+                    </span>
+                  ) : null}
+                </button>
+                {hasActive ? (
+                  <button
+                    type="button"
+                    onClick={clearFilters}
+                    className="rounded-full border border-ink/10 px-3.5 py-2 font-label text-[10px] tracking-[0.14em] text-ink/65 uppercase transition-colors hover:border-burgundy/25 hover:text-burgundy"
+                  >
+                    Clear
+                  </button>
+                ) : null}
+                {dirty ? (
+                  <button
+                    type="button"
+                    onClick={applyFilters}
+                    className="bg-velvet-texture rounded-full px-3.5 py-2 font-label text-[10px] tracking-[0.14em] text-ivory uppercase"
+                  >
+                    Apply
+                  </button>
+                ) : null}
+              </div>
 
-          {catalogLoading ? (
-            <div className="mt-12">
-              <ProductGridSkeleton count={8} />
-            </div>
-          ) : list.length === 0 ? (
-            <div className="mt-20 text-center">
-              <p className="font-display text-3xl text-ink">Nothing in this edit yet.</p>
-              <Link href="/shop" className="mt-4 inline-block font-label text-[11px] text-burgundy">
-                View the full collection →
-              </Link>
-            </div>
-          ) : (
-            <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12 lg:grid-cols-4">
-              {list.map((product, index) => (
-                <ProductCard
-                  key={product.slug}
-                  product={product}
-                  index={index}
-                  colorFamilies={colorFamilies}
-                  catalogProducts={products}
+              <label className="relative mx-auto block w-full max-w-md md:mx-0 md:max-w-none">
+                <span className="sr-only">Search products</span>
+                <span className="pointer-events-none absolute inset-y-0 left-3.5 flex items-center text-ink/35">
+                  <IconSearch />
+                </span>
+                <input
+                  type="search"
+                  value={query}
+                  onChange={(e) => onSearchChange(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') commitSearch();
+                  }}
+                  placeholder="Search this edit — lotus, bee, silver…"
+                  className="w-full rounded-full border border-ink/10 bg-ivory/80 py-2.5 pr-4 pl-10 text-sm text-ink outline-none transition-[border-color,box-shadow] placeholder:text-ink/35 focus:border-burgundy/30 focus:bg-white focus:shadow-[0_8px_24px_rgba(94,6,42,0.06)]"
                 />
-              ))}
+              </label>
+
+              <div className="flex items-center gap-3 md:justify-end">
+                <p className="font-label text-[10px] tracking-[0.12em] text-ink/70 uppercase">
+                  {catalogLoading
+                    ? 'Loading…'
+                    : `${list.length} ${list.length === 1 ? 'piece' : 'pieces'}`}
+                </p>
+                <label className="flex items-center gap-2 font-label text-[10px] tracking-[0.12em] text-ink/70 uppercase">
+                  <span className="sr-only">Sort</span>
+                  <select
+                    value={sort}
+                    onChange={(event) => setSort(event.target.value)}
+                    className="rounded-full border border-ink/10 bg-ivory px-3 py-2 text-[10px] tracking-[0.14em] text-ink/85 uppercase outline-none"
+                  >
+                    <option value="featured">Featured</option>
+                    <option value="price-asc">Price, rising</option>
+                    <option value="price-desc">Price, descending</option>
+                    <option value="name">Name</option>
+                  </select>
+                </label>
+              </div>
             </div>
-          )}
+          </div>
+
+          {/* Sidebar + grid — stretch so sticky sidebar has a tall containing block */}
+          <div className="mt-6 flex items-stretch gap-6 xl:gap-8">
+            <ShopFilters
+              draft={draft}
+              onDraftChange={setDraft}
+              options={filterOptions}
+              priceBounds={priceBounds}
+              onApply={applyFilters}
+              onClear={clearFilters}
+              dirty={dirty}
+              hasActive={hasActive}
+              collapsed={!sidebarOpen}
+              onToggleCollapsed={() => setSidebarOpen(false)}
+              mobileOpen={mobileFiltersOpen}
+              onCloseMobile={() => setMobileFiltersOpen(false)}
+            />
+
+            <div className="min-w-0 flex-1 self-start">
+              {catalogLoading ? (
+                <ProductGridSkeleton
+                  count={sidebarOpen ? 6 : 8}
+                  className={
+                    sidebarOpen
+                      ? 'lg:grid-cols-3'
+                      : 'lg:grid-cols-4'
+                  }
+                />
+              ) : list.length === 0 ? (
+                <div className="rounded-[1.25rem] border border-ink/8 bg-ivory/40 px-6 py-20 text-center">
+                  <p className="font-display text-3xl text-ink">Nothing matches this edit.</p>
+                  <p className="mx-auto mt-3 max-w-sm text-sm font-light text-ink/70">
+                    Try clearing filters or searching a different note from the garden.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={clearFilters}
+                    className="bg-velvet-texture mt-6 inline-flex rounded-full px-5 py-2.5 font-label text-[11px] text-ivory"
+                  >
+                    Clear
+                  </button>
+                </div>
+              ) : (
+                <div
+                  className={`grid grid-cols-2 gap-x-4 gap-y-10 transition-[grid-template-columns] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:gap-x-6 md:gap-y-12 ${
+                    sidebarOpen ? 'lg:grid-cols-3' : 'lg:grid-cols-4'
+                  }`}
+                >
+                  {list.map((product, index) => (
+                    <ProductCard
+                      key={product.slug}
+                      product={product}
+                      index={index}
+                      colorFamilies={colorFamilies}
+                      catalogProducts={products}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
 
           <p className="sr-only" data-catalog-source={source}>
             Catalog source {source}
@@ -231,7 +490,7 @@ export default function ShopExperience({
           <PairUpWith
             categories={categories}
             currentCategory={category}
-            onSelect={(slug) => updateFilters(slug, 'all')}
+            onSelect={(slug) => updateCategory(slug)}
           />
         </div>
       </section>
@@ -260,7 +519,7 @@ function PairUpWith({ categories = [], currentCategory, onSelect }) {
         {others.map((item) => (
           <Link
             key={item.slug}
-            href={buildShopHref({ category: item.slug, collection: 'all' })}
+            href={buildShopHref({ category: item.slug })}
             onClick={() => onSelect(item.slug)}
             className="group relative aspect-[4/5] w-[min(68vw,15.5rem)] shrink-0 snap-start overflow-hidden rounded-[1.25rem] md:w-[17.5rem]"
           >
@@ -284,15 +543,11 @@ function PairUpWith({ categories = [], currentCategory, onSelect }) {
   );
 }
 
-function FilterPill({ href, active, onNavigate, children }) {
+function CategoryPill({ active, onClick, children }) {
   return (
-    <Link
-      href={href}
-      scroll={false}
-      onClick={(event) => {
-        event.preventDefault();
-        onNavigate();
-      }}
+    <button
+      type="button"
+      onClick={onClick}
       className={`rounded-full px-4 py-2 font-label text-[10px] tracking-[0.14em] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         active
           ? 'bg-velvet-texture text-ivory'
@@ -301,6 +556,6 @@ function FilterPill({ href, active, onNavigate, children }) {
       aria-current={active ? 'page' : undefined}
     >
       {children}
-    </Link>
+    </button>
   );
 }

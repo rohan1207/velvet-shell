@@ -25,11 +25,6 @@ const categories = [
     image: '/categories/ring.png',
   },
   {
-    label: 'Brooches',
-    href: '/shop?category=cuffs',
-    image: '/categories/ring.png',
-  },
-  {
     label: 'Anklets',
     href: '/shop?category=anklets',
     image: '/categories/anklet.png',
