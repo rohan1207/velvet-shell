@@ -269,10 +269,33 @@ img {
   animation-delay: 0.7s;
 }
 
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background-image: linear-gradient(
+    110deg,
+    rgba(235, 227, 218, 0.55) 0%,
+    rgba(235, 227, 218, 0.55) 35%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(235, 227, 218, 0.55) 65%,
+    rgba(235, 227, 218, 0.55) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.35s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .shop-dot-ping,
-  .shop-dot-ping-delay {
+  .shop-dot-ping-delay,
+  .skeleton-shimmer {
     animation: none;
   }
 

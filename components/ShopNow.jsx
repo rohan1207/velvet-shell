@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { categories as fallbackCategories } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
+import { ProductGridSkeleton } from '@/components/ProductCardSkeleton';
 
 export default function ShopNow() {
   const [activeTab, setActiveTab] = useState('all');
@@ -12,19 +13,25 @@ export default function ShopNow() {
   const [categories, setCategories] = useState(fallbackCategories);
   const [colorFamilies, setColorFamilies] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
     fetch('/api/catalog')
       .then((r) => r.json())
       .then((d) => {
-        if (cancelled || !d.products?.length) return;
-        setProducts(d.products);
-        setAllProducts(d.allProducts || d.products);
-        setColorFamilies(d.colorFamilies || []);
-        if (d.categories?.length) setCategories(d.categories);
+        if (cancelled) return;
+        if (d.products?.length) {
+          setProducts(d.products);
+          setAllProducts(d.allProducts || d.products);
+          setColorFamilies(d.colorFamilies || []);
+          if (d.categories?.length) setCategories(d.categories);
+        }
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
     return () => {
       cancelled = true;
     };
@@ -71,28 +78,32 @@ export default function ShopNow() {
         </div>
 
         <div className="relative mt-8 min-h-[28rem]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10 lg:grid-cols-4"
-            >
-              {filtered.map((product, index) => (
-                <ProductCard
-                  key={product.slug}
-                  product={product}
-                  index={index}
-                  colorFamilies={colorFamilies}
-                  catalogProducts={allProducts}
-                />
-              ))}
-            </motion.div>
-          </AnimatePresence>
+          {loading ? (
+            <ProductGridSkeleton count={8} className="gap-y-8 md:gap-y-10" />
+          ) : (
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10 lg:grid-cols-4"
+              >
+                {filtered.map((product, index) => (
+                  <ProductCard
+                    key={product.slug}
+                    product={product}
+                    index={index}
+                    colorFamilies={colorFamilies}
+                    catalogProducts={allProducts}
+                  />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          )}
 
-          {filtered.length === 0 && (
+          {!loading && filtered.length === 0 && (
             <p className="py-20 text-center text-sm font-light text-ink/80">
               Nothing in this edit just now.
             </p>

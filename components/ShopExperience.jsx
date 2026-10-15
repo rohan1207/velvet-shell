@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { shopHero as defaultShopHero } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
+import { ProductGridSkeleton } from '@/components/ProductCardSkeleton';
 import CategoryHeroSlider from '@/components/CategoryHeroSlider';
 
 function buildShopHref({ category = 'all', collection = 'all' } = {}) {
@@ -34,6 +35,7 @@ export default function ShopExperience({
   const [categories, setCategories] = useState(initialCategories);
   const [colorFamilies, setColorFamilies] = useState(initialColorFamilies);
   const [source, setSource] = useState(catalogSource);
+  const [catalogLoading, setCatalogLoading] = useState(!initialProducts?.length);
 
   useEffect(() => {
     setCollection(params.get('collection') || 'all');
@@ -46,26 +48,33 @@ export default function ShopExperience({
     setCategories(initialCategories);
     setColorFamilies(initialColorFamilies);
     setSource(catalogSource);
+    if (initialProducts?.length) setCatalogLoading(false);
   }, [initialProducts, initialCollections, initialCategories, initialColorFamilies, catalogSource]);
 
   // Client refresh so admin edits appear without a full rebuild
   useEffect(() => {
     let cancelled = false;
+    if (!initialProducts?.length) setCatalogLoading(true);
     fetch('/api/catalog')
       .then((r) => r.json())
       .then((d) => {
-        if (cancelled || !d.products?.length) return;
-        setProducts(d.products);
-        if (d.collections?.length) setCollections(d.collections);
-        if (d.categories?.length) setCategories(d.categories);
-        if (d.colorFamilies) setColorFamilies(d.colorFamilies);
-        setSource(d.source || 'supabase');
+        if (cancelled) return;
+        if (d.products?.length) {
+          setProducts(d.products);
+          if (d.collections?.length) setCollections(d.collections);
+          if (d.categories?.length) setCategories(d.categories);
+          if (d.colorFamilies) setColorFamilies(d.colorFamilies);
+          setSource(d.source || 'supabase');
+        }
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setCatalogLoading(false);
+      });
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [initialProducts?.length]);
 
   const shopHero = shopHeroData || defaultShopHero;
   const activeCategory = categories.find((item) => item.slug === category) ?? null;
@@ -170,7 +179,9 @@ export default function ShopExperience({
             </div>
             <div className="flex items-center gap-4">
               <p className="font-label text-[10px] text-ink/80">
-                {list.length} {list.length === 1 ? 'piece' : 'pieces'}
+                {catalogLoading
+                  ? 'Loading…'
+                  : `${list.length} ${list.length === 1 ? 'piece' : 'pieces'}`}
               </p>
               <label className="flex items-center gap-3 font-label text-[10px] text-ink/80">
                 <span className="sr-only">Sort</span>
@@ -188,7 +199,11 @@ export default function ShopExperience({
             </div>
           </div>
 
-          {list.length === 0 ? (
+          {catalogLoading ? (
+            <div className="mt-12">
+              <ProductGridSkeleton count={8} />
+            </div>
+          ) : list.length === 0 ? (
             <div className="mt-20 text-center">
               <p className="font-display text-3xl text-ink">Nothing in this edit yet.</p>
               <Link href="/shop" className="mt-4 inline-block font-label text-[11px] text-burgundy">

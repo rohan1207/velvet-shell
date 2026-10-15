@@ -2,12 +2,14 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import PinnedProductStrip from '@/components/PinnedProductStrip';
+import { ProductStripSkeleton } from '@/components/ProductCardSkeleton';
 
 export default function NewArrivals() {
   const [products, setProducts] = useState([]);
   const [colorFamilies, setColorFamilies] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [curation, setCuration] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -24,7 +26,10 @@ export default function NewArrivals() {
         }
         if (c.curation) setCuration(c.curation);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
     return () => {
       cancelled = true;
     };
@@ -44,6 +49,18 @@ export default function NewArrivals() {
     }
     return chosen.slice(0, 12);
   }, [products, curation]);
+
+  if (loading) {
+    return (
+      <ProductStripSkeleton
+        count={4}
+        eyebrow="Seasonal"
+        title="Festive Edit"
+        line="Preparing this season’s selection…"
+        bgClass="bg-pearl"
+      />
+    );
+  }
 
   if (!picks.length) return null;
 
