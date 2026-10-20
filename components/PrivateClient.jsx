@@ -53,8 +53,8 @@ export default function PrivateClient() {
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
-            <div className="relative min-h-[320px] overflow-hidden bg-cream sm:min-h-[480px] lg:min-h-full">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:col-span-7">
+            <div className="relative min-h-[220px] overflow-hidden rounded-xl bg-cream sm:min-h-[480px] sm:rounded-none lg:min-h-full">
               <Image
                 src="/images/salon-viewing.png"
                 alt="Private salon prepared for a jewelry viewing"

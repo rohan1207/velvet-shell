@@ -8,6 +8,7 @@ import { collectionName as dummyCollectionName } from '@/lib/products';
 import { money } from '@/lib/format';
 import { useStore } from '@/context/StoreContext';
 import ProductCard from './ProductCard';
+import { ProductPageNotes } from './ProductNotes';
 
 function labelCollection(slug, collections = []) {
   return collections.find((c) => c.slug === slug)?.name || dummyCollectionName(slug) || slug;
@@ -93,8 +94,8 @@ export default function ProductExperience({
     <div className="bg-ivory pt-site-chrome">
       <div className="mx-auto grid max-w-[1600px] gap-10 px-5 pt-6 pb-24 md:px-10 md:pt-8 lg:grid-cols-12 lg:gap-16">
         <div className="order-2 lg:sticky lg:top-[calc(var(--site-promo-h)+var(--site-nav-h)+1rem)] lg:order-1 lg:col-span-7 lg:self-start">
-          <div className="flex h-[min(100svh-var(--site-promo-h)-var(--site-nav-h)-3rem,920px)] gap-2.5 md:gap-3">
-            <div className="flex w-14 shrink-0 flex-col gap-2.5 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] md:w-16 lg:w-[4.5rem] [&::-webkit-scrollbar]:hidden">
+          <div className="flex h-[min(62svh,28rem)] gap-2 md:h-[min(100svh-var(--site-promo-h)-var(--site-nav-h)-3rem,920px)] md:gap-3">
+            <div className="flex w-12 shrink-0 flex-col gap-2 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] md:w-16 md:gap-2.5 lg:w-[4.5rem] [&::-webkit-scrollbar]:hidden">
               {gallery.map((src, index) => (
                 <button
                   key={`${src}-${index}`}
@@ -128,7 +129,9 @@ export default function ProductExperience({
           <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
             {labelCollection(activeProduct.collection, collections)}
           </p>
-          <h1 className="font-display mt-3 text-5xl md:text-6xl">{title}</h1>
+          <h1 className="font-display mt-3 text-3xl leading-[1.08] tracking-[-0.03em] md:text-6xl">
+            {title}
+          </h1>
           <p className="font-num mt-4 text-lg text-ink/90">{money(activeProduct.price)}</p>
           <p className="mt-8 max-w-md text-base leading-relaxed text-stone">
             {activeProduct.description}
@@ -200,11 +203,11 @@ export default function ProductExperience({
             </div>
           </div>
 
-          {metalOptions.length > 0 && (
+          {(metalOptions.length > 0 || metal) && (
             <div className="mt-8">
               <p className="text-[10px] tracking-[0.28em] uppercase">Finish</p>
               <div className="mt-3 flex flex-wrap gap-2">
-                {metalOptions.map((option) => (
+                {(metalOptions.length ? metalOptions : [metal].filter(Boolean)).map((option) => (
                   <button
                     key={option}
                     type="button"
@@ -217,6 +220,11 @@ export default function ProductExperience({
                   </button>
                 ))}
               </div>
+              {colorOptions.length > 1 ? (
+                <p className="mt-2 text-xs font-light text-ink/55">
+                  Finish follows the selected colour — Silver is Sterling Silver; Gold is 18K Gold Plated.
+                </p>
+              ) : null}
             </div>
           )}
 
@@ -256,6 +264,8 @@ export default function ProductExperience({
             </p>
           )}
 
+          <ProductPageNotes category={activeProduct.category} />
+
           <div className="mt-12 divide-y divide-cream border-y border-cream">
             {[
               ['story', 'The piece', storyCopy],
@@ -286,7 +296,7 @@ export default function ProductExperience({
             The shop
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-3 gap-y-7 md:gap-x-6 md:gap-y-12 lg:grid-cols-4">
           {related.map((item, index) => (
             <ProductCard key={item.slug} product={item} index={index} />
           ))}

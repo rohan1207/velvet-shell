@@ -8,24 +8,20 @@ import Footer from './Footer';
 import CartDrawer from './CartDrawer';
 import QuickViewDrawer from './QuickViewDrawer';
 import SearchModal from './SearchModal';
-import MobileBlock from './MobileBlock';
 
 export default function Providers({ children }) {
   return (
     <StoreProvider>
-      <MobileBlock />
-      <div className="max-md:hidden">
-        <SmoothScroll>
-          <Suspense fallback={null}>
-            <SiteHeader />
-          </Suspense>
-          <CartDrawer />
-          <QuickViewDrawer />
-          <SearchModal />
-          <main className="relative w-full overflow-x-clip">{children}</main>
-          <Footer />
-        </SmoothScroll>
-      </div>
+      <SmoothScroll>
+        <Suspense fallback={null}>
+          <SiteHeader />
+        </Suspense>
+        <CartDrawer />
+        <QuickViewDrawer />
+        <SearchModal />
+        <main className="relative w-full overflow-x-clip">{children}</main>
+        <Footer />
+      </SmoothScroll>
     </StoreProvider>
   );
 }

@@ -19,7 +19,7 @@ export default function WishlistPage() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="font-label text-gold">Wishlist</p>
-            <h1 className="font-display mt-4 text-5xl md:text-7xl">Saved</h1>
+            <h1 className="font-display mt-4 text-4xl tracking-[-0.03em] md:text-7xl">Saved</h1>
             {saved.length > 0 && (
               <p className="mt-3 text-sm font-light text-ink/85">
                 {saved.length} {saved.length === 1 ? 'piece' : 'pieces'}

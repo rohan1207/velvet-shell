@@ -8,7 +8,7 @@ export default function ContactPage() {
       <div className="mx-auto grid max-w-[1600px] gap-16 px-5 md:grid-cols-2 md:px-10">
         <div>
           <p className="text-[11px] tracking-[0.28em] text-gold uppercase">Contact</p>
-          <h1 className="font-display mt-4 text-5xl md:text-7xl">Write to the house.</h1>
+          <h1 className="font-display mt-4 text-4xl tracking-[-0.03em] md:text-7xl">Write to the house.</h1>
           <p className="mt-6 max-w-md text-stone">
             Viewings are by appointment in Jaipur and Paris. Private commissions begin with a conversation, not a formality.
           </p>

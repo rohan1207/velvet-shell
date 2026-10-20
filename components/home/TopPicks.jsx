@@ -29,7 +29,7 @@ export default function TopPicks() {
     const ctx = gsap.context(() => {
       const pin = root.current;
       const track = root.current?.querySelector('.picks-track');
-      if (pin && track && window.innerWidth > 900) {
+      if (pin && track && window.matchMedia('(min-width: 768px)').matches) {
         gsap.to(track, {
           x: () => -(track.scrollWidth - window.innerWidth + 80),
           ease: 'none',
@@ -54,8 +54,11 @@ export default function TopPicks() {
   }, []);
 
   return (
-    <section ref={root} className="picks-pin relative box-border flex h-[100svh] flex-col overflow-hidden bg-ivory">
-      <div className="shrink-0 px-5 pt-5 md:px-10 md:pt-6">
+    <section
+      ref={root}
+      className="picks-pin relative box-border flex flex-col overflow-hidden bg-ivory md:h-[100svh]"
+    >
+      <div className="shrink-0 px-5 pt-8 pb-2 md:px-10 md:pt-6">
         <div className="flex flex-col items-start justify-between gap-3 border-b border-ink/8 pb-4 md:flex-row md:items-end md:pb-5">
           <div>
             <p className="font-label text-gold">Top picks</p>
@@ -73,15 +76,29 @@ export default function TopPicks() {
         </div>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-x-auto md:overflow-hidden [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <div className="picks-track flex h-full w-max items-stretch gap-4 px-5 py-4 md:gap-6 md:px-10 md:py-5">
+      {/* Phone: 2-col grid */}
+      <div className="grid grid-cols-2 gap-x-3 gap-y-7 px-5 py-6 md:hidden">
+        {picks.map((product, index) => (
+          <ProductCard
+            key={product.slug}
+            product={product}
+            index={index}
+            className="h-full"
+            sizes="50vw"
+          />
+        ))}
+      </div>
+
+      {/* Desktop: pinned horizontal track */}
+      <div className="hidden min-h-0 flex-1 overflow-hidden md:block">
+        <div className="picks-track flex h-full w-max items-stretch gap-6 px-10 py-5">
           {picks.map((product, index) => (
             <ProductCard
               key={product.slug}
               product={product}
               index={index}
-              className="flex h-full w-[72vw] shrink-0 flex-col sm:w-[40vw] lg:w-[22vw]"
-              sizes="(max-width: 768px) 72vw, 22vw"
+              className="flex h-full w-[40vw] shrink-0 flex-col lg:w-[22vw]"
+              sizes="22vw"
             />
           ))}
         </div>

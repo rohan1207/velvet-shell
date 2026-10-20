@@ -8,6 +8,8 @@ const columns = [
       { href: '/shop?category=earrings', label: 'Earrings' },
       { href: '/shop?category=bracelets', label: 'Bracelets' },
       { href: '/shop?category=necklaces', label: 'Necklaces' },
+      { href: '/shop?category=pendants', label: 'Pendants' },
+      { href: '/shop?category=chokers', label: 'Chokers' },
       { href: '/shop?category=rings', label: 'Rings' },
       { href: '/shop?category=cuffs', label: 'Brooches' },
       { href: '/shop?category=anklets', label: 'Anklets' },
@@ -64,13 +66,13 @@ export default function Footer() {
                 alt="Velvet Shell"
                 width={200}
                 height={200}
-                className="h-[5.5rem] w-[5.5rem] object-contain md:h-[6.5rem] md:w-[6.5rem]"
+                className="h-16 w-16 object-contain md:h-[6.5rem] md:w-[6.5rem]"
               />
             </Link>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-ivory/85">
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-ivory/85 md:mt-5">
               Jewellery, gifting & lifestyle creations, shaped by considered design and quiet intrigue.
             </p>
-            <form className="mt-8 max-w-sm" action="/contact">
+            <form className="mt-6 max-w-sm md:mt-8" action="/contact">
               <label className="font-label text-gold">Stay in touch</label>
               <p className="mt-2 text-sm leading-relaxed text-ivory/80">
                 A little from Velvet Shell, occasionally.
@@ -88,20 +90,27 @@ export default function Footer() {
               </div>
             </form>
           </div>
-          {columns.map((col) => (
-            <div key={col.title} className="lg:col-span-2">
-              <p className="font-label text-gold">{col.title}</p>
-              <ul className="mt-4 space-y-3">
-                {col.links.map((link) => (
-                  <li key={`${col.title}-${link.label}`}>
-                    <Link href={link.href} className="text-sm text-ivory/80 transition-colors hover:text-ivory">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="grid grid-cols-2 gap-8 sm:gap-10 md:contents">
+            {columns.map((col) => (
+              <div key={col.title} className="lg:col-span-2">
+                <p className="font-label text-[10px] tracking-[0.18em] text-gold md:text-[11px]">
+                  {col.title}
+                </p>
+                <ul className="mt-3 space-y-2.5 md:mt-4 md:space-y-3">
+                  {col.links.map((link) => (
+                    <li key={`${col.title}-${link.label}`}>
+                      <Link
+                        href={link.href}
+                        className="text-[13px] text-ivory/80 transition-colors hover:text-ivory md:text-sm"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mt-12 overflow-hidden border-t border-ivory/10 pt-6 md:mt-14 md:pt-7">

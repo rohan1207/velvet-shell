@@ -1,12 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HOME_BANNER_SLIDES } from '@/lib/home-banner-slides';
+import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
 
-const HOLD_MS = 3800;
+const HOLD_MS = 2800;
 const FRAMES = HOME_BANNER_SLIDES;
 
 function ArrowCircle({ className = '' }) {
@@ -59,12 +59,11 @@ export default function HeroEarringReel({ className = '', showBadge = true }) {
             animate={{ scale: 1.06 }}
             transition={{ duration: HOLD_MS / 1000, ease: 'linear' }}
           >
-            <Image
+            <ResponsiveBannerImage
               src={frame.image}
               alt={frame.alt}
-              fill
-              sizes="28vw"
               priority={index === 0}
+              sizes="(max-width: 768px) 50vw, 28vw"
               className="object-cover object-center"
             />
           </motion.div>

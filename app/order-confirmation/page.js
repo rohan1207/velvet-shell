@@ -20,7 +20,7 @@ export default function ConfirmationPage() {
     <div className="bg-ivory pt-28 pb-24 md:pt-36">
       <div className="mx-auto max-w-2xl px-5">
         <p className="font-label text-gold">Confirmed</p>
-        <h1 className="font-display mt-4 text-5xl text-ink md:text-7xl">The house has it.</h1>
+        <h1 className="font-display mt-4 text-4xl tracking-[-0.03em] text-ink md:text-7xl">The house has it.</h1>
         <p className="mt-6 text-sm font-light leading-relaxed text-ink/85">
           A note is on its way. Ready pieces ship within a few days. Made-to-order pieces leave the
           atelier in two to three weeks.

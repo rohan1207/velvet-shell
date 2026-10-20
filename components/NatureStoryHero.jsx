@@ -1,11 +1,15 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
+import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
+import {
+  BANNER_INTERVAL_MS,
+  BANNER_TRANSITION_MS,
+  buildClonedSlides,
+  useInfiniteCarousel,
+} from '@/lib/use-infinite-carousel';
 
-const INTERVAL_MS = 6000;
-const TRANSITION_MS = 1100;
+import { shopCategoryHref } from '@/lib/shop-links';
 
 const slides = [
   {
@@ -16,7 +20,7 @@ const slides = [
     title: 'Held in the golden hour.',
     line: 'A quiet pendant among ripening fruit — silver and gold, worn like a soft reveal.',
     cta: 'Shop necklaces',
-    href: '/shop?category=necklaces',
+    href: shopCategoryHref('necklaces'),
     tone: 'dark',
     overlay: 'soft',
   },
@@ -27,8 +31,8 @@ const slides = [
     eyebrow: 'Velvet Shell',
     title: 'Where sweetness finds form.',
     line: 'Jewellery drawn from the meadow — made to be worn and kept.',
-    cta: 'Shop the meadow',
-    href: '/shop?category=rings',
+    cta: 'Shop rings',
+    href: shopCategoryHref('rings'),
     tone: 'light',
     overlay: 'soft',
   },
@@ -39,8 +43,8 @@ const slides = [
     eyebrow: 'Velvet Shell',
     title: 'Wings over still water.',
     line: 'An icy blue stone, a golden butterfly — jewellery that feels found in the forest.',
-    cta: 'Shop the ring',
-    href: '/shop/aquamarine-butterfly-ring',
+    cta: 'Shop rings',
+    href: shopCategoryHref('rings'),
     tone: 'light',
     overlay: 'soft',
   },
@@ -51,8 +55,8 @@ const slides = [
     eyebrow: 'Velvet Shell',
     title: 'Bloom where you are held.',
     line: 'Lotus light on the wrist — silver, soft stone, and morning stillness.',
-    cta: 'Discover lotuses',
-    href: '/shop?category=bracelets',
+    cta: 'Shop bracelets',
+    href: shopCategoryHref('bracelets'),
     tone: 'light',
     overlay: 'soft',
   },
@@ -64,140 +68,45 @@ const slides = [
     title: 'Petals that never fade.',
     line: 'Orchid forms in silver — quiet elegance for softly luminous days.',
     cta: 'Shop earrings',
-    href: '/shop?category=earrings',
+    href: shopCategoryHref('earrings'),
     tone: 'dark',
     overlay: 'soft',
   },
 ];
 
-const FIRST = 1;
-const LAST = slides.length; // track index of last real slide
-const CLONE_END = slides.length + 1;
-const CLONE_START = 0;
-
-const trackSlides = [
-  { ...slides[slides.length - 1], key: 'clone-start' },
-  ...slides.map((s) => ({ ...s, key: s.id })),
-  { ...slides[0], key: 'clone-end' },
-];
+const trackSlides = buildClonedSlides(slides, (s) => s.id);
 
 export default function NatureStoryHero() {
   const count = slides.length;
-  const [trackIndex, setTrackIndex] = useState(FIRST);
-  const [withTransition, setWithTransition] = useState(true);
-  const [hoverPaused, setHoverPaused] = useState(false);
-  const locked = useRef(false);
-  const wrapTimer = useRef(null);
-  const autoTimer = useRef(null);
+  const { rootRef, trackStyle, logicalIndex, goNext, goPrev, goTo } = useInfiniteCarousel({
+    count,
+    intervalMs: BANNER_INTERVAL_MS,
+    transitionMs: BANNER_TRANSITION_MS,
+  });
 
-  const logicalIndex = Math.min(Math.max(trackIndex - 1, 0), count - 1);
   const slide = slides[logicalIndex];
   const isDark = slide.tone === 'dark';
   const softOverlay = slide.overlay === 'soft';
 
-  const clearWrapTimer = () => {
-    if (wrapTimer.current) {
-      window.clearTimeout(wrapTimer.current);
-      wrapTimer.current = null;
-    }
-  };
-
-  const afterMove = useCallback((nextIndex) => {
-    clearWrapTimer();
-    wrapTimer.current = window.setTimeout(() => {
-      if (nextIndex === CLONE_END || nextIndex === CLONE_START) {
-        setWithTransition(false);
-        setTrackIndex(nextIndex === CLONE_END ? FIRST : LAST);
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            setWithTransition(true);
-            locked.current = false;
-          });
-        });
-      } else {
-        locked.current = false;
-      }
-    }, TRANSITION_MS);
-  }, []);
-
-  const goNext = useCallback(() => {
-    if (locked.current) return;
-    locked.current = true;
-    setWithTransition(true);
-    setTrackIndex((i) => {
-      const next = i + 1;
-      afterMove(next);
-      return next;
-    });
-  }, [afterMove]);
-
-  const goPrev = useCallback(() => {
-    if (locked.current) return;
-    locked.current = true;
-    setWithTransition(true);
-    setTrackIndex((i) => {
-      const next = i - 1;
-      afterMove(next);
-      return next;
-    });
-  }, [afterMove]);
-
-  const goTo = useCallback(
-    (i) => {
-      if (locked.current) return;
-      const target = i + 1;
-      if (target === trackIndex) return;
-      locked.current = true;
-      setWithTransition(true);
-      setTrackIndex(target);
-      afterMove(target);
-    },
-    [trackIndex, afterMove],
-  );
-
-  // Autoplay — stable interval; never advances while locked (clone wrap)
-  useEffect(() => {
-    if (hoverPaused) return undefined;
-    autoTimer.current = window.setInterval(() => {
-      if (!locked.current) goNext();
-    }, INTERVAL_MS);
-    return () => {
-      if (autoTimer.current) window.clearInterval(autoTimer.current);
-    };
-  }, [goNext, hoverPaused]);
-
-  useEffect(() => () => clearWrapTimer(), []);
-
   return (
     <section
+      ref={rootRef}
       className="relative box-border h-[100svh] w-full overflow-hidden bg-ink"
       aria-roledescription="carousel"
       aria-label="Nature storytelling hero"
-      onMouseEnter={() => setHoverPaused(true)}
-      onMouseLeave={() => setHoverPaused(false)}
     >
       <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="flex h-full w-full will-change-transform"
-          style={{
-            transform: `translate3d(-${trackIndex * 100}%, 0, 0)`,
-            transition: withTransition
-              ? `transform ${TRANSITION_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`
-              : 'none',
-          }}
-        >
+        <div className="flex h-full w-full will-change-transform" style={trackStyle}>
           {trackSlides.map((item) => (
             <article
-              key={item.key}
+              key={item.__key}
               className="relative h-full w-full min-w-full shrink-0 basis-full"
             >
-              <Image
+              <ResponsiveBannerImage
                 src={item.image}
                 alt={item.alt}
-                fill
                 priority
                 quality={90}
-                sizes="100vw"
                 className="object-cover object-center"
               />
             </article>
@@ -205,20 +114,20 @@ export default function NatureStoryHero() {
         </div>
 
         <div
-          className={`pointer-events-none absolute inset-0 transition-opacity duration-700 ${
+          className={`pointer-events-none absolute inset-0 transition-opacity duration-700 max-md:bg-gradient-to-t max-md:from-ink/55 max-md:via-ink/15 max-md:to-transparent ${
             isDark
               ? softOverlay
-                ? 'bg-gradient-to-r from-ivory/45 via-ivory/10 to-transparent'
-                : 'bg-gradient-to-r from-ivory/70 via-ivory/25 to-transparent'
+                ? 'md:bg-gradient-to-r md:from-ivory/45 md:via-ivory/10 md:to-transparent'
+                : 'md:bg-gradient-to-r md:from-ivory/70 md:via-ivory/25 md:to-transparent'
               : softOverlay
-                ? 'bg-gradient-to-r from-ink/25 via-ink/8 to-transparent'
-                : 'bg-gradient-to-r from-ink/50 via-ink/20 to-transparent'
+                ? 'md:bg-gradient-to-r md:from-ink/25 md:via-ink/8 md:to-transparent'
+                : 'md:bg-gradient-to-r md:from-ink/50 md:via-ink/20 md:to-transparent'
           }`}
           aria-hidden
         />
       </div>
 
-      <div className="pt-site-chrome relative z-10 flex h-full items-center">
+      <div className="pt-site-chrome relative z-10 flex h-full items-end pb-16 md:items-center md:pb-0">
         <div className="mx-auto w-full max-w-[1600px] px-5 md:px-10 lg:px-14">
           <div
             key={slide.id}

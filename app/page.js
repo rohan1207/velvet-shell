@@ -11,6 +11,7 @@ import TheHouse from '@/components/TheHouse';
 // import TrustStrip from '@/components/TrustStrip';
 import BannerShowcase from '@/components/BannerShowcase';
 import Testimonials from '@/components/Testimonials';
+import { HomeProductNotes } from '@/components/ProductNotes';
 
 export const metadata = {
   title: 'Velvet Shell — A treasure in every reveal',
@@ -32,6 +33,7 @@ export default function HomePage() {
       <NewArrivals />
       <BestOfVelvetShell />
       <ShopNow />
+      <HomeProductNotes />
       <FullBleedVideo />
       <ShopByLook />
       <BannerShowcase />

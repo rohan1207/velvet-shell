@@ -43,11 +43,11 @@ async function rest(path, { method = 'GET', body, prefer } = {}) {
   return data;
 }
 
-function subcategoryFromSlug(slug = '') {
-  const s = slug.toLowerCase();
-  if (s.includes('choker')) return 'chokers';
-  if (s.includes('pendant')) return 'pendants';
-  if (s.includes('chain') && !s.includes('bracelet')) return 'chains';
+function subcategoryFromText(name = '', slug = '') {
+  const s = `${name} ${slug}`.toLowerCase();
+  if (/\bchoker\b/.test(s)) return 'chokers';
+  if (/\bpendant\b/.test(s)) return 'pendants';
+  if (/\bchain\b/.test(s) && !/\bbracelet\b/.test(s)) return 'chains';
   return 'necklaces';
 }
 
@@ -98,18 +98,22 @@ async function main() {
 
   // Also include any DB families currently under necklaces
   const dbFamilies = await rest(
-    'product_families?select=id,slug,category&or=(category.eq.necklaces,category.eq.pendants,category.eq.chains,category.eq.chokers)'
+    'product_families?select=id,slug,name,category&or=(category.eq.necklaces,category.eq.pendants,category.eq.chains,category.eq.chokers)'
   );
 
   const seedCat = new Map(FAMILIES.map((f) => [f.slug, f.category]));
   const counts = { necklaces: 0, pendants: 0, chains: 0, chokers: 0 };
 
   for (const family of dbFamilies) {
+    const fromName = subcategoryFromText(family.name, family.slug);
+    const seed = seedCat.get(family.slug);
+    // Prefer name/slug heuristic (pendant / choker in the title), then seed, then keep necklaces
     const next =
-      seedCat.get(family.slug) &&
-      ['necklaces', 'pendants', 'chains', 'chokers'].includes(seedCat.get(family.slug))
-        ? seedCat.get(family.slug)
-        : subcategoryFromSlug(family.slug);
+      fromName !== 'necklaces'
+        ? fromName
+        : seed && ['necklaces', 'pendants', 'chains', 'chokers'].includes(seed)
+          ? seed
+          : 'necklaces';
 
     // Only reclassify neck-related seed families + current neck rows
     if (!targetSlugs.has(family.slug) && family.category === 'necklaces') {

@@ -281,7 +281,9 @@ export default function CheckoutPage() {
       <div className="bg-ivory pt-28 pb-24 md:pt-36">
         <div className="mx-auto max-w-xl px-5 text-center md:px-10">
           <p className="font-label text-gold">Checkout</p>
-          <h1 className="font-display mt-3 text-5xl text-ink">Your bag is empty</h1>
+          <h1 className="font-display mt-3 text-4xl tracking-[-0.03em] text-ink md:text-5xl">
+            Your bag is empty
+          </h1>
           <p className="mt-4 text-sm font-light text-ink/70">Add a piece before checkout.</p>
           <Link
             href="/shop"

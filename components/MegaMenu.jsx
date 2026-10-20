@@ -1,12 +1,14 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
+import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
 
 const shopMenu = {
   eyebrow: 'Shop',
   line: 'Browse by form, collection, or house edit.',
+  exploreHref: '/shop',
+  exploreLabel: 'Shop all',
   columns: [
     {
       title: 'Categories',
@@ -14,10 +16,12 @@ const shopMenu = {
         { href: '/shop?category=earrings', label: 'Earrings' },
         { href: '/shop?category=bracelets', label: 'Bracelets' },
         { href: '/shop?category=necklaces', label: 'Necklaces' },
+        { href: '/shop?category=pendants', label: 'Pendants' },
+        { href: '/shop?category=chokers', label: 'Chokers' },
         { href: '/shop?category=rings', label: 'Rings' },
+        { href: '/shop?category=cuffs', label: 'Brooches' },
         { href: '/shop?category=anklets', label: 'Anklets' },
         { href: '/shop?category=sets', label: 'Sets' },
-        { href: '/shop?category=cuffs', label: 'Brooches' },
         { href: '/shop', label: 'Shop all' },
       ],
     },
@@ -46,22 +50,22 @@ const shopMenu = {
   ],
   features: [
     {
+      href: '/shop?category=pendants',
+      image: '/images/banners/necklaces/pomegranate.jpg',
+      label: 'Pendants',
+      note: 'A single quiet focus',
+    },
+    {
+      href: '/shop?category=chokers',
+      image: '/images/banners/necklaces/flower.jpg',
+      label: 'Chokers',
+      note: 'Worn close to the neck',
+    },
+    {
       href: '/shop?category=earrings',
       image: '/images/banners/earrings/honeybee.jpg',
       label: 'Earrings',
       note: 'Nature at the ear',
-    },
-    {
-      href: '/shop?category=rings',
-      image: '/images/banners/rings/lotus.jpg',
-      label: 'Rings',
-      note: 'Petals for the hand',
-    },
-    {
-      href: '/#festive-edit',
-      image: '/images/banners/home-hero/garden.jpg',
-      label: 'Festive Edit',
-      note: 'Seasonal favourites',
     },
   ],
 };
@@ -69,6 +73,8 @@ const shopMenu = {
 const giftingMenu = {
   eyebrow: 'Gifting',
   line: 'Thoughtful pieces for occasions, houses and teams.',
+  exploreHref: '/gifting',
+  exploreLabel: 'Explore gifting',
   columns: [
     {
       title: 'Gifting',
@@ -87,6 +93,15 @@ const giftingMenu = {
         { href: '/shop?category=necklaces', label: 'Necklaces' },
         { href: '/shop?category=rings', label: 'Rings' },
         { href: '/shop?category=sets', label: 'Sets' },
+      ],
+    },
+    {
+      title: 'Occasions',
+      links: [
+        { href: '/gifting', label: 'Corporate' },
+        { href: '/shop?category=sets', label: 'Wedding & sets' },
+        { href: '/#festive-edit', label: 'Festive edit' },
+        { href: '/contact', label: 'Custom enquire' },
       ],
     },
   ],
@@ -115,6 +130,8 @@ const giftingMenu = {
 const brandMenu = {
   eyebrow: 'Brand',
   line: 'The house, the story, and how we care for each piece.',
+  exploreHref: '/about',
+  exploreLabel: 'About us',
   columns: [
     {
       title: 'The brand',
@@ -133,6 +150,15 @@ const brandMenu = {
         { href: '/terms', label: 'Terms & Conditions' },
         { href: '/returns', label: 'Returns & Refunds' },
         { href: '/shipping', label: 'Shipping' },
+      ],
+    },
+    {
+      title: 'Visit',
+      links: [
+        { href: '/lookbook', label: 'Lookbook' },
+        { href: '/wishlist', label: 'Saved pieces' },
+        { href: '/account', label: 'Account' },
+        { href: '/shop', label: 'Shop the edit' },
       ],
     },
   ],
@@ -158,28 +184,28 @@ const brandMenu = {
   ],
 };
 
+/** Compact vertical feature — image on top, label below (never cropped). */
 function FeatureCard({ feature, onNavigate }) {
   return (
     <Link
       href={feature.href}
       onClick={onNavigate}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-ink/8 bg-white transition-all duration-500 hover:border-burgundy/20 hover:shadow-[0_12px_32px_rgba(45,43,43,0.08)]"
+      className="group flex w-full max-w-[11.5rem] flex-col xl:max-w-[13rem]"
     >
-      <span className="relative aspect-[16/10] overflow-hidden bg-pearl">
-        <Image
+      <span className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-ink">
+        <ResponsiveBannerImage
           src={feature.image}
           alt=""
-          fill
-          sizes="(max-width: 1024px) 40vw, 220px"
-          className="object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+          sizes="220px"
+          className="object-cover object-center transition-transform duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
         />
       </span>
-      <span className="flex flex-1 flex-col px-3.5 py-3">
-        <span className="font-label text-[10px] tracking-[0.16em] text-ink uppercase transition-colors group-hover:text-burgundy">
+      <span className="mt-2.5 flex flex-col px-0.5">
+        <span className="font-label text-[9px] tracking-[0.16em] text-ink uppercase transition-colors group-hover:text-burgundy xl:text-[10px]">
           {feature.label}
         </span>
         {feature.note ? (
-          <span className="mt-1 text-[12px] font-light leading-snug text-ink/60">{feature.note}</span>
+          <span className="mt-1 text-[11px] font-light leading-snug text-ink/60">{feature.note}</span>
         ) : null}
       </span>
     </Link>
@@ -188,38 +214,35 @@ function FeatureCard({ feature, onNavigate }) {
 
 function MegaPanel({ menu, onNavigate }) {
   return (
-    <div className="border-t border-ink/6 bg-ivory/98 shadow-[0_28px_60px_rgba(40,20,24,0.14)] backdrop-blur-md">
-      <div className="mx-auto max-w-[1600px] px-5 py-8 md:px-10 md:py-10">
-        <div className="mb-7 flex flex-col gap-1 border-b border-ink/8 pb-5 md:flex-row md:items-end md:justify-between">
+    <div className="flex h-full min-h-0 flex-col bg-ivory">
+      <div className="mx-auto flex h-full min-h-0 w-full max-w-[1600px] flex-col px-5 py-6 md:px-10 md:py-8 lg:py-9">
+        <div className="mb-5 flex shrink-0 flex-col gap-1 border-b border-ink/8 pb-4 md:mb-6 md:flex-row md:items-end md:justify-between md:pb-5">
           <div>
             <p className="font-label text-[10px] tracking-[0.22em] text-gold uppercase">{menu.eyebrow}</p>
             <p className="mt-1.5 max-w-md text-sm font-light text-ink/70">{menu.line}</p>
           </div>
           <Link
-            href={menu.columns[0]?.links?.slice(-1)[0]?.href || '/shop'}
+            href={menu.exploreHref || '/shop'}
             onClick={onNavigate}
             className="mt-3 font-label text-[10px] tracking-[0.16em] text-burgundy uppercase transition-opacity hover:opacity-70 md:mt-0"
           >
-            Explore →
+            {menu.exploreLabel || 'Explore'} →
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
-          <div
-            className={`grid gap-8 sm:grid-cols-2 lg:col-span-5 lg:gap-10 ${
-              menu.columns.length >= 3 ? 'xl:grid-cols-3' : ''
-            }`}
-          >
+        <div className="grid min-h-0 flex-1 grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8 xl:gap-10">
+          {/* Link columns */}
+          <div className="flex min-h-0 flex-col justify-start gap-8 overflow-y-auto sm:grid sm:grid-cols-3 sm:gap-8 lg:col-span-5 lg:gap-10 xl:col-span-4">
             {menu.columns.map((col) => (
               <div key={col.title}>
                 <p className="font-label text-[10px] tracking-[0.2em] text-ink/45 uppercase">{col.title}</p>
-                <ul className="mt-4 space-y-2.5">
+                <ul className="mt-3.5 space-y-2.5 md:mt-4 md:space-y-3">
                   {col.links.map((link) => (
                     <li key={`${col.title}-${link.label}`}>
                       <Link
                         href={link.href}
                         onClick={onNavigate}
-                        className="text-[13px] font-light tracking-[-0.01em] text-ink/80 transition-colors duration-300 hover:text-burgundy"
+                        className="text-[13px] font-light tracking-[-0.01em] text-ink/80 transition-colors duration-300 hover:text-burgundy md:text-[14px]"
                       >
                         {link.label}
                       </Link>
@@ -230,7 +253,8 @@ function MegaPanel({ menu, onNavigate }) {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:col-span-7 lg:gap-4">
+          {/* Compact vertical cards — top right */}
+          <div className="flex flex-wrap items-start justify-start gap-2.5 sm:gap-3 lg:col-span-7 lg:justify-end xl:col-span-8">
             {menu.features.map((feature) => (
               <FeatureCard key={feature.label} feature={feature} onNavigate={onNavigate} />
             ))}
@@ -256,18 +280,21 @@ export default function MegaMenu({ open, onOpen, onClose }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-30 cursor-default bg-ink/25 backdrop-blur-[1px]"
+            className="fixed inset-0 z-30 cursor-default bg-ink/30 backdrop-blur-[1px]"
             style={{ top: 'calc(var(--site-promo-h) + var(--site-nav-h))' }}
             onClick={onClose}
             onMouseEnter={onClose}
           />
           <motion.div
             key={open}
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
+            exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-x-0 top-full z-40"
+            className="absolute inset-x-0 top-full z-40 overflow-hidden border-t border-ink/6 shadow-[0_28px_60px_rgba(40,20,24,0.16)]"
+            style={{
+              height: 'calc(100svh - var(--site-promo-h) - var(--site-nav-h))',
+            }}
             onMouseEnter={() => onOpen(open)}
             onMouseLeave={onClose}
           >

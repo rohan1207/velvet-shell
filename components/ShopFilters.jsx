@@ -30,8 +30,8 @@ export function normalizeMaterialTags(material) {
   const m = String(material || '').toLowerCase();
   if (!m) return [];
   const tags = [];
-  if (/sterling|s\s*925|\b925\b/.test(m)) tags.push('Sterling Silver');
-  if (/gold\s*plat|18\s*k|vermeil/.test(m)) tags.push('Gold Plated');
+  if (/sterling|s\s*925|\b925\b|sterling silver/.test(m)) tags.push('Sterling Silver');
+  if (/gold\s*plat|18\s*k|18k|vermeil|gold plated/.test(m)) tags.push('Gold Plated');
   if (/silver\s*plat/.test(m)) tags.push('Silver Plated');
   if (/pearl|nacre|mother\s*of\s*pearl/.test(m)) tags.push('Pearl');
   if (

@@ -12,7 +12,10 @@ if (typeof window !== 'undefined') {
 export default function SmoothScroll({ children }) {
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return undefined;
+    // Native touch scroll feels better on phones; Lenis is desktop-oriented.
+    const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+    const isNarrow = window.matchMedia('(max-width: 767px)').matches;
+    if (reduced || isCoarse || isNarrow) return undefined;
 
     const lenis = new Lenis({
       duration: 1.15,

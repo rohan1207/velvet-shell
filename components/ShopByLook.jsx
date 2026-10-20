@@ -83,7 +83,7 @@ function Hotspot({ spot, active, onActivate, onDeactivate }) {
           >
             <Link
               href={href}
-              className="group/pill flex min-w-[220px] max-w-[260px] items-center gap-3 rounded-full border border-white/50 bg-ivory/96 py-2 pr-4 pl-2 shadow-[0_14px_44px_rgba(20,18,16,0.22)] backdrop-blur-md transition-transform duration-300 hover:scale-[1.02]"
+              className="group/pill flex w-[min(220px,calc(100vw-2.5rem))] max-w-[260px] items-center gap-3 rounded-full border border-white/50 bg-ivory/96 py-2 pr-4 pl-2 shadow-[0_14px_44px_rgba(20,18,16,0.22)] backdrop-blur-md transition-transform duration-300 hover:scale-[1.02]"
             >
               <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-cream ring-1 ring-ink/8">
                 <Image src={product.image} alt="" fill className="object-cover" sizes="44px" />
@@ -172,7 +172,7 @@ export default function ShopByLook() {
             </h2>
           </div>
           <p className="max-w-sm text-sm font-light leading-relaxed text-ink/80">
-            Hover the soft lights on each look. A pill appears with the piece — click through to shop it.
+            Tap the soft lights on each look. A pill appears with the piece — open it to shop.
           </p>
         </div>
 

@@ -8,6 +8,7 @@ import { shopHero as defaultShopHero } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
 import { ProductGridSkeleton } from '@/components/ProductCardSkeleton';
 import CategoryHeroSlider from '@/components/CategoryHeroSlider';
+import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
 import ShopFilters, {
   colorKey,
   emptyFilterState,
@@ -300,8 +301,8 @@ export default function ShopExperience({
 
       <section id="shop-edit" className="scroll-mt-4 bg-white pb-24 pt-12 md:pt-16">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-          {/* Title + category pills */}
-          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          {/* Title + single-line category pills (never wrap) */}
+          <div className="flex flex-col gap-5 md:gap-6">
             <div>
               <p className="font-label text-gold">Shop now</p>
               <h2 className="font-display mt-3 text-4xl text-ink md:text-5xl">
@@ -314,19 +315,21 @@ export default function ShopExperience({
               </p>
             </div>
 
-            <div className="flex w-full max-w-2xl flex-wrap gap-1.5 md:justify-end">
-              <CategoryPill active={category === 'all'} onClick={() => updateCategory('all')}>
-                All
-              </CategoryPill>
-              {categories.map((item) => (
-                <CategoryPill
-                  key={item.slug}
-                  active={category === item.slug}
-                  onClick={() => updateCategory(item.slug)}
-                >
-                  {item.name}
+            <div className="-mx-5 overflow-x-auto px-5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:overflow-visible md:px-0">
+              <div className="flex w-max min-w-full flex-nowrap items-center gap-1 sm:gap-1.5 md:w-full md:justify-end">
+                <CategoryPill active={category === 'all'} onClick={() => updateCategory('all')}>
+                  All
                 </CategoryPill>
-              ))}
+                {categories.map((item) => (
+                  <CategoryPill
+                    key={item.slug}
+                    active={category === item.slug}
+                    onClick={() => updateCategory(item.slug)}
+                  >
+                    {item.name}
+                  </CategoryPill>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -335,7 +338,7 @@ export default function ShopExperience({
             className="sticky z-40 mt-8 border-b border-ink/8 bg-white/95 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-white/90"
             style={{ top: 'calc(var(--site-promo-h) + var(--site-nav-h))' }}
           >
-            <div className="grid grid-cols-1 items-center gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_minmax(0,1fr)] md:gap-4">
+            <div className="grid grid-cols-1 items-center gap-2.5 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_minmax(0,1fr)] md:gap-4">
               <div className="flex flex-wrap items-center gap-2 md:justify-start">
                 <button
                   type="button"
@@ -399,7 +402,7 @@ export default function ShopExperience({
                 />
               </label>
 
-              <div className="flex items-center gap-3 md:justify-end">
+              <div className="flex items-center justify-between gap-3 md:justify-end">
                 <p className="font-label text-[10px] tracking-[0.12em] text-ink/70 uppercase">
                   {catalogLoading
                     ? 'Loading…'
@@ -410,7 +413,7 @@ export default function ShopExperience({
                   <select
                     value={sort}
                     onChange={(event) => setSort(event.target.value)}
-                    className="rounded-full border border-ink/10 bg-ivory px-3 py-2 text-[10px] tracking-[0.14em] text-ink/85 uppercase outline-none"
+                    className="max-w-[9.5rem] rounded-full border border-ink/10 bg-ivory px-2.5 py-2 text-[10px] tracking-[0.12em] text-ink/85 uppercase outline-none md:max-w-none md:px-3 md:tracking-[0.14em]"
                   >
                     <option value="featured">Featured</option>
                     <option value="price-asc">Price, rising</option>
@@ -465,7 +468,7 @@ export default function ShopExperience({
                 </div>
               ) : (
                 <div
-                  className={`grid grid-cols-2 gap-x-4 gap-y-10 transition-[grid-template-columns] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:gap-x-6 md:gap-y-12 ${
+                  className={`grid grid-cols-2 gap-x-3 gap-y-7 transition-[grid-template-columns] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:gap-x-6 md:gap-y-12 ${
                     sidebarOpen ? 'lg:grid-cols-3' : 'lg:grid-cols-4'
                   }`}
                 >
@@ -512,8 +515,33 @@ function PairUpWith({ categories = [], currentCategory, onSelect }) {
         <p className="hidden text-sm font-light text-ink/80 sm:block">Scroll for more →</p>
       </div>
 
+      {/* Phone: 2-col category cards */}
+      <div className="grid grid-cols-2 gap-3 md:hidden">
+        {others.map((item) => (
+          <Link
+            key={item.slug}
+            href={buildShopHref({ category: item.slug })}
+            onClick={() => onSelect(item.slug)}
+            className="group relative aspect-[4/5] overflow-hidden rounded-xl"
+          >
+            <ResponsiveBannerImage
+              src={item.banner}
+              alt=""
+              sizes="50vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/65 via-ink/20 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-3">
+              <p className="font-label text-[9px] tracking-[0.14em] text-gold uppercase">Shop</p>
+              <p className="font-display mt-1 text-lg leading-tight text-ivory">{item.name}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* Tablet+: horizontal snap rail */}
       <div
-        className="-mx-5 flex gap-3 overflow-x-auto px-5 pb-2 snap-x snap-mandatory scroll-smooth md:-mx-10 md:gap-4 md:px-10 [scrollbar-width:thin]"
+        className="-mx-10 hidden gap-4 overflow-x-auto px-10 pb-2 snap-x snap-mandatory scroll-smooth md:flex [scrollbar-width:thin]"
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
         {others.map((item) => (
@@ -521,19 +549,18 @@ function PairUpWith({ categories = [], currentCategory, onSelect }) {
             key={item.slug}
             href={buildShopHref({ category: item.slug })}
             onClick={() => onSelect(item.slug)}
-            className="group relative aspect-[4/5] w-[min(68vw,15.5rem)] shrink-0 snap-start overflow-hidden rounded-[1.25rem] md:w-[17.5rem]"
+            className="group relative aspect-[4/5] w-[17.5rem] shrink-0 snap-start overflow-hidden rounded-[1.25rem]"
           >
-            <Image
+            <ResponsiveBannerImage
               src={item.banner}
               alt=""
-              fill
               sizes="280px"
               className="object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/15 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+            <div className="absolute inset-x-0 bottom-0 p-6">
               <p className="font-label text-[10px] text-gold">Shop</p>
-              <p className="font-display mt-1.5 text-2xl text-ivory md:text-[1.75rem]">{item.name}</p>
+              <p className="font-display mt-1.5 text-[1.75rem] text-ivory">{item.name}</p>
               <p className="mt-1.5 line-clamp-2 text-sm font-light text-ivory/80">{item.line}</p>
             </div>
           </Link>
@@ -548,7 +575,7 @@ function CategoryPill({ active, onClick, children }) {
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full px-4 py-2 font-label text-[10px] tracking-[0.14em] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+      className={`shrink-0 rounded-full px-2.5 py-1.5 font-label text-[9px] tracking-[0.1em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-3 sm:text-[10px] sm:tracking-[0.12em] xl:px-4 xl:py-2 xl:tracking-[0.14em] ${
         active
           ? 'bg-velvet-texture text-ivory'
           : 'bg-transparent text-ink/80 hover:bg-ivory hover:text-ink'

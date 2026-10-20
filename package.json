@@ -12,7 +12,8 @@
     "admin:build": "npm --prefix admin run build",
     "seed:admin": "node --env-file=.env.local scripts/seed-admin.mjs",
     "seed:ywje": "node --env-file=.env.local scripts/seed-ywje-catalog.mjs",
-    "db:migrate": "node --env-file=.env.local scripts/run-migrations.mjs"
+    "db:migrate": "node --env-file=.env.local scripts/run-migrations.mjs",
+    "banners:mobile": "node scripts/generate-mobile-banners.mjs"
   },
   "dependencies": {
     "@google/model-viewer": "^4.3.1",
@@ -35,6 +36,7 @@
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4",
     "ws": "^8.22.0"
   }

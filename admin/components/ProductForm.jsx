@@ -4,6 +4,13 @@ import { useMemo, useState } from 'react';
 import { slugify } from '@/lib/format';
 import { DEFAULT_SHIPPING, normalizeShipping } from '@/lib/shipping';
 
+function materialForColor(label = '') {
+  const l = String(label).toLowerCase();
+  if (/\bgold\b/.test(l)) return '18K Gold Plated';
+  if (/\bsilver\b|sterling|925/.test(l)) return 'Sterling Silver';
+  return 'Sterling Silver';
+}
+
 function newVariant(label = 'Default', swatch = '#C5C5C5', primary = true) {
   return {
     id: `tmp-${Math.random().toString(36).slice(2, 9)}`,
@@ -15,7 +22,7 @@ function newVariant(label = 'Default', swatch = '#C5C5C5', primary = true) {
     story: '',
     care: '',
     features: [],
-    material: 'S925 Silver',
+    material: materialForColor(label),
     length: 'Adjustable',
     reviews: { rating: 0, count: 0, highlights: [] },
     heroUrl: '',
@@ -117,6 +124,7 @@ export default function ProductForm({
 
   function addColor(preset) {
     const next = newVariant(preset.label, preset.swatch, false);
+    next.material = materialForColor(preset.label);
     setForm((f) => {
       const variants = [...f.variants, next];
       return {
@@ -127,6 +135,9 @@ export default function ProductForm({
       };
     });
     setFeaturesText('');
+    setNotice(
+      `Added ${preset.label}. Upload only ${preset.label} photos on this colour tab — do not mix metals in one gallery.`,
+    );
   }
 
   function importFromVariant(sourceIndex) {
@@ -559,9 +570,15 @@ export default function ProductForm({
                 <input
                   className="input mt-1"
                   value={variant.colorLabel}
-                  onChange={(e) =>
-                    patchVariant(form.activeVariantIndex, { colorLabel: e.target.value })
-                  }
+                  onChange={(e) => {
+                    const colorLabel = e.target.value;
+                    const next = { colorLabel };
+                    const inferred = materialForColor(colorLabel);
+                    if (inferred && (colorLabel || '').trim()) {
+                      next.material = inferred;
+                    }
+                    patchVariant(form.activeVariantIndex, next);
+                  }}
                 />
               </label>
               <label className="block">
@@ -630,7 +647,7 @@ export default function ProductForm({
               onChange={(e) =>
                 patchVariant(form.activeVariantIndex, { material: e.target.value })
               }
-              placeholder="S925 Silver"
+              placeholder="Sterling Silver or 18K Gold Plated"
             />
           </label>
           <label className="block">

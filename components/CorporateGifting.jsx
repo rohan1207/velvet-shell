@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
 
 const occasions = [
   {
@@ -37,12 +38,10 @@ export default function CorporateGifting() {
       {/* Hero — banner image only */}
       <section className="relative box-border h-[100svh] w-full overflow-hidden bg-[#f3ebe3] pt-[5.25rem] md:pt-[5.85rem]">
         <div className="relative h-full w-full">
-          <Image
+          <ResponsiveBannerImage
             src="/images/category-banner-gifting.jpg"
             alt="Velvet Shell gifting — white orchids in soft natural light"
-            fill
             priority
-            sizes="100vw"
             className="object-cover object-center"
           />
         </div>
@@ -83,7 +82,7 @@ export default function CorporateGifting() {
 
       {/* More Than A Gesture */}
       <section className="grid lg:grid-cols-2">
-        <div className="relative min-h-[58vh] lg:min-h-[88vh]">
+        <div className="relative min-h-[42vh] md:min-h-[58vh] lg:min-h-[88vh]">
           <Image
             src="/images/gifting-gesture.jpg"
             alt="Velvet Shell corporate gift presentation"
@@ -134,11 +133,11 @@ export default function CorporateGifting() {
         </div>
 
         <div className="mx-auto max-w-[1600px] px-5 py-14 md:px-10 md:py-20">
-          <ul className="grid gap-0 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid grid-cols-2 gap-0 lg:grid-cols-3">
             {occasions.map((item, index) => (
               <li
                 key={item.title}
-                className="border-t border-ink/10 py-8 pr-0 sm:pr-8 lg:border-ink/10 [&:nth-child(3n)]:lg:pr-0"
+                className="border-t border-ink/10 py-6 pr-3 sm:py-8 sm:pr-8 lg:border-ink/10 [&:nth-child(3n)]:lg:pr-0"
               >
                 <span className="font-label text-[10px] text-gold">
                   {String(index + 1).padStart(2, '0')}
@@ -175,7 +174,7 @@ export default function CorporateGifting() {
             made to feel distinctive without being excessive.
           </p>
         </div>
-        <div className="relative order-1 min-h-[58vh] lg:order-2 lg:min-h-[88vh]">
+        <div className="relative order-1 min-h-[42vh] md:min-h-[58vh] lg:order-2 lg:min-h-[88vh]">
           <Image
             src="/images/gifting-selection.jpg"
             alt="Curated Velvet Shell jewellery gift arrangement"
@@ -261,7 +260,7 @@ function GiftingEnquiryForm() {
       onSubmit={onSubmit}
       className="space-y-6 border border-ink/10 bg-ivory px-6 py-8 md:space-y-7 md:px-10 md:py-10"
     >
-      <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+      <div className="grid grid-cols-2 gap-3 md:gap-8">
         <Field label="Name" name="name" required />
         <Field label="Company" name="company" />
         <Field label="Email" name="email" type="email" required />

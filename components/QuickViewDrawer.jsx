@@ -182,10 +182,16 @@ export default function QuickViewDrawer() {
                   {wished ? '♥' : '♡'}
                 </button>
               </div>
+              <p className="mt-3 text-center text-[10px] font-light leading-relaxed text-ink/45">
+                Hand-finished — colour and detail may vary gently from the photographs.
+                {product.category === 'earrings'
+                  ? ' Longer drops can be adjusted on request.'
+                  : ''}
+              </p>
               <Link
                 href={`/shop/${product.slug}`}
                 onClick={closeQuickView}
-                className="mt-4 block text-center font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
+                className="mt-3 block text-center font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
               >
                 View full details →
               </Link>

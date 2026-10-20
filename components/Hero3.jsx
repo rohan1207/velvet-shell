@@ -3,8 +3,10 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { giftingHref, shopCategoryHref } from '@/lib/shop-links';
 import HeroEarringReel from './HeroEarringReel';
 import HeroFlowerFrames from './HeroFlowerFrames';
+import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
 
 function ArrowCircle({ className = '' }) {
   return (
@@ -62,17 +64,16 @@ export default function Hero3() {
               </div>
 
               <Link
-                href="/gifting"
+                href={giftingHref()}
                 data-cursor="Gift"
                 className="group relative min-h-0 overflow-hidden rounded-[1.5rem] bg-[#ebe6df] lg:rounded-[1.75rem]"
               >
-                <Image
-                  src="/images/hero-gifting-beach.jpg"
-                  alt="Velvet Shell gift bag and shell boxes on the beach at sunrise — a treasure in every reveal"
-                  fill
-                  sizes="28vw"
-                  className="object-cover object-center transition-transform duration-[1.15s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-                />
+              <ResponsiveBannerImage
+                src="/images/hero-gifting-beach.jpg"
+                alt="Velvet Shell gift bag and shell boxes on the beach at sunrise — a treasure in every reveal"
+                sizes="28vw"
+                className="object-cover object-center transition-transform duration-[1.15s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+              />
                 <span className="bg-velvet-texture absolute bottom-3 left-3 z-10 inline-flex items-center gap-2 rounded-full py-2 pr-2 pl-3.5 shadow-sm">
                   <span className="text-[9px] font-semibold tracking-[0.14em] text-ivory uppercase">
                     Gifting
@@ -84,13 +85,13 @@ export default function Hero3() {
           </div>
 
           <Link
-            href="/shop?category=bracelets"
+            href={shopCategoryHref('rings')}
             data-cursor="Shop"
             className="group relative h-full min-h-0 aspect-[1073/1466] max-w-full justify-self-end overflow-hidden rounded-[1.5rem] bg-pearl lg:rounded-[1.75rem]"
           >
             <Image
               src="/hero/floral_ring.png"
-              alt="Indian model wearing Velvet Shell floral silver necklace, bracelet, and rings"
+              alt="Indian model wearing Velvet Shell floral silver rings and jewellery"
               fill
               priority
               sizes="(min-width: 768px) 38vw, 100vw"
@@ -131,12 +132,12 @@ export default function Hero3() {
           </div>
 
           <Link
-            href="/shop?category=bracelets"
+            href={shopCategoryHref('rings')}
             className="relative min-h-[22rem] overflow-hidden rounded-[1.35rem] bg-pearl"
           >
             <Image
               src="/hero/floral_ring.png"
-              alt="Indian model wearing Velvet Shell floral silver necklace, bracelet, and rings"
+              alt="Indian model wearing Velvet Shell floral silver rings and jewellery"
               fill
               priority
               sizes="100vw"
@@ -149,13 +150,12 @@ export default function Hero3() {
               <HeroEarringReel />
             </div>
             <Link
-              href="/gifting"
+              href={giftingHref()}
               className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] bg-[#ebe6df]"
             >
-              <Image
+              <ResponsiveBannerImage
                 src="/images/hero-gifting-beach.jpg"
                 alt="Velvet Shell gift bag and shell boxes on the beach at sunrise"
-                fill
                 sizes="50vw"
                 className="object-cover object-center"
               />

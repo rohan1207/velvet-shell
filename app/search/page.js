@@ -11,7 +11,7 @@ export default function SearchPage() {
   return (
     <div className="bg-ivory pt-28 pb-24 md:pt-36">
       <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-        <h1 className="font-display text-5xl md:text-7xl">Search</h1>
+        <h1 className="font-display text-4xl tracking-[-0.03em] md:text-7xl">Search</h1>
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}

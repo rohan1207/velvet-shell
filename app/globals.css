@@ -24,8 +24,15 @@
 }
 
 :root {
-  --site-promo-h: 2.5rem;
-  --site-nav-h: 5.25rem;
+  --site-promo-h: 2.25rem;
+  --site-nav-h: 4.65rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --site-promo-h: 2.5rem;
+    --site-nav-h: 5.25rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -314,11 +321,35 @@ img {
   background: rgba(94, 6, 42, 0.35);
 }
 
+@keyframes nav-cart-bump {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.22);
+  }
+  70% {
+    transform: scale(0.94);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+[data-nav-cart].nav-cart-bump {
+  animation: nav-cart-bump 0.48s var(--ease-luxe) both;
+}
+
+.fly-to-cart-orb {
+  contain: layout style;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .shop-dot-ping,
   .shop-dot-ping-delay,
-  .skeleton-shimmer {
+  .skeleton-shimmer,
+  [data-nav-cart].nav-cart-bump {
     animation: none;
   }
 

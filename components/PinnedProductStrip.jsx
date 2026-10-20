@@ -171,7 +171,23 @@ export default function PinnedProductStrip({
         </div>
       </div>
 
-      <div className="relative mt-6 md:mt-7">
+      {/* Phone: 2-column grid (no hover — cards stand alone) */}
+      <div className="mx-auto mt-6 grid max-w-[1600px] grid-cols-2 gap-x-3 gap-y-7 px-5 md:hidden">
+        {picks.map((product, index) => (
+          <ProductCard
+            key={product.slug}
+            product={product}
+            index={index}
+            className="h-full"
+            sizes="50vw"
+            colorFamilies={colorFamilies}
+            catalogProducts={catalogProducts}
+          />
+        ))}
+      </div>
+
+      {/* Tablet+: horizontal strip */}
+      <div className="relative mt-7 hidden md:block">
         <SideArrow dir="prev" disabled={!canPrev} onClick={() => scrollByPage(-1)} />
         <SideArrow dir="next" disabled={!canNext} onClick={() => scrollByPage(1)} />
 
@@ -187,18 +203,18 @@ export default function PinnedProductStrip({
           className="cursor-grab overflow-x-auto overflow-y-hidden select-none active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           style={{ touchAction: 'pan-x' }}
         >
-          <div className="flex w-max gap-4 px-12 md:gap-6 md:px-16">
+          <div className="flex w-max gap-6 px-16">
             {picks.map((product, index) => (
               <div
                 key={product.slug}
                 data-strip-card
-                className="w-[72vw] shrink-0 sm:w-[40vw] lg:w-[22vw] xl:w-[21vw]"
+                className="w-[40vw] shrink-0 lg:w-[22vw] xl:w-[21vw]"
               >
                 <ProductCard
                   product={product}
                   index={index}
                   className="h-full"
-                  sizes="(max-width: 768px) 72vw, 22vw"
+                  sizes="22vw"
                   colorFamilies={colorFamilies}
                   catalogProducts={catalogProducts}
                 />

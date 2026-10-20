@@ -20,16 +20,16 @@ export default function BlogsPage() {
           Stories of nacre, craft, and the quiet decisions that shape every Velvet Shell piece.
         </p>
 
-        <div className="mt-14 grid gap-12 md:mt-16 md:grid-cols-2 md:gap-x-10 md:gap-y-16">
+        <div className="mt-10 grid grid-cols-2 gap-x-3 gap-y-8 md:mt-16 md:gap-x-10 md:gap-y-16">
           {journal.map((post, index) => (
             <Link
               key={post.slug}
               href={`/blogs/${post.slug}`}
-              className={`group ${index === 0 ? 'md:col-span-2' : ''}`}
+              className={`group ${index === 0 ? 'col-span-2' : ''}`}
             >
               <div
-                className={`relative overflow-hidden bg-pearl ${
-                  index === 0 ? 'aspect-[16/8]' : 'aspect-[16/10]'
+                className={`relative overflow-hidden rounded-xl bg-pearl md:rounded-none ${
+                  index === 0 ? 'aspect-[16/9] md:aspect-[16/8]' : 'aspect-[4/3] md:aspect-[16/10]'
                 }`}
               >
                 <Image
@@ -41,17 +41,23 @@ export default function BlogsPage() {
                   priority={index === 0}
                 />
               </div>
-              <p className="mt-5 font-label text-[10px] text-gold">
+              <p className="mt-3 font-label text-[9px] tracking-[0.14em] text-gold uppercase md:mt-5 md:text-[10px]">
                 {post.eyebrow} · {post.date}
               </p>
               <h2
-                className={`font-display mt-2 tracking-[-0.02em] text-ink transition-colors group-hover:text-burgundy ${
-                  index === 0 ? 'text-3xl md:text-5xl' : 'text-2xl md:text-3xl'
+                className={`font-display mt-1.5 tracking-[-0.02em] text-ink transition-colors group-hover:text-burgundy md:mt-2 ${
+                  index === 0
+                    ? 'text-2xl md:text-5xl'
+                    : 'text-base leading-snug md:text-3xl'
                 }`}
               >
                 {post.title}
               </h2>
-              <p className="mt-3 max-w-xl text-[15px] font-light leading-relaxed text-ink/80">
+              <p
+                className={`mt-2 font-light leading-relaxed text-ink/80 md:mt-3 md:max-w-xl md:text-[15px] ${
+                  index === 0 ? 'text-sm' : 'line-clamp-3 text-xs md:line-clamp-none md:text-[15px]'
+                }`}
+              >
                 {post.excerpt}
               </p>
             </Link>

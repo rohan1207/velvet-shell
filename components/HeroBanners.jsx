@@ -1,11 +1,12 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
+import { shopCategoryHref } from '@/lib/shop-links';
 
-const AUTO_MS = 2800;
+const AUTO_MS = 2800; // continuous forward cycle (crossfade), 2.5–3s hold
 const EASE = [0.45, 0.05, 0.25, 1];
 
 const slides = [
@@ -18,7 +19,7 @@ const slides = [
     titleAccent: 'like tide.',
     description: 'Sculptural drops in champagne gold and baroque pearl — worn like a soft pulse of light.',
     cta: 'Shop earrings',
-    href: '/shop?category=earrings',
+    href: shopCategoryHref('earrings'),
     image: '/images/category-banner-earrings.jpg',
     alt: 'Nature storytelling — gold orchid earrings among white blooms',
   },
@@ -31,7 +32,7 @@ const slides = [
     titleAccent: 'a chamber.',
     description: 'Architectural gold and irregular nacre — a quiet architecture for the collarbone.',
     cta: 'Shop necklaces',
-    href: '/shop?category=necklaces',
+    href: shopCategoryHref('necklaces'),
     image: '/images/category-banner-necklaces.jpg',
     alt: 'Nature storytelling — silver floral pendant on a white lily',
   },
@@ -44,7 +45,7 @@ const slides = [
     titleAccent: 'quiet gold.',
     description: 'Signets and stacks with weight you feel — never noise, only presence.',
     cta: 'Shop rings',
-    href: '/shop?category=rings',
+    href: shopCategoryHref('rings'),
     image: '/images/category-banner-rings.jpg',
     alt: 'Nature storytelling — floral rings on living branches',
   },
@@ -57,7 +58,7 @@ const slides = [
     titleAccent: 'worn softly.',
     description: 'Pearl lines and sculptural cuffs — a soft conversation for the wrist.',
     cta: 'Shop bracelets',
-    href: '/shop?category=bracelets',
+    href: shopCategoryHref('bracelets'),
     image: '/images/category-banner-bracelets.jpg',
     alt: 'Nature storytelling — clover leaves in soft forest light',
   },
@@ -120,13 +121,11 @@ export default function HeroBanners() {
               transition={{ duration: 1.05, ease: EASE }}
               style={{ pointerEvents: active ? 'auto' : 'none' }}
             >
-              <Image
+              <ResponsiveBannerImage
                 src={item.image}
                 alt={item.alt}
-                fill
                 priority={i === 0}
-                sizes="100vw"
-                className="object-cover object-[68%_center] md:object-[72%_center]"
+                className="object-cover object-center md:object-[72%_center]"
               />
             </motion.div>
           );

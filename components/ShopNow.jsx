@@ -50,30 +50,33 @@ export default function ShopNow() {
   return (
     <section className="bg-pearl">
       <div className="mx-auto max-w-[1600px] px-5 py-10 md:px-10 md:py-12">
-        <div className="flex flex-col items-start justify-between gap-5 md:flex-row md:items-end">
+        <div className="flex flex-col gap-5">
           <div>
             <p className="font-label text-gold">Shop now</p>
-            <h2 className="font-display mt-2 text-4xl text-ink md:text-5xl">The collection, edited.</h2>
+            <h2 className="font-display mt-2 text-3xl text-ink md:text-5xl">The collection, edited.</h2>
           </div>
 
-          <div className="flex w-full max-w-xl flex-wrap gap-1.5 md:justify-end">
-            {tabs.map((tab) => {
-              const active = activeTab === tab.slug;
-              return (
-                <button
-                  key={tab.slug}
-                  type="button"
-                  onClick={() => setActiveTab(tab.slug)}
-                  className={`rounded-full px-4 py-2 font-label text-[10px] tracking-[0.14em] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                    active
-                      ? 'bg-velvet-texture text-ivory'
-                      : 'bg-transparent text-ink/80 hover:bg-ivory hover:text-ink'
-                  }`}
-                >
-                  {tab.name}
-                </button>
-              );
-            })}
+          {/* Single-line category row — scrolls on very narrow screens, never wraps */}
+          <div className="-mx-5 overflow-x-auto px-5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:overflow-visible md:px-0">
+            <div className="flex w-max min-w-full flex-nowrap items-center gap-1 sm:gap-1.5 md:w-full md:justify-end">
+              {tabs.map((tab) => {
+                const active = activeTab === tab.slug;
+                return (
+                  <button
+                    key={tab.slug}
+                    type="button"
+                    onClick={() => setActiveTab(tab.slug)}
+                    className={`shrink-0 rounded-full px-2.5 py-1.5 font-label text-[9px] tracking-[0.1em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-3 sm:text-[10px] sm:tracking-[0.12em] xl:px-4 xl:py-2 xl:tracking-[0.14em] ${
+                      active
+                        ? 'bg-velvet-texture text-ivory'
+                        : 'bg-transparent text-ink/80 hover:bg-ivory hover:text-ink'
+                    }`}
+                  >
+                    {tab.name}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
@@ -88,7 +91,7 @@ export default function ShopNow() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                className="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10 lg:grid-cols-4"
+                className="grid grid-cols-2 gap-x-3 gap-y-7 md:gap-x-6 md:gap-y-10 lg:grid-cols-4"
               >
                 {filtered.map((product, index) => (
                   <ProductCard

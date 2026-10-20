@@ -9,16 +9,19 @@ import { useStore } from '@/context/StoreContext';
 import MegaMenu from './MegaMenu';
 
 const leftLinks = [
+  { href: '/', label: 'Home', match: 'home' },
   { href: '/shop?category=earrings', label: 'Earrings', match: 'earrings' },
   { href: '/shop?category=bracelets', label: 'Bracelets', match: 'bracelets' },
   { href: '/shop?category=necklaces', label: 'Necklaces', match: 'necklaces' },
+  { href: '/shop?category=pendants', label: 'Pendants', match: 'pendants' },
+  { href: '/shop?category=chokers', label: 'Chokers', match: 'chokers' },
   { href: '/shop?category=rings', label: 'Rings', match: 'rings' },
-  { href: '/shop?category=cuffs', label: 'Brooches', match: 'cuffs' },
-  { href: '/shop?category=anklets', label: 'Anklets', match: 'anklets' },
-  { href: '/shop?category=sets', label: 'Sets', match: 'sets' },
 ];
 
 const rightLinks = [
+  { href: '/shop?category=anklets', label: 'Anklets', match: 'anklets' },
+  { href: '/shop?category=sets', label: 'Sets', match: 'sets' },
+  { href: '/shop?category=cuffs', label: 'Brooches', match: 'cuffs' },
   { href: '/gifting', label: 'Gifting', match: 'gifting', mega: 'gifting' },
   { href: '/shop', label: 'Shop', match: 'shop', mega: 'shop' },
   { href: '/about', label: 'Brand', match: 'brand', mega: 'brand' },
@@ -26,6 +29,10 @@ const rightLinks = [
 
 const links = [...leftLinks, ...rightLinks];
 
+/**
+ * Desktop nav link — fluid type/padding so small laptops never collide with the logo.
+ * lg (~1024–1279): compact · xl (~1280–1535): mid · 2xl (1536+): full
+ */
 function NavLink({ link, active, onOpenMega, onCloseMega }) {
   return (
     <Link
@@ -34,7 +41,7 @@ function NavLink({ link, active, onOpenMega, onCloseMega }) {
         if (link.mega) onOpenMega(link.mega);
         else onCloseMega();
       }}
-      className={`relative px-2 py-1.5 text-[12px] font-semibold tracking-[0.1em] uppercase transition-colors duration-300 lg:px-2.5 lg:text-[13px] xl:text-[14px] ${
+      className={`relative shrink-0 px-1 py-1 text-[10px] font-semibold tracking-[0.06em] uppercase transition-colors duration-300 xl:px-1.5 xl:text-[11px] xl:tracking-[0.08em] 2xl:px-2.5 2xl:text-[13px] 2xl:tracking-[0.1em] ${
         active ? 'text-white' : 'text-white/75 hover:text-white'
       }`}
     >
@@ -42,7 +49,7 @@ function NavLink({ link, active, onOpenMega, onCloseMega }) {
       {active && (
         <motion.span
           layoutId="nav-underline"
-          className="absolute inset-x-2 -bottom-0.5 h-px bg-gold lg:inset-x-2.5"
+          className="absolute inset-x-1 -bottom-0.5 h-px bg-gold xl:inset-x-1.5 2xl:inset-x-2.5"
           transition={{ type: 'spring', stiffness: 380, damping: 32 }}
         />
       )}
@@ -133,6 +140,17 @@ export default function Navbar() {
     setMega(null);
   }, [pathname, searchParams, setMenuOpen]);
 
+  // Clear hamburger drawer if viewport grows into desktop nav
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const onChange = () => {
+      if (mq.matches) setMenuOpen(false);
+    };
+    onChange();
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, [setMenuOpen]);
+
   function openMega(key) {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setMega(key);
@@ -150,6 +168,9 @@ export default function Navbar() {
 
   function isActive(link) {
     if (link.mega && mega === link.mega) return true;
+    if (link.match === 'home') {
+      return pathname === '/';
+    }
     if (link.match === 'brand') {
       return (
         pathname.startsWith('/about') ||
@@ -179,48 +200,58 @@ export default function Navbar() {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          boxShadow: scrolled || mega ? '0 14px 40px rgba(74, 14, 19, 0.45)' : '0 6px 22px rgba(74, 14, 19, 0.28)',
+          boxShadow:
+            scrolled || mega
+              ? '0 14px 40px rgba(74, 14, 19, 0.45)'
+              : '0 6px 22px rgba(74, 14, 19, 0.28)',
         }}
         onMouseLeave={scheduleCloseMega}
       >
-        <div className="relative mx-auto grid h-[5.25rem] max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 md:h-[5.85rem] md:gap-4 md:px-8">
-          {/* Left — product menus */}
-          <nav className="relative z-10 hidden min-w-0 items-center justify-start xl:flex">
-            {leftLinks.map((link) => (
-              <NavLink
-                key={link.label}
-                link={link}
-                active={isActive(link)}
-                onOpenMega={openMega}
-                onCloseMega={scheduleCloseMega}
-              />
-            ))}
+        {/*
+          Breakpoints:
+          - < lg (phones + tablets): hamburger
+          - lg+: desktop menus, fluid type so small/mid laptops never hit the logo
+        */}
+        <div className="relative mx-auto grid h-[4.65rem] max-w-[1600px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-1 px-3 sm:h-[5.25rem] sm:px-4 md:h-[5.85rem] md:px-5 lg:gap-2 lg:px-4 xl:gap-3 xl:px-6 2xl:gap-4 2xl:px-8">
+          {/* Left — product menus (desktop only) */}
+          <nav className="relative z-10 hidden min-w-0 items-center justify-start overflow-hidden lg:flex lg:pr-2 xl:pr-3">
+            <div className="flex min-w-0 flex-nowrap items-center">
+              {leftLinks.map((link) => (
+                <NavLink
+                  key={link.label}
+                  link={link}
+                  active={isActive(link)}
+                  onOpenMega={openMega}
+                  onCloseMega={scheduleCloseMega}
+                />
+              ))}
+            </div>
           </nav>
-          <div className="xl:hidden" aria-hidden />
+          <div className="lg:hidden" aria-hidden />
 
-          {/* Center — logo */}
+          {/* Center — logo (reserved column, above menus) */}
           <Link
             href="/"
             aria-label="Velvet Shell home"
-            className="relative z-10 justify-self-center"
+            className="relative z-20 justify-self-center"
             onMouseEnter={scheduleCloseMega}
           >
-            <span className="relative block h-[5.1rem] w-[5.1rem] overflow-visible md:h-[6.25rem] md:w-[6.25rem]">
+            <span className="relative block h-[4.25rem] w-[4.25rem] overflow-visible sm:h-[5.1rem] sm:w-[5.1rem] md:h-[5.5rem] md:w-[5.5rem] lg:h-[5.25rem] lg:w-[5.25rem] xl:h-[5.75rem] xl:w-[5.75rem] 2xl:h-[6.25rem] 2xl:w-[6.25rem]">
               <Image
                 src="/logo-splash.png"
                 alt="Velvet Shell"
                 fill
                 priority
-                className="origin-center object-contain scale-[1.36] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.42]"
-                sizes="(max-width: 768px) 100px, 120px"
+                className="origin-center object-contain scale-[1.22] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.32] sm:scale-[1.28] lg:scale-[1.2] xl:scale-[1.28] 2xl:scale-[1.36]"
+                sizes="(max-width: 1024px) 88px, 120px"
                 style={{ mixBlendMode: 'screen' }}
               />
             </span>
           </Link>
 
           {/* Right — Gifting, Shop, Brand + icons */}
-          <div className="relative z-10 flex min-w-0 items-center justify-end gap-0.5 sm:gap-1">
-            <nav className="mr-1 hidden items-center xl:flex">
+          <div className="relative z-10 flex min-w-0 items-center justify-end gap-0 sm:gap-0.5 lg:pl-2 xl:pl-3">
+            <nav className="mr-0.5 hidden min-w-0 items-center overflow-hidden lg:flex">
               {rightLinks.map((link) => (
                 <NavLink
                   key={link.label}
@@ -235,18 +266,18 @@ export default function Navbar() {
               type="button"
               aria-label="Search"
               onClick={() => setSearchOpen(true)}
-              className="inline-flex h-11 w-11 items-center justify-center text-white/85 transition-colors hover:text-white"
+              className="inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10 xl:h-11 xl:w-11"
             >
-              <IconSearch className="h-[1.35rem] w-[1.35rem]" />
+              <IconSearch className="h-5 w-5 xl:h-[1.35rem] xl:w-[1.35rem]" />
             </button>
             <Link
               href="/wishlist"
               aria-label={`Wishlist (${wishlistCount})`}
-              className="relative inline-flex h-11 w-11 items-center justify-center text-white/85 transition-colors hover:text-white"
+              className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10 xl:h-11 xl:w-11"
             >
-              <IconWishlist className="h-[1.35rem] w-[1.35rem]" />
+              <IconWishlist className="h-5 w-5 xl:h-[1.35rem] xl:w-[1.35rem]" />
               {wishlistCount > 0 && (
-                <span className="absolute top-1.5 right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-white px-1 text-[10px] font-semibold text-[#5E062A]">
+                <span className="absolute top-1 right-0.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-white px-1 text-[9px] font-semibold text-[#5E062A] sm:top-1.5 sm:right-1 sm:h-4 sm:min-w-4 sm:text-[10px]">
                   {wishlistCount}
                 </span>
               )}
@@ -254,25 +285,27 @@ export default function Navbar() {
             <Link
               href="/account"
               aria-label="Account"
-              className="inline-flex h-11 w-11 items-center justify-center text-white/85 transition-colors hover:text-white"
+              className="inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10 xl:h-11 xl:w-11"
             >
-              <IconAccount className="h-[1.35rem] w-[1.35rem]" />
+              <IconAccount className="h-5 w-5 xl:h-[1.35rem] xl:w-[1.35rem]" />
             </Link>
             <button
               type="button"
+              data-nav-cart
               aria-label={`Bag (${cartCount})`}
               onClick={() => setCartOpen(true)}
-              className="relative inline-flex h-11 w-11 items-center justify-center text-white/85 transition-colors hover:text-white"
+              className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10 xl:h-11 xl:w-11"
             >
-              <IconBag className="h-[1.4rem] w-[1.4rem]" />
-              <span className="absolute top-1.5 right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-white px-1 text-[10px] font-semibold text-[#5E062A]">
+              <IconBag className="h-5 w-5 xl:h-[1.4rem] xl:w-[1.4rem]" />
+              <span className="absolute top-1 right-0.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-white px-1 text-[9px] font-semibold text-[#5E062A] sm:top-1.5 sm:right-1 sm:h-4 sm:min-w-4 sm:text-[10px]">
                 {cartCount}
               </span>
             </button>
+            {/* Hamburger: phones + tablets only */}
             <button
               type="button"
               aria-label="Open menu"
-              className="ml-0.5 inline-flex h-11 w-11 items-center justify-center text-white xl:hidden"
+              className="ml-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center text-white sm:h-10 sm:w-10 lg:hidden"
               onClick={() => setMenuOpen(true)}
             >
               <span className="flex w-5 flex-col gap-1.5">
@@ -292,7 +325,7 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40"
+            className="fixed inset-0 z-40 lg:hidden"
             style={{
               backgroundColor: '#5E062A',
               backgroundImage: "url('/images/navbar-velvet.jpg')",
@@ -300,19 +333,19 @@ export default function Navbar() {
               backgroundPosition: 'center',
             }}
           >
-            <div className="mx-auto flex h-[5.25rem] max-w-[1600px] items-center justify-between px-4 md:h-[5.85rem] md:px-8">
+            <div className="mx-auto flex h-[4.65rem] max-w-[1600px] items-center justify-between px-3 sm:h-[5.25rem] sm:px-4 md:h-[5.85rem] md:px-8">
               <Link
                 href="/"
                 aria-label="Velvet Shell home"
-                className="relative block h-[5.1rem] w-[5.1rem] overflow-visible md:h-[6.25rem] md:w-[6.25rem]"
+                className="relative block h-[4.25rem] w-[4.25rem] overflow-visible sm:h-[5.1rem] sm:w-[5.1rem] md:h-[5.5rem] md:w-[5.5rem]"
                 onClick={() => setMenuOpen(false)}
               >
                 <Image
                   src="/logo-splash.png"
                   alt=""
                   fill
-                  className="origin-center object-contain scale-[1.36]"
-                  sizes="(max-width: 768px) 100px, 120px"
+                  className="origin-center object-contain scale-[1.22] sm:scale-[1.28]"
+                  sizes="88px"
                   style={{ mixBlendMode: 'screen' }}
                 />
               </Link>
@@ -325,8 +358,8 @@ export default function Navbar() {
               </button>
             </div>
 
-            <div className="flex h-[calc(100%-7rem)] flex-col justify-between px-6 pb-12">
-              <nav className="mt-6 flex flex-col gap-1">
+            <div className="flex h-[calc(100%-7rem)] flex-col justify-between overflow-y-auto px-6 pb-12">
+              <nav className="mt-4 flex flex-col gap-0.5 sm:mt-6 sm:gap-1">
                 {links.map((link, i) => (
                   <motion.div
                     key={link.label}
@@ -337,7 +370,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={() => setMenuOpen(false)}
-                      className={`block py-2.5 text-3xl font-semibold tracking-[0.04em] uppercase sm:text-4xl ${
+                      className={`block py-2 text-[1.65rem] font-semibold tracking-[0.04em] uppercase sm:py-2.5 sm:text-3xl md:text-4xl ${
                         isActive(link) ? 'text-white' : 'text-white/75'
                       }`}
                     >
@@ -350,7 +383,7 @@ export default function Navbar() {
                             key={child.label}
                             href={child.href}
                             onClick={() => setMenuOpen(false)}
-                            className={`py-2 text-lg font-medium tracking-[0.06em] uppercase ${
+                            className={`py-2 text-base font-medium tracking-[0.06em] uppercase sm:text-lg ${
                               category === child.match ? 'text-white' : 'text-white/65'
                             }`}
                           >
