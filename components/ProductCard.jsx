@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
+import AppImage from '@/components/AppImage';
 import { money } from '@/lib/format';
 import { getProductVariants as getDummyVariants } from '@/lib/products';
 import { flyToCart, prefersReducedMotion } from '@/lib/fly-to-cart';

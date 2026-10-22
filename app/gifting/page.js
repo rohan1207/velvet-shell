@@ -3,7 +3,7 @@ import CorporateGifting from '@/components/CorporateGifting';
 export const metadata = {
   title: 'Corporate Gifting',
   description:
-    'Corporate gifting considered beyond the expected — curated jewellery and lifestyle gifts for clients, teams, leaders and milestones.',
+    'Corporate gifting and wedding favours — curated jewellery in Velvet Shell packaging for clients, teams, leaders and celebrations.',
 };
 
 export default function GiftingPage() {

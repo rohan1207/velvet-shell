@@ -1,13 +1,12 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useStore } from '@/context/StoreContext';
-import { getProduct } from '@/lib/products';
 import { money } from '@/lib/format';
+import ProductThumb from '@/components/ProductThumb';
 
 export default function CartPage() {
-  const { cart, updateQty, removeFromCart, cartTotal } = useStore();
+  const { cart, updateQty, removeFromCart, cartTotal, getProduct } = useStore();
 
   return (
     <div className="bg-ivory pt-28 pb-24 md:pt-36">
@@ -25,21 +24,34 @@ export default function CartPage() {
             <ul className="mt-12 divide-y divide-cream border-y border-cream">
               {cart.map((item) => {
                 const product = getProduct(item.slug);
-                if (!product) return null;
+                const name = product?.name || item.name || item.slug;
+                const price = product?.price ?? item.price ?? 0;
+                const href = `/shop/${product?.slug || item.slug}`;
                 return (
                   <li key={item.id} className="flex gap-4 py-6 md:gap-6 md:py-8">
-                    <Link href={`/shop/${product.slug}`} className="relative h-24 w-20 shrink-0 overflow-hidden rounded-lg bg-cream md:h-32 md:w-24 md:rounded-none">
-                      <Image src={product.image} alt={product.name} fill className="object-cover" sizes="96px" />
+                    <Link
+                      href={href}
+                      className="relative h-24 w-20 shrink-0 overflow-hidden rounded-lg bg-cream ring-1 ring-ink/6 md:h-32 md:w-24"
+                    >
+                      <ProductThumb
+                        product={product}
+                        item={item}
+                        alt={name}
+                        sizes="96px"
+                        className="object-cover object-center"
+                      />
                     </Link>
                     <div className="flex min-w-0 flex-1 flex-col">
                       <div className="flex justify-between gap-3">
                         <div className="min-w-0">
-                          <p className="font-display text-lg leading-snug md:text-2xl">{product.name}</p>
+                          <p className="font-display text-lg leading-snug md:text-2xl">{name}</p>
                           <p className="mt-1.5 text-xs text-stone md:mt-2">
                             {item.metal} · {item.size}
                           </p>
                         </div>
-                        <p className="font-num shrink-0 text-sm md:text-base">{money(product.price * item.qty)}</p>
+                        <p className="font-num shrink-0 text-sm md:text-base">
+                          {money(price * item.qty)}
+                        </p>
                       </div>
                       <div className="mt-auto flex items-center justify-between pt-4">
                         <div className="flex items-center gap-4">
@@ -51,7 +63,11 @@ export default function CartPage() {
                             +
                           </button>
                         </div>
-                        <button type="button" onClick={() => removeFromCart(item.id)} className="text-[10px] tracking-[0.2em] uppercase text-stone">
+                        <button
+                          type="button"
+                          onClick={() => removeFromCart(item.id)}
+                          className="text-[10px] tracking-[0.2em] text-stone uppercase"
+                        >
                           Remove
                         </button>
                       </div>
@@ -65,7 +81,10 @@ export default function CartPage() {
                 <p className="text-sm text-stone">Subtotal</p>
                 <p className="font-num text-3xl text-ink md:text-4xl">{money(cartTotal)}</p>
               </div>
-              <Link href="/checkout" className="flex h-12 items-center rounded-full bg-ink px-10 text-[11px] tracking-[0.28em] text-ivory uppercase">
+              <Link
+                href="/checkout"
+                className="flex h-12 items-center rounded-full bg-ink px-10 text-[11px] tracking-[0.28em] text-ivory uppercase"
+              >
                 Checkout
               </Link>
             </div>

@@ -127,6 +127,36 @@ const giftingMenu = {
   ],
 };
 
+const accessoriesMenu = {
+  eyebrow: 'Accessories',
+  line: 'Brooches and charms — small finishes with presence.',
+  exploreHref: '/shop?category=cuffs',
+  exploreLabel: 'Browse accessories',
+  columns: [
+    {
+      title: 'Accessories',
+      links: [
+        { href: '/shop?category=cuffs', label: 'Brooches' },
+        { href: '/shop?category=charms', label: 'Charms' },
+      ],
+    },
+  ],
+  features: [
+    {
+      href: '/shop?category=cuffs',
+      image: '/images/banners/brooches/calla.jpg',
+      label: 'Brooches',
+      note: 'Pinned to lapel or dress',
+    },
+    {
+      href: '/shop?category=charms',
+      image: '/images/banners/brooches/bamboo.jpg',
+      label: 'Charms',
+      note: 'Tiny stories in metal',
+    },
+  ],
+};
+
 const brandMenu = {
   eyebrow: 'Brand',
   line: 'The house, the story, and how we care for each piece.',
@@ -267,7 +297,15 @@ function MegaPanel({ menu, onNavigate }) {
 
 export default function MegaMenu({ open, onOpen, onClose }) {
   const menu =
-    open === 'shop' ? shopMenu : open === 'brand' ? brandMenu : open === 'gifting' ? giftingMenu : null;
+    open === 'shop'
+      ? shopMenu
+      : open === 'brand'
+        ? brandMenu
+        : open === 'gifting'
+          ? giftingMenu
+          : open === 'accessories'
+            ? accessoriesMenu
+            : null;
 
   return (
     <AnimatePresence>
@@ -306,4 +344,4 @@ export default function MegaMenu({ open, onOpen, onClose }) {
   );
 }
 
-export { shopMenu, brandMenu, giftingMenu };
+export { shopMenu, brandMenu, giftingMenu, accessoriesMenu };

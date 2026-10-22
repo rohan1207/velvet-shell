@@ -25,20 +25,34 @@
 
 :root {
   --site-promo-h: 2.25rem;
+  /* Mobile / tablet: single brand row */
   --site-nav-h: 4.65rem;
 }
 
 @media (min-width: 640px) {
   :root {
     --site-promo-h: 2.5rem;
-    --site-nav-h: 5.25rem;
+    --site-nav-h: 5.1rem;
   }
 }
 
 @media (min-width: 768px) {
   :root {
     --site-promo-h: 2.75rem;
-    --site-nav-h: 5.85rem;
+    --site-nav-h: 5.25rem;
+  }
+}
+
+/* Desktop: brand row + category row */
+@media (min-width: 1024px) {
+  :root {
+    --site-nav-h: 7.55rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --site-nav-h: 7.85rem;
   }
 }
 

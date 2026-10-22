@@ -1,38 +1,38 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
+import AppImage from '@/components/AppImage';
 
 const categories = [
   {
     label: 'Earrings',
     href: '/shop?category=earrings',
-    image: '/categories/earrings.png',
+    image: '/categories/earrings-g1.png',
   },
   {
     label: 'Bracelets',
     href: '/shop?category=bracelets',
-    image: '/categories/bracelate.png',
+    image: '/categories/bracelate-g1.png',
   },
   {
     label: 'Necklaces',
     href: '/shop?category=necklaces',
-    image: '/categories/necklace.png',
+    image: '/categories/necklace-g1.png',
   },
   {
     label: 'Rings',
     href: '/shop?category=rings',
-    image: '/categories/ring.png',
+    image: '/categories/ring-g1.png',
   },
   {
-    label: 'Anklets',
-    href: '/shop?category=anklets',
-    image: '/categories/anklet.png',
+    label: 'Chokers',
+    href: '/shop?category=chokers',
+    image: '/categories/choker-g1.png',
   },
   {
     label: 'Sets',
     href: '/shop?category=sets',
-    image: '/categories/necklace.png',
+    image: '/categories/necklace-g1.png',
   },
 ];
 
@@ -61,7 +61,7 @@ export default function CategoryCircles() {
                 className="group flex w-full max-w-[11.5rem] flex-col items-center text-center outline-none"
               >
                 <span className="relative block aspect-[5/6] w-full overflow-visible transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] group-active:scale-[0.98]">
-                  <Image
+                  <AppImage
                     src={category.image}
                     alt={category.label}
                     fill

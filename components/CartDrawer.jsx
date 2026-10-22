@@ -1,10 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from '@/context/StoreContext';
 import { money } from '@/lib/format';
+import ProductThumb from '@/components/ProductThumb';
 
 export default function CartDrawer() {
   const {
@@ -70,34 +70,34 @@ export default function CartDrawer() {
                 <ul className="space-y-7 py-6">
                   {cart.map((item) => {
                     const product = getProduct(item.slug);
-                    if (!product) return null;
-                    const line = product.price * item.qty;
+                    const name = product?.name || item.name || item.slug;
+                    const price = product?.price ?? item.price ?? 0;
+                    const line = price * item.qty;
+                    const href = `/shop/${product?.slug || item.slug}`;
                     return (
                       <li key={item.id} className="flex gap-4">
                         <Link
-                          href={`/shop/${product.slug}`}
+                          href={href}
                           onClick={() => setCartOpen(false)}
-                          className="relative h-28 w-24 shrink-0 overflow-hidden bg-pearl"
+                          className="relative h-28 w-24 shrink-0 overflow-hidden rounded-lg bg-pearl ring-1 ring-ink/6"
                         >
-                          <Image
-                            src={product.image}
-                            alt={product.name}
-                            fill
-                            className="object-cover"
+                          <ProductThumb
+                            product={product}
+                            item={item}
+                            alt={name}
                             sizes="96px"
+                            className="object-cover object-center"
                           />
                         </Link>
                         <div className="flex min-w-0 flex-1 flex-col">
                           <div className="flex justify-between gap-3">
                             <div className="min-w-0">
-                              <p className="font-display text-xl leading-tight text-ink">
-                                {product.name}
-                              </p>
+                              <p className="font-display text-xl leading-tight text-ink">{name}</p>
                               <p className="mt-1.5 text-xs font-light text-ink/85">
                                 {item.metal} · {item.size}
                               </p>
                               <p className="mt-1 text-xs font-light text-ink/85">
-                                <span className="font-num">{money(product.price)}</span> each
+                                <span className="font-num">{money(price)}</span> each
                               </p>
                             </div>
                             <p className="font-num shrink-0 text-sm text-ink">{money(line)}</p>

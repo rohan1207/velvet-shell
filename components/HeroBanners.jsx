@@ -14,53 +14,49 @@ const slides = [
     id: 'earrings',
     label: 'Earrings',
     index: '01',
-    eyebrow: 'Shell Edit',
-    titleLead: 'Light that falls',
-    titleAccent: 'like tide.',
-    description: 'Sculptural drops in champagne gold and baroque pearl — worn like a soft pulse of light.',
+    titleLead: 'Shop',
+    titleAccent: 'earrings',
+    description: 'Drops, hoops, and studs in silver and gold.',
     cta: 'Shop earrings',
     href: shopCategoryHref('earrings'),
     image: '/images/category-banner-earrings.jpg',
-    alt: 'Nature storytelling — gold orchid earrings among white blooms',
+    alt: 'Gold orchid earrings among white blooms',
   },
   {
     id: 'necklace',
     label: 'Necklaces',
     index: '02',
-    eyebrow: 'Shell Edit',
-    titleLead: 'A collar like',
-    titleAccent: 'a chamber.',
-    description: 'Architectural gold and irregular nacre — a quiet architecture for the collarbone.',
+    titleLead: 'Shop',
+    titleAccent: 'necklaces',
+    description: 'Pendants and chains for the collarbone.',
     cta: 'Shop necklaces',
     href: shopCategoryHref('necklaces'),
     image: '/images/category-banner-necklaces.jpg',
-    alt: 'Nature storytelling — silver floral pendant on a white lily',
+    alt: 'Silver floral pendant on a white lily',
   },
   {
     id: 'rings',
     label: 'Rings',
     index: '03',
-    eyebrow: 'Shell Edit',
-    titleLead: 'A seal of',
-    titleAccent: 'quiet gold.',
-    description: 'Signets and stacks with weight you feel — never noise, only presence.',
+    titleLead: 'Shop',
+    titleAccent: 'rings',
+    description: 'Sculptural forms made to be worn and kept.',
     cta: 'Shop rings',
     href: shopCategoryHref('rings'),
     image: '/images/category-banner-rings.jpg',
-    alt: 'Nature storytelling — floral rings on living branches',
+    alt: 'Floral rings on living branches',
   },
   {
     id: 'bracelets',
     label: 'Bracelets',
     index: '04',
-    eyebrow: 'Shell Edit',
-    titleLead: 'Foam and metal,',
-    titleAccent: 'worn softly.',
-    description: 'Pearl lines and sculptural cuffs — a soft conversation for the wrist.',
+    titleLead: 'Shop',
+    titleAccent: 'bracelets',
+    description: 'Soft forms for the wrist.',
     cta: 'Shop bracelets',
     href: shopCategoryHref('bracelets'),
     image: '/images/category-banner-bracelets.jpg',
-    alt: 'Nature storytelling — clover leaves in soft forest light',
+    alt: 'Bracelets among clover leaves in soft forest light',
   },
 ];
 
@@ -139,18 +135,6 @@ export default function HeroBanners() {
       {/* Left editorial panel */}
       <div className="absolute inset-0 z-10 flex items-center pt-20 md:pt-24">
         <div className="mx-auto flex w-full max-w-[1600px] items-stretch gap-8 px-5 md:px-10">
-          {/* Vertical brand rail */}
-          <div className="hidden shrink-0 flex-col items-center justify-center gap-6 pt-8 md:flex">
-            <span className="h-16 w-px bg-gradient-to-b from-transparent via-[#5E062A]/45 to-transparent" />
-            <p
-              className="font-display text-[11px] tracking-[0.42em] text-[#5E062A]/55 uppercase"
-              style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
-            >
-              Velvet Shell
-            </p>
-            <span className="h-16 w-px bg-gradient-to-b from-transparent via-[#D4AF64]/55 to-transparent" />
-          </div>
-
           <div className="relative max-w-xl pb-24 pt-40 md:max-w-[36rem] md:pb-16 md:pt-40">
             <AnimatePresence initial={false}>
               <motion.div
@@ -165,12 +149,7 @@ export default function HeroBanners() {
                   <span className="font-display text-5xl leading-none tracking-[-0.04em] text-[#5E062A]/18 md:text-6xl">
                     {slide.index}
                   </span>
-                  <div>
-                    <p className="text-[10px] font-medium tracking-[0.36em] text-[#D4AF64] uppercase">
-                      {slide.eyebrow}
-                    </p>
-                    <p className="mt-1 text-[11px] tracking-[0.22em] text-[#2D2B2B]/45 uppercase">{slide.label}</p>
-                  </div>
+                  <p className="text-[11px] tracking-[0.22em] text-[#2D2B2B]/45 uppercase">{slide.label}</p>
                 </div>
 
                 <h1 className="font-display mt-7 text-[2.85rem] leading-[1.08] tracking-[-0.02em] text-ink sm:text-5xl md:text-[3.75rem] lg:text-[4.25rem]">

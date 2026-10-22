@@ -8,32 +8,84 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { useStore } from '@/context/StoreContext';
 import MegaMenu from './MegaMenu';
 
-const leftLinks = [
-  { href: '/', label: 'Home', match: 'home' },
+/** Top row — house links (left of logo) */
+const houseLinks = [
+  { href: '/', label: 'Home', match: 'home', icon: 'home' },
+  { href: '/gifting', label: 'Gifting', match: 'gifting', mega: 'gifting', icon: 'gifting' },
+  // Shop mega — paused for now
+  // { href: '/shop', label: 'Shop', match: 'shop', mega: 'shop' },
+  { href: '/about', label: 'Brand', match: 'brand', mega: 'brand', icon: 'brand' },
+];
+
+/** Second row — product categories (full width, desktop) */
+const categoryLinks = [
   { href: '/shop?category=earrings', label: 'Earrings', match: 'earrings' },
   { href: '/shop?category=bracelets', label: 'Bracelets', match: 'bracelets' },
   { href: '/shop?category=necklaces', label: 'Necklaces', match: 'necklaces' },
   { href: '/shop?category=pendants', label: 'Pendants', match: 'pendants' },
   { href: '/shop?category=chokers', label: 'Chokers', match: 'chokers' },
   { href: '/shop?category=rings', label: 'Rings', match: 'rings' },
-];
-
-const rightLinks = [
+  {
+    href: '/shop?category=cuffs',
+    label: 'Accessories',
+    match: 'accessories',
+    mega: 'accessories',
+    children: [
+      { href: '/shop?category=cuffs', label: 'Brooches', match: 'cuffs' },
+      { href: '/shop?category=charms', label: 'Charms', match: 'charms' },
+    ],
+  },
   { href: '/shop?category=anklets', label: 'Anklets', match: 'anklets' },
   { href: '/shop?category=sets', label: 'Sets', match: 'sets' },
-  { href: '/shop?category=cuffs', label: 'Brooches', match: 'cuffs' },
-  { href: '/gifting', label: 'Gifting', match: 'gifting', mega: 'gifting' },
-  { href: '/shop', label: 'Shop', match: 'shop', mega: 'shop' },
-  { href: '/about', label: 'Brand', match: 'brand', mega: 'brand' },
 ];
 
-const links = [...leftLinks, ...rightLinks];
+/** Mobile drawer — house + categories; Accessories expands to Brooches / Charms */
+const mobileLinks = [
+  ...houseLinks,
+  ...categoryLinks.flatMap((link) =>
+    link.children?.length
+      ? [
+          { href: link.href, label: link.label, match: link.match, section: true },
+          ...link.children,
+        ]
+      : [link],
+  ),
+];
 
-/**
- * Desktop nav link — fluid type/padding so small laptops never collide with the logo.
- * lg (~1024–1279): compact · xl (~1280–1535): mid · 2xl (1536+): full
- */
-function NavLink({ link, active, onOpenMega, onCloseMega }) {
+function HouseIcon({ name, className = 'h-4 w-4' }) {
+  if (name === 'home') return <IconHome className={className} />;
+  if (name === 'gifting') return <IconGift className={className} />;
+  if (name === 'brand') return <IconBrand className={className} />;
+  return null;
+}
+
+function HouseLink({ link, active, onOpenMega, onCloseMega }) {
+  return (
+    <Link
+      href={link.href}
+      aria-label={link.icon ? link.label : undefined}
+      onMouseEnter={() => {
+        if (link.mega) onOpenMega(link.mega);
+        else onCloseMega();
+      }}
+      className={`relative inline-flex shrink-0 items-center gap-1.5 px-2 py-1 font-label text-[10px] font-semibold tracking-[0.14em] uppercase transition-colors duration-300 xl:px-2.5 xl:text-[11px] xl:tracking-[0.16em] ${
+        active ? 'text-white' : 'text-white/75 hover:text-white'
+      }`}
+    >
+      {link.icon ? <HouseIcon name={link.icon} className="h-4 w-4 xl:h-[1.1rem] xl:w-[1.1rem]" /> : null}
+      <span>{link.label}</span>
+      {active ? (
+        <motion.span
+          layoutId="nav-house-underline"
+          className="absolute inset-x-2 -bottom-0.5 h-px bg-gold"
+          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+        />
+      ) : null}
+    </Link>
+  );
+}
+
+function CategoryLink({ link, active, onOpenMega, onCloseMega }) {
   return (
     <Link
       href={link.href}
@@ -41,19 +93,78 @@ function NavLink({ link, active, onOpenMega, onCloseMega }) {
         if (link.mega) onOpenMega(link.mega);
         else onCloseMega();
       }}
-      className={`relative shrink-0 px-1 py-1 text-[10px] font-semibold tracking-[0.06em] uppercase transition-colors duration-300 xl:px-1.5 xl:text-[11px] xl:tracking-[0.08em] 2xl:px-2.5 2xl:text-[13px] 2xl:tracking-[0.1em] ${
-        active ? 'text-white' : 'text-white/75 hover:text-white'
+      className={`relative shrink-0 px-2.5 py-2.5 font-label text-[11px] font-medium tracking-[0.14em] uppercase transition-colors duration-300 sm:px-3 md:px-3.5 xl:px-4 xl:text-[12px] xl:tracking-[0.16em] ${
+        active ? 'text-white' : 'text-white/70 hover:text-white'
       }`}
     >
       {link.label}
-      {active && (
+      {active ? (
         <motion.span
-          layoutId="nav-underline"
-          className="absolute inset-x-1 -bottom-0.5 h-px bg-gold xl:inset-x-1.5 2xl:inset-x-2.5"
+          layoutId="nav-category-underline"
+          className="absolute inset-x-2.5 bottom-1 h-px bg-gold md:inset-x-3"
           transition={{ type: 'spring', stiffness: 380, damping: 32 }}
         />
-      )}
+      ) : null}
     </Link>
+  );
+}
+
+function IconHome({ className = 'h-5 w-5' }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <path
+        d="M4.5 10.8 12 4.5l7.5 6.3V19a1.5 1.5 0 0 1-1.5 1.5h-3.75v-5.25h-4.5V20.5H6A1.5 1.5 0 0 1 4.5 19v-8.2Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconGift({ className = 'h-5 w-5' }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <path
+        d="M4.5 10.5h15v9.2a1.3 1.3 0 0 1-1.3 1.3H5.8a1.3 1.3 0 0 1-1.3-1.3v-9.2Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path d="M3.8 7.2h16.4v3.3H3.8V7.2Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M12 7.2v13.8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <path
+        d="M12 7.2c-.9-1.9-2.5-2.9-4-2.4s-2.3 2.2-1.5 3.5L12 7.2Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 7.2c.9-1.9 2.5-2.9 4-2.4s2.3 2.2 1.5 3.5L12 7.2Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconBrand({ className = 'h-5 w-5' }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <path
+        d="M12 3.5c2.4 2.1 4.8 3.7 7.2 4.6-.4 5.4-2.8 9.1-7.2 12.1-4.4-3-6.8-6.7-7.2-12.1 2.4-.9 4.8-2.5 7.2-4.6Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 8.2c.9.8 1.9 1.4 2.9 1.8-.2 2.1-1.1 3.5-2.9 4.7-1.8-1.2-2.7-2.6-2.9-4.7 1-.4 2-1 2.9-1.8Z"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
@@ -118,6 +229,18 @@ function IconWishlist({ className = 'h-5 w-5' }) {
   );
 }
 
+function IconButton({ className = '', children, ...props }) {
+  return (
+    <button
+      type="button"
+      className={`inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10 ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}
+
 export default function Navbar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -140,7 +263,6 @@ export default function Navbar() {
     setMega(null);
   }, [pathname, searchParams, setMenuOpen]);
 
-  // Clear hamburger drawer if viewport grows into desktop nav
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)');
     const onChange = () => {
@@ -168,9 +290,7 @@ export default function Navbar() {
 
   function isActive(link) {
     if (link.mega && mega === link.mega) return true;
-    if (link.match === 'home') {
-      return pathname === '/';
-    }
+    if (link.match === 'home') return pathname === '/';
     if (link.match === 'brand') {
       return (
         pathname.startsWith('/about') ||
@@ -178,10 +298,11 @@ export default function Navbar() {
         pathname.startsWith('/journal')
       );
     }
-    if (link.match === 'gifting') {
-      return pathname.startsWith('/gifting');
-    }
+    if (link.match === 'gifting') return pathname.startsWith('/gifting');
     if (link.match === 'shop') return pathname === '/shop' && !category;
+    if (link.match === 'accessories') {
+      return pathname.startsWith('/shop') && (category === 'cuffs' || category === 'charms');
+    }
     if (pathname.startsWith('/shop')) return category === link.match;
     return false;
   }
@@ -207,17 +328,15 @@ export default function Navbar() {
         }}
         onMouseLeave={scheduleCloseMega}
       >
-        {/*
-          Breakpoints:
-          - < lg (phones + tablets): hamburger
-          - lg+: desktop menus, fluid type so small/mid laptops never hit the logo
-        */}
-        <div className="relative mx-auto grid h-[4.65rem] max-w-[1600px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-1 px-3 sm:h-[5.25rem] sm:px-4 md:h-[5.85rem] md:px-5 lg:gap-2 lg:px-4 xl:gap-3 xl:px-6 2xl:gap-4 2xl:px-8">
-          {/* Left — product menus (desktop only) */}
-          <nav className="relative z-10 hidden min-w-0 items-center justify-start overflow-hidden lg:flex lg:pr-2 xl:pr-3">
-            <div className="flex min-w-0 flex-nowrap items-center">
-              {leftLinks.map((link) => (
-                <NavLink
+        {/* ——— Row 1: house links · logo · utilities ——— */}
+        <div className="relative mx-auto grid h-[4.65rem] max-w-[1600px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 px-3 sm:h-[5.1rem] sm:px-4 md:h-[5.25rem] md:px-6 lg:px-8">
+          <nav
+            className="relative z-10 hidden min-w-0 items-center justify-start lg:flex"
+            aria-label="House"
+          >
+            <div className="flex items-center gap-0.5">
+              {houseLinks.map((link) => (
+                <HouseLink
                   key={link.label}
                   link={link}
                   active={isActive(link)}
@@ -229,31 +348,90 @@ export default function Navbar() {
           </nav>
           <div className="lg:hidden" aria-hidden />
 
-          {/* Center — logo (reserved column, above menus) */}
           <Link
             href="/"
             aria-label="Velvet Shell home"
             className="relative z-20 justify-self-center"
             onMouseEnter={scheduleCloseMega}
           >
-            <span className="relative block h-[4.25rem] w-[4.25rem] overflow-visible sm:h-[5.1rem] sm:w-[5.1rem] md:h-[5.5rem] md:w-[5.5rem] lg:h-[5.25rem] lg:w-[5.25rem] xl:h-[5.75rem] xl:w-[5.75rem] 2xl:h-[6.25rem] 2xl:w-[6.25rem]">
+            <span className="relative block h-[4.1rem] w-[4.1rem] overflow-visible sm:h-[4.75rem] sm:w-[4.75rem] md:h-[5rem] md:w-[5rem] lg:h-[4.85rem] lg:w-[4.85rem] xl:h-[5.25rem] xl:w-[5.25rem]">
               <Image
                 src="/logo-splash.png"
                 alt="Velvet Shell"
                 fill
                 priority
-                className="origin-center object-contain scale-[1.22] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.32] sm:scale-[1.28] lg:scale-[1.2] xl:scale-[1.28] 2xl:scale-[1.36]"
-                sizes="(max-width: 1024px) 88px, 120px"
+                className="origin-center object-contain scale-[1.22] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.32] sm:scale-[1.26] lg:scale-[1.2] xl:scale-[1.28]"
+                sizes="(max-width: 1024px) 88px, 110px"
                 style={{ mixBlendMode: 'screen' }}
               />
             </span>
           </Link>
 
-          {/* Right — Gifting, Shop, Brand + icons */}
-          <div className="relative z-10 flex min-w-0 items-center justify-end gap-0 sm:gap-0.5 lg:pl-2 xl:pl-3">
-            <nav className="mr-0.5 hidden min-w-0 items-center overflow-hidden lg:flex">
-              {rightLinks.map((link) => (
-                <NavLink
+          <div className="relative z-10 flex min-w-0 items-center justify-end gap-1 sm:gap-1.5">
+            <button
+              type="button"
+              aria-label="Search"
+              onClick={() => setSearchOpen(true)}
+              onMouseEnter={scheduleCloseMega}
+              className="group inline-flex h-8 max-w-[9.5rem] items-center gap-2 rounded-full border border-white/20 bg-white/10 px-2.5 text-white/80 transition-colors hover:border-white/35 hover:bg-white/15 hover:text-white sm:h-9 sm:max-w-none sm:gap-2.5 sm:px-3.5 md:h-9 md:min-w-[10.5rem]"
+            >
+              <IconSearch className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
+              <span className="truncate font-label text-[10px] tracking-[0.12em] text-white/55 uppercase transition-colors group-hover:text-white/75 sm:text-[11px]">
+                Search
+              </span>
+            </button>
+            <Link
+              href="/wishlist"
+              aria-label={`Wishlist (${wishlistCount})`}
+              className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10"
+            >
+              <IconWishlist className="h-5 w-5" />
+              {wishlistCount > 0 ? (
+                <span className="absolute top-1 right-0.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-white px-1 text-[9px] font-semibold text-[#5E062A] sm:top-1.5 sm:right-1">
+                  {wishlistCount}
+                </span>
+              ) : null}
+            </Link>
+            <Link
+              href="/account"
+              aria-label="Account"
+              className="inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10"
+            >
+              <IconAccount className="h-5 w-5" />
+            </Link>
+            <IconButton
+              data-nav-cart
+              aria-label={`Bag (${cartCount})`}
+              onClick={() => setCartOpen(true)}
+              className="relative"
+            >
+              <IconBag className="h-5 w-5" />
+              <span className="absolute top-1 right-0.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-white px-1 text-[9px] font-semibold text-[#5E062A] sm:top-1.5 sm:right-1">
+                {cartCount}
+              </span>
+            </IconButton>
+            <IconButton
+              aria-label="Open menu"
+              className="ml-0.5 lg:hidden"
+              onClick={() => setMenuOpen(true)}
+            >
+              <span className="flex w-5 flex-col gap-1.5">
+                <span className="h-px w-full bg-white" />
+                <span className="h-px w-full bg-white" />
+              </span>
+            </IconButton>
+          </div>
+        </div>
+
+        {/* ——— Row 2: categories (desktop / laptop) ——— */}
+        <nav
+          className="relative z-10 hidden border-t border-white/12 lg:block"
+          aria-label="Categories"
+        >
+          <div className="mx-auto flex max-w-[1600px] items-center justify-center overflow-x-auto px-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden xl:px-8">
+            <div className="flex w-max min-w-0 flex-nowrap items-center justify-center gap-x-1 xl:gap-x-1.5">
+              {categoryLinks.map((link) => (
+                <CategoryLink
                   key={link.label}
                   link={link}
                   active={isActive(link)}
@@ -261,60 +439,9 @@ export default function Navbar() {
                   onCloseMega={scheduleCloseMega}
                 />
               ))}
-            </nav>
-            <button
-              type="button"
-              aria-label="Search"
-              onClick={() => setSearchOpen(true)}
-              className="inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10 xl:h-11 xl:w-11"
-            >
-              <IconSearch className="h-5 w-5 xl:h-[1.35rem] xl:w-[1.35rem]" />
-            </button>
-            <Link
-              href="/wishlist"
-              aria-label={`Wishlist (${wishlistCount})`}
-              className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10 xl:h-11 xl:w-11"
-            >
-              <IconWishlist className="h-5 w-5 xl:h-[1.35rem] xl:w-[1.35rem]" />
-              {wishlistCount > 0 && (
-                <span className="absolute top-1 right-0.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-white px-1 text-[9px] font-semibold text-[#5E062A] sm:top-1.5 sm:right-1 sm:h-4 sm:min-w-4 sm:text-[10px]">
-                  {wishlistCount}
-                </span>
-              )}
-            </Link>
-            <Link
-              href="/account"
-              aria-label="Account"
-              className="inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10 xl:h-11 xl:w-11"
-            >
-              <IconAccount className="h-5 w-5 xl:h-[1.35rem] xl:w-[1.35rem]" />
-            </Link>
-            <button
-              type="button"
-              data-nav-cart
-              aria-label={`Bag (${cartCount})`}
-              onClick={() => setCartOpen(true)}
-              className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10 xl:h-11 xl:w-11"
-            >
-              <IconBag className="h-5 w-5 xl:h-[1.4rem] xl:w-[1.4rem]" />
-              <span className="absolute top-1 right-0.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-white px-1 text-[9px] font-semibold text-[#5E062A] sm:top-1.5 sm:right-1 sm:h-4 sm:min-w-4 sm:text-[10px]">
-                {cartCount}
-              </span>
-            </button>
-            {/* Hamburger: phones + tablets only */}
-            <button
-              type="button"
-              aria-label="Open menu"
-              className="ml-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center text-white sm:h-10 sm:w-10 lg:hidden"
-              onClick={() => setMenuOpen(true)}
-            >
-              <span className="flex w-5 flex-col gap-1.5">
-                <span className="h-px w-full bg-white" />
-                <span className="h-px w-full bg-white" />
-              </span>
-            </button>
+            </div>
           </div>
-        </div>
+        </nav>
 
         <MegaMenu open={mega} onOpen={openMega} onClose={closeMega} />
       </header>
@@ -333,18 +460,18 @@ export default function Navbar() {
               backgroundPosition: 'center',
             }}
           >
-            <div className="mx-auto flex h-[4.65rem] max-w-[1600px] items-center justify-between px-3 sm:h-[5.25rem] sm:px-4 md:h-[5.85rem] md:px-8">
+            <div className="mx-auto flex h-[4.65rem] max-w-[1600px] items-center justify-between px-3 sm:h-[5.1rem] sm:px-4 md:px-8">
               <Link
                 href="/"
                 aria-label="Velvet Shell home"
-                className="relative block h-[4.25rem] w-[4.25rem] overflow-visible sm:h-[5.1rem] sm:w-[5.1rem] md:h-[5.5rem] md:w-[5.5rem]"
+                className="relative block h-[4.1rem] w-[4.1rem] overflow-visible sm:h-[4.75rem] sm:w-[4.75rem]"
                 onClick={() => setMenuOpen(false)}
               >
                 <Image
                   src="/logo-splash.png"
                   alt=""
                   fill
-                  className="origin-center object-contain scale-[1.22] sm:scale-[1.28]"
+                  className="origin-center object-contain scale-[1.22] sm:scale-[1.26]"
                   sizes="88px"
                   style={{ mixBlendMode: 'screen' }}
                 />
@@ -360,38 +487,30 @@ export default function Navbar() {
 
             <div className="flex h-[calc(100%-7rem)] flex-col justify-between overflow-y-auto px-6 pb-12">
               <nav className="mt-4 flex flex-col gap-0.5 sm:mt-6 sm:gap-1">
-                {links.map((link, i) => (
+                <p className="mb-2 font-label text-[10px] tracking-[0.22em] text-gold/90 uppercase">
+                  Menu
+                </p>
+                {mobileLinks.map((link, i) => (
                   <motion.div
                     key={link.label}
                     initial={{ y: 28, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.05 * i, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ delay: 0.04 * i, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Link
                       href={link.href}
                       onClick={() => setMenuOpen(false)}
-                      className={`block py-2 text-[1.65rem] font-semibold tracking-[0.04em] uppercase sm:py-2.5 sm:text-3xl md:text-4xl ${
-                        isActive(link) ? 'text-white' : 'text-white/75'
-                      }`}
+                      className={`flex items-center gap-2.5 py-2 text-[1.55rem] font-semibold tracking-[0.04em] uppercase sm:py-2.5 sm:text-3xl ${
+                        link.section
+                          ? 'mt-3 text-[0.95rem] tracking-[0.18em] text-gold/90 sm:text-base'
+                          : isActive(link)
+                            ? 'text-white'
+                            : 'text-white/75'
+                      } ${link.match === 'cuffs' || link.match === 'charms' ? 'pl-3 text-[1.25rem] sm:text-2xl' : ''}`}
                     >
-                      {link.label}
+                      {link.icon ? <HouseIcon name={link.icon} className="h-6 w-6" /> : null}
+                      <span>{link.label}</span>
                     </Link>
-                    {link.children?.length > 0 && (
-                      <div className="mb-2 ml-1 flex flex-col border-l border-white/20 pl-4">
-                        {link.children.map((child) => (
-                          <Link
-                            key={child.label}
-                            href={child.href}
-                            onClick={() => setMenuOpen(false)}
-                            className={`py-2 text-base font-medium tracking-[0.06em] uppercase sm:text-lg ${
-                              category === child.match ? 'text-white' : 'text-white/65'
-                            }`}
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
                   </motion.div>
                 ))}
               </nav>

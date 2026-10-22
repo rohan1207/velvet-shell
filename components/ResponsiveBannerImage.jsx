@@ -1,6 +1,7 @@
 'use client';
 
-import Image from 'next/image';
+import AppImage from '@/components/AppImage';
+import { withAssetVersion } from '@/lib/asset-version';
 import { mobileBannerSrc } from '@/lib/mobile-banner';
 
 /**
@@ -17,13 +18,14 @@ export default function ResponsiveBannerImage({
   sizes = '100vw',
   fill = true,
 }) {
-  const phone = mobileSrc || mobileBannerSrc(src);
+  const desktop = withAssetVersion(src);
+  const phone = withAssetVersion(mobileSrc || mobileBannerSrc(src));
 
   if (!fill) {
     return (
       <picture>
         <source media="(max-width: 767px)" srcSet={phone} />
-        <img src={src} alt={alt} className={className} />
+        <img src={desktop} alt={alt} className={className} />
       </picture>
     );
   }
@@ -31,7 +33,7 @@ export default function ResponsiveBannerImage({
   return (
     <>
       {/* Phone */}
-      <Image
+      <AppImage
         src={phone}
         alt={alt}
         fill
@@ -41,8 +43,8 @@ export default function ResponsiveBannerImage({
         className={`md:hidden ${className}`}
       />
       {/* Desktop / tablet */}
-      <Image
-        src={src}
+      <AppImage
+        src={desktop}
         alt={alt}
         fill
         priority={priority}

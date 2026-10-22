@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useStore } from '@/context/StoreContext';
-import { getProduct, collectionName } from '@/lib/products';
+import { collectionName } from '@/lib/products';
 import { money } from '@/lib/format';
 import { loadRazorpayScript } from '@/lib/razorpay-client';
+import ProductThumb from '@/components/ProductThumb';
 
 const emptyForm = {
   fullName: '',
@@ -35,6 +35,7 @@ export default function CheckoutPage() {
     selectAddress,
     addAddress,
     placeOrder,
+    getProduct,
   } = useStore();
 
   const [form, setForm] = useState(emptyForm);
@@ -71,14 +72,22 @@ export default function CheckoutPage() {
 
   const lines = useMemo(
     () =>
-      cart
-        .map((item) => {
-          const product = getProduct(item.slug);
-          if (!product) return null;
-          return { item, product, lineTotal: product.price * item.qty };
-        })
-        .filter(Boolean),
-    [cart],
+      cart.map((item) => {
+        const product = getProduct(item.slug);
+        const price = product?.price ?? item.price ?? 0;
+        return {
+          item,
+          product: product || {
+            slug: item.slug,
+            name: item.name || item.slug,
+            image: item.image,
+            price,
+            collection: '',
+          },
+          lineTotal: price * item.qty,
+        };
+      }),
+    [cart, getProduct],
   );
 
   function updateField(key, value) {
@@ -561,17 +570,17 @@ function OrderSummaryCard({ lines, cartCount, cartTotal }) {
       <ul className="flex-1 space-y-4 overflow-y-auto px-6 py-5">
         {lines.map(({ item, product, lineTotal }) => (
           <li key={item.id} className="flex gap-4">
-            <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-xl bg-cream">
-              <Image
-                src={product.image || product.image_url}
-                alt={product.name}
-                fill
-                className="object-cover"
+            <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-xl bg-cream ring-1 ring-ink/6">
+              <ProductThumb
+                product={product}
+                item={item}
+                alt={product.name || item.name}
                 sizes="64px"
+                className="object-cover object-center"
               />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm text-ink">{product.name}</p>
+              <p className="truncate text-sm text-ink">{product.name || item.name}</p>
               <p className="mt-0.5 text-[11px] font-light text-ink/55">
                 {collectionName(
                   typeof product.collection === 'string'

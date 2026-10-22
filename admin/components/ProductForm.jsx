@@ -24,6 +24,7 @@ function newVariant(label = 'Default', swatch = '#C5C5C5', primary = true) {
     features: [],
     material: materialForColor(label),
     length: 'Adjustable',
+    sizeTags: ['Adjustable'],
     reviews: { rating: 0, count: 0, highlights: [] },
     heroUrl: '',
     gallery: [],
@@ -81,13 +82,21 @@ export default function ProductForm({
       ...initial,
       shipping: normalizeShipping(initial.shipping),
       recommendedFamilyIds: initial.recommendedFamilyIds || [],
-      variants: (initial.variants?.length ? initial.variants : [newVariant()]).map((v) => ({
-        ...newVariant(),
-        ...v,
-        features: Array.isArray(v.features) ? v.features : [],
-        reviews: v.reviews || { rating: 0, count: 0, highlights: [] },
-        gallery: Array.isArray(v.gallery) ? v.gallery : [],
-      })),
+      variants: (initial.variants?.length ? initial.variants : [newVariant()]).map((v) => {
+        const sizeTags = Array.isArray(v.sizeTags)
+          ? v.sizeTags.map((t) => String(t || '').trim()).filter(Boolean)
+          : [];
+        const length = String(v.length || '').trim();
+        return {
+          ...newVariant(),
+          ...v,
+          features: Array.isArray(v.features) ? v.features : [],
+          reviews: v.reviews || { rating: 0, count: 0, highlights: [] },
+          gallery: Array.isArray(v.gallery) ? v.gallery : [],
+          sizeTags: sizeTags.length ? sizeTags : length ? [length] : [],
+          length: length || sizeTags[0] || '',
+        };
+      }),
       activeVariantIndex: 0,
     };
   });
@@ -95,6 +104,7 @@ export default function ProductForm({
   const [featuresText, setFeaturesText] = useState(() =>
     featuresToText(form.variants[0]?.features)
   );
+  const [sizeTagDraft, setSizeTagDraft] = useState('');
   const [uploadingHero, setUploadingHero] = useState(false);
   const [uploadingGallery, setUploadingGallery] = useState(false);
   const [notice, setNotice] = useState('');
@@ -119,6 +129,7 @@ export default function ProductForm({
   function switchVariant(index) {
     setForm((f) => ({ ...f, activeVariantIndex: index }));
     setFeaturesText(featuresToText(form.variants[index]?.features));
+    setSizeTagDraft('');
     setNotice('');
   }
 
@@ -150,6 +161,7 @@ export default function ProductForm({
       features: [...(source.features || [])],
       material: source.material,
       length: source.length,
+      sizeTags: [...(source.sizeTags || [])],
       reviews: { ...source.reviews, highlights: [...(source.reviews?.highlights || [])] },
       stock: source.stock,
       // intentionally NOT copying heroUrl / gallery
@@ -230,9 +242,15 @@ export default function ProductForm({
     const variants = form.variants.map((v, i) => {
       const features =
         i === form.activeVariantIndex ? textToFeatures(featuresText) : v.features || [];
+      const sizeTags = Array.isArray(v.sizeTags)
+        ? v.sizeTags.map((t) => String(t || '').trim()).filter(Boolean)
+        : [];
+      const length = sizeTags[0] || String(v.length || '').trim();
       return {
         ...v,
         features,
+        sizeTags,
+        length,
         price: Number(v.price) || 0,
         stock: Number(v.stock) || 0,
       };
@@ -650,17 +668,88 @@ export default function ProductForm({
               placeholder="Sterling Silver or 18K Gold Plated"
             />
           </label>
-          <label className="block">
-            <span className="text-xs text-[#7a736c]">Length / size</span>
-            <input
-              className="input mt-1"
-              value={variant.length}
-              onChange={(e) =>
-                patchVariant(form.activeVariantIndex, { length: e.target.value })
-              }
-              placeholder="Adjustable · 16–18 in"
-            />
-          </label>
+          <div className="block md:col-span-2">
+            <span className="text-xs text-[#7a736c]">Size pills / tags</span>
+            <p className="mt-1 text-[11px] leading-relaxed text-[#9a928a]">
+              Shown as Measure pills on the product page. Add size notes for petite pieces (e.g.
+              “Petite · ~1 cm”).
+            </p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {(variant.sizeTags?.length ? variant.sizeTags : []).map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#e6dfd4] bg-[#faf7f2] px-3 py-1.5 text-[11px] tracking-[0.06em] text-[#3a342f]"
+                >
+                  {tag}
+                  <button
+                    type="button"
+                    aria-label={`Remove ${tag}`}
+                    className="text-[#9a928a] transition-colors hover:text-[#5E062A]"
+                    onClick={() => {
+                      const next = (variant.sizeTags || []).filter((t) => t !== tag);
+                      patchVariant(form.activeVariantIndex, {
+                        sizeTags: next,
+                        length: next[0] || '',
+                      });
+                    }}
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+              {!variant.sizeTags?.length ? (
+                <span className="rounded-full border border-dashed border-[#e6dfd4] px-3 py-1.5 text-[11px] text-[#9a928a]">
+                  No size pills yet — storefront shows “One size”
+                </span>
+              ) : null}
+            </div>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <input
+                className="input min-w-[14rem] flex-1"
+                value={sizeTagDraft}
+                onChange={(e) => setSizeTagDraft(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key !== 'Enter') return;
+                  e.preventDefault();
+                  const tag = sizeTagDraft.trim();
+                  if (!tag) return;
+                  const existing = variant.sizeTags || [];
+                  if (existing.some((t) => t.toLowerCase() === tag.toLowerCase())) {
+                    setSizeTagDraft('');
+                    return;
+                  }
+                  const next = [...existing, tag];
+                  patchVariant(form.activeVariantIndex, {
+                    sizeTags: next,
+                    length: next[0] || '',
+                  });
+                  setSizeTagDraft('');
+                }}
+                placeholder="e.g. Petite · ~1 cm"
+              />
+              <button
+                type="button"
+                className="rounded-full border border-[#e6dfd4] bg-white px-4 py-2 text-[11px] tracking-[0.12em] text-[#3a342f] uppercase transition-colors hover:border-[#5E062A]/35 hover:text-[#5E062A]"
+                onClick={() => {
+                  const tag = sizeTagDraft.trim();
+                  if (!tag) return;
+                  const existing = variant.sizeTags || [];
+                  if (existing.some((t) => t.toLowerCase() === tag.toLowerCase())) {
+                    setSizeTagDraft('');
+                    return;
+                  }
+                  const next = [...existing, tag];
+                  patchVariant(form.activeVariantIndex, {
+                    sizeTags: next,
+                    length: next[0] || '',
+                  });
+                  setSizeTagDraft('');
+                }}
+              >
+                Add pill
+              </button>
+            </div>
+          </div>
           <label className="block">
             <span className="text-xs text-[#7a736c]">Review rating (0–5)</span>
             <input

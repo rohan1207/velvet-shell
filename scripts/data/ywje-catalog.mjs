@@ -212,6 +212,11 @@ function family(def) {
       const des = x.design || design;
       const typ = x.type || type;
       const len = x.length || length;
+      const sizeTags = Array.isArray(x.sizeTags)
+        ? x.sizeTags.map((t) => String(t || '').trim()).filter(Boolean)
+        : len
+          ? [len]
+          : [];
       return {
         slug: colored ? `${slug}-${slugify(x.colorLabel)}` : slug,
         colorLabel: x.colorLabel,
@@ -220,7 +225,8 @@ function family(def) {
         price: x.price,
         stock: x.stock ?? 0,
         material: mat,
-        length: len,
+        length: sizeTags[0] || len,
+        sizeTags,
         description:
           x.description ||
           desc({ name, design: des, type: typ, material: mat, closing: x.closing }),
@@ -641,7 +647,12 @@ export const FAMILIES = [
     badge: 'Clover',
     design: 'Four-leaf clover',
     type: 'Stud earrings',
-    variants: [v('YWJE0043', 'Silver', SILVER, 1099, 4)],
+    variants: [
+      v('YWJE0043', 'Silver', SILVER, 1099, 4, {
+        length: 'Petite · ~1 cm',
+        sizeTags: ['Petite · ~1 cm'],
+      }),
+    ],
   }),
   family({
     slug: 'quiet-heart-studs',

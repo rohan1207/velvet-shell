@@ -421,6 +421,7 @@ async function main() {
       features: primary.features || [],
       material: FINISH_GOLD,
       length_label: primary.length_label,
+      size_tags: primary.size_tags || [],
       reviews: primary.reviews || { rating: 0, count: 0 },
       hero_url: nextGold[0],
       gallery: toGalleryRows(nextGold),

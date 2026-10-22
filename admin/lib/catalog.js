@@ -2,6 +2,16 @@ import { createAdminSupabase } from '@/lib/supabase';
 import { normalizeShipping } from '@/lib/shipping';
 import { slugify } from '@/lib/format';
 
+/** Size pills shown on the storefront Measure row. */
+export function normalizeSizeTags(tags, lengthLabel = '') {
+  const fromArray = Array.isArray(tags)
+    ? tags.map((t) => String(t || '').trim()).filter(Boolean)
+    : [];
+  if (fromArray.length) return [...new Set(fromArray)];
+  const length = String(lengthLabel || '').trim();
+  return length ? [length] : [];
+}
+
 function mapFamilyRow(row, variants = []) {
   return {
     id: row.id,
@@ -38,6 +48,7 @@ function mapVariantRow(row) {
     features: Array.isArray(row.features) ? row.features : [],
     material: row.material || '',
     length: row.length_label || '',
+    sizeTags: normalizeSizeTags(row.size_tags, row.length_label),
     reviews: {
       rating: Number(row.reviews?.rating || 0),
       count: Number(row.reviews?.count || 0),
@@ -160,6 +171,7 @@ function emptyVariant(label = 'Default', swatch = '#C5C5C5') {
     features: [],
     material: '',
     length: '',
+    sizeTags: [],
     reviews: { rating: 0, count: 0, highlights: [] },
     heroUrl: '',
     gallery: [],
@@ -275,7 +287,9 @@ export async function upsertFamily(payload) {
             .map((s) => s.trim())
             .filter(Boolean),
       material: v.material || '',
-      length_label: v.length || '',
+      length_label:
+        normalizeSizeTags(v.sizeTags, v.length)[0] || String(v.length || '').trim() || '',
+      size_tags: normalizeSizeTags(v.sizeTags, v.length),
       reviews: {
         rating: Math.min(5, Math.max(0, Number(v.reviews?.rating) || 0)),
         count: Math.max(0, Number(v.reviews?.count) || 0),

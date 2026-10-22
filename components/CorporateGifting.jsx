@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
+import { whatsappGiftingHref } from '@/lib/social';
 
 const occasions = [
   {
@@ -19,6 +20,10 @@ const occasions = [
     line: 'Meaningful choices for milestones, appreciation and celebration.',
   },
   {
+    title: 'Wedding Favours',
+    line: 'Shell-wrapped keepsakes for guests — intimate, lasting, and beautifully presented.',
+  },
+  {
     title: 'Festive Gifting',
     line: 'A refined way to mark the season and the relationships within it.',
   },
@@ -28,6 +33,33 @@ const occasions = [
   },
 ];
 
+const packagingShots = [
+  {
+    src: '/images/gifting/packaging/official-packaging.png',
+    alt: 'Velvet Shell gift bag with burgundy ribbon and open shell jewellery cases',
+    label: 'The reveal',
+  },
+  {
+    src: '/images/gifting/packaging/bag-ribbon.jpg',
+    alt: 'Velvet Shell white gift bag with branded burgundy ribbon',
+    label: 'Gift bag',
+  },
+  {
+    src: '/images/gifting/packaging/wedding-favours.jpg',
+    alt: 'Velvet Shell wedding favours with shell boxes and ribbons',
+    label: 'Wedding favours',
+  },
+];
+
+const OCCASION_OPTIONS = [
+  'Corporate / client gifts',
+  'Wedding favours',
+  'Team & employee gifts',
+  'Festive gifting',
+  'Leadership / milestone',
+  'Other',
+];
+
 function scrollToBrief() {
   document.getElementById('gifting-brief')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -35,19 +67,19 @@ function scrollToBrief() {
 export default function CorporateGifting() {
   return (
     <div className="bg-ivory">
-      {/* Hero — banner image only */}
+      {/* Hero */}
       <section className="relative box-border h-[100svh] w-full overflow-hidden bg-[#f3ebe3] pt-[5.25rem] md:pt-[5.85rem]">
         <div className="relative h-full w-full">
           <ResponsiveBannerImage
-            src="/images/category-banner-gifting.jpg"
-            alt="Velvet Shell gifting — white orchids in soft natural light"
+            src="/images/gifting/hero-packaging.jpg"
+            alt="Velvet Shell official gifting packaging — gift bag, ribbon and shell cases"
             priority
             className="object-cover object-center"
           />
         </div>
       </section>
 
-      {/* Intro — Chosen With Thought */}
+      {/* Intro */}
       <section className="border-b border-ink/8 bg-ivory">
         <div className="mx-auto grid max-w-[1600px] gap-12 px-5 py-20 md:px-10 md:py-28 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-end lg:gap-20">
           <div>
@@ -63,8 +95,8 @@ export default function CorporateGifting() {
             </p>
             <p className="mt-5 text-[15px] font-light leading-[1.8] text-ink/85">
               At Velvet Shell, we believe a memorable gift should feel chosen, not distributed. From
-              clients and partners to teams, leaders and milestones, we curate gifts that bring together
-              thoughtful design, usefulness, beauty and the pleasure of discovery.
+              clients and partners to teams, leaders and wedding favours, we curate gifts that bring
+              together thoughtful design, beauty and the pleasure of discovery.
             </p>
             <button
               type="button"
@@ -80,12 +112,60 @@ export default function CorporateGifting() {
         </div>
       </section>
 
+      {/* Official packaging — single row of 3 */}
+      <section className="border-b border-ink/8 bg-pearl">
+        <div className="mx-auto max-w-[1600px] px-5 py-16 md:px-10 md:py-24">
+          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+            <div className="max-w-2xl">
+              <p className="font-label text-gold">Packaging</p>
+              <h2 className="font-display mt-3 text-[clamp(2.2rem,4.5vw,3.6rem)] leading-[1.05] tracking-[-0.02em] text-ink">
+                A treasure in every reveal.
+              </h2>
+              <p className="mt-5 max-w-xl text-[15px] font-light leading-[1.8] text-ink/80">
+                Our official gifting presentation — white gift bag, burgundy Velvet Shell ribbon, and
+                scallop shell cases. Also available as wedding favours.
+              </p>
+            </div>
+            <a
+              href={whatsappGiftingHref()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 rounded-full border border-ink/15 px-6 py-3 font-label text-[11px] tracking-[0.18em] text-ink transition-colors hover:border-burgundy/40 hover:text-burgundy"
+            >
+              Enquire on WhatsApp
+              <span aria-hidden className="text-gold">
+                →
+              </span>
+            </a>
+          </div>
+
+          <ul className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+            {packagingShots.map((shot) => (
+              <li key={shot.src} className="group relative overflow-hidden bg-ivory">
+                <div className="relative aspect-[4/3] w-full">
+                  <Image
+                    src={shot.src}
+                    alt={shot.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                    className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+                  />
+                </div>
+                <p className="absolute bottom-3 left-3 font-label text-[10px] tracking-[0.18em] text-ivory uppercase drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)]">
+                  {shot.label}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* More Than A Gesture */}
       <section className="grid lg:grid-cols-2">
         <div className="relative min-h-[42vh] md:min-h-[58vh] lg:min-h-[88vh]">
           <Image
-            src="/images/gifting-gesture.jpg"
-            alt="Velvet Shell corporate gift presentation"
+            src="/images/gifting/selection-packaging.jpg"
+            alt="Velvet Shell gift bag and open shell case"
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover object-center"
@@ -112,8 +192,8 @@ export default function CorporateGifting() {
       <section className="bg-ivory">
         <div className="relative min-h-[40vh] overflow-hidden md:min-h-[46vh]">
           <Image
-            src="/images/gifting-occasion.jpg"
-            alt="Velvet Shell gift pouches arranged for corporate occasions"
+            src="/images/gifting/occasion-packaging.jpg"
+            alt="Velvet Shell wedding favours and occasion packaging"
             fill
             sizes="100vw"
             className="object-cover object-center"
@@ -126,7 +206,7 @@ export default function CorporateGifting() {
                 Curated For The Occasion
               </h2>
               <p className="mt-4 max-w-lg text-[15px] font-light leading-relaxed text-ivory/80">
-                Five ways we shape gifting — each tuned to the relationship and the moment.
+                Corporate edits, wedding favours, and festive moments — each tuned to the relationship.
               </p>
             </div>
           </div>
@@ -151,37 +231,6 @@ export default function CorporateGifting() {
               </li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      {/* A Thoughtful Selection */}
-      <section className="grid lg:grid-cols-2">
-        <div className="order-2 flex flex-col justify-center px-6 py-16 md:px-14 lg:order-1 lg:px-16 xl:px-24">
-          <p className="font-label text-gold">The selection</p>
-          <h2 className="font-display mt-4 max-w-md text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.05] tracking-[-0.02em] text-ink">
-            A Thoughtful Selection
-          </h2>
-          <div className="mt-8 h-px w-12 bg-gold/70" />
-          <p className="mt-8 max-w-md text-[15px] font-light leading-[1.85] text-ink/80">
-            We look beyond what is simply beautiful.
-          </p>
-          <p className="mt-5 max-w-md text-[15px] font-light leading-[1.85] text-ink/80">
-            We consider design, usefulness, individuality, presentation and the person receiving it —
-            bringing together jewellery, lifestyle creations and gifting pieces that carry character.
-          </p>
-          <p className="mt-5 max-w-md text-[15px] font-light leading-[1.85] text-ink/80">
-            Inspired by the forms, textures and quiet ingenuity of the natural world, our selections are
-            made to feel distinctive without being excessive.
-          </p>
-        </div>
-        <div className="relative order-1 min-h-[42vh] md:min-h-[58vh] lg:order-2 lg:min-h-[88vh]">
-          <Image
-            src="/images/gifting-selection.jpg"
-            alt="Curated Velvet Shell jewellery gift arrangement"
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover object-center"
-          />
         </div>
       </section>
 
@@ -218,13 +267,21 @@ export default function CorporateGifting() {
               Have A Gifting Brief?
             </h2>
             <p className="mt-6 max-w-md text-[15px] font-light leading-[1.8] text-ink/85">
-              Tell us about the occasion, your recipients and your requirements. We’ll take it from
-              there.
+              A few details are enough — we will write back with considered options.
             </p>
             <p className="mt-10 text-[13px] font-light text-ink/80">
-              Prefer to write freely?{' '}
+              Prefer WhatsApp?{' '}
+              <a
+                href={whatsappGiftingHref()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-burgundy transition-opacity hover:opacity-70"
+              >
+                Message us
+              </a>
+              {' · '}
               <Link href="/contact" className="text-burgundy transition-opacity hover:opacity-70">
-                Contact Us
+                Contact
               </Link>
             </p>
           </div>
@@ -237,14 +294,38 @@ export default function CorporateGifting() {
 }
 
 function GiftingEnquiryForm() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState('idle');
+  const [error, setError] = useState('');
 
-  function onSubmit(event) {
+  async function onSubmit(event) {
     event.preventDefault();
-    setSent(true);
+    setError('');
+    setStatus('sending');
+
+    const form = new FormData(event.currentTarget);
+    const payload = {
+      name: String(form.get('name') || '').trim(),
+      email: String(form.get('email') || '').trim(),
+      occasion: String(form.get('occasion') || '').trim(),
+      note: String(form.get('note') || '').trim(),
+    };
+
+    try {
+      const res = await fetch('/api/gifting/enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || 'Could not send enquiry.');
+      setStatus('sent');
+    } catch (err) {
+      setStatus('idle');
+      setError(err.message || 'Could not send enquiry.');
+    }
   }
 
-  if (sent) {
+  if (status === 'sent') {
     return (
       <div className="border border-ink/10 bg-ivory px-6 py-10 md:px-10 md:py-12">
         <p className="font-display text-3xl text-ink md:text-4xl">We have your brief.</p>
@@ -258,36 +339,50 @@ function GiftingEnquiryForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="space-y-6 border border-ink/10 bg-ivory px-6 py-8 md:space-y-7 md:px-10 md:py-10"
+      className="space-y-7 border border-ink/10 bg-ivory px-6 py-8 md:space-y-8 md:px-10 md:py-10"
     >
-      <div className="grid grid-cols-2 gap-3 md:gap-8">
-        <Field label="Name" name="name" required />
-        <Field label="Company" name="company" />
-        <Field label="Email" name="email" type="email" required />
-        <Field label="Occasion" name="occasion" placeholder="Client gifts, festive, leadership…" />
-      </div>
-      <Field label="Approximate quantity" name="quantity" placeholder="1, 25, 100…" />
+      <Field label="Name" name="name" required autoComplete="name" />
+      <Field label="Email" name="email" type="email" required autoComplete="email" />
       <label className="block">
-        <span className="font-label text-[10px] text-ink/80">Requirements</span>
-        <textarea
-          name="message"
-          rows={4}
+        <span className="font-label text-[10px] text-ink/80">Occasion</span>
+        <select
+          name="occasion"
           required
-          placeholder="Recipients, timeline, tone, budget range…"
+          defaultValue=""
+          className="mt-3 w-full appearance-none border-b border-ink/15 bg-transparent py-3 text-[15px] font-light text-ink outline-none"
+        >
+          <option value="" disabled>
+            Choose an occasion…
+          </option>
+          {OCCASION_OPTIONS.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label className="block">
+        <span className="font-label text-[10px] text-ink/80">Note</span>
+        <textarea
+          name="note"
+          rows={3}
+          placeholder="Quantity, timeline, or anything we should know…"
           className="mt-3 w-full resize-none border-b border-ink/15 bg-transparent py-3 text-[15px] font-light text-ink outline-none placeholder:text-ink/25"
         />
       </label>
+      {error ? <p className="text-sm text-burgundy">{error}</p> : null}
       <button
         type="submit"
-        className="bg-velvet-texture mt-2 inline-flex h-12 items-center rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory transition-opacity hover:opacity-90"
+        disabled={status === 'sending'}
+        className="bg-velvet-texture mt-2 inline-flex h-12 items-center rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory transition-opacity hover:opacity-90 disabled:opacity-60"
       >
-        Start An Enquiry
+        {status === 'sending' ? 'Sending…' : 'Send enquiry'}
       </button>
     </form>
   );
 }
 
-function Field({ label, name, type = 'text', required, placeholder }) {
+function Field({ label, name, type = 'text', required, placeholder, autoComplete }) {
   return (
     <label className="block">
       <span className="font-label text-[10px] text-ink/80">{label}</span>
@@ -296,6 +391,7 @@ function Field({ label, name, type = 'text', required, placeholder }) {
         type={type}
         required={required}
         placeholder={placeholder}
+        autoComplete={autoComplete}
         className="mt-3 w-full border-b border-ink/15 bg-transparent py-3 text-[15px] font-light text-ink outline-none placeholder:text-ink/25"
       />
     </label>

@@ -16,9 +16,8 @@ const slides = [
     id: 'pomegranate',
     image: '/images/banners/home-hero/pomegranate-story.jpg',
     alt: 'Pomegranate pendant necklace hanging from a fruiting branch at golden hour',
-    eyebrow: 'Velvet Shell',
-    title: 'Held in the golden hour.',
-    line: 'A quiet pendant among ripening fruit — silver and gold, worn like a soft reveal.',
+    title: 'Shop necklaces',
+    line: 'Pendants and chains — silver and gold, worn close.',
     cta: 'Shop necklaces',
     href: shopCategoryHref('necklaces'),
     tone: 'dark',
@@ -28,9 +27,8 @@ const slides = [
     id: 'honeybee',
     image: '/images/banners/home-hero/honeybee-story.jpg',
     alt: 'Honeybee ring on honeycomb among golden wildflowers',
-    eyebrow: 'Velvet Shell',
-    title: 'Where sweetness finds form.',
-    line: 'Jewellery drawn from the meadow — made to be worn and kept.',
+    title: 'Shop rings',
+    line: 'Nature-inspired rings made to be worn and kept.',
     cta: 'Shop rings',
     href: shopCategoryHref('rings'),
     tone: 'light',
@@ -40,36 +38,33 @@ const slides = [
     id: 'butterfly-stream',
     image: '/images/banners/home-hero/butterfly-stream-story.jpg',
     alt: 'Aquamarine butterfly ring on moss beside a forest stream',
-    eyebrow: 'Velvet Shell',
-    title: 'Wings over still water.',
-    line: 'An icy blue stone, a golden butterfly — jewellery that feels found in the forest.',
+    title: 'Shop rings',
+    line: 'Quiet stones and sculptural forms for the hand.',
     cta: 'Shop rings',
     href: shopCategoryHref('rings'),
     tone: 'light',
     overlay: 'soft',
   },
   {
-    id: 'lotus',
+    id: 'bracelets',
     image: '/images/banners/home-hero/lotus-story.jpg',
-    alt: 'Lotus whisper bracelet on a dewy lily pad',
-    eyebrow: 'Velvet Shell',
-    title: 'Bloom where you are held.',
-    line: 'Lotus light on the wrist — silver, soft stone, and morning stillness.',
+    alt: 'Bracelet resting on a dewy lily pad',
+    title: 'Shop bracelets',
+    line: 'Soft forms for the wrist — silver, stone, and light.',
     cta: 'Shop bracelets',
     href: shopCategoryHref('bracelets'),
     tone: 'light',
     overlay: 'soft',
   },
   {
-    id: 'orchid',
-    image: '/images/banners/home-hero/orchid-story.jpg',
-    alt: 'Phalaenopsis orchid hoop earrings among white orchids',
-    eyebrow: 'Velvet Shell',
-    title: 'Petals that never fade.',
-    line: 'Orchid forms in silver — quiet elegance for softly luminous days.',
+    id: 'floral-threader',
+    image: '/images/banners/home-hero/floral-threader-story.jpg',
+    alt: 'Floral silver threader earrings on a dewy garden leaf',
+    title: 'Shop earrings',
+    line: 'Drops, hoops, and studs for softly luminous days.',
     cta: 'Shop earrings',
     href: shopCategoryHref('earrings'),
-    tone: 'dark',
+    tone: 'light',
     overlay: 'soft',
   },
 ];
@@ -133,15 +128,8 @@ export default function NatureStoryHero() {
             key={slide.id}
             className="flex max-w-lg flex-col items-start text-left animate-[fade-up_0.9s_var(--ease-luxe)_both]"
           >
-            <p
-              className={`font-label text-[10px] tracking-[0.28em] uppercase ${
-                isDark ? 'text-burgundy' : 'text-ivory/85'
-              }`}
-            >
-              {slide.eyebrow}
-            </p>
             <h1
-              className={`font-display mt-3 text-[clamp(2.4rem,5.2vw,3.85rem)] leading-[1.05] tracking-[-0.02em] ${
+              className={`font-display text-[clamp(2.4rem,5.2vw,3.85rem)] leading-[1.05] tracking-[-0.02em] ${
                 isDark ? 'text-ink' : 'text-ivory'
               }`}
             >

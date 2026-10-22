@@ -8,6 +8,7 @@ import Footer from './Footer';
 import CartDrawer from './CartDrawer';
 import QuickViewDrawer from './QuickViewDrawer';
 import SearchModal from './SearchModal';
+import WhatsAppFloat from './WhatsAppFloat';
 
 export default function Providers({ children }) {
   return (
@@ -21,6 +22,7 @@ export default function Providers({ children }) {
         <SearchModal />
         <main className="relative w-full overflow-x-clip">{children}</main>
         <Footer />
+        <WhatsAppFloat />
       </SmoothScroll>
     </StoreProvider>
   );

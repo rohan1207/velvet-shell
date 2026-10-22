@@ -3,6 +3,15 @@ const nextConfig = {
   transpilePackages: ['@google/model-viewer'],
   images: {
     qualities: [75, 90, 100],
+    // Replaced public/ assets share the same path; keep TTL low and allow ?v=
+    // so withAssetVersion() can bust the optimizer cache.
+    minimumCacheTTL: 60,
+    localPatterns: [
+      {
+        pathname: '/**',
+        // omit `search` → any ?v=… query is allowed
+      },
+    ],
     remotePatterns: [
       {
         protocol: 'https',

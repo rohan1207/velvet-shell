@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { getProduct as getDummyProduct } from '@/lib/products';
+import { productImageSrc } from '@/lib/product-image';
 
 const StoreContext = createContext(null);
 
@@ -198,16 +199,39 @@ export function StoreProvider({ children }) {
         metal = product?.metal?.[0] || 'S925 Silver',
         qty = 1,
       } = options;
+      const image = productImageSrc(product);
+      const name = product?.name || slug;
+      const price = product?.price || 0;
       setCart((current) => {
         const existing = current.find(
           (item) => item.slug === slug && item.size === size && item.metal === metal
         );
         if (existing) {
           return current.map((item) =>
-            item.id === existing.id ? { ...item, qty: item.qty + qty } : item
+            item.id === existing.id
+              ? {
+                  ...item,
+                  qty: item.qty + qty,
+                  image: item.image || image,
+                  name: item.name || name,
+                  price: item.price || price,
+                }
+              : item
           );
         }
-        return [...current, { id: `${slug}-${size}-${metal}`, slug, size, metal, qty }];
+        return [
+          ...current,
+          {
+            id: `${slug}-${size}-${metal}`,
+            slug,
+            size,
+            metal,
+            qty,
+            image,
+            name,
+            price,
+          },
+        ];
       });
       setCartOpen(true);
       setQuickViewSlug(null);
@@ -407,7 +431,7 @@ export function StoreProvider({ children }) {
         return {
           ...item,
           name: product?.name || item.name || item.slug,
-          image: product?.image || product?.image_url || item.image,
+          image: productImageSrc(product, item),
           price: product?.price ?? item.price,
         };
       });

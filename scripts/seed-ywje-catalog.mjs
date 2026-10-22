@@ -140,7 +140,12 @@ async function upsertFamily(family) {
       description: v.description,
       features: v.features,
       material: v.material,
-      length_label: v.length || '',
+      length_label: v.length || (Array.isArray(v.sizeTags) ? v.sizeTags[0] : '') || '',
+      size_tags: Array.isArray(v.sizeTags)
+        ? v.sizeTags
+        : v.length
+          ? [v.length]
+          : [],
       reviews: v.reviews,
       hero_url: '',
       gallery: [],

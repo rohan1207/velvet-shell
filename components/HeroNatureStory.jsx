@@ -9,47 +9,43 @@ import {
   useInfiniteCarousel,
 } from '@/lib/use-infinite-carousel';
 
-import { shopCategoryHref, shopHref } from '@/lib/shop-links';
+import { shopCategoryHref } from '@/lib/shop-links';
 
 const slides = [
   {
-    id: 'garden',
+    id: 'necklaces',
     image: '/images/banners/home-hero/garden.jpg',
-    eyebrow: 'Nature, worn close',
-    title: 'Where the garden\nbecomes jewellery.',
-    body: 'Floral forms drawn from living blooms — silver and gold pieces that feel discovered, not manufactured.',
-    cta: 'Shop all',
-    href: shopHref(),
+    title: 'Shop necklaces',
+    body: 'Pendants and chains in silver and gold.',
+    cta: 'Shop necklaces',
+    href: shopCategoryHref('necklaces'),
     align: 'center',
   },
   {
-    id: 'lotus',
+    id: 'bracelets',
     image: '/images/banners/home-hero/lotus.jpg',
-    eyebrow: 'The lotus edit',
-    title: 'Quiet blooms\nin morning mist.',
-    body: 'Lotus-inspired pieces for those who love depth, softness, and the still beauty of water and leaf.',
+    title: 'Shop bracelets',
+    body: 'Soft forms for the wrist.',
     cta: 'Shop bracelets',
     href: shopCategoryHref('bracelets'),
     align: 'left',
   },
   {
-    id: 'honeybee',
+    id: 'earrings',
     image: '/images/banners/home-hero/honeybee.jpg',
-    eyebrow: 'From the meadow',
-    title: 'Little wonders\nof the wild.',
-    body: 'Honeybee earrings and botanical charms — tiny stories of pollen, light, and golden hours.',
+    title: 'Shop earrings',
+    body: 'Drops, hoops, and studs for every day.',
     cta: 'Shop earrings',
     href: shopCategoryHref('earrings'),
     align: 'right',
   },
   {
-    id: 'calla',
+    id: 'rings',
     image: '/images/banners/home-hero/calla.jpg',
-    eyebrow: 'Botanical atelier',
-    title: 'Thoughtful forms\nfrom living nature.',
-    body: 'Calla lilies, ferns, and soft greens — jewellery that carries the calm of a private garden.',
-    cta: 'Shop brooches',
-    href: shopCategoryHref('cuffs'),
+    title: 'Shop rings',
+    body: 'Sculptural forms made to be worn and kept.',
+    cta: 'Shop rings',
+    href: shopCategoryHref('rings'),
     align: 'center',
   },
 ];
@@ -109,10 +105,7 @@ export default function HeroNatureStory() {
             key={slide.id}
             className="pointer-events-auto max-w-xl animate-[fade-up_0.9s_var(--ease-luxe)_both] md:max-w-2xl"
           >
-            <p className="font-label text-[10px] tracking-[0.28em] text-gold uppercase md:text-[11px]">
-              {slide.eyebrow}
-            </p>
-            <h1 className="font-display mt-4 whitespace-pre-line text-[clamp(2.4rem,6.5vw,4.6rem)] leading-[1.05] tracking-[-0.02em] text-ivory">
+            <h1 className="font-display whitespace-pre-line text-[clamp(2.4rem,6.5vw,4.6rem)] leading-[1.05] tracking-[-0.02em] text-ivory">
               {slide.title}
             </h1>
             <p className="mt-5 max-w-md text-[14px] font-light leading-relaxed text-ivory/85 md:text-[15px] md:leading-[1.75]">
