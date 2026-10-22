@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import Image from 'next/image';
+import AppImage from '@/components/AppImage';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { collectionName as dummyCollectionName } from '@/lib/products';
@@ -107,13 +107,13 @@ export default function ProductExperience({
                     active === index ? 'z-10 scale-[1.08]' : 'scale-100 hover:scale-[1.03]'
                   }`}
                 >
-                  <Image src={src} alt="" fill className="object-cover" sizes="72px" />
+                  <AppImage src={src} alt="" fill className="object-cover" sizes="72px" />
                 </button>
               ))}
             </div>
 
             <div className="relative min-h-0 min-w-0 flex-1 overflow-hidden rounded-[1.25rem] bg-cream md:rounded-[1.5rem]">
-              <Image
+              <AppImage
                 src={gallery[active] || gallery[0]}
                 alt={activeProduct.name}
                 fill

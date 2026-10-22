@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import Image from 'next/image';
+import AppImage from '@/components/AppImage';
 import Link from 'next/link';
 import { giftingHref, shopCategoryHref } from '@/lib/shop-links';
 import HeroEarringReel from './HeroEarringReel';
@@ -89,7 +89,7 @@ export default function Hero3() {
             data-cursor="Shop"
             className="group relative h-full min-h-0 aspect-[1073/1466] max-w-full justify-self-end overflow-hidden rounded-[1.5rem] bg-pearl lg:rounded-[1.75rem]"
           >
-            <Image
+            <AppImage
               src="/hero/floral_ring.png"
               alt="Indian model wearing Velvet Shell floral silver rings and jewellery"
               fill
@@ -120,7 +120,7 @@ export default function Hero3() {
               </p>
             </div>
             <div className="flex justify-end px-3 pb-2">
-              <Image
+              <AppImage
                 src="/flower-frames/ezgif-frame-030.png"
                 alt=""
                 width={160}
@@ -135,7 +135,7 @@ export default function Hero3() {
             href={shopCategoryHref('rings')}
             className="relative min-h-[22rem] overflow-hidden rounded-[1.35rem] bg-pearl"
           >
-            <Image
+            <AppImage
               src="/hero/floral_ring.png"
               alt="Indian model wearing Velvet Shell floral silver rings and jewellery"
               fill

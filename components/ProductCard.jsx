@@ -232,7 +232,7 @@ export default function ProductCard({
       style={{ animationDelay: `${index * 70}ms` }}
     >
       <div className="relative isolate aspect-square overflow-hidden bg-transparent">
-        <Image
+        <AppImage
           key={currentImage}
           src={currentImage}
           alt={active.name}
@@ -242,7 +242,7 @@ export default function ProductCard({
         />
 
         {hasGallery ? (
-          <Image
+          <AppImage
             src={galleryImages[1]}
             alt=""
             fill

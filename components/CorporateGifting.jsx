@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
+import AppImage from '@/components/AppImage';
 import Link from 'next/link';
 import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
 import { whatsappGiftingHref } from '@/lib/social';
@@ -143,7 +143,7 @@ export default function CorporateGifting() {
             {packagingShots.map((shot) => (
               <li key={shot.src} className="group relative overflow-hidden bg-ivory">
                 <div className="relative aspect-[4/3] w-full">
-                  <Image
+                  <AppImage
                     src={shot.src}
                     alt={shot.alt}
                     fill
@@ -163,7 +163,7 @@ export default function CorporateGifting() {
       {/* More Than A Gesture */}
       <section className="grid lg:grid-cols-2">
         <div className="relative min-h-[42vh] md:min-h-[58vh] lg:min-h-[88vh]">
-          <Image
+          <AppImage
             src="/images/gifting/selection-packaging.jpg"
             alt="Velvet Shell gift bag and open shell case"
             fill
@@ -191,7 +191,7 @@ export default function CorporateGifting() {
       {/* Curated For The Occasion */}
       <section className="bg-ivory">
         <div className="relative min-h-[40vh] overflow-hidden md:min-h-[46vh]">
-          <Image
+          <AppImage
             src="/images/gifting/occasion-packaging.jpg"
             alt="Velvet Shell wedding favours and occasion packaging"
             fill

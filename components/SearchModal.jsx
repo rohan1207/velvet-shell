@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Image from 'next/image';
+import AppImage from '@/components/AppImage';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from '@/context/StoreContext';
@@ -56,7 +56,7 @@ export default function SearchModal() {
                     className="flex items-center gap-4 py-2"
                   >
                     <span className="relative h-16 w-14 overflow-hidden bg-cream">
-                      <Image src={product.image} alt="" fill className="object-cover" sizes="56px" />
+                      <AppImage src={product.image} alt="" fill className="object-cover" sizes="56px" />
                     </span>
                     <span className="font-display text-2xl">{product.name}</span>
                     <span className="font-num ml-auto text-sm text-ink/85">{money(product.price)}</span>

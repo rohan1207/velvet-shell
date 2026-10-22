@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import Image from 'next/image';
+import AppImage from '@/components/AppImage';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from '@/context/StoreContext';
@@ -69,7 +69,7 @@ export default function QuickViewDrawer() {
 
             <div className="flex-1 overflow-y-auto">
               <div className="relative aspect-[4/5] bg-pearl">
-                <Image
+                <AppImage
                   src={product.image}
                   alt={product.name}
                   fill

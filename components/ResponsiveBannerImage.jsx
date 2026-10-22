@@ -18,14 +18,13 @@ export default function ResponsiveBannerImage({
   sizes = '100vw',
   fill = true,
 }) {
-  const desktop = withAssetVersion(src);
-  const phone = withAssetVersion(mobileSrc || mobileBannerSrc(src));
+  const phone = mobileSrc || mobileBannerSrc(src);
 
   if (!fill) {
     return (
       <picture>
-        <source media="(max-width: 767px)" srcSet={phone} />
-        <img src={desktop} alt={alt} className={className} />
+        <source media="(max-width: 767px)" srcSet={withAssetVersion(phone)} />
+        <img src={withAssetVersion(src)} alt={alt} className={className} />
       </picture>
     );
   }
@@ -44,7 +43,7 @@ export default function ResponsiveBannerImage({
       />
       {/* Desktop / tablet */}
       <AppImage
-        src={desktop}
+        src={src}
         alt={alt}
         fill
         priority={priority}
