@@ -49,6 +49,13 @@ export default function ProductExperience({
   const [metal, setMetal] = useState(metalOptions[0] || '');
   const [qty, setQty] = useState(1);
   const [open, setOpen] = useState('story');
+  const [customValues, setCustomValues] = useState({});
+  const [customError, setCustomError] = useState('');
+
+  const customizationFields =
+    activeProduct.customizationEnabled && Array.isArray(activeProduct.customizationFields)
+      ? activeProduct.customizationFields
+      : [];
 
   useEffect(() => {
     setActiveSlug(product.slug);
@@ -59,6 +66,8 @@ export default function ProductExperience({
     setSize(activeProduct.sizes?.[0] || 'One size');
     setMetal(activeProduct.metal?.[0] || '');
     setQty(1);
+    setCustomValues({});
+    setCustomError('');
   }, [activeProduct.slug]);
 
   function selectColor(slug) {
@@ -92,10 +101,10 @@ export default function ProductExperience({
 
   return (
     <div className="bg-ivory pt-site-chrome">
-      <div className="mx-auto grid max-w-[1600px] gap-10 px-5 pt-6 pb-24 md:px-10 md:pt-8 lg:grid-cols-12 lg:gap-16">
-        <div className="order-2 lg:sticky lg:top-[calc(var(--site-promo-h)+var(--site-nav-h)+1rem)] lg:order-1 lg:col-span-7 lg:self-start">
-          <div className="flex h-[min(62svh,28rem)] gap-2 md:h-[min(100svh-var(--site-promo-h)-var(--site-nav-h)-3rem,920px)] md:gap-3">
-            <div className="flex w-12 shrink-0 flex-col gap-2 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] md:w-16 md:gap-2.5 lg:w-[4.5rem] [&::-webkit-scrollbar]:hidden">
+      <div className="mx-auto grid max-w-[1600px] gap-8 px-5 pt-4 pb-28 md:gap-10 md:px-10 md:pt-8 md:pb-24 lg:grid-cols-12 lg:gap-16">
+        <div className="order-1 lg:sticky lg:top-[calc(var(--site-promo-h)+var(--site-nav-h)+1rem)] lg:col-span-7 lg:self-start">
+          <div className="flex h-[min(58svh,26rem)] gap-2 md:h-[min(100svh-var(--site-promo-h)-var(--site-nav-h)-3rem,920px)] md:gap-3">
+            <div className="flex w-14 shrink-0 flex-col gap-2 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] md:w-16 md:gap-2.5 lg:w-[4.5rem] [&::-webkit-scrollbar]:hidden">
               {gallery.map((src, index) => (
                 <button
                   key={`${src}-${index}`}
@@ -125,11 +134,11 @@ export default function ProductExperience({
           </div>
         </div>
 
-        <div className="order-1 lg:sticky lg:top-32 lg:order-2 lg:col-span-5 lg:self-start">
+        <div className="order-2 lg:sticky lg:top-[calc(var(--site-promo-h)+var(--site-nav-h)+1rem)] lg:col-span-5 lg:self-start">
           <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
             {labelCollection(activeProduct.collection, collections)}
           </p>
-          <h1 className="font-display mt-3 text-3xl leading-[1.08] tracking-[-0.03em] md:text-6xl">
+          <h1 className="font-display mt-3 text-[1.85rem] leading-[1.08] tracking-[-0.03em] sm:text-3xl md:text-6xl">
             {title}
           </h1>
           <p className="font-num mt-4 text-lg text-ink/90">{money(activeProduct.price)}</p>
@@ -228,14 +237,63 @@ export default function ProductExperience({
             </div>
           )}
 
+          {customizationFields.length > 0 ? (
+            <div className="mt-8 space-y-4">
+              <p className="text-[10px] tracking-[0.28em] uppercase">Customization</p>
+              {customizationFields.map((field) => {
+                const value = customValues[field.id] ?? '';
+                const common = {
+                  id: `custom-${field.id}`,
+                  value,
+                  placeholder: field.placeholder || '',
+                  required: !!field.required,
+                  onChange: (e) => {
+                    setCustomError('');
+                    setCustomValues((prev) => ({ ...prev, [field.id]: e.target.value }));
+                  },
+                  className:
+                    'mt-2 w-full rounded-xl border border-cream bg-white px-4 py-3 text-sm outline-none transition focus:border-ink/25',
+                };
+                return (
+                  <label key={field.id} className="block">
+                    <span className="text-sm text-ink">
+                      {field.label}
+                      {field.required ? <span className="text-burgundy"> *</span> : null}
+                    </span>
+                    {field.inputType === 'textarea' ? (
+                      <textarea {...common} rows={3} />
+                    ) : (
+                      <input
+                        {...common}
+                        type={field.inputType === 'number' ? 'number' : 'text'}
+                        inputMode={field.inputType === 'number' ? 'decimal' : undefined}
+                      />
+                    )}
+                  </label>
+                );
+              })}
+              {customError ? <p className="text-sm text-burgundy">{customError}</p> : null}
+            </div>
+          ) : null}
+
           <div className="mt-8">
             <p className="text-[10px] tracking-[0.28em] uppercase">Quantity</p>
-            <div className="mt-3 inline-flex items-center gap-5 rounded-full border border-cream px-5 py-2.5">
-              <button type="button" onClick={() => setQty((n) => Math.max(1, n - 1))}>
+            <div className="mt-3 inline-flex items-center rounded-full border border-cream px-1.5">
+              <button
+                type="button"
+                aria-label="Decrease quantity"
+                onClick={() => setQty((n) => Math.max(1, n - 1))}
+                className="flex h-11 w-11 items-center justify-center"
+              >
                 −
               </button>
               <span className="min-w-6 text-center text-sm">{qty}</span>
-              <button type="button" onClick={() => setQty((n) => Math.min(10, n + 1))}>
+              <button
+                type="button"
+                aria-label="Increase quantity"
+                onClick={() => setQty((n) => Math.min(10, n + 1))}
+                className="flex h-11 w-11 items-center justify-center"
+              >
                 +
               </button>
             </div>
@@ -244,7 +302,23 @@ export default function ProductExperience({
           <div className="mt-10 flex gap-3">
             <button
               type="button"
-              onClick={() => addToCart(activeProduct.slug, { size, metal, qty })}
+              onClick={() => {
+                const missing = customizationFields.find(
+                  (field) => field.required && !String(customValues[field.id] ?? '').trim(),
+                );
+                if (missing) {
+                  setCustomError(`Please fill in: ${missing.label}`);
+                  return;
+                }
+                const customization = customizationFields
+                  .map((field) => ({
+                    id: field.id,
+                    label: field.label,
+                    value: String(customValues[field.id] ?? '').trim(),
+                  }))
+                  .filter((entry) => entry.value);
+                addToCart(activeProduct.slug, { size, metal, qty, customization });
+              }}
               className="flex h-[52px] flex-1 items-center justify-center rounded-full bg-ink text-[11px] tracking-[0.28em] text-ivory uppercase"
             >
               Add to bag · <span className="font-num">{money(activeProduct.price * qty)}</span>

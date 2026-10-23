@@ -70,7 +70,7 @@ function IconBagMini({ className = 'h-[1.05rem] w-[1.05rem] md:h-5 md:w-5' }) {
   );
 }
 
-function ActionIcon({ label, onClick, children, active = false }) {
+function ActionIcon({ label, onClick, children, active = false, className = '' }) {
   return (
     <button
       type="button"
@@ -81,11 +81,11 @@ function ActionIcon({ label, onClick, children, active = false }) {
         onClick?.();
       }}
       onPointerDown={(event) => event.stopPropagation()}
-      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors duration-300 md:h-11 md:w-11 ${
+      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
         active
           ? 'bg-velvet-texture text-ivory'
           : 'text-ink/85 hover:text-burgundy'
-      }`}
+      } ${className}`}
     >
       {children}
     </button>
@@ -294,12 +294,12 @@ export default function ProductCard({
                       event.stopPropagation();
                       setActiveSlug(variant.slug);
                     }}
-                    className={`flex h-4 w-4 items-center justify-center rounded-full transition-all duration-300 md:h-5 md:w-5 ${
+                    className={`flex h-7 w-7 items-center justify-center rounded-full transition-all duration-300 md:h-5 md:w-5 ${
                       selected ? 'ring-1 ring-ink ring-offset-1 ring-offset-white md:ring-offset-2' : ''
                     }`}
                   >
                     <span
-                      className="block h-2.5 w-2.5 rounded-full border border-ink/15 md:h-3.5 md:w-3.5"
+                      className="block h-3.5 w-3.5 rounded-full border border-ink/15 md:h-3.5 md:w-3.5"
                       style={{ backgroundColor: variant.swatch }}
                     />
                   </button>
@@ -310,16 +310,16 @@ export default function ProductCard({
 
         <Link
           href={href}
-          className="font-label mt-1.5 line-clamp-2 min-h-[2.4em] w-full px-0.5 text-center text-[9px] leading-[1.2] tracking-[0.1em] text-ink uppercase transition-colors hover:text-burgundy md:mt-2 md:min-h-[2.6em] md:text-[11px] md:tracking-[0.14em]"
+          className="font-label mt-1.5 line-clamp-2 min-h-[2.6em] w-full px-0.5 text-center text-[10px] leading-[1.25] tracking-[0.08em] text-ink uppercase transition-colors hover:text-burgundy md:mt-2 md:text-[11px] md:tracking-[0.14em]"
         >
           {title}
         </Link>
 
-        <p className="font-num mt-1.5 text-center text-[12px] tracking-[0.04em] text-ink/75 md:mt-2 md:text-[13px]">
+        <p className="font-num mt-1.5 text-center text-[13px] tracking-[0.04em] text-ink/75 md:mt-2">
           {priceLabel}
         </p>
 
-        <div className="mt-auto flex items-center justify-between gap-2 px-4 pt-3 md:px-6 md:pt-3.5">
+        <div className="mt-auto flex items-center justify-between gap-1.5 px-1.5 pt-3 sm:px-4 md:px-6 md:pt-3.5">
           <div className="flex items-center gap-0.5">
             <ActionIcon
               label={wished ? 'Remove from wishlist' : 'Add to wishlist'}
@@ -329,7 +329,11 @@ export default function ProductCard({
               <IconHeart filled={wished} />
             </ActionIcon>
             {showQuickView ? (
-              <ActionIcon label="Quick view" onClick={() => openQuickView(active.slug)}>
+              <ActionIcon
+                label="Quick view"
+                className="hidden md:flex"
+                onClick={() => openQuickView(active.slug)}
+              >
                 <IconEye />
               </ActionIcon>
             ) : null}
@@ -343,18 +347,18 @@ export default function ProductCard({
             aria-label={bagPhase === 'done' ? 'Added to bag' : 'Add to bag'}
             onClick={handleAddToBag}
             onPointerDown={(event) => event.stopPropagation()}
-            className={`bg-velvet-texture relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full font-label text-ivory uppercase transition-[width,height,padding,opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+            className={`bg-velvet-texture relative inline-flex min-w-0 shrink items-center justify-center overflow-hidden rounded-full font-label text-ivory uppercase transition-[width,height,padding,opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
               bagPhase === 'flying'
-                ? 'h-10 w-10 px-0 py-0 opacity-0 md:h-11 md:w-11'
+                ? 'h-11 w-11 px-0 py-0 opacity-0 md:h-11 md:w-11'
                 : bagPhase === 'morph'
-                  ? 'h-10 w-10 px-0 py-0 md:h-11 md:w-11'
+                  ? 'h-11 w-11 px-0 py-0 md:h-11 md:w-11'
                   : bagPhase === 'done'
-                    ? 'h-10 min-w-[5.5rem] px-4 py-2 md:h-12 md:min-w-[7rem] md:px-6 md:py-3'
-                    : 'h-9 px-3.5 py-2 hover:opacity-90 active:scale-[0.98] md:h-12 md:px-6 md:py-3'
+                    ? 'h-11 min-w-[5.75rem] px-3.5 py-2 md:h-12 md:min-w-[7rem] md:px-6 md:py-3'
+                    : 'h-11 px-3.5 py-2 hover:opacity-90 active:scale-[0.98] md:h-12 md:px-6 md:py-3'
             } ${bagBusy ? 'cursor-default' : 'cursor-pointer'} disabled:opacity-100`}
           >
             <span
-              className={`whitespace-nowrap text-[8px] tracking-[0.12em] transition-opacity duration-200 md:text-[10px] md:tracking-[0.14em] ${
+              className={`whitespace-nowrap text-[9px] tracking-[0.1em] transition-opacity duration-200 md:text-[10px] md:tracking-[0.14em] ${
                 bagPhase === 'idle' || bagPhase === 'done' ? 'opacity-100' : 'pointer-events-none absolute opacity-0'
               }`}
             >

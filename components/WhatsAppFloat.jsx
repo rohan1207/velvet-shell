@@ -1,18 +1,29 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { whatsappHref } from '@/lib/social';
 
+/** Hide on routes where a primary sticky CTA already owns the bottom-right. */
+const HIDDEN_PREFIXES = ['/checkout', '/cart', '/account'];
+
 export default function WhatsAppFloat() {
+  const pathname = usePathname() || '';
+  const hidden = HIDDEN_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  );
+
+  if (hidden) return null;
+
   return (
     <a
       href={whatsappHref()}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="group fixed right-4 bottom-[calc(1.1rem+env(safe-area-inset-bottom))] z-[60] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_28px_rgba(37,211,102,0.45)] transition-transform duration-300 hover:scale-105 hover:shadow-[0_14px_36px_rgba(37,211,102,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366] md:right-6 md:bottom-6 md:h-[3.75rem] md:w-[3.75rem]"
+      className="group fixed right-3 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-[60] flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_28px_rgba(37,211,102,0.45)] transition-transform duration-300 hover:scale-105 hover:shadow-[0_14px_36px_rgba(37,211,102,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366] sm:right-4 sm:h-14 sm:w-14 md:right-6 md:bottom-6 md:h-[3.75rem] md:w-[3.75rem]"
     >
       <span className="pointer-events-none absolute inset-0 rounded-full bg-white/15 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      <IconWhatsApp className="relative h-7 w-7 md:h-8 md:w-8" />
+      <IconWhatsApp className="relative h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" />
     </a>
   );
 }

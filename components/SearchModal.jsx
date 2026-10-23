@@ -53,13 +53,17 @@ export default function SearchModal() {
                   <Link
                     href={`/shop/${product.slug}`}
                     onClick={() => setSearchOpen(false)}
-                    className="flex items-center gap-4 py-2"
+                    className="flex items-center gap-3 py-2.5 sm:gap-4"
                   >
-                    <span className="relative h-16 w-14 overflow-hidden bg-cream">
+                    <span className="relative h-14 w-12 shrink-0 overflow-hidden bg-cream sm:h-16 sm:w-14">
                       <AppImage src={product.image} alt="" fill className="object-cover" sizes="56px" />
                     </span>
-                    <span className="font-display text-2xl">{product.name}</span>
-                    <span className="font-num ml-auto text-sm text-ink/85">{money(product.price)}</span>
+                    <span className="font-display min-w-0 flex-1 truncate text-lg sm:text-2xl">
+                      {product.name}
+                    </span>
+                    <span className="font-num shrink-0 text-sm text-ink/85">
+                      {money(product.price)}
+                    </span>
                   </Link>
                 </li>
               ))}

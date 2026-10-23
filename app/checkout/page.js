@@ -306,7 +306,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-28 pb-20 md:pt-32">
+    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-28 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pt-32 md:pb-20">
       {successOrder && (
         <SuccessModal
           order={successOrder}
@@ -589,6 +589,15 @@ function OrderSummaryCard({ lines, cartCount, cartTotal }) {
                 )}{' '}
                 · {item.metal} · {item.size}
               </p>
+              {Array.isArray(item.customization) && item.customization.length > 0 ? (
+                <ul className="mt-1.5 space-y-0.5 text-[11px] text-ink/65">
+                  {item.customization.map((entry, i) => (
+                    <li key={`${entry.id || entry.label}-${i}`}>
+                      {entry.label}: {entry.value}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
               <p className="mt-1 text-xs text-ink/60">Qty {item.qty}</p>
             </div>
             <p className="font-num text-sm text-ink">{money(lineTotal)}</p>

@@ -233,7 +233,7 @@ function IconButton({ className = '', children, ...props }) {
   return (
     <button
       type="button"
-      className={`inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10 ${className}`}
+      className={`inline-flex h-11 w-11 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10 ${className}`}
       {...props}
     >
       {children}
@@ -367,27 +367,27 @@ export default function Navbar() {
             </span>
           </Link>
 
-          <div className="relative z-10 flex min-w-0 items-center justify-end gap-1 sm:gap-1.5">
+          <div className="relative z-10 flex min-w-0 items-center justify-end gap-0.5 sm:gap-1.5">
             <button
               type="button"
               aria-label="Search"
               onClick={() => setSearchOpen(true)}
               onMouseEnter={scheduleCloseMega}
-              className="group inline-flex h-8 max-w-[9.5rem] items-center gap-2 rounded-full border border-white/20 bg-white/10 px-2.5 text-white/80 transition-colors hover:border-white/35 hover:bg-white/15 hover:text-white sm:h-9 sm:max-w-none sm:gap-2.5 sm:px-3.5 md:h-9 md:min-w-[10.5rem]"
+              className="group inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white/85 transition-colors hover:text-white sm:h-9 sm:w-auto sm:max-w-none sm:gap-2.5 sm:border sm:border-white/20 sm:bg-white/10 sm:px-3.5 sm:text-white/80 sm:hover:border-white/35 sm:hover:bg-white/15 md:min-w-[10.5rem]"
             >
-              <IconSearch className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
-              <span className="truncate font-label text-[10px] tracking-[0.12em] text-white/55 uppercase transition-colors group-hover:text-white/75 sm:text-[11px]">
+              <IconSearch className="h-5 w-5 shrink-0 sm:h-4 sm:w-4" />
+              <span className="hidden truncate font-label text-[10px] tracking-[0.12em] text-white/55 uppercase transition-colors group-hover:text-white/75 sm:inline sm:text-[11px]">
                 Search
               </span>
             </button>
             <Link
               href="/wishlist"
               aria-label={`Wishlist (${wishlistCount})`}
-              className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10"
+              className="relative inline-flex h-11 w-11 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10"
             >
               <IconWishlist className="h-5 w-5" />
               {wishlistCount > 0 ? (
-                <span className="absolute top-1 right-0.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-white px-1 text-[9px] font-semibold text-[#5E062A] sm:top-1.5 sm:right-1">
+                <span className="absolute top-1.5 right-1 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-white px-1 text-[9px] font-semibold text-[#5E062A]">
                   {wishlistCount}
                 </span>
               ) : null}
@@ -395,7 +395,7 @@ export default function Navbar() {
             <Link
               href="/account"
               aria-label="Account"
-              className="inline-flex h-9 w-9 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10"
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10"
             >
               <IconAccount className="h-5 w-5" />
             </Link>

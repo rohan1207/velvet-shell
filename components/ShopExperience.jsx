@@ -338,8 +338,8 @@ export default function ShopExperience({
             className="sticky z-40 mt-8 border-b border-ink/8 bg-white/95 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-white/90"
             style={{ top: 'calc(var(--site-promo-h) + var(--site-nav-h))' }}
           >
-            <div className="grid grid-cols-1 items-center gap-2.5 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_minmax(0,1fr)] md:gap-4">
-              <div className="flex flex-wrap items-center gap-2 md:justify-start">
+            <div className="flex flex-col gap-2.5 md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_minmax(0,1fr)] md:items-center md:gap-4">
+              <div className="flex items-center gap-2 md:flex-wrap md:justify-start">
                 <button
                   type="button"
                   onClick={() => setSidebarOpen(true)}
@@ -355,7 +355,7 @@ export default function ShopExperience({
                 <button
                   type="button"
                   onClick={() => setMobileFiltersOpen(true)}
-                  className="inline-flex items-center gap-2 rounded-full border border-ink/12 px-3.5 py-2 font-label text-[10px] tracking-[0.14em] text-ink/75 uppercase lg:hidden"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/12 px-3.5 py-2 font-label text-[10px] tracking-[0.14em] text-ink/75 uppercase lg:hidden"
                 >
                   <IconFilters />
                   Filters
@@ -369,7 +369,7 @@ export default function ShopExperience({
                   <button
                     type="button"
                     onClick={clearFilters}
-                    className="rounded-full border border-ink/10 px-3.5 py-2 font-label text-[10px] tracking-[0.14em] text-ink/65 uppercase transition-colors hover:border-burgundy/25 hover:text-burgundy"
+                    className="min-h-11 rounded-full border border-ink/10 px-3.5 py-2 font-label text-[10px] tracking-[0.14em] text-ink/65 uppercase transition-colors hover:border-burgundy/25 hover:text-burgundy"
                   >
                     Clear
                   </button>
@@ -378,11 +378,31 @@ export default function ShopExperience({
                   <button
                     type="button"
                     onClick={applyFilters}
-                    className="bg-velvet-texture rounded-full px-3.5 py-2 font-label text-[10px] tracking-[0.14em] text-ivory uppercase"
+                    className="bg-velvet-texture min-h-11 rounded-full px-3.5 py-2 font-label text-[10px] tracking-[0.14em] text-ivory uppercase"
                   >
                     Apply
                   </button>
                 ) : null}
+                <div className="ml-auto flex items-center gap-2 md:hidden">
+                  <p className="font-label text-[10px] tracking-[0.12em] text-ink/70 uppercase">
+                    {catalogLoading
+                      ? '…'
+                      : `${list.length}`}
+                  </p>
+                  <label className="flex items-center">
+                    <span className="sr-only">Sort</span>
+                    <select
+                      value={sort}
+                      onChange={(event) => setSort(event.target.value)}
+                      className="max-w-[8.5rem] rounded-full border border-ink/10 bg-ivory px-2.5 py-2 text-[10px] tracking-[0.12em] text-ink/85 uppercase outline-none"
+                    >
+                      <option value="featured">Featured</option>
+                      <option value="price-asc">Price ↑</option>
+                      <option value="price-desc">Price ↓</option>
+                      <option value="name">Name</option>
+                    </select>
+                  </label>
+                </div>
               </div>
 
               <label className="relative mx-auto block w-full max-w-md md:mx-0 md:max-w-none">
@@ -397,12 +417,12 @@ export default function ShopExperience({
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') commitSearch();
                   }}
-                  placeholder="Search this edit — lotus, bee, silver…"
+                  placeholder="Search — lotus, bee, silver…"
                   className="w-full rounded-full border border-ink/10 bg-ivory/80 py-2.5 pr-4 pl-10 text-sm text-ink outline-none transition-[border-color,box-shadow] placeholder:text-ink/35 focus:border-burgundy/30 focus:bg-white focus:shadow-[0_8px_24px_rgba(94,6,42,0.06)]"
                 />
               </label>
 
-              <div className="flex items-center justify-between gap-3 md:justify-end">
+              <div className="hidden items-center justify-between gap-3 md:flex md:justify-end">
                 <p className="font-label text-[10px] tracking-[0.12em] text-ink/70 uppercase">
                   {catalogLoading
                     ? 'Loading…'
@@ -413,7 +433,7 @@ export default function ShopExperience({
                   <select
                     value={sort}
                     onChange={(event) => setSort(event.target.value)}
-                    className="max-w-[9.5rem] rounded-full border border-ink/10 bg-ivory px-2.5 py-2 text-[10px] tracking-[0.12em] text-ink/85 uppercase outline-none md:max-w-none md:px-3 md:tracking-[0.14em]"
+                    className="rounded-full border border-ink/10 bg-ivory px-3 py-2 text-[10px] tracking-[0.14em] text-ink/85 uppercase outline-none"
                   >
                     <option value="featured">Featured</option>
                     <option value="price-asc">Price, rising</option>

@@ -70,7 +70,7 @@ export default function CategoryCircles() {
                   />
                 </span>
 
-                <span className="mt-3 font-label text-[10px] tracking-[0.14em] text-ink/80 transition-colors duration-500 group-hover:text-burgundy group-active:text-burgundy md:mt-4 md:tracking-[0.16em] lg:text-[11px]">
+                <span className="mt-3 font-label text-[11px] tracking-[0.12em] text-ink/80 transition-colors duration-500 group-hover:text-burgundy group-active:text-burgundy md:mt-4 md:text-[10px] md:tracking-[0.16em] lg:text-[11px]">
                   {category.label}
                 </span>
               </Link>

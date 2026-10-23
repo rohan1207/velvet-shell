@@ -12,6 +12,26 @@ export function normalizeSizeTags(tags, lengthLabel = '') {
   return length ? [length] : [];
 }
 
+export function normalizeCustomizationFields(fields) {
+  if (!Array.isArray(fields)) return [];
+  return fields
+    .map((field, index) => {
+      const label = String(field?.label || '').trim();
+      if (!label) return null;
+      const inputType = ['text', 'number', 'textarea'].includes(field?.inputType)
+        ? field.inputType
+        : 'text';
+      return {
+        id: String(field?.id || `field_${index + 1}`).trim() || `field_${index + 1}`,
+        label,
+        inputType,
+        required: !!field?.required,
+        placeholder: String(field?.placeholder || '').trim(),
+      };
+    })
+    .filter(Boolean);
+}
+
 function mapFamilyRow(row, variants = []) {
   return {
     id: row.id,
@@ -20,6 +40,8 @@ function mapFamilyRow(row, variants = []) {
     category: row.category,
     collection: row.collection_slug || '',
     hasColorVariants: !!row.has_color_variants,
+    customizationEnabled: !!row.customization_enabled,
+    customizationFields: normalizeCustomizationFields(row.customization_fields),
     shipping: normalizeShipping(row.shipping),
     recommendedFamilyIds: Array.isArray(row.recommended_family_ids)
       ? row.recommended_family_ids
@@ -190,6 +212,8 @@ export function blankFamily() {
     category: 'rings',
     collection: 'the-shell-edit',
     hasColorVariants: false,
+    customizationEnabled: false,
+    customizationFields: [],
     shipping: normalizeShipping(null),
     recommendedFamilyIds: [],
     badge: '',
@@ -221,12 +245,19 @@ export async function upsertFamily(payload) {
   // Ensure one primary
   if (!variants.some((v) => v.isPrimary)) variants[0].isPrimary = true;
 
+  const customizationEnabled = !!payload.customizationEnabled;
+  const customizationFields = customizationEnabled
+    ? normalizeCustomizationFields(payload.customizationFields)
+    : [];
+
   const familyRow = {
     slug: familySlug,
     name,
     category: payload.category,
     collection_slug: payload.collection || null,
     has_color_variants: hasColor,
+    customization_enabled: customizationEnabled,
+    customization_fields: customizationFields,
     shipping: normalizeShipping(payload.shipping),
     recommended_family_ids: payload.recommendedFamilyIds || [],
     badge: payload.badge || '',
@@ -267,10 +298,20 @@ export async function upsertFamily(payload) {
     const v = variants[i];
     const colorPart = hasColor ? slugify(v.colorLabel || `color-${i + 1}`) : 'default';
     const variantSlug =
-      slugify(v.slug) ||
-      (hasColor ? `${familySlug}-${colorPart}` : familySlug);
+      slugify(v.slug) || (hasColor ? `${familySlug}-${colorPart}` : familySlug);
 
-    const row = {
+    const sizeTags = normalizeSizeTags(v.sizeTags, v.length);
+    const featureList = Array.isArray(v.features)
+      ? v.features
+      : String(v.features || '')
+          .split('\n')
+          .map((s) => s.trim())
+          .filter(Boolean);
+    const galleryList = Array.isArray(v.gallery)
+      ? v.gallery.filter((g) => g && g.url)
+      : [];
+
+    const variantRow = {
       family_id: familyId,
       slug: variantSlug,
       color_label: v.colorLabel || (hasColor ? `Color ${i + 1}` : 'Default'),
@@ -280,23 +321,18 @@ export async function upsertFamily(payload) {
       description: v.description || '',
       story: v.story || '',
       care: v.care || '',
-      features: Array.isArray(v.features)
-        ? v.features
-        : String(v.features || '')
-            .split('\n')
-            .map((s) => s.trim())
-            .filter(Boolean),
+      features: featureList,
       material: v.material || '',
-      length_label:
-        normalizeSizeTags(v.sizeTags, v.length)[0] || String(v.length || '').trim() || '',
-      size_tags: normalizeSizeTags(v.sizeTags, v.length),
+      length_label: sizeTags[0] || String(v.length || '').trim() || '',
+      size_tags: sizeTags,
       reviews: {
-        rating: Math.min(5, Math.max(0, Number(v.reviews?.rating) || 0)),
-        count: Math.max(0, Number(v.reviews?.count) || 0),
-        highlights: Array.isArray(v.reviews?.highlights) ? v.reviews.highlights : [],
+        rating: Math.min(5, Math.max(0, Number(v.reviews && v.reviews.rating) || 0)),
+        count: Math.max(0, Number(v.reviews && v.reviews.count) || 0),
+        highlights:
+          v.reviews && Array.isArray(v.reviews.highlights) ? v.reviews.highlights : [],
       },
       hero_url: v.heroUrl || '',
-      gallery: Array.isArray(v.gallery) ? v.gallery.filter((g) => g?.url) : [],
+      gallery: galleryList,
       stock: Math.max(0, Number(v.stock) || 0),
       out_of_stock: !!v.outOfStock,
       active: v.active !== false,
@@ -304,12 +340,16 @@ export async function upsertFamily(payload) {
       updated_at: new Date().toISOString(),
     };
 
-    if (v.id && !String(v.id).startsWith('tmp-')) {
-      const { error } = await db.from('product_color_variants').update(row).eq('id', v.id);
-      if (error) throw error;
+    const existingId = v.id && !String(v.id).startsWith('tmp-') ? v.id : null;
+    if (existingId) {
+      const updated = await db
+        .from('product_color_variants')
+        .update(variantRow)
+        .eq('id', existingId);
+      if (updated.error) throw updated.error;
     } else {
-      const { error } = await db.from('product_color_variants').insert(row);
-      if (error) throw error;
+      const inserted = await db.from('product_color_variants').insert(variantRow);
+      if (inserted.error) throw inserted.error;
     }
   }
 

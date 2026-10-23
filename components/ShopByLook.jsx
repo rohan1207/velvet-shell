@@ -30,6 +30,28 @@ const looks = [
   },
 ];
 
+function ProductPill({ product, href, className = '' }) {
+  return (
+    <Link
+      href={href}
+      className={`group/pill flex w-[min(240px,calc(100vw-2.5rem))] max-w-[260px] items-center gap-3 rounded-full border border-white/50 bg-ivory/96 py-2 pr-4 pl-2 shadow-[0_14px_44px_rgba(20,18,16,0.22)] backdrop-blur-md transition-transform duration-300 hover:scale-[1.02] ${className}`}
+    >
+      <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-cream ring-1 ring-ink/8">
+        <Image src={product.image} alt="" fill className="object-cover" sizes="44px" />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block truncate text-[13px] font-medium tracking-[-0.01em] text-ink">
+          {product.name}
+        </span>
+        <span className="mt-0.5 flex items-center justify-between gap-2">
+          <span className="font-num text-[11px] text-ink/85">{money(product.price)}</span>
+          <span className="font-label text-[9px] tracking-[0.14em] text-gold uppercase">View</span>
+        </span>
+      </span>
+    </Link>
+  );
+}
+
 function Hotspot({ spot, active, onActivate, onDeactivate }) {
   const product = getProduct(spot.productSlug);
   if (!product) return null;
@@ -60,14 +82,15 @@ function Hotspot({ spot, active, onActivate, onDeactivate }) {
           e.stopPropagation();
           onActivate();
         }}
-        className={`relative flex h-4 w-4 items-center justify-center rounded-full transition-transform duration-500 ${
-          active ? 'scale-125' : 'hover:scale-110'
+        className={`relative flex h-11 w-11 items-center justify-center rounded-full transition-transform duration-500 md:h-4 md:w-4 ${
+          active ? 'scale-110 md:scale-125' : 'hover:scale-110'
         }`}
       >
-        <span className="absolute h-3.5 w-3.5 rounded-full bg-white/95 shadow-[0_0_18px_rgba(255,255,255,0.85)]" />
-        <span className="absolute h-1.5 w-1.5 rounded-full bg-burgundy" />
+        <span className="absolute h-4 w-4 rounded-full bg-white/95 shadow-[0_0_18px_rgba(255,255,255,0.85)] md:h-3.5 md:w-3.5" />
+        <span className="absolute h-2 w-2 rounded-full bg-burgundy md:h-1.5 md:w-1.5" />
       </button>
 
+      {/* Desktop side pill — stays near hotspot */}
       <AnimatePresence>
         {active && (
           <motion.div
@@ -75,31 +98,13 @@ function Hotspot({ spot, active, onActivate, onDeactivate }) {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: flip ? 8 : -8, scale: 0.98 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className={`absolute top-1/2 z-30 -translate-y-1/2 ${
+            className={`absolute top-1/2 z-30 hidden -translate-y-1/2 md:block ${
               flip ? 'right-[calc(100%+12px)]' : 'left-[calc(100%+12px)]'
             }`}
             onMouseEnter={onActivate}
             onMouseLeave={onDeactivate}
           >
-            <Link
-              href={href}
-              className="group/pill flex w-[min(220px,calc(100vw-2.5rem))] max-w-[260px] items-center gap-3 rounded-full border border-white/50 bg-ivory/96 py-2 pr-4 pl-2 shadow-[0_14px_44px_rgba(20,18,16,0.22)] backdrop-blur-md transition-transform duration-300 hover:scale-[1.02]"
-            >
-              <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-cream ring-1 ring-ink/8">
-                <Image src={product.image} alt="" fill className="object-cover" sizes="44px" />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="block truncate text-[13px] font-medium tracking-[-0.01em] text-ink">
-                  {product.name}
-                </span>
-                <span className="mt-0.5 flex items-center justify-between gap-2">
-                  <span className="font-num text-[11px] text-ink/85">{money(product.price)}</span>
-                  <span className="font-label text-[9px] tracking-[0.14em] text-gold uppercase">
-                    View
-                  </span>
-                </span>
-              </span>
-            </Link>
+            <ProductPill product={product} href={href} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -112,6 +117,9 @@ function LookCard({ look }) {
   const cardRef = useRef(null);
   const leaveTimer = useRef(null);
   const uid = useId();
+
+  const activeSpot = look.hotspots.find((s) => s.id === activeId);
+  const activeProduct = activeSpot ? getProduct(activeSpot.productSlug) : null;
 
   useEffect(() => {
     function onDocPointer(e) {
@@ -155,6 +163,26 @@ function LookCard({ look }) {
             onDeactivate={scheduleDeactivate}
           />
         ))}
+
+        {/* Phone: anchored bottom pill stays in-viewport */}
+        <AnimatePresence>
+          {activeProduct && activeSpot ? (
+            <motion.div
+              key={activeSpot.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-x-3 bottom-3 z-30 flex justify-center md:hidden"
+            >
+              <ProductPill
+                product={activeProduct}
+                href={`/shop/${activeProduct.slug}`}
+                className="w-full max-w-none"
+              />
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
       </div>
     </article>
   );
@@ -185,7 +213,7 @@ export default function ShopByLook() {
         <div className="mt-4 flex shrink-0 justify-center md:mt-5">
           <Link
             href="/shop"
-            className="bg-velvet-texture inline-flex items-center rounded-full px-6 py-2.5 font-label text-[11px] text-ivory transition-opacity hover:opacity-90"
+            className="bg-velvet-texture inline-flex min-h-11 items-center rounded-full px-6 py-2.5 font-label text-[11px] text-ivory transition-opacity hover:opacity-90"
           >
             Shop the collection
           </Link>

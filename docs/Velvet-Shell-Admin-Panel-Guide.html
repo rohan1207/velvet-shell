@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Velvet Shell — Admin Panel Walkthrough</title>
+  <style>
+    :root {
+      --burgundy: #5e062a;
+      --ink: #2d2b2b;
+      --stone: #7a736c;
+      --gold: #d4af64;
+      --ivory: #f5eee8;
+      --pearl: #faf7f2;
+      --cream: #ebe3da;
+      --line: rgba(45, 43, 43, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--pearl);
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .sheet {
+      max-width: 880px;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 10px 40px rgba(45, 43, 43, 0.06);
+    }
+
+    .cover {
+      background: linear-gradient(155deg, #5e062a 0%, #3a0419 100%);
+      color: var(--ivory);
+      padding: 4.5rem 3rem 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::after {
+      content: "";
+      position: absolute;
+      inset: auto -20% -40% auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,175,100,0.28), transparent 65%);
+    }
+    .cover-eyebrow {
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gold);
+      margin: 0 0 1rem;
+    }
+    .cover h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      margin: 0 0 1rem;
+      max-width: 14ch;
+    }
+    .cover p {
+      margin: 0;
+      max-width: 38rem;
+      color: rgba(245, 238, 232, 0.88);
+      font-weight: 300;
+    }
+    .cover-meta {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(245, 238, 232, 0.65);
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.5rem;
+      background: rgba(255,255,255,0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+    .toolbar p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--stone);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 38px;
+      padding: 0 1.1rem;
+      border-radius: 8px;
+      border: none;
+      background: var(--burgundy);
+      color: var(--ivory);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn:hover { opacity: 0.92; }
+    .btn-ghost {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .content { padding: 2.5rem 3rem 4rem; }
+
+    .toc {
+      background: var(--pearl);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .toc h2 {
+      margin: 0 0 0.85rem;
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .toc ol {
+      margin: 0;
+      padding-left: 1.2rem;
+      columns: 1;
+    }
+    @media (min-width: 700px) {
+      .toc ol { columns: 2; column-gap: 2rem; }
+    }
+    .toc li { break-inside: avoid; margin: 0.35rem 0; }
+    .toc a {
+      color: var(--burgundy);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .toc a:hover { text-decoration: underline; }
+
+    h2.section {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.85rem;
+      font-weight: 500;
+      margin: 2.75rem 0 0.75rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--line);
+      color: var(--ink);
+    }
+    h2.section:first-of-type { border-top: none; margin-top: 0; }
+    h3 {
+      font-size: 1.15rem;
+      margin: 1.75rem 0 0.55rem;
+      color: var(--burgundy);
+    }
+    h4 {
+      font-size: 0.95rem;
+      margin: 1.25rem 0 0.4rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    p { margin: 0.55rem 0; }
+    ul, ol { margin: 0.5rem 0 0.85rem; padding-left: 1.25rem; }
+    li { margin: 0.35rem 0; }
+    strong { font-weight: 600; }
+
+    .lead {
+      font-size: 1.05rem;
+      color: var(--stone);
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+      margin: 1rem 0;
+      background: #fff;
+    }
+    .card.tip {
+      background: #fffdf8;
+      border-color: rgba(212, 175, 100, 0.45);
+    }
+    .card.warn {
+      background: #fdf7f8;
+      border-color: rgba(94, 6, 42, 0.22);
+    }
+    .card.note {
+      background: var(--pearl);
+    }
+    .card-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 0 0 0.35rem;
+    }
+    .card.warn .card-label { color: var(--burgundy); }
+
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+      margin: 0.85rem 0 1.25rem;
+    }
+    .steps > li {
+      position: relative;
+      padding: 0.85rem 0.9rem 0.85rem 3.1rem;
+      margin: 0.55rem 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--pearl);
+    }
+    .steps > li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0.85rem;
+      top: 0.95rem;
+      width: 1.55rem;
+      height: 1.55rem;
+      border-radius: 999px;
+      background: var(--burgundy);
+      color: var(--ivory);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: var(--cream);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .kbd {
+      display: inline-block;
+      padding: 0.05rem 0.4rem;
+      border-radius: 5px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.85rem 0 1.25rem;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 0.65rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--pearl);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+      margin: 0.85rem 0 1.25rem;
+    }
+    .flow span {
+      background: var(--pearl);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .flow .arrow { border: none; background: transparent; color: var(--stone); padding: 0; }
+
+    .footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      color: var(--stone);
+      font-size: 13px;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .sheet { box-shadow: none; max-width: none; }
+      .toolbar { display: none !important; }
+      .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .content { padding: 1.5rem 1.75rem 2rem; }
+      h2.section { break-before: page; }
+      h2.section#welcome { break-before: avoid; }
+      .card, .steps > li, table { break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
+    }
+
+    @media (max-width: 640px) {
+      .cover { padding: 3rem 1.5rem 2.5rem; }
+      .content { padding: 1.75rem 1.25rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <header class="cover">
+      <p class="cover-eyebrow">Velvet Shell · House operations</p>
+      <h1>Admin Panel Walkthrough</h1>
+      <p>
+        A complete start-to-end guide for running the Velvet Shell catalogue, orders,
+        homepage, discounts, and content — written so you can manage the house confidently,
+        step by step.
+      </p>
+      <div class="cover-meta">
+        <span>Client training guide</span>
+        <span>Print or save as PDF</span>
+        <span>Updated for the current admin console</span>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <p>Tip: use <strong>Print → Save as PDF</strong> to send this as a PDF.</p>
+      <button class="btn" type="button" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+    <main class="content">
+      <nav class="toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+        <ol>
+          <li><a href="#welcome">1. Welcome &amp; how to use this guide</a></li>
+          <li><a href="#login">2. Signing in &amp; signing out</a></li>
+          <li><a href="#shell">3. Sidebar, layout &amp; navigation</a></li>
+          <li><a href="#dashboard">4. Dashboard</a></li>
+          <li><a href="#products">5. Products (add, edit, variants, images, customization)</a></li>
+          <li><a href="#categories">6. Categories</a></li>
+          <li><a href="#homepage">7. Homepage: Festive Edit &amp; Best sellers</a></li>
+          <li><a href="#discounts">8. Discounts &amp; promo codes</a></li>
+          <li><a href="#orders">9. Orders &amp; fulfilment</a></li>
+          <li><a href="#customers">10. Customers</a></li>
+          <li><a href="#looks">11. Shop by look</a></li>
+          <li><a href="#blogs">12. Blogs</a></li>
+          <li><a href="#testimonials">13. Testimonials</a></li>
+          <li><a href="#images">14. Uploading images (important)</a></li>
+          <li><a href="#checklist">15. Everyday checklist</a></li>
+          <li><a href="#help">16. Common questions &amp; troubleshooting</a></li>
+        </ol>
+      </nav>
+
+      <!-- 1 -->
+      <h2 class="section" id="welcome">1. Welcome &amp; how to use this guide</h2>
+      <p class="lead">
+        This is your private house console. From here you control what appears on the Velvet Shell
+        website: jewellery products, homepage selections, discounts, customer orders, and soft
+        content like looks, blogs, and testimonials.
+      </p>
+      <div class="card tip">
+        <p class="card-label">How to learn fastest</p>
+        <p>
+          Read sections <strong>2–5</strong> first (login, navigation, dashboard, products).
+          Those are what you will use every day. Then learn orders (section 9). Use the rest as
+          a reference when you need homepage, discounts, or content.
+        </p>
+      </div>
+      <div class="card note">
+        <p class="card-label">Two kinds of pages</p>
+        <ul>
+          <li><strong>Live commerce pages</strong> (Products, Categories, Homepage strips, Discounts, Orders, Customers, Dashboard) — saved to the house database and reflected on the live website.</li>
+          <li><strong>Content tools</strong> (Shop by look, Blogs, Testimonials) — managed inside the admin for storefront content blocks. Prefer editing them from the same computer/browser you normally use for admin work.</li>
+        </ul>
+      </div>
+
+      <!-- 2 -->
+      <h2 class="section" id="login">2. Signing in &amp; signing out</h2>
+      <h3>Open the admin</h3>
+      <p>Go to your admin web address (the private console URL shared with you). You will see a screen titled <strong>Admin access</strong>.</p>
+
+      <h3>Sign in</h3>
+      <ol class="steps">
+        <li>Enter your <strong>admin email</strong>.</li>
+        <li>Enter your <strong>password</strong>.</li>
+        <li>Click <strong>Enter console</strong>.</li>
+        <li>Wait for “Signing in…” — then you land on the Dashboard.</li>
+      </ol>
+      <div class="card warn">
+        <p class="card-label">If login fails</p>
+        <ul>
+          <li>Check Caps Lock and that you are using the admin account (not a customer account).</li>
+          <li>If you see “Too many attempts. Try again later.” — wait a few minutes and try again.</li>
+          <li>Ask your technical contact to reset access if the password no longer works.</li>
+        </ul>
+      </div>
+
+      <h3>Sign out</h3>
+      <ol class="steps">
+        <li>Open the left sidebar.</li>
+        <li>At the bottom, click <strong>Log out</strong>.</li>
+        <li>You return to the login screen. Always log out on shared computers.</li>
+      </ol>
+
+      <!-- 3 -->
+      <h2 class="section" id="shell">3. Sidebar, layout &amp; navigation</h2>
+      <p>Every page shares the same shell: a dark left sidebar and a light work area.</p>
+
+      <h3>Sidebar menu (top to bottom)</h3>
+      <table>
+        <thead>
+          <tr><th>Menu item</th><th>What it is for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Dashboard</td><td>Overview of products, stock, orders, revenue</td></tr>
+          <tr><td>Products</td><td>Add / edit jewellery families, photos, prices, customization</td></tr>
+          <tr><td>Categories</td><td>Earrings, rings, necklaces… used in filters</td></tr>
+          <tr><td>Festive Edit</td><td>Choose products for the seasonal homepage strip</td></tr>
+          <tr><td>Best sellers</td><td>Choose products for the best-sellers homepage strip</td></tr>
+          <tr><td>Discounts</td><td>Promo codes and bulk-buy offers</td></tr>
+          <tr><td>Orders</td><td>Fulfilment: accept, pack, dispatch, deliver</td></tr>
+          <tr><td>Customers</td><td>People who ordered / have accounts</td></tr>
+          <tr><td>Shop by look</td><td>Look images with clickable product hotspots</td></tr>
+          <tr><td>Blogs</td><td>Journal / blog posts</td></tr>
+          <tr><td>Testimonials</td><td>Customer quotes for the website</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Collapse / expand the sidebar (desktop)</h3>
+      <ol class="steps">
+        <li>When the sidebar is open, click the <strong>×</strong> (close) icon at the top-right of the sidebar to collapse it to icons only — more room for tables and forms.</li>
+        <li>When collapsed, click the <strong>hamburger</strong> (three lines) at the top of the rail to expand again.</li>
+        <li>The console remembers your choice for next time.</li>
+      </ol>
+
+      <h3>On a phone or small laptop</h3>
+      <ol class="steps">
+        <li>Tap the menu button in the top bar to open the sidebar.</li>
+        <li>Choose a page — the menu closes automatically.</li>
+        <li>Tap × or the dimmed background to close without navigating.</li>
+      </ol>
+
+      <div class="card tip">
+        <p class="card-label">Orders badge</p>
+        <p>Orders in the sidebar may show a small number (or gold dot when collapsed). Treat it as a reminder to check the Orders page for work waiting on you.</p>
+      </div>
+
+      <!-- 4 -->
+      <h2 class="section" id="dashboard">4. Dashboard</h2>
+      <p class="lead">Your morning overview. Most numbers are clickable and take you straight into the right filtered list.</p>
+
+      <h3>What you will see</h3>
+      <ul>
+        <li><strong>Live products</strong> — active on the website</li>
+        <li><strong>Draft products</strong> — saved but not live yet</li>
+        <li><strong>Low stock</strong> — stock of 3 or fewer</li>
+        <li><strong>Out of stock</strong> — needs attention</li>
+        <li><strong>Missing images</strong> — products without a proper hero image</li>
+        <li><strong>Orders / open orders</strong> — fulfilment workload</li>
+        <li><strong>Revenue</strong> — this month / this year / total confirmed</li>
+        <li><strong>Active discounts</strong></li>
+        <li><strong>Low stock list</strong> and <strong>recent orders</strong> at the bottom</li>
+      </ul>
+
+      <h3>How to use it</h3>
+      <ol class="steps">
+        <li>Open <strong>Dashboard</strong> after login.</li>
+        <li>Scan for red flags: low stock, out of stock, missing images, open orders.</li>
+        <li>Click a card (for example <strong>Draft products</strong>) to jump into Products already filtered.</li>
+        <li>Use <strong>Recent orders → View all</strong> to start fulfilment.</li>
+      </ol>
+
+      <!-- 5 -->
+      <h2 class="section" id="products">5. Products — the heart of the catalogue</h2>
+      <p class="lead">
+        Products are saved as <strong>families</strong>. One family can have one colour, or several
+        colour variants (Silver / Gold / Pink…) each with its own photos, price, and stock.
+      </p>
+
+      <h3>5.1 Product list</h3>
+      <p>Go to <strong>Products</strong> in the sidebar.</p>
+      <ul>
+        <li>See every family: thumbnail, name, slug, price, category, collection, colour count, status, stock.</li>
+        <li>Use filters: <strong>Search</strong>, <strong>Category</strong>, <strong>Collection</strong>, <strong>Status</strong> (Active / Draft), <strong>Stock</strong> (Low / Out / In).</li>
+        <li>Click a product name/row to edit it.</li>
+        <li>Click <strong>Add product</strong> to create a new piece.</li>
+      </ul>
+      <div class="card tip">
+        <p class="card-label">Status meanings</p>
+        <ul>
+          <li><span class="pill">Active</span> — visible on the live website (when published correctly).</li>
+          <li><span class="pill">Draft</span> — saved in admin, not shown as a live listing.</li>
+        </ul>
+      </div>
+
+      <h3>5.2 Add a new product (full walkthrough)</h3>
+      <ol class="steps">
+        <li>Click <strong>Add product</strong>.</li>
+        <li><strong>Basics</strong>
+          <ul>
+            <li>Enter the <strong>Name</strong> (required). The <strong>slug</strong> (web address piece) is created automatically from the name.</li>
+            <li>Optional <strong>Badge</strong> (for example “New · Floral”).</li>
+            <li>Choose <strong>Category</strong> and <strong>Collection</strong>.</li>
+            <li>Set <strong>Status</strong>: keep as Draft while you finish photos; switch to Active when ready to sell.</li>
+          </ul>
+        </li>
+        <li><strong>Shipping</strong> — edit the intro text, India ETA, and notes if your atelier timing changed. Defaults are already sensible for India.</li>
+        <li><strong>Recommendations</strong> — optionally tick other products for “You may also like” (available once more products exist).</li>
+        <li><strong>Customization</strong> (optional but powerful)
+          <ul>
+            <li>Tick <strong>Customization available?</strong> if the shopper must give you extra details.</li>
+            <li>Write a clear prompt, for example: <em>Specify the dangles length</em>.</li>
+            <li>Choose input type: <strong>Text</strong>, <strong>Number</strong>, or <strong>Long text</strong>.</li>
+            <li>Add a placeholder hint if helpful (e.g. “e.g. 2.5 inches”).</li>
+            <li>Tick <strong>Required</strong> if they must answer before adding to bag.</li>
+            <li>Use <strong>+ Add prompt</strong> for more questions (initials, message, chain length…).</li>
+          </ul>
+        </li>
+        <li><strong>Colour variants</strong>
+          <ul>
+            <li>If the piece exists in only one finish, leave “color variants” off (single Default colour).</li>
+            <li>If it exists in Silver and Gold (etc.), tick <strong>Does this product have color variants?</strong></li>
+            <li>Add colours with presets (+ Silver, + Gold…) or <strong>+ Custom color</strong>.</li>
+            <li>Name each colour, pick a swatch, and mark one as <strong>Primary listing color</strong>.</li>
+            <li>Optional: <strong>Import details from</strong> another colour to copy price/copy/stock — photos are <em>not</em> copied (upload each colour’s own photos).</li>
+          </ul>
+        </li>
+        <li><strong>Details for the active colour</strong>
+          <ul>
+            <li>Set <strong>Price</strong> (INR) and <strong>Stock</strong>.</li>
+            <li>Confirm <strong>Material</strong> (often auto-suggested from the colour name).</li>
+            <li>Add <strong>size pills</strong> (e.g. Adjustable, 16", 18"). Press Enter or Add pill. If you leave sizes empty, the site shows “One size”.</li>
+            <li>Fill Description, The piece (story), Care, and Features (one feature per line).</li>
+            <li>Optional review rating / count if you want to display social proof.</li>
+          </ul>
+        </li>
+        <li><strong>Hero &amp; gallery images</strong>
+          <ul>
+            <li>Upload a <strong>Hero</strong> image for the active colour (direct file upload — not a URL).</li>
+            <li>Upload one or more <strong>Gallery</strong> images. Wait until uploading finishes.</li>
+            <li>Switch colour tabs and upload that colour’s photos separately so finishes never mix.</li>
+          </ul>
+        </li>
+        <li>Click <strong>Save product</strong>. Wait for “Saving product…” to finish.</li>
+        <li>You are taken to the product’s edit page. Review once, then set Status to <strong>Active</strong> when you want it live.</li>
+      </ol>
+
+      <h3>5.3 Edit an existing product</h3>
+      <ol class="steps">
+        <li>Products list → click the product.</li>
+        <li>Change any section (price, stock, photos, customization prompts, shipping…).</li>
+        <li>Click <strong>Save product</strong>.</li>
+      </ol>
+
+      <h3>5.4 Delete a product</h3>
+      <ol class="steps">
+        <li>Open the product edit page.</li>
+        <li>Click <strong>Delete</strong> (top area).</li>
+        <li>Confirm when asked — this removes the whole family <em>and</em> all its colour variants.</li>
+      </ol>
+      <div class="card warn">
+        <p class="card-label">Careful</p>
+        <p>Deletion cannot be undone from the admin. Prefer setting Status to <strong>Draft</strong> if you only want to hide a piece temporarily.</p>
+      </div>
+
+      <h3>5.5 Customization answers (what the customer sees)</h3>
+      <p>
+        When customization is enabled, the product page on the website shows your prompts.
+        The shopper types text or a number. Their answers appear in:
+      </p>
+      <ul>
+        <li>Their bag / cart / checkout</li>
+        <li>The <strong>order detail</strong> in admin (highlighted as Customization)</li>
+      </ul>
+      <p>Always write prompts in plain language the customer will understand.</p>
+
+      <!-- 6 -->
+      <h2 class="section" id="categories">6. Categories</h2>
+      <p>Categories power the product form and storefront filters (Earrings, Rings, Necklaces…).</p>
+      <ol class="steps">
+        <li>Open <strong>Categories</strong>.</li>
+        <li>Enter a <strong>Name</strong> (required).</li>
+        <li>Slug is optional — leave blank to auto-create from the name.</li>
+        <li>Optional <strong>Line</strong> (short description).</li>
+        <li>Click <strong>Save category</strong>.</li>
+      </ol>
+      <div class="card note">
+        <p class="card-label">Updating a category</p>
+        <p>There is no separate “edit” button on each row. To update, save again using the same slug (or the same name so the slug matches). There is no delete button — ask your technical contact if a category must be removed from the database.</p>
+      </div>
+
+      <!-- 7 -->
+      <h2 class="section" id="homepage">7. Homepage: Festive Edit &amp; Best sellers</h2>
+      <p>These two pages control curated product strips on the website homepage.</p>
+
+      <h3>Festive Edit</h3>
+      <p>Seasonal / festive selection strip. Open <strong>Festive Edit</strong>.</p>
+
+      <h3>Best sellers</h3>
+      <p>“Best of Velvet Shell” strip. Open <strong>Best sellers</strong>.</p>
+
+      <h3>How to curate either strip</h3>
+      <ol class="steps">
+        <li>Edit the section copy if needed: <strong>Eyebrow</strong>, <strong>Title</strong>, <strong>Supporting line</strong>.</li>
+        <li>Use Search / Category / Collection filters to find products.</li>
+        <li>Tick products in the table (or use <strong>Select visible</strong>).</li>
+        <li>In the <strong>Selected order</strong> list, use <strong>Up / Down</strong> to set homepage order, or <strong>Remove</strong>.</li>
+        <li>Click <strong>Save changes</strong>.</li>
+      </ol>
+      <div class="card tip">
+        <p class="card-label">Order matters</p>
+        <p>The order of the selected list is the order customers see on the homepage.</p>
+      </div>
+
+      <!-- 8 -->
+      <h2 class="section" id="discounts">8. Discounts &amp; promo codes</h2>
+      <p>Open <strong>Discounts</strong> to manage promo codes and bulk-buy tiers.</p>
+
+      <h3>List page</h3>
+      <ul>
+        <li>See usage stats: times used, sales revenue, discount given.</li>
+        <li>Filter tabs: <strong>Active</strong> / <strong>Past</strong> / <strong>All</strong>.</li>
+        <li><strong>New promo code</strong> or <strong>Bulk offer</strong> to create.</li>
+        <li>Click a row to edit.</li>
+      </ul>
+
+      <h3>Create a promo code</h3>
+      <ol class="steps">
+        <li>Click <strong>New promo code</strong>.</li>
+        <li>Enter an internal <strong>Name</strong>.</li>
+        <li>Enter a <strong>Code</strong> shoppers will type (or click <strong>Generate</strong>). Codes are stored in capitals.</li>
+        <li>Choose <strong>Percentage</strong> or <strong>Flat amount (₹)</strong> and set the value.</li>
+        <li>Optional: minimum order, max total uses, max uses per customer.</li>
+        <li>Choose where it applies: entire catalogue, categories, collections, or selected products.</li>
+        <li>Set start/end dates and status (<strong>Active</strong> / Paused / Draft).</li>
+        <li><strong>Save</strong>.</li>
+      </ol>
+
+      <h3>Create a bulk-buy offer</h3>
+      <ol class="steps">
+        <li>Click <strong>Bulk offer</strong> (or create discount → Bulk buy tiers).</li>
+        <li>Add tiers such as “Buy 2 → 10% off”, “Buy 3 → ₹500 off”.</li>
+        <li>The highest matching quantity wins at checkout.</li>
+        <li>Set scope, schedule, status → Save.</li>
+      </ol>
+
+      <h3>Delete a discount</h3>
+      <p>Open the discount → <strong>Delete</strong> → confirm.</p>
+
+      <!-- 9 -->
+      <h2 class="section" id="orders">9. Orders &amp; fulfilment</h2>
+      <p class="lead">This is how you process every paid order from the website.</p>
+
+      <h3>Orders list</h3>
+      <ol class="steps">
+        <li>Open <strong>Orders</strong>.</li>
+        <li>Use status chips: All, Pending, Accepted, Packed, Dispatched, Delivered, Cancelled.</li>
+        <li>Search by order number, email, or customer name.</li>
+        <li>Look for <strong>Custom notes</strong> under Pieces — that order has customization answers.</li>
+        <li>Click <strong>Open</strong> (or the order number) for the full detail.</li>
+      </ol>
+
+      <h3>Recommended fulfilment flow</h3>
+      <div class="flow">
+        <span>Pending</span><span class="arrow">→</span>
+        <span>Accepted</span><span class="arrow">→</span>
+        <span>Packed</span><span class="arrow">→</span>
+        <span>Dispatched</span><span class="arrow">→</span>
+        <span>Delivered</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Status</th><th>Meaning for the atelier</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Pending</td><td>New / awaiting your attention</td></tr>
+          <tr><td>Accepted</td><td>Payment confirmed — you have taken the order</td></tr>
+          <tr><td>Packed</td><td>Piece prepared / packed for courier</td></tr>
+          <tr><td>Dispatched</td><td>Handed to courier / shipped</td></tr>
+          <tr><td>Delivered</td><td>Customer received the piece</td></tr>
+          <tr><td>Cancelled</td><td>Order stopped / cancelled</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Order detail page — what to check</h3>
+      <ul>
+        <li><strong>Customer</strong> — name, email, phone</li>
+        <li><strong>Ship to</strong> — full address</li>
+        <li><strong>Payment</strong> — Razorpay reference</li>
+        <li><strong>Line items</strong> — product photo, name, metal, size, quantity, price</li>
+        <li><strong>Customization</strong> — each prompt and the customer’s answer (read carefully before making the piece)</li>
+        <li><strong>Totals</strong> — subtotal, shipping, total</li>
+      </ul>
+
+      <h3>Update status</h3>
+      <ol class="steps">
+        <li>Open the order.</li>
+        <li>Use the <strong>Fulfilment status</strong> dropdown.</li>
+        <li>Choose the new status — it saves immediately (you should see “Saved”).</li>
+        <li>The progress strip at the top updates for the main flow.</li>
+      </ol>
+      <div class="card note">
+        <p class="card-label">Good practice</p>
+        <p>Move statuses in order (Accepted → Packed → Dispatched → Delivered). Only use Cancelled when the order will not ship. There is no “delete order” button — keep the record for history.</p>
+      </div>
+
+      <!-- 10 -->
+      <h2 class="section" id="customers">10. Customers</h2>
+      <p>Open <strong>Customers</strong> to see people connected to accounts / orders.</p>
+      <ol class="steps">
+        <li>Browse the table: name, email, phone, order count, amount spent.</li>
+        <li>Click a customer to open their side panel.</li>
+        <li>Review their order history (order number, status, total).</li>
+      </ol>
+      <p>This page is <strong>view-only</strong> — you do not edit customer profiles here. Use it for outreach and order follow-up.</p>
+
+      <!-- 11 -->
+      <h2 class="section" id="looks">11. Shop by look</h2>
+      <p>Create lifestyle look images with soft glowing hotspots. Shoppers tap a light to open the linked product.</p>
+      <ol class="steps">
+        <li>Open <strong>Shop by look</strong>.</li>
+        <li>Edit the look title / supporting line / alt text if needed.</li>
+        <li>Upload the look <strong>image</strong> (direct upload). Replacing the image clears existing hotspots — place them again.</li>
+        <li>Click <strong>Mark hotspots</strong>.</li>
+        <li>Click on the image where the jewellery sits → choose a product from the picker.</li>
+        <li>Adjust with <strong>Change</strong> / <strong>Remove</strong> in the hotspot list.</li>
+        <li>Click <strong>Save look</strong>.</li>
+      </ol>
+      <div class="card tip">
+        <p class="card-label">Accuracy tip</p>
+        <p>The image is shown full (not cropped) so hotspot positions stay correct on the website.</p>
+      </div>
+
+      <!-- 12 -->
+      <h2 class="section" id="blogs">12. Blogs</h2>
+      <ol class="steps">
+        <li>Open <strong>Blogs</strong>.</li>
+        <li>Filter All / Live / Draft.</li>
+        <li>Click <strong>Add blog</strong>.</li>
+        <li>Enter Title (slug auto-fills), Status, Cover image (upload), Excerpt, Body.</li>
+        <li><strong>Save blog</strong>.</li>
+        <li>To edit later: open the post from the list, update fields (including Eyebrow / Published label on the edit screen), Save.</li>
+      </ol>
+      <p>Set status to <strong>Live</strong> when the post should appear; keep <strong>Draft</strong> while writing.</p>
+
+      <!-- 13 -->
+      <h2 class="section" id="testimonials">13. Testimonials</h2>
+      <ol class="steps">
+        <li>Open <strong>Testimonials</strong>.</li>
+        <li>Click <strong>Add testimonial</strong> (or click an existing card to edit).</li>
+        <li>Fill Name, Place, Piece worn, Quote.</li>
+        <li>Upload a portrait image (and optional second image).</li>
+        <li>Tick <strong>Active on storefront</strong> to show it; untick to hide.</li>
+        <li><strong>Save</strong>.</li>
+      </ol>
+      <div class="card note">
+        <p class="card-label">Hiding vs deleting</p>
+        <p>There is no delete button. Untick <strong>Active on storefront</strong> to hide a quote without removing it.</p>
+      </div>
+
+      <!-- 14 -->
+      <h2 class="section" id="images">14. Uploading images (important)</h2>
+      <p>Everywhere you see image fields in admin, you upload a file from your computer. You do <strong>not</strong> need to paste a web URL.</p>
+      <ol class="steps">
+        <li>Click <strong>Upload image</strong> / <strong>Upload hero</strong> / <strong>Upload gallery</strong>.</li>
+        <li>Choose a file from your device.</li>
+        <li>Wait for the spinner (“Uploading…”) to finish.</li>
+        <li>Confirm the preview looks correct.</li>
+        <li>Then click the page’s main <strong>Save</strong> button (Save product / Save look / Save blog…).</li>
+      </ol>
+      <div class="card warn">
+        <p class="card-label">Rules of thumb</p>
+        <ul>
+          <li>Prefer clear, well-lit jewellery photos.</li>
+          <li>Keep files reasonably sized (very large videos/images can fail; max about 40MB).</li>
+          <li>Never navigate away mid-upload.</li>
+          <li>On products with multiple colours, upload photos while that colour tab is selected.</li>
+          <li>If upload fails with a Cloudflare / R2 configuration message, contact your technical partner — hosting keys may need checking.</li>
+        </ul>
+      </div>
+
+      <!-- 15 -->
+      <h2 class="section" id="checklist">15. Everyday checklist</h2>
+      <h4>Morning</h4>
+      <ul>
+        <li>Dashboard → check open orders, low stock, missing images.</li>
+        <li>Orders → move Pending → Accepted for anything new and paid.</li>
+      </ul>
+      <h4>When a new piece arrives</h4>
+      <ul>
+        <li>Products → Add product → photos per colour → Draft → review → Active.</li>
+        <li>Add customization prompts if the piece needs measurements or notes.</li>
+        <li>Optionally add it to Festive Edit or Best sellers.</li>
+      </ul>
+      <h4>When packing / shipping</h4>
+      <ul>
+        <li>Open the order → read customization carefully → Pack → Dispatch → Deliver.</li>
+      </ul>
+      <h4>Weekly</h4>
+      <ul>
+        <li>Review discounts (pause or expire old codes).</li>
+        <li>Refresh testimonials / looks / blog if you have new stories.</li>
+      </ul>
+
+      <!-- 16 -->
+      <h2 class="section" id="help">16. Common questions &amp; troubleshooting</h2>
+
+      <h3>I saved a product but can’t see it on the website</h3>
+      <ul>
+        <li>Is Status set to <strong>Active</strong> (not Draft)?</li>
+        <li>Hard-refresh the website or try a private browser window (cache).</li>
+        <li>Confirm the product has a hero image and price greater than zero.</li>
+      </ul>
+
+      <h3>Customer customization isn’t showing on the order</h3>
+      <ul>
+        <li>On the product, confirm <strong>Customization available?</strong> is ticked and prompts have labels.</li>
+        <li>Required prompts must be filled before add-to-bag on the website.</li>
+        <li>Open the order detail — answers appear in the gold-edged Customization block on each line.</li>
+      </ul>
+
+      <h3>Upload button does nothing / errors</h3>
+      <ul>
+        <li>Stay logged in.</li>
+        <li>Try a smaller JPG/PNG.</li>
+        <li>If the message mentions Cloudflare R2, ask your technical partner to verify admin upload keys.</li>
+      </ul>
+
+      <h3>I can’t find Collections as a menu item</h3>
+      <p>Collections are chosen inside the Product form (and discount scope). There is no separate Collections page in this console.</p>
+
+      <h3>Who to contact</h3>
+      <p>
+        For login issues, missing migration errors, or upload hosting problems, message your Velvet Shell
+        technical partner with a screenshot of the exact error text.
+      </p>
+
+      <div class="footer">
+        <p><strong>Velvet Shell</strong> — Admin Panel Walkthrough</p>
+        <p>
+          Open this file in any browser. To send as PDF: click <strong>Print / Save as PDF</strong>
+          above, or press <span class="kbd">Ctrl</span> + <span class="kbd">P</span> (Windows) /
+          <span class="kbd">⌘</span> + <span class="kbd">P</span> (Mac) → choose “Save as PDF”.
+        </p>
+        <p>File location in the project: <span class="kbd">docs/Velvet-Shell-Admin-Panel-Guide.html</span></p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

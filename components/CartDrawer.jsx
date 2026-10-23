@@ -96,6 +96,15 @@ export default function CartDrawer() {
                               <p className="mt-1.5 text-xs font-light text-ink/85">
                                 {item.metal} · {item.size}
                               </p>
+                              {Array.isArray(item.customization) && item.customization.length > 0 ? (
+                                <ul className="mt-2 space-y-1 text-[11px] text-ink/70">
+                                  {item.customization.map((entry, i) => (
+                                    <li key={`${entry.id || entry.label}-${i}`}>
+                                      <span className="text-ink/50">{entry.label}:</span> {entry.value}
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : null}
                               <p className="mt-1 text-xs font-light text-ink/85">
                                 <span className="font-num">{money(price)}</span> each
                               </p>
@@ -103,19 +112,21 @@ export default function CartDrawer() {
                             <p className="font-num shrink-0 text-sm text-ink">{money(line)}</p>
                           </div>
                           <div className="mt-auto flex items-center justify-between pt-4">
-                            <div className="inline-flex items-center gap-4 rounded-full border border-ink/10 px-4 py-1.5 text-sm">
+                            <div className="inline-flex items-center rounded-full border border-ink/10 px-1.5 text-sm">
                               <button
                                 type="button"
                                 aria-label="Decrease quantity"
                                 onClick={() => updateQty(item.id, item.qty - 1)}
+                                className="flex h-11 w-11 items-center justify-center"
                               >
                                 −
                               </button>
-                              <span className="min-w-4 text-center">{item.qty}</span>
+                              <span className="min-w-5 text-center">{item.qty}</span>
                               <button
                                 type="button"
                                 aria-label="Increase quantity"
                                 onClick={() => updateQty(item.id, item.qty + 1)}
+                                className="flex h-11 w-11 items-center justify-center"
                               >
                                 +
                               </button>
@@ -123,7 +134,7 @@ export default function CartDrawer() {
                             <button
                               type="button"
                               onClick={() => removeFromCart(item.id)}
-                              className="font-label text-[10px] tracking-[0.16em] text-ink/80 uppercase hover:text-burgundy"
+                              className="font-label min-h-11 px-2 text-[10px] tracking-[0.16em] text-ink/80 uppercase hover:text-burgundy"
                             >
                               Remove
                             </button>
@@ -137,7 +148,7 @@ export default function CartDrawer() {
             </div>
 
             {cart.length > 0 && (
-              <div className="border-t border-ink/8 px-6 py-6">
+              <div className="border-t border-ink/8 px-6 pt-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
                 <div className="flex justify-between text-sm">
                   <span className="text-ink/85">Subtotal</span>
                   <span className="font-num text-ink">{money(cartTotal)}</span>
@@ -155,7 +166,7 @@ export default function CartDrawer() {
                 <Link
                   href="/cart"
                   onClick={() => setCartOpen(false)}
-                  className="mt-3 block text-center font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
+                  className="mt-3 block py-2 text-center font-label text-[11px] tracking-[0.16em] text-ink/85 hover:text-burgundy"
                 >
                   View bag
                 </Link>

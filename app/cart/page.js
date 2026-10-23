@@ -48,25 +48,44 @@ export default function CartPage() {
                           <p className="mt-1.5 text-xs text-stone md:mt-2">
                             {item.metal} · {item.size}
                           </p>
+                          {Array.isArray(item.customization) && item.customization.length > 0 ? (
+                            <ul className="mt-2 space-y-1 text-[11px] text-ink/70">
+                              {item.customization.map((entry, i) => (
+                                <li key={`${entry.id || entry.label}-${i}`}>
+                                  <span className="text-ink/45">{entry.label}:</span> {entry.value}
+                                </li>
+                              ))}
+                            </ul>
+                          ) : null}
                         </div>
                         <p className="font-num shrink-0 text-sm md:text-base">
                           {money(price * item.qty)}
                         </p>
                       </div>
                       <div className="mt-auto flex items-center justify-between pt-4">
-                        <div className="flex items-center gap-4">
-                          <button type="button" onClick={() => updateQty(item.id, item.qty - 1)}>
+                        <div className="inline-flex items-center rounded-full border border-ink/10 px-1">
+                          <button
+                            type="button"
+                            aria-label="Decrease quantity"
+                            onClick={() => updateQty(item.id, item.qty - 1)}
+                            className="flex h-11 w-11 items-center justify-center"
+                          >
                             −
                           </button>
-                          <span>{item.qty}</span>
-                          <button type="button" onClick={() => updateQty(item.id, item.qty + 1)}>
+                          <span className="min-w-5 text-center text-sm">{item.qty}</span>
+                          <button
+                            type="button"
+                            aria-label="Increase quantity"
+                            onClick={() => updateQty(item.id, item.qty + 1)}
+                            className="flex h-11 w-11 items-center justify-center"
+                          >
                             +
                           </button>
                         </div>
                         <button
                           type="button"
                           onClick={() => removeFromCart(item.id)}
-                          className="text-[10px] tracking-[0.2em] text-stone uppercase"
+                          className="min-h-11 px-2 text-[10px] tracking-[0.2em] text-stone uppercase"
                         >
                           Remove
                         </button>

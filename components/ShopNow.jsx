@@ -66,7 +66,7 @@ export default function ShopNow() {
                     key={tab.slug}
                     type="button"
                     onClick={() => setActiveTab(tab.slug)}
-                    className={`shrink-0 rounded-full px-2.5 py-1.5 font-label text-[9px] tracking-[0.1em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-3 sm:text-[10px] sm:tracking-[0.12em] xl:px-4 xl:py-2 xl:tracking-[0.14em] ${
+                    className={`shrink-0 rounded-full px-3.5 py-2.5 font-label text-[10px] tracking-[0.1em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-3 sm:py-1.5 sm:text-[10px] sm:tracking-[0.12em] xl:px-4 xl:py-2 xl:tracking-[0.14em] ${
                       active
                         ? 'bg-velvet-texture text-ivory'
                         : 'bg-transparent text-ink/80 hover:bg-ivory hover:text-ink'

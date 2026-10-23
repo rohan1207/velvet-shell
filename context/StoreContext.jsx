@@ -198,13 +198,30 @@ export function StoreProvider({ children }) {
         size = product?.sizes?.[0] || 'One size',
         metal = product?.metal?.[0] || 'S925 Silver',
         qty = 1,
+        customization = [],
       } = options;
       const image = productImageSrc(product);
       const name = product?.name || slug;
       const price = product?.price || 0;
+      const customEntries = Array.isArray(customization)
+        ? customization
+            .map((entry) => ({
+              id: String(entry?.id || ''),
+              label: String(entry?.label || '').trim(),
+              value: String(entry?.value ?? '').trim(),
+            }))
+            .filter((entry) => entry.label && entry.value)
+        : [];
+      const customKey = customEntries
+        .map((entry) => `${entry.id}:${entry.value}`)
+        .join('|');
       setCart((current) => {
         const existing = current.find(
-          (item) => item.slug === slug && item.size === size && item.metal === metal
+          (item) =>
+            item.slug === slug &&
+            item.size === size &&
+            item.metal === metal &&
+            (item.customKey || '') === customKey,
         );
         if (existing) {
           return current.map((item) =>
@@ -215,6 +232,9 @@ export function StoreProvider({ children }) {
                   image: item.image || image,
                   name: item.name || name,
                   price: item.price || price,
+                  customization: item.customization?.length
+                    ? item.customization
+                    : customEntries,
                 }
               : item
           );
@@ -222,7 +242,7 @@ export function StoreProvider({ children }) {
         return [
           ...current,
           {
-            id: `${slug}-${size}-${metal}`,
+            id: `${slug}-${size}-${metal}${customKey ? `-${customKey}` : ''}`,
             slug,
             size,
             metal,
@@ -230,6 +250,8 @@ export function StoreProvider({ children }) {
             image,
             name,
             price,
+            customization: customEntries,
+            customKey,
           },
         ];
       });

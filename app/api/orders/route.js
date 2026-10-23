@@ -83,6 +83,15 @@ export async function POST(request) {
       const product = getProduct(item.slug) || {};
       const unit = Number(item.price ?? product.price) || 0;
       const qty = Math.max(1, Number(item.qty) || 1);
+      const customization = Array.isArray(item.customization)
+        ? item.customization
+            .map((entry) => ({
+              id: String(entry?.id || ''),
+              label: String(entry?.label || '').trim(),
+              value: String(entry?.value ?? '').trim(),
+            }))
+            .filter((entry) => entry.label && entry.value)
+        : [];
       return {
         product_slug: item.slug,
         product_name: item.name || product.name || item.slug,
@@ -92,6 +101,7 @@ export async function POST(request) {
         unit_price: unit,
         qty,
         line_total: unit * qty,
+        customization,
       };
     });
 
