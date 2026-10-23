@@ -46,8 +46,10 @@ export function normalizeMaterialTags(material) {
 }
 
 export function colorKey(product) {
-  const label = String(product.colorLabel || 'Default').trim() || 'Default';
-  if (/^default$/i.test(label)) return 'Silver';
+  const label = String(product.colorLabel || '').trim();
+  if (!label || /^default$/i.test(label)) return null;
+  // Metal finishes are not gem colours
+  if (/^(silver|gold|sterling|925|18k)/i.test(label)) return null;
   return label;
 }
 

@@ -119,6 +119,32 @@ export default function ProductCard({
     () => resolveVariants(product.slug, families, pool),
     [product.slug, families, pool],
   );
+
+  /** Card swatches: gem colours when present, otherwise metal finishes. */
+  const swatchOptions = useMemo(() => {
+    if (variants.length < 2) return [];
+    const gems = [];
+    const gemSeen = new Set();
+    for (const v of variants) {
+      const label = v.colorLabel || (v.isGemColor ? v.label : '');
+      if (!label || label === 'Default') continue;
+      if (v.isGemColor === false) continue;
+      if (gemSeen.has(label)) continue;
+      gemSeen.add(label);
+      gems.push(v);
+    }
+    if (gems.length > 1) return gems;
+
+    const finishes = [];
+    const finishSeen = new Set();
+    for (const v of variants) {
+      const finish = v.finish || v.product?.finishLabel || v.label;
+      if (!finish || finishSeen.has(finish)) continue;
+      finishSeen.add(finish);
+      finishes.push(v);
+    }
+    return finishes.length > 1 ? finishes : [];
+  }, [variants]);
   const [activeSlug, setActiveSlug] = useState(product.slug);
   const [imageIndex, setImageIndex] = useState(0);
   /** idle | morph | flying | done */
@@ -279,12 +305,18 @@ export default function ProductCard({
 
       <div className="mt-2.5 flex flex-1 flex-col md:mt-3">
         <div className="flex min-h-4 items-center justify-center gap-1.5 md:min-h-5 md:gap-2">
-          {variants.length > 1
-            ? variants.map((variant) => {
-                const selected = variant.slug === active.slug;
+          {swatchOptions.length > 1
+            ? swatchOptions.map((variant) => {
+                const activeColor = active.colorLabel;
+                const activeFinish = active.finishLabel || active.metal?.[0];
+                const selected = variant.isGemColor
+                  ? (variant.colorLabel || variant.label) === activeColor ||
+                    variant.slug === active.slug
+                  : (variant.finish || variant.label) === activeFinish ||
+                    variant.slug === active.slug;
                 return (
                   <button
-                    key={variant.slug}
+                    key={`${variant.slug}-${variant.label}`}
                     type="button"
                     aria-label={variant.label}
                     aria-pressed={selected}

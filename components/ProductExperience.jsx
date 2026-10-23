@@ -25,28 +25,82 @@ export default function ProductExperience({
   colorFamily = null,
   variants = [],
 }) {
+  void colorFamily;
   const router = useRouter();
   const { addToCart, wishlist, toggleWishlist } = useStore();
 
-  const colorOptions = useMemo(() => {
+  const allVariants = useMemo(() => {
     if (Array.isArray(variants) && variants.length > 1) return variants;
     return [];
   }, [variants]);
 
   const [activeSlug, setActiveSlug] = useState(product.slug);
   const activeProduct =
-    colorOptions.find((v) => v.slug === activeSlug)?.product || product;
+    allVariants.find((v) => v.slug === activeSlug)?.product || product;
 
   const gallery =
     activeProduct.gallery?.length > 0
       ? activeProduct.gallery
       : [activeProduct.image || '/images/product-placeholder.svg'];
   const sizeOptions = activeProduct.sizes?.length ? activeProduct.sizes : ['One size'];
-  const metalOptions = activeProduct.metal?.length ? activeProduct.metal : [];
+
+  const gemColorOptions = useMemo(() => {
+    const seen = new Set();
+    const list = [];
+    for (const v of allVariants) {
+      const label =
+        v.colorLabel ||
+        v.product?.colorLabel ||
+        (v.isGemColor ? v.label : '');
+      if (!label || label === 'Default') continue;
+      if (v.isGemColor === false) continue;
+      if (seen.has(label)) continue;
+      seen.add(label);
+      list.push({
+        label,
+        swatch: v.swatch || v.product?.colorSwatch || '#C5C5C5',
+        slug: v.slug,
+      });
+    }
+    // Fallback: if family flagged gem colours but labels sit on product
+    if (!list.length && activeProduct.hasGemColors) {
+      for (const v of allVariants) {
+        const label = v.product?.colorLabel;
+        if (!label || label === 'Default' || seen.has(label)) continue;
+        seen.add(label);
+        list.push({
+          label,
+          swatch: v.product?.colorSwatch || '#C5C5C5',
+          slug: v.slug,
+        });
+      }
+    }
+    return list;
+  }, [allVariants, activeProduct.hasGemColors]);
+
+  const finishOptions = useMemo(() => {
+    const seen = new Set();
+    const list = [];
+    for (const v of allVariants) {
+      const finish =
+        v.finish ||
+        v.product?.finishLabel ||
+        v.product?.metal?.[0] ||
+        '';
+      if (!finish || seen.has(finish)) continue;
+      seen.add(finish);
+      list.push(finish);
+    }
+    if (!list.length && activeProduct.finishLabel) list.push(activeProduct.finishLabel);
+    if (!list.length && activeProduct.metal?.[0]) list.push(activeProduct.metal[0]);
+    return list;
+  }, [allVariants, activeProduct.finishLabel, activeProduct.metal]);
 
   const [active, setActive] = useState(0);
   const [size, setSize] = useState(sizeOptions[0]);
-  const [metal, setMetal] = useState(metalOptions[0] || '');
+  const [metal, setMetal] = useState(
+    activeProduct.finishLabel || activeProduct.metal?.[0] || finishOptions[0] || '',
+  );
   const [qty, setQty] = useState(1);
   const [open, setOpen] = useState('story');
   const [customValues, setCustomValues] = useState({});
@@ -64,16 +118,52 @@ export default function ProductExperience({
   useEffect(() => {
     setActive(0);
     setSize(activeProduct.sizes?.[0] || 'One size');
-    setMetal(activeProduct.metal?.[0] || '');
+    setMetal(activeProduct.finishLabel || activeProduct.metal?.[0] || '');
     setQty(1);
     setCustomValues({});
     setCustomError('');
   }, [activeProduct.slug]);
 
-  function selectColor(slug) {
-    if (slug === activeSlug) return;
+  function resolveVariantSlug({ colorLabel, finishLabel }) {
+    const color = colorLabel ?? activeProduct.colorLabel;
+    const finish = finishLabel ?? metal;
+    const match = allVariants.find((v) => {
+      const vColor = v.colorLabel || v.product?.colorLabel || 'Default';
+      const vFinish =
+        v.finish || v.product?.finishLabel || v.product?.metal?.[0] || '';
+      const colorOk = gemColorOptions.length ? vColor === color : true;
+      const finishOk = finish ? vFinish === finish : true;
+      return colorOk && finishOk;
+    });
+    if (match) return match.slug;
+    const byFinish = allVariants.find(
+      (v) => (v.finish || v.product?.finishLabel || v.product?.metal?.[0]) === finish,
+    );
+    if (byFinish) return byFinish.slug;
+    const byColor = allVariants.find(
+      (v) => (v.colorLabel || v.product?.colorLabel) === color,
+    );
+    return byColor?.slug || allVariants[0]?.slug || activeSlug;
+  }
+
+  function selectVariantSlug(slug) {
+    if (!slug || slug === activeSlug) return;
     setActiveSlug(slug);
     router.replace(`/shop/${slug}`, { scroll: false });
+  }
+
+  function selectGemColor(label) {
+    selectVariantSlug(resolveVariantSlug({ colorLabel: label, finishLabel: metal }));
+  }
+
+  function selectFinish(finish) {
+    setMetal(finish);
+    selectVariantSlug(
+      resolveVariantSlug({
+        colorLabel: activeProduct.colorLabel,
+        finishLabel: finish,
+      }),
+    );
   }
 
   const detailsList = (activeProduct.details || []).filter(Boolean);
@@ -86,7 +176,7 @@ export default function ProductExperience({
   const detailsCopy = detailsList.length
     ? detailsList.join(' · ')
     : [
-        activeProduct.metal?.[0] || '925 sterling silver',
+        activeProduct.finishLabel || activeProduct.metal?.[0] || '925 Silver',
         activeProduct.colorLabel && activeProduct.colorLabel !== 'Default'
           ? `Colour: ${activeProduct.colorLabel}`
           : null,
@@ -97,7 +187,7 @@ export default function ProductExperience({
         .join(' · ');
 
   const title =
-    colorOptions.length > 1 ? displayTitle(activeProduct.name) : activeProduct.name;
+    allVariants.length > 1 ? displayTitle(activeProduct.name) : activeProduct.name;
 
   return (
     <div className="bg-ivory pt-site-chrome">
@@ -146,32 +236,29 @@ export default function ProductExperience({
             {activeProduct.description}
           </p>
 
-          {colorOptions.length > 1 && (
+          {gemColorOptions.length > 1 && (
             <div className="mt-10">
               <p className="text-[10px] tracking-[0.28em] uppercase">
                 Colour
                 <span className="ml-2 tracking-normal normal-case text-ink/70">
-                  {activeProduct.colorLabel ||
-                    colorOptions.find((v) => v.slug === activeSlug)?.label ||
-                    ''}
+                  {activeProduct.colorLabel && activeProduct.colorLabel !== 'Default'
+                    ? activeProduct.colorLabel
+                    : ''}
                 </span>
               </p>
               <div className="mt-3 flex flex-wrap gap-2.5">
-                {colorOptions.map((variant) => {
-                  const selected = variant.slug === activeSlug;
-                  const swatch =
-                    variant.swatch ||
-                    variant.product?.colorSwatch ||
-                    '#C5C5C5';
-                  const label = variant.label || variant.product?.colorLabel || 'Colour';
+                {gemColorOptions.map((option) => {
+                  const selected =
+                    activeProduct.colorLabel === option.label ||
+                    (!activeProduct.colorLabel && option.slug === activeSlug);
                   return (
                     <button
-                      key={variant.slug}
+                      key={option.label}
                       type="button"
-                      title={label}
-                      aria-label={label}
+                      title={option.label}
+                      aria-label={option.label}
                       aria-pressed={selected}
-                      onClick={() => selectColor(variant.slug)}
+                      onClick={() => selectGemColor(option.label)}
                       className={`flex h-9 w-9 items-center justify-center rounded-full transition-transform duration-300 ${
                         selected
                           ? 'scale-110 ring-2 ring-gold/80 ring-offset-2 ring-offset-ivory'
@@ -180,17 +267,15 @@ export default function ProductExperience({
                     >
                       <span
                         className="h-7 w-7 rounded-full border border-ink/10 shadow-sm"
-                        style={{ backgroundColor: swatch }}
+                        style={{ backgroundColor: option.swatch }}
                       />
                     </button>
                   );
                 })}
               </div>
-              {colorFamily?.id ? (
-                <p className="mt-2 text-xs font-light text-ink/60">
-                  {colorOptions.length} colours in this piece
-                </p>
-              ) : null}
+              <p className="mt-2 text-xs font-light text-ink/60">
+                {gemColorOptions.length} colours in this piece
+              </p>
             </div>
           )}
 
@@ -212,15 +297,20 @@ export default function ProductExperience({
             </div>
           </div>
 
-          {(metalOptions.length > 0 || metal) && (
+          {finishOptions.length > 0 && (
             <div className="mt-8">
-              <p className="text-[10px] tracking-[0.28em] uppercase">Finish</p>
+              <p className="text-[10px] tracking-[0.28em] uppercase">
+                Finish
+                <span className="ml-2 tracking-normal normal-case text-ink/70">
+                  {metal}
+                </span>
+              </p>
               <div className="mt-3 flex flex-wrap gap-2">
-                {(metalOptions.length ? metalOptions : [metal].filter(Boolean)).map((option) => (
+                {finishOptions.map((option) => (
                   <button
                     key={option}
                     type="button"
-                    onClick={() => setMetal(option)}
+                    onClick={() => selectFinish(option)}
                     className={`rounded-full px-4 py-2 text-[11px] tracking-[0.1em] ${
                       metal === option ? 'bg-ink text-ivory' : 'border border-cream text-stone'
                     }`}
@@ -229,9 +319,9 @@ export default function ProductExperience({
                   </button>
                 ))}
               </div>
-              {colorOptions.length > 1 ? (
+              {finishOptions.length > 1 ? (
                 <p className="mt-2 text-xs font-light text-ink/55">
-                  Finish follows the selected colour — Silver is Sterling Silver; Gold is 18K Gold Plated.
+                  Choose 925 Silver or 18K Gold-Plated — each finish can have its own photos.
                 </p>
               ) : null}
             </div>

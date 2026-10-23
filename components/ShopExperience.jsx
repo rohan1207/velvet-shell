@@ -158,8 +158,10 @@ export default function ShopExperience({
         materialCounts.set(tag, (materialCounts.get(tag) || 0) + 1);
       }
       const ck = colorKey(p);
-      colorCounts.set(ck, (colorCounts.get(ck) || 0) + 1);
-      if (p.colorSwatch && !colorSwatches.has(ck)) colorSwatches.set(ck, p.colorSwatch);
+      if (ck) {
+        colorCounts.set(ck, (colorCounts.get(ck) || 0) + 1);
+        if (p.colorSwatch && !colorSwatches.has(ck)) colorSwatches.set(ck, p.colorSwatch);
+      }
     }
 
     const collectionMeta = new Map(collections.map((c) => [c.slug, c]));
