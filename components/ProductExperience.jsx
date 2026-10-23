@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { collectionName as dummyCollectionName } from '@/lib/products';
 import { money } from '@/lib/format';
 import { useStore } from '@/context/StoreContext';
+import { sortByColourPriority } from '@/lib/catalog/color-order';
 import ProductCard from './ProductCard';
 import { ProductPageNotes } from './ProductNotes';
 
@@ -23,6 +24,7 @@ function displayTitle(name = '') {
     .trim() || name;
 }
 
+/** Keep admin gallery sequence: hero, then gallery items in saved order. */
 function imagesForProduct(p) {
   if (!p) return [];
   const list = [];
@@ -47,8 +49,11 @@ export default function ProductExperience({
   const { addToCart, wishlist, toggleWishlist } = useStore();
 
   const colourVariants = useMemo(() => {
-    if (Array.isArray(variants) && variants.length > 1) return variants;
-    return [];
+    if (!(Array.isArray(variants) && variants.length > 1)) return [];
+    return sortByColourPriority(
+      variants,
+      (v) => v.label || v.colorLabel || v.product?.colorLabel,
+    );
   }, [variants]);
 
   const [activeSlug, setActiveSlug] = useState(product.slug);
@@ -57,7 +62,10 @@ export default function ProductExperience({
 
   const sizeOptions = activeProduct.sizes?.length ? activeProduct.sizes : ['One size'];
 
-  /** All images across every colour — for the thumbnail strip */
+  /**
+   * Thumbnail strip: Gold images (in upload order), then Silver, then other colours.
+   * Within each colour, admin gallery sequence is preserved.
+   */
   const allImages = useMemo(() => {
     const tagged = [];
     const pool =
@@ -83,7 +91,7 @@ export default function ProductExperience({
     return tagged;
   }, [colourVariants, product, activeProduct.colorLabel, activeProduct.slug]);
 
-  /** Main card always shows the selected colour's images first */
+  /** Main stage: selected colour's images in saved gallery order (hero first). */
   const activeImages = useMemo(() => {
     const own = imagesForProduct(activeProduct);
     if (own.length) return own;
@@ -104,35 +112,39 @@ export default function ProductExperience({
 
   useEffect(() => {
     setActiveSlug(product.slug);
+    setActive(0);
   }, [product.slug]);
 
   useEffect(() => {
-    setActive(0);
     setSize(activeProduct.sizes?.[0] || 'One size');
     setQty(1);
     setCustomValues({});
     setCustomError('');
   }, [activeProduct.slug]);
 
-  function selectColour(slug) {
-    if (!slug || slug === activeSlug) return;
+  function selectColour(slug, imageIndex = 0) {
+    if (!slug) return;
+    if (slug === activeSlug) {
+      setActive(imageIndex);
+      return;
+    }
     setActiveSlug(slug);
-    setActive(0);
+    setActive(imageIndex);
     router.replace(`/shop/${slug}`, { scroll: false });
   }
 
   function selectThumb(tagged) {
-    // Switching thumbnail of another colour also switches the colour swatch
+    // Other colour thumb → switch swatch + show that image; same colour → just change main
     if (tagged.slug && tagged.slug !== activeSlug) {
-      selectColour(tagged.slug);
+      const nextProduct =
+        colourVariants.find((v) => v.slug === tagged.slug)?.product || product;
+      const nextImages = imagesForProduct(nextProduct);
+      const idx = nextImages.indexOf(tagged.src);
+      selectColour(tagged.slug, idx >= 0 ? idx : 0);
       return;
     }
     const idx = activeImages.indexOf(tagged.src);
-    if (idx >= 0) setActive(idx);
-    else {
-      // Image from another colour already handled via selectColour; if same colour list differs
-      setActive(0);
-    }
+    setActive(idx >= 0 ? idx : 0);
   }
 
   const title = displayTitle(activeProduct.name);

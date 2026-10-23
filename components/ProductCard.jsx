@@ -7,6 +7,7 @@ import { money } from '@/lib/format';
 import { getProductVariants as getDummyVariants } from '@/lib/products';
 import { flyToCart, prefersReducedMotion } from '@/lib/fly-to-cart';
 import { useStore } from '@/context/StoreContext';
+import { sortByColourPriority } from '@/lib/catalog/color-order';
 
 function resolveVariants(slug, colorFamilies = [], catalogProducts = []) {
   if (colorFamilies?.length && catalogProducts?.length) {
@@ -14,15 +15,18 @@ function resolveVariants(slug, colorFamilies = [], catalogProducts = []) {
       (f) => f.primary === slug || f.variants?.some((v) => v.slug === slug),
     );
     if (!family) return [];
-    return family.variants
-      .map((variant) => {
-        const product = catalogProducts.find((p) => p.slug === variant.slug);
-        if (!product) return null;
-        return { ...variant, product };
-      })
-      .filter(Boolean);
+    return sortByColourPriority(
+      family.variants
+        .map((variant) => {
+          const product = catalogProducts.find((p) => p.slug === variant.slug);
+          if (!product) return null;
+          return { ...variant, product };
+        })
+        .filter(Boolean),
+      (v) => v.label || v.product?.colorLabel,
+    );
   }
-  return getDummyVariants(slug);
+  return sortByColourPriority(getDummyVariants(slug), (v) => v.label || v.product?.colorLabel);
 }
 
 function IconHeart({ filled = false, className = 'h-5 w-5 md:h-[1.35rem] md:w-[1.35rem]' }) {
@@ -121,6 +125,7 @@ export default function ProductCard({
     [product.slug, families, pool],
   );
   const [activeSlug, setActiveSlug] = useState(product.slug);
+  const [previewSlug, setPreviewSlug] = useState(null);
   const [imageIndex, setImageIndex] = useState(0);
   /** idle | morph | flying | done */
   const [bagPhase, setBagPhase] = useState('idle');
@@ -130,11 +135,12 @@ export default function ProductCard({
 
   useEffect(() => {
     setActiveSlug(product.slug);
+    setPreviewSlug(null);
   }, [product.slug]);
 
   useEffect(() => {
     setImageIndex(0);
-  }, [activeSlug]);
+  }, [activeSlug, previewSlug]);
 
   useEffect(() => {
     return () => {
@@ -144,19 +150,25 @@ export default function ProductCard({
     };
   }, []);
 
+  const displaySlug = previewSlug || activeSlug;
   const active =
     variants.find((item) => item.slug === activeSlug)?.product ||
     variants[0]?.product ||
     product;
+  const displayProduct =
+    variants.find((item) => item.slug === displaySlug)?.product || active;
 
   const galleryImages = useMemo(() => {
-    const gallery = Array.isArray(active.gallery) ? active.gallery.filter(Boolean) : [];
-    const list = [active.image, active.hoverImage, ...gallery].filter(Boolean);
+    // Preserve admin gallery order: hero first, then gallery sequence (no resort).
+    const gallery = Array.isArray(displayProduct.gallery)
+      ? displayProduct.gallery.filter(Boolean)
+      : [];
+    const list = [displayProduct.image, ...gallery].filter(Boolean);
     return [...new Set(list)];
-  }, [active.gallery, active.hoverImage, active.image]);
+  }, [displayProduct.gallery, displayProduct.image]);
 
-  const currentImage = galleryImages[imageIndex] || active.image || '';
-  const hasGallery = galleryImages.length > 1;
+  const currentImage = galleryImages[imageIndex] || displayProduct.image || '';
+  const hasGallery = galleryImages.length > 1 && !previewSlug;
 
   const wished = wishlist.includes(active.slug);
   const href = `/shop/${active.slug}`;
@@ -236,13 +248,13 @@ export default function ProductCard({
         <AppImage
           key={currentImage}
           src={currentImage}
-          alt={active.name}
+          alt={displayProduct.name}
           fill
           sizes={sizes}
           className="pointer-events-none object-contain object-center transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] [@media(hover:hover)]:group-hover:scale-[1.03]"
         />
 
-        {hasGallery ? (
+        {hasGallery && variants.length <= 1 ? (
           <AppImage
             src={galleryImages[1]}
             alt=""
@@ -283,6 +295,7 @@ export default function ProductCard({
           {variants.length > 1
             ? variants.map((variant) => {
                 const selected = variant.slug === active.slug;
+                const previewing = previewSlug === variant.slug;
                 return (
                   <button
                     key={variant.slug}
@@ -294,9 +307,17 @@ export default function ProductCard({
                       event.preventDefault();
                       event.stopPropagation();
                       setActiveSlug(variant.slug);
+                      setPreviewSlug(null);
+                      setImageIndex(0);
                     }}
+                    onMouseEnter={() => setPreviewSlug(variant.slug)}
+                    onMouseLeave={() => setPreviewSlug(null)}
+                    onFocus={() => setPreviewSlug(variant.slug)}
+                    onBlur={() => setPreviewSlug(null)}
                     className={`flex h-7 w-7 items-center justify-center rounded-full transition-all duration-300 md:h-5 md:w-5 ${
-                      selected ? 'ring-1 ring-ink ring-offset-1 ring-offset-white md:ring-offset-2' : ''
+                      selected || previewing
+                        ? 'ring-1 ring-ink ring-offset-1 ring-offset-white md:ring-offset-2'
+                        : ''
                     }`}
                   >
                     <span
