@@ -95,7 +95,8 @@ function ActionIcon({ label, onClick, children, active = false, className = '' }
 function displayName(name = '') {
   return name
     .replace(/Ã¢â‚¬â€|â€”|â€“|&mdash;|&ndash;/gi, '—')
-    .replace(/\s*[—–-]\s*(Gold|Silver|Pink|Green|White|Edit).*$/i, '')
+    .replace(/\s+[—–]\s*.+$/, '')
+    .replace(/\s+-\s+(Gold|Silver|Pink|Green|White|Blue|Clear|Purple|Edit).*$/i, '')
     .replace(/\s+/g, ' ')
     .trim();
 }

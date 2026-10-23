@@ -1,0 +1,322 @@
+[
+  {
+    "name": "Two-Tone Flower Stud Earrings",
+    "category": "Earrings",
+    "type": "Stud Earrings",
+    "description": "Inspired by blooming flowers, these handcrafted 925 sterling silver stud earrings feature a charming two-tone floral design. Their elegant silhouette makes them easy to style for everyday wear, special occasions or gifting.",
+    "material": "925 Sterling Silver",
+    "finish": null,
+    "stone": null,
+    "design": "Flower",
+    "style": null,
+    "colours": ["Gold", "Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 3, "price": 2999, "driveLink": null },
+      { "colour": "Silver", "stock": 3, "price": 2999, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Blooming Flower Drop Earrings",
+    "category": "Earrings",
+    "type": "Drop Earrings",
+    "description": "These 925 sterling silver drop earrings feature a graceful blooming flower design with an elongated silhouette that adds movement and elegance to your look. A versatile choice for occasions, celebrations or thoughtful gifting.",
+    "material": "925 Sterling Silver",
+    "finish": null,
+    "stone": null,
+    "design": "Blooming Flower",
+    "style": null,
+    "colours": ["Gold", "Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 2, "price": 3599, "driveLink": null },
+      { "colour": "Silver", "stock": 2, "price": 3599, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Natural Pearl Leaf Earrings",
+    "category": "Earrings",
+    "type": "Earrings",
+    "description": "Inspired by the organic shape of leaves, these 925 sterling silver earrings feature a natural pearl accent and a graceful leaf silhouette. A refined nature-inspired design that works beautifully for everyday styling, special occasions and gifting.",
+    "material": "925 Sterling Silver",
+    "finish": null,
+    "stone": "Natural Pearl",
+    "design": "Leaf & Pearl",
+    "style": null,
+    "colours": ["Silver", "Gold"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Silver", "stock": 3, "price": 3999, "driveLink": null },
+      { "colour": "Gold", "stock": 3, "price": 3999, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Butterfly Stud Earrings",
+    "category": "Earrings",
+    "type": "Stud Earrings",
+    "description": "A charming pair of 925 sterling silver stud earrings featuring an intricate butterfly design. Lightweight and easy to style, they add a subtle nature-inspired touch to everyday looks and make a thoughtful gifting choice.",
+    "material": "925 Sterling Silver",
+    "finish": null,
+    "stone": null,
+    "design": "Butterfly",
+    "style": null,
+    "colours": ["Gold", "Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 2, "price": 2999, "driveLink": null },
+      { "colour": "Silver", "stock": 2, "price": 2499, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Wild Flower Stud Earrings",
+    "category": "Earrings",
+    "type": "Stud Earrings",
+    "description": "Inspired by the natural beauty of wildflowers, these handcrafted 925 sterling silver stud earrings feature a graceful floral design with intricate detailing. Their timeless silhouette adds a fresh, nature-inspired touch to everyday and occasion styling.",
+    "material": "925 Sterling Silver",
+    "finish": null,
+    "stone": null,
+    "design": "Wild Flower",
+    "style": null,
+    "colours": ["Gold", "Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 2, "price": 2999, "driveLink": null },
+      { "colour": "Silver", "stock": 2, "price": 2999, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Forget-Me-Not Flower Baroque Pearl Earrings",
+    "category": "Earrings",
+    "type": "Drop Earrings",
+    "description": "A cluster of delicate forget-me-not flowers meets a natural baroque pearl in these elegant drop earrings. Crafted in 925 sterling silver with an 18K gold-plated finish, the floral arrangement and organic pearl shape create a graceful statement for celebrations, occasions and evening styling.",
+    "material": "925 Sterling Silver",
+    "finish": "18K Gold Plated",
+    "stone": "Natural Baroque Pearl",
+    "design": "Forget-Me-Not Flower",
+    "style": null,
+    "colours": ["Gold", "Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 1, "price": 5999, "driveLink": null },
+      { "colour": "Silver", "stock": 1, "price": 5999, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Forget-Me-Not Flower Agate Stud Earrings",
+    "category": "Earrings",
+    "type": "Stud Earrings",
+    "description": "Small forget-me-not flowers sit beautifully against polished agate stones, giving these 925 sterling silver stud earrings a fresh and artistic character. Finished with 18K gold plating, they bring a touch of colour and floral detail to everyday looks and special occasions.",
+    "material": "925 Sterling Silver",
+    "finish": "18K Gold Plated",
+    "stone": "Agate",
+    "design": "Forget-Me-Not Flower",
+    "style": null,
+    "colours": ["Green", "Blue"],
+    "currency": "INR",
+    "status": "draft",
+    "notes": "Price was #REF! in Excel — estimated; activate after review.",
+    "variants": [
+      { "colour": "Green", "stock": 2, "price": 3499, "driveLink": null, "priceEstimated": true },
+      { "colour": "Blue", "stock": 2, "price": 3499, "driveLink": null, "priceEstimated": true }
+    ]
+  },
+  {
+    "name": "Forget-Me-Not Flower Stud Earrings",
+    "category": "Earrings",
+    "type": "Stud Earrings",
+    "description": "A charming floral arrangement featuring delicate forget-me-not blossoms set along a natural-looking branch. Crafted in 925 sterling silver with an 18K gold-plated finish, these stud earrings bring a graceful botanical touch to your look without feeling overly ornate.",
+    "material": "925 Sterling Silver",
+    "finish": "18K Gold Plated",
+    "stone": null,
+    "design": "Forget-Me-Not Flower",
+    "style": null,
+    "colours": ["Gold", "Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 1, "price": 2999, "driveLink": null },
+      { "colour": "Silver", "stock": 1, "price": 2999, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Forget-Me-Not Flower Hoop Earrings",
+    "category": "Earrings",
+    "type": "Hoop Earrings",
+    "description": "These graceful hoop earrings feature clusters of forget-me-not flowers arranged along the hoop for a distinctive floral finish. The detailed blooms add character to the design, while the 18K gold-plated 925 sterling silver construction gives them a polished look suited to both occasions and everyday styling.",
+    "material": "925 Sterling Silver",
+    "finish": "18K Gold Plated",
+    "stone": null,
+    "design": "Forget-Me-Not Flower",
+    "style": null,
+    "colours": ["Gold", "Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 1, "price": 3999, "driveLink": null },
+      { "colour": "Silver", "stock": 1, "price": 3999, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Forget-Me-Not Pearl Dangle Earrings",
+    "category": "Earrings",
+    "type": "Dangle Earrings",
+    "description": "Clusters of forget-me-not flowers and pearl accents come together in these graceful dangle earrings. Crafted in 925 sterling silver with a gold-plated finish, the floral arrangement adds movement and a soft botanical character, making them a beautiful choice for occasions or elevated everyday styling.",
+    "material": "925 Sterling Silver",
+    "finish": "Gold Plated",
+    "stone": "Pearl",
+    "design": "Forget-Me-Not Flower & Pearl",
+    "style": null,
+    "colours": ["Gold", "Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 1, "price": 3599, "driveLink": null },
+      { "colour": "Silver", "stock": 1, "price": 3599, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Dragonfly Stud Earrings",
+    "category": "Earrings",
+    "type": "Stud Earrings",
+    "description": "A pair of finely detailed dragonfly studs that bring a playful touch of nature to your jewellery collection. The compact silhouette makes them easy to wear, while the polished finish adds a refined look suitable for everyday outfits and gifting.",
+    "material": "925 Sterling Silver",
+    "finish": "Gold Plated",
+    "stone": null,
+    "design": "Dragonfly",
+    "style": null,
+    "colours": ["Gold", "Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 1, "price": 2499, "driveLink": null },
+      { "colour": "Silver", "stock": 1, "price": 2499, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Dragonfly Baroque Pearl Drop Earrings",
+    "category": "Earrings",
+    "type": "Drop Earrings",
+    "description": "A graceful dragonfly detail paired with naturally shaped baroque pearls creates a distinctive look in these drop earrings. Crafted in 925 sterling silver with an 18K gold-plated finish, the removable design offers versatility while the organic pearl shapes add character.",
+    "material": "925 Sterling Silver",
+    "finish": "18K Gold Plated",
+    "stone": "Baroque Pearl",
+    "design": "Dragonfly & Pearl",
+    "style": null,
+    "colours": ["Gold", "Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 2, "price": 2999, "driveLink": null },
+      { "colour": "Silver", "stock": 2, "price": 2999, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Flying Bird Stud Earrings",
+    "category": "Earrings",
+    "type": "Stud Earrings",
+    "description": "Featuring birds captured in mid-flight, these handcrafted stud earrings bring a sense of movement and freedom to the design. The sculpted form and polished finish create a distinctive pair that works well for everyday styling as well as gifting.",
+    "material": "925 Sterling Silver",
+    "finish": "18K Gold Plated",
+    "stone": null,
+    "design": "Flying Bird",
+    "style": null,
+    "colours": ["Gold"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 1, "price": 2999, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Asymmetry Swallow Bird Stud Earrings",
+    "category": "Earrings",
+    "type": "Stud Earrings",
+    "description": "Two graceful swallows take flight in an asymmetric arrangement, creating a playful yet artistic look. Crafted in 925 sterling silver with an 18K gold-plated finish, these earrings bring a sense of movement and individuality to your jewellery collection. A distinctive choice for everyday styling, special occasions or gifting.",
+    "material": "925 Sterling Silver",
+    "finish": "18K Gold Plated",
+    "stone": null,
+    "design": "Swallow Bird",
+    "style": "Asymmetrical",
+    "colours": ["Gold"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 1, "price": 2999, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Phalaenopsis Flower Hoop Earrings",
+    "category": "Earrings",
+    "type": "Hoop Earrings",
+    "description": "Featuring layered Phalaenopsis flower petals arranged along a classic hoop silhouette, these earrings bring a graceful botanical detail to your look. Crafted in 925 sterling silver, the floral design adds a refined yet distinctive finish, making them suitable for occasions, celebrations and gifting.",
+    "material": "925 Sterling Silver",
+    "finish": null,
+    "stone": null,
+    "design": "Phalaenopsis Flower",
+    "style": null,
+    "colours": ["Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Silver", "stock": 1, "price": 4999, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Lilac Flower Drop Earrings",
+    "category": "Earrings",
+    "type": "Drop Earrings",
+    "description": "A graceful arrangement of lilac-toned flowers brings a soft pop of colour to these handcrafted drop earrings. Made from 925 sterling silver with an 18K gold-plated finish, the floral detailing gives the pair an elegant yet distinctive character, perfect for special occasions and thoughtful gifting.",
+    "material": "925 Sterling Silver",
+    "finish": "18K Gold Plated",
+    "stone": null,
+    "design": "Lilac Flower",
+    "style": null,
+    "colours": ["Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Silver", "stock": 1, "price": 6999, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Pothos Dangle Earrings",
+    "category": "Earrings",
+    "type": "Dangle Earrings",
+    "description": "Delicate pothos leaves are arranged in an elegant dangling silhouette, giving these earrings a graceful botanical character. Crafted in 925 sterling silver with an 18K gold-plated finish, the detailed leaf design adds movement and a refined touch to your look.",
+    "material": "925 Sterling Silver",
+    "finish": "18K Gold Plated",
+    "stone": null,
+    "design": "Pothos / Epipremnum Aureum",
+    "style": null,
+    "colours": ["Gold"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 1, "price": 5999, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Four-Leaf Mini Clover Pearl Dangle Earrings",
+    "category": "Earrings",
+    "type": "Dangle Drop Earrings",
+    "description": "A classic four-leaf clover silhouette paired with freshwater pearls gives these dangle earrings a graceful and timeless appeal. Crafted in 925 sterling silver with an 18K gold-plated finish, the floral-clover design adds a refined touch to both everyday and occasion styling. Available in Gold and Silver finishes.",
+    "material": "925 Sterling Silver",
+    "finish": "18K Gold Plated / Silver",
+    "stone": "Freshwater Pearl",
+    "design": "Four-Leaf Clover",
+    "style": null,
+    "colours": ["Gold", "Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 2, "price": 3999, "driveLink": null },
+      { "colour": "Silver", "stock": 2, "price": 3599, "driveLink": null }
+    ]
+  },
+  {
+    "name": "Succulent Mini Flower Stud Earrings",
+    "category": "Earrings",
+    "type": "Stud Earrings",
+    "description": "Designed with layered petals resembling a blooming succulent, these 925 sterling silver stud earrings bring a sculptural floral detail to your jewellery collection. The textured petals add depth and character, while the polished finish keeps the look refined and versatile. Available in Gold and Silver finishes.",
+    "material": "925 Sterling Silver",
+    "finish": "18K Gold Plated / Silver",
+    "stone": null,
+    "design": "Succulent Flower",
+    "style": null,
+    "colours": ["Gold", "Silver"],
+    "currency": "INR",
+    "variants": [
+      { "colour": "Gold", "stock": 1, "price": 3599, "driveLink": null },
+      { "colour": "Silver", "stock": 1, "price": 3199, "driveLink": null }
+    ]
+  }
+]
