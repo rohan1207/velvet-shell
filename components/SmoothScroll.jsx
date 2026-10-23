@@ -23,6 +23,7 @@ export default function SmoothScroll({ children }) {
       wheelMultiplier: 0.9,
     });
 
+    window.__lenis = lenis;
     lenis.on('scroll', ScrollTrigger.update);
     const ticker = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(ticker);
@@ -34,6 +35,7 @@ export default function SmoothScroll({ children }) {
     return () => {
       window.removeEventListener('resize', onResize);
       gsap.ticker.remove(ticker);
+      if (window.__lenis === lenis) window.__lenis = undefined;
       lenis.destroy();
     };
   }, []);

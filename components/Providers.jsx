@@ -3,6 +3,7 @@
 import { Suspense } from 'react';
 import { StoreProvider } from '@/context/StoreContext';
 import SmoothScroll from './SmoothScroll';
+import ScrollToTop from './ScrollToTop';
 import SiteHeader from './SiteHeader';
 import Footer from './Footer';
 import CartDrawer from './CartDrawer';
@@ -15,12 +16,14 @@ export default function Providers({ children }) {
     <StoreProvider>
       <SmoothScroll>
         <Suspense fallback={null}>
+          <ScrollToTop />
           <SiteHeader />
         </Suspense>
         <CartDrawer />
         <QuickViewDrawer />
         <SearchModal />
-        <main className="relative w-full overflow-x-clip">{children}</main>
+        {/* min-h keeps footer below the fold while the next page / skeleton paints */}
+        <main className="relative w-full min-h-[100svh] overflow-x-clip">{children}</main>
         <Footer />
         <WhatsAppFloat />
       </SmoothScroll>
