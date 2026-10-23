@@ -1,0 +1,3727 @@
+{
+  "products": [
+    {
+      "name": "Two-Tone Flower Stud Earrings",
+      "slug": "two-tone-flower-stud-earrings-lfja0177",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0177",
+      "drive": "https://drive.google.com/drive/folders/1ISXa6zKciEWzvj02djiU5qDsrcaDWbJk",
+      "variants": [
+        {
+          "sku": "LFJA0177D",
+          "token": "D",
+          "colorLabel": "Option D",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 3,
+          "description": "Inspired by blooming flowers, these handcrafted 925 sterling silver stud earrings feature a charming two-tone floral design. Their elegant silhouette makes them easy to style for everyday wear, special occasions or gifting. Material: 925 Sterling Silver Design: Flower Type: Stud Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0177D",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0177E",
+          "token": "E",
+          "colorLabel": "Option E",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 3,
+          "description": "Inspired by blooming flowers, these handcrafted 925 sterling silver stud earrings feature a charming two-tone floral design. Their elegant silhouette makes them easy to style for everyday wear, special occasions or gifting. Material: 925 Sterling Silver Design: Flower Type: Stud Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0177E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Blooming Flower Drop Earrings",
+      "slug": "blooming-flower-drop-earrings-lfjb0007",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0007",
+      "drive": "https://drive.google.com/drive/folders/1RyyPlSffz_wtuZDb3s5M6NTeiVg7eZnr",
+      "variants": [
+        {
+          "sku": "LFJB0007B",
+          "token": "B",
+          "colorLabel": "Option B",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3599,
+          "stock": 2,
+          "description": "These 925 sterling silver drop earrings feature a graceful blooming flower design with an elongated silhouette that adds movement and elegance to your look. A versatile choice for occasions, celebrations or thoughtful gifting. Material: 925 Sterling Silver Design: Blooming Flower Type: Drop Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0007B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0007A",
+          "token": "A",
+          "colorLabel": "Option A",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3599,
+          "stock": 2,
+          "description": "These 925 sterling silver drop earrings feature a graceful blooming flower design with an elongated silhouette that adds movement and elegance to your look. A versatile choice for occasions, celebrations or thoughtful gifting. Material: 925 Sterling Silver Design: Blooming Flower Type: Drop Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0007A",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Natural Pearl Leaf Earrings",
+      "slug": "natural-pearl-leaf-earrings-lfja0119",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0119",
+      "drive": "https://drive.google.com/drive/folders/1SXNR2CtyygWzzvc6peQZlMQGUbkHvGSc",
+      "variants": [
+        {
+          "sku": "LFJA0119E",
+          "token": "E",
+          "colorLabel": "Option E",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3999,
+          "stock": 3,
+          "description": "Inspired by the organic shape of leaves, these 925 sterling silver earrings feature a natural pearl accent and a graceful leaf silhouette. A refined nature-inspired design that works beautifully for everyday styling, special occasions and gifting. Material: 925 Sterling Silver Stone: Natural Pearl Design: Leaf & Pearl Type: Earrings Colour: Silver / Gold",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0119E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0119A",
+          "token": "A",
+          "colorLabel": "Option A",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3999,
+          "stock": 3,
+          "description": "Inspired by the organic shape of leaves, these 925 sterling silver earrings feature a natural pearl accent and a graceful leaf silhouette. A refined nature-inspired design that works beautifully for everyday styling, special occasions and gifting. Material: 925 Sterling Silver Stone: Natural Pearl Design: Leaf & Pearl Type: Earrings Colour: Silver / Gold",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0119A",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Butterfly Stud Earrings",
+      "slug": "butterfly-stud-earrings-lfja0154",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0154",
+      "drive": "https://drive.google.com/drive/folders/1yL1okjB2qWgdrh0r1Zrk2wjMMI6HZJK6",
+      "variants": [
+        {
+          "sku": "LFJA0154A",
+          "token": "A",
+          "colorLabel": "Option A",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 2,
+          "description": "A charming pair of 925 sterling silver stud earrings featuring an intricate butterfly design. Lightweight and easy to style, they add a subtle nature-inspired touch to everyday looks and make a thoughtful gifting choice. Material: 925 Sterling Silver Design: Butterfly Type: Stud Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0154A",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0154B",
+          "token": "B",
+          "colorLabel": "Option B",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2499,
+          "stock": 2,
+          "description": "A charming pair of 925 sterling silver stud earrings featuring an intricate butterfly design. Lightweight and easy to style, they add a subtle nature-inspired touch to everyday looks and make a thoughtful gifting choice. Material: 925 Sterling Silver Design: Butterfly Type: Stud Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0154B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Wild Flower Stud Earrings",
+      "slug": "wild-flower-stud-earrings-lfja0088",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0088",
+      "drive": "https://drive.google.com/drive/folders/1n2toVxj-2cVsnVfb2_l6zO0LNrvXUYt8",
+      "variants": [
+        {
+          "sku": "LFJA0088A",
+          "token": "A",
+          "colorLabel": "Option A",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 2,
+          "description": "Inspired by the natural beauty of wildflowers, these handcrafted 925 sterling silver stud earrings feature a graceful floral design with intricate detailing. Their timeless silhouette adds a fresh, nature-inspired touch to everyday and occasion styling. Material: 925 Sterling Silver Design: Wild Flower Type: Stud Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0088A",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0088E",
+          "token": "E",
+          "colorLabel": "Option E",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 2,
+          "description": "Inspired by the natural beauty of wildflowers, these handcrafted 925 sterling silver stud earrings feature a graceful floral design with intricate detailing. Their timeless silhouette adds a fresh, nature-inspired touch to everyday and occasion styling. Material: 925 Sterling Silver Design: Wild Flower Type: Stud Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0088E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Forget-Me-Not Flower Baroque Pearl Earrings",
+      "slug": "forget-me-not-flower-baroque-pearl-earrings-lfjb0274",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJB0274",
+      "drive": "https://drive.google.com/drive/folders/1Py-Ppjg4Ldw_vxDYn6epUp1tYk_lm4-M",
+      "variants": [
+        {
+          "sku": "LFJB0274A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 5999,
+          "stock": 1,
+          "description": "A cluster of delicate forget-me-not flowers meets a natural baroque pearl in these elegant drop earrings. Crafted in 925 sterling silver with an 18K gold-plated finish, the floral arrangement and organic pearl shape create a graceful statement for celebrations, occasions and evening styling. Material: 925 Sterling Silver Finish: 18K Gold Plated Stone: Natural Baroque Pearl Design: Forget-Me-Not Flower Type: Drop Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0274A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0274B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 5999,
+          "stock": 1,
+          "description": "A cluster of delicate forget-me-not flowers meets a natural baroque pearl in these elegant drop earrings. Crafted in 925 sterling silver with an 18K gold-plated finish, the floral arrangement and organic pearl shape create a graceful statement for celebrations, occasions and evening styling. Material: 925 Sterling Silver Finish: 18K Gold Plated Stone: Natural Baroque Pearl Design: Forget-Me-Not Flower Type: Drop Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0274B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Forget-Me-Not Flower Stud Earrings",
+      "slug": "forget-me-not-flower-stud-earrings-lfja0151",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJA0151",
+      "drive": "https://drive.google.com/drive/folders/1ZHfNsjF4ZJyP4VVpYaNMmD4oKwc6nYU3",
+      "variants": [
+        {
+          "sku": "LFJA0151A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 2999,
+          "stock": 1,
+          "description": "A charming floral arrangement featuring delicate forget-me-not blossoms set along a natural-looking branch. Crafted in 925 sterling silver with an 18K gold-plated finish, these stud earrings bring a graceful botanical touch to your look without feeling overly ornate. Material: 925 Sterling Silver Finish: 18K Gold Plated Design: Forget-Me-Not Flower Type: Stud Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0151A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0151E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 1,
+          "description": "A charming floral arrangement featuring delicate forget-me-not blossoms set along a natural-looking branch. Crafted in 925 sterling silver with an 18K gold-plated finish, these stud earrings bring a graceful botanical touch to your look without feeling overly ornate. Material: 925 Sterling Silver Finish: 18K Gold Plated Design: Forget-Me-Not Flower Type: Stud Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0151E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Forget-Me-Not Flower Hoop Earrings",
+      "slug": "forget-me-not-flower-hoop-earrings-lfjc0024",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJC0024",
+      "drive": "https://drive.google.com/drive/folders/1gM5Pi5ES3k12kiarnfOd5csgKZ08j0JD",
+      "variants": [
+        {
+          "sku": "LFJC0024A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 3999,
+          "stock": 1,
+          "description": "These graceful hoop earrings feature clusters of forget-me-not flowers arranged along the hoop for a distinctive floral finish. The detailed blooms add character to the design, while the 18K gold-plated 925 sterling silver construction gives them a polished look suited to both occasions and everyday styling. Material: 925 Sterling Silver Finish: 18K Gold Plated Design: Forget-Me-Not Flower Type: Hoop Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJC0024A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJC0024E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3999,
+          "stock": 1,
+          "description": "These graceful hoop earrings feature clusters of forget-me-not flowers arranged along the hoop for a distinctive floral finish. The detailed blooms add character to the design, while the 18K gold-plated 925 sterling silver construction gives them a polished look suited to both occasions and everyday styling. Material: 925 Sterling Silver Finish: 18K Gold Plated Design: Forget-Me-Not Flower Type: Hoop Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJC0024E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Forget-Me-Not Pearl Dangle Earrings",
+      "slug": "forget-me-not-pearl-dangle-earrings-lfjb0324",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJB0324",
+      "drive": "https://drive.google.com/drive/folders/11XhnindAI8wFM6ewqydpCZQbmfAYVwi-",
+      "variants": [
+        {
+          "sku": "LFJB0324A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 3599,
+          "stock": 1,
+          "description": "Clusters of forget-me-not flowers and pearl accents come together in these graceful dangle earrings. Crafted in 925 sterling silver with a gold-plated finish, the floral arrangement adds movement and a soft botanical character, making them a beautiful choice for occasions or elevated everyday styling. Material: 925 Sterling Silver Finish: Gold Plated Design: Forget-Me-Not Flower & Pearl Type: Dangle Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0324A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0324E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3599,
+          "stock": 1,
+          "description": "Clusters of forget-me-not flowers and pearl accents come together in these graceful dangle earrings. Crafted in 925 sterling silver with a gold-plated finish, the floral arrangement adds movement and a soft botanical character, making them a beautiful choice for occasions or elevated everyday styling. Material: 925 Sterling Silver Finish: Gold Plated Design: Forget-Me-Not Flower & Pearl Type: Dangle Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0324E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Dragonfly Stud Earrings",
+      "slug": "dragonfly-stud-earrings-lfja0095",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJA0095",
+      "drive": "https://drive.google.com/drive/folders/1HJx6vZuo2G67WTa05z9rdyeK7kdo19LO",
+      "variants": [
+        {
+          "sku": "LFJA0095A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 2499,
+          "stock": 1,
+          "description": "A pair of finely detailed dragonfly studs that bring a playful touch of nature to your jewellery collection. The compact silhouette makes them easy to wear, while the polished finish adds a refined look suitable for everyday outfits and gifting. Material: 925 Sterling Silver Finish: Gold Plated Design: Dragonfly Type: Stud Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0095A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0095B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2499,
+          "stock": 1,
+          "description": "A pair of finely detailed dragonfly studs that bring a playful touch of nature to your jewellery collection. The compact silhouette makes them easy to wear, while the polished finish adds a refined look suitable for everyday outfits and gifting. Material: 925 Sterling Silver Finish: Gold Plated Design: Dragonfly Type: Stud Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0095B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Dragonfly Baroque Pearl Drop Earrings",
+      "slug": "dragonfly-baroque-pearl-drop-earrings-lfjb0275",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJB0275",
+      "drive": "https://drive.google.com/drive/folders/1S8ehdEiS4z3w_G1BHRTr_JCrkLmdZSvL",
+      "variants": [
+        {
+          "sku": "LFJB0275A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 2999,
+          "stock": 2,
+          "description": "A graceful dragonfly detail paired with naturally shaped baroque pearls creates a distinctive look in these drop earrings. Crafted in 925 sterling silver with an 18K gold-plated finish, the removable design offers versatility while the organic pearl shapes add character. Material: 925 Sterling Silver Finish: 18K Gold Plated Stone: Baroque Pearl Design: Dragonfly & Pearl Type: Drop Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0275A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0275B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 2,
+          "description": "A graceful dragonfly detail paired with naturally shaped baroque pearls creates a distinctive look in these drop earrings. Crafted in 925 sterling silver with an 18K gold-plated finish, the removable design offers versatility while the organic pearl shapes add character. Material: 925 Sterling Silver Finish: 18K Gold Plated Stone: Baroque Pearl Design: Dragonfly & Pearl Type: Drop Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0275B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Flying Bird Stud Earrings",
+      "slug": "flying-bird-stud-earrings-lfja0103",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0103",
+      "drive": "https://drive.google.com/drive/folders/1PkBhBygX6cN0ExMm8w95ZWP-z4Gc2NBy",
+      "variants": [
+        {
+          "sku": "LFJA0103E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 2999,
+          "stock": 1,
+          "description": "Featuring birds captured in mid-flight, these handcrafted stud earrings bring a sense of movement and freedom to the design. The sculpted form and polished finish create a distinctive pair that works well for everyday styling as well as gifting. Material: 925 Sterling Silver Finish: 18K Gold Plated Design: Flying Bird Type: Stud Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0103E",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Asymmetry Swallow Bird Stud Earrings",
+      "slug": "asymmetry-swallow-bird-stud-earrings-lfja0099",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0099",
+      "drive": "https://drive.google.com/drive/folders/1BXMzfxnsqZtMDKLhYCsW1sTu50H5Er-3",
+      "variants": [
+        {
+          "sku": "LFJA0099A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 2999,
+          "stock": 1,
+          "description": "Two graceful swallows take flight in an asymmetric arrangement, creating a playful yet artistic look. Crafted in 925 sterling silver with an 18K gold-plated finish, these earrings bring a sense of movement and individuality to your jewellery collection. A distinctive choice for everyday styling, special occasions or gifting. Material: 925 Sterling Silver Finish: 18K Gold Plated Design: Swallow Bird Type: Stud Earrings Style: Asymmetrical",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0099A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Phalaenopsis Flower Hoop Earrings",
+      "slug": "phalaenopsis-flower-hoop-earrings-lfjc0023",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJC0023",
+      "drive": "https://drive.google.com/drive/folders/1fw5BGAHvZAD_E_64-CyjlDahIVHwr68E",
+      "variants": [
+        {
+          "sku": "LFJC0023E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 4999,
+          "stock": 1,
+          "description": "Featuring layered Phalaenopsis flower petals arranged along a classic hoop silhouette, these earrings bring a graceful botanical detail to your look. Crafted in 925 sterling silver, the floral design adds a refined yet distinctive finish, making them suitable for occasions, celebrations and gifting. Material: 925 Sterling Silver Design: Phalaenopsis Flower Type: Hoop Earrings Colour: Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJC0023E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Lilac Flower Drop Earrings",
+      "slug": "lilac-flower-drop-earrings-lfjb0320",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0320",
+      "drive": "https://drive.google.com/drive/folders/1_tquYF2P78pot3mpcZ_1Ag7pLeo0KQrf",
+      "variants": [
+        {
+          "sku": "LFJB0320E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 6999,
+          "stock": 1,
+          "description": "A graceful arrangement of lilac-toned flowers brings a soft pop of colour to these handcrafted drop earrings. Made from 925 sterling silver with an 18K gold-plated finish, the floral detailing gives the pair an elegant yet distinctive character, perfect for special occasions and thoughtful gifting. Material: 925 Sterling Silver Finish: 18K Gold Plated Design: Lilac Flower Type: Drop Earrings Colour: Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0320E",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Pothos Dangle Earrings",
+      "slug": "pothos-dangle-earrings-lfjb0319",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0319",
+      "drive": "https://drive.google.com/drive/folders/1-1CgNeDI2hnYl2UMz-_4JH80taqr5P5V",
+      "variants": [
+        {
+          "sku": "LFJB0319E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 5999,
+          "stock": 1,
+          "description": "Delicate pothos leaves are arranged in an elegant dangling silhouette, giving these earrings a graceful botanical character. Crafted in 925 sterling silver with an 18K gold-plated finish, the detailed leaf design adds movement and a refined touch to your look. Material: 925 Sterling Silver Finish: 18K Gold Plated Design: Pothos / Epipremnum Aureum Type: Dangle Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0319E",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Four-Leaf Mini Clover Pearl Dangle Earrings",
+      "slug": "four-leaf-mini-clover-pearl-dangle-earrings-lfjb0322",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJB0322",
+      "drive": "https://drive.google.com/drive/folders/1Y1OCnyfXgU846f6aMbWtfQthD11p08NK",
+      "variants": [
+        {
+          "sku": "LFJB0322A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 3999,
+          "stock": 2,
+          "description": "A classic four-leaf clover silhouette paired with freshwater pearls gives these dangle earrings a graceful and timeless appeal. Crafted in 925 sterling silver with an 18K gold-plated finish, the floral-clover design adds a refined touch to both everyday and occasion styling. Available in Gold and Silver finishes. Material: 925 Sterling Silver Finish: 18K Gold Plated / Silver Stone: Freshwater Pearl Design: Four-Leaf Clover Type: Dangle Drop Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0322A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0322B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3599,
+          "stock": 2,
+          "description": "A classic four-leaf clover silhouette paired with freshwater pearls gives these dangle earrings a graceful and timeless appeal. Crafted in 925 sterling silver with an 18K gold-plated finish, the floral-clover design adds a refined touch to both everyday and occasion styling. Available in Gold and Silver finishes. Material: 925 Sterling Silver Finish: 18K Gold Plated / Silver Stone: Freshwater Pearl Design: Four-Leaf Clover Type: Dangle Drop Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0322B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Succulent Mini Flower Stud Earrings",
+      "slug": "succulent-mini-flower-stud-earrings-lfja0171",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJA0171",
+      "drive": "https://drive.google.com/drive/folders/1tuJHg3lVO0ypQ9ptjQRrXoj51kaU1f9y",
+      "variants": [
+        {
+          "sku": "LFJA0171A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 3599,
+          "stock": 1,
+          "description": "Designed with layered petals resembling a blooming succulent, these 925 sterling silver stud earrings bring a sculptural floral detail to your jewellery collection. The textured petals add depth and character, while the polished finish keeps the look refined and versatile. Available in Gold and Silver finishes. Material: 925 Sterling Silver Finish: 18K Gold Plated / Silver Design: Succulent Flower Type: Stud Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0171A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0171B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3199,
+          "stock": 1,
+          "description": "Designed with layered petals resembling a blooming succulent, these 925 sterling silver stud earrings bring a sculptural floral detail to your jewellery collection. The textured petals add depth and character, while the polished finish keeps the look refined and versatile. Available in Gold and Silver finishes. Material: 925 Sterling Silver Finish: 18K Gold Plated / Silver Design: Succulent Flower Type: Stud Earrings Colour: Gold / Silver",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0171B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Luxury Chrysanthemum Flower Earrings Pure Parties and Gifts",
+      "slug": "luxury-chrysanthemum-flower-earrings-pure-parties-and-gifts-lfja0128",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJA0128",
+      "drive": "https://drive.google.com/drive/folders/1A2QNXaN53XwMOPrrvJHA99pCuBVwo10p",
+      "variants": [
+        {
+          "sku": "LFJA0128B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3599,
+          "stock": 1,
+          "description": "Luxury Chrysanthemum Flower Earrings Pure Parties and Gifts",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0128B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0128A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 3999,
+          "stock": 1,
+          "description": "Luxury Chrysanthemum Flower Earrings Pure Parties and Gifts",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0128A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Chrysanthemum Flower Dangle Long Drop Hanging Earrings",
+      "slug": "chrysanthemum-flower-dangle-long-drop-hanging-earrings-lfjb0281",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJB0281",
+      "drive": "https://drive.google.com/drive/folders/1B8v7_jbriYCHnkcRrw9LDayIPFtCuDjR",
+      "variants": [
+        {
+          "sku": "LFJB0281E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3599,
+          "stock": 1,
+          "description": "Chrysanthemum Flower Dangle Long Drop Hanging Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0281E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0281A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 3999,
+          "stock": 1,
+          "description": "Chrysanthemum Flower Dangle Long Drop Hanging Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0281A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Retro French Vintage Simple Circle Drop Earrings",
+      "slug": "retro-french-vintage-simple-circle-drop-earrings-lfjb0287",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0287",
+      "drive": "https://drive.google.com/drive/folders/1f3IDGv3R2EasMpfO_yb34BZDFo5SvdVs",
+      "variants": [
+        {
+          "sku": "LFJB0287E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 7499,
+          "stock": 1,
+          "description": "Retro French Vintage Simple Circle Drop Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0287E",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Fashionable Jewelry Natural Stone Lotus Whispers Drop Earring New Year Accessories",
+      "slug": "fashionable-jewelry-natural-stone-lotus-whispers-drop-earring-new-year-accessori",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0095",
+      "drive": "https://drive.google.com/drive/folders/1teBreCtg4nFjKmnXKnreNCqGHhQA_g8i",
+      "variants": [
+        {
+          "sku": "LFJB0095B",
+          "token": "B",
+          "colorLabel": "Option B",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 5999,
+          "stock": 1,
+          "description": "Fashionable Jewelry Natural Stone Lotus Whispers Drop Earring New Year Accessories",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0095B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0095A",
+          "token": "A",
+          "colorLabel": "Option A",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 5999,
+          "stock": 1,
+          "description": "Fashionable Jewelry Natural Stone Lotus Whispers Drop Earring New Year Accessories",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0095A",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Price Natural Aquamarine Crystal Delicate Rose Flower Earrings",
+      "slug": "price-natural-aquamarine-crystal-delicate-rose-flower-earrings-lfja0087",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0087",
+      "drive": "https://drive.google.com/drive/folders/16D9MniAHiD5DT015ghJaixVKRVa8K3JD",
+      "variants": [
+        {
+          "sku": "LFJA0087B1",
+          "token": "B1",
+          "colorLabel": "Blue",
+          "colorSwatch": "#4A7BA7",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 1999,
+          "stock": 1,
+          "description": "Price Natural Aquamarine Crystal Delicate Rose Flower Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0087B1",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0087B2",
+          "token": "B2",
+          "colorLabel": "Green",
+          "colorSwatch": "#2F6B4F",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 1999,
+          "stock": 1,
+          "description": "Price Natural Aquamarine Crystal Delicate Rose Flower Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0087B2",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0087B3",
+          "token": "B3",
+          "colorLabel": "Clear",
+          "colorSwatch": "#E8EEF2",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 1999,
+          "stock": 1,
+          "description": "Price Natural Aquamarine Crystal Delicate Rose Flower Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0087B3",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Simply Iris Flower Long Drop Earrings Gift",
+      "slug": "simply-iris-flower-long-drop-earrings-gift-lfjb0309",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0309",
+      "drive": "https://drive.google.com/drive/folders/1SWe07PnHZ63GfhPzpD9SczhDDHi4kfU0",
+      "variants": [
+        {
+          "sku": "LFJB0309A",
+          "token": "A",
+          "colorLabel": "Option A",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3999,
+          "stock": 1,
+          "description": "Simply Iris Flower Long Drop Earrings Gift",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0309A",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0309B",
+          "token": "B",
+          "colorLabel": "Option B",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3799,
+          "stock": 1,
+          "description": "Simply Iris Flower Long Drop Earrings Gift",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0309B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Simply Iris Flower Long Drop Earrings Gift",
+      "slug": "simply-iris-flower-long-drop-earrings-gift-lfjb0310",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0310",
+      "drive": "https://drive.google.com/drive/folders/1uvcqk0rKmFEdnnei5w2iDo4Eq1AIRLNz",
+      "variants": [
+        {
+          "sku": "LFJB0310E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3999,
+          "stock": 1,
+          "description": "Simply Iris Flower Long Drop Earrings Gift",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0310E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Hand Made 18k Gold Plate Fashion Large Drop Flower Earring",
+      "slug": "hand-made-18k-gold-plate-fashion-large-drop-flower-earring-lfjb0284",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJB0284",
+      "drive": "https://drive.google.com/drive/folders/1ynhWAg71-7kmTeK8BTx8B5bFLxObrBev",
+      "variants": [
+        {
+          "sku": "LFJB0284A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 4599,
+          "stock": 1,
+          "description": "Hand Made 18k Gold Plate Fashion Large Drop Flower Earring",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0284A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0284E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 4599,
+          "stock": 1,
+          "description": "Hand Made 18k Gold Plate Fashion Large Drop Flower Earring",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0284E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Fashion Diamond Baroque Pearl Stud Earrings Set With Lady",
+      "slug": "fashion-diamond-baroque-pearl-stud-earrings-set-with-lady-lfja0133",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJA0133",
+      "drive": "https://drive.google.com/drive/folders/1WZShQE3v7YZvtaLF7u_1eD0wz5Wxm_-Z",
+      "variants": [
+        {
+          "sku": "LFJA0133B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3199,
+          "stock": 2,
+          "description": "Fashion Diamond Baroque Pearl Stud Earrings Set With Lady",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0133B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0133A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 3599,
+          "stock": 2,
+          "description": "Fashion Diamond Baroque Pearl Stud Earrings Set With Lady",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0133A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Handmade Curved Branches & Leaves Asymmetric Stud Earrings",
+      "slug": "handmade-curved-branches-leaves-asymmetric-stud-earrings-lfjb0276",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0276",
+      "drive": "https://drive.google.com/drive/folders/1oCQgxQW5zbYvP0grJV6420wekcaLBC67",
+      "variants": [
+        {
+          "sku": "LFJB0276D",
+          "token": "D",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 1,
+          "description": "Handmade Curved Branches & Leaves Asymmetric Stud Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0276D",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Pendants 925 Sterling Sliver Exquisite Long Feather",
+      "slug": "pendants-925-sterling-sliver-exquisite-long-feather-lfjb0238",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJB0238",
+      "drive": "https://drive.google.com/drive/folders/1A-_qxMjilDe0RczGlbJJqPuYODLdB_Qe",
+      "variants": [
+        {
+          "sku": "LFJB0238A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 4499,
+          "stock": 1,
+          "description": "Pendants 925 Sterling Sliver Exquisite Long Feather",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0238A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0238B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 4299,
+          "stock": 1,
+          "description": "Pendants 925 Sterling Sliver Exquisite Long Feather",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0238B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Natural Pearl Rings Earrings",
+      "slug": "natural-pearl-rings-earrings-lfja0116",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0116",
+      "drive": "https://drive.google.com/drive/folders/18nGderreJ8XHH6UBthzU7DBWliAof9sl",
+      "variants": [
+        {
+          "sku": "LFJA0116E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3999,
+          "stock": 1,
+          "description": "Natural Pearl Rings Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0116E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Fresh Water Pearl Butterfly Stud Earrings With",
+      "slug": "fresh-water-pearl-butterfly-stud-earrings-with-lfja0140",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJA0140",
+      "drive": "https://drive.google.com/drive/folders/1lQH9VpBpY1cCTdHe_GnFWkdsD0HvBiQ6",
+      "variants": [
+        {
+          "sku": "LFJA0140B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 2,
+          "description": "Fresh Water Pearl Butterfly Stud Earrings With",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0140B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0140A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 2999,
+          "stock": 2,
+          "description": "Fresh Water Pearl Butterfly Stud Earrings With",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0140A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Natural Amber Stud Earrings and Ring Handmade Butterfly",
+      "slug": "natural-amber-stud-earrings-and-ring-handmade-butterfly-lfja0037",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0037",
+      "drive": "https://drive.google.com/drive/folders/1HqJA0ocke-BbO3g226GN_96ej1813PVW",
+      "variants": [
+        {
+          "sku": "LFJA0037B",
+          "token": "B",
+          "colorLabel": "Option B",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 1,
+          "description": "Natural Amber Stud Earrings and Ring Handmade Butterfly",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0037B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0037A",
+          "token": "A",
+          "colorLabel": "Option A",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 1,
+          "description": "Natural Amber Stud Earrings and Ring Handmade Butterfly",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0037A",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Blooming Anemone Flower Garnet Topaz Amethyst Peridot Stone Earring",
+      "slug": "blooming-anemone-flower-garnet-topaz-amethyst-peridot-stone-earring-lfjb0208",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0208",
+      "drive": "https://drive.google.com/drive/folders/1A2QNXaN53XwMOPrrvJHA99pCuBVwo10p",
+      "variants": [
+        {
+          "sku": "LFJB0208B",
+          "token": "B",
+          "colorLabel": "Option B",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 4599,
+          "stock": 1,
+          "description": "Blooming Anemone Flower Garnet Topaz Amethyst Peridot Stone Earring",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0208B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0208D1",
+          "token": "D1",
+          "colorLabel": "Option D",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 4999,
+          "stock": 1,
+          "description": "Blooming Anemone Flower Garnet Topaz Amethyst Peridot Stone Earring",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0208D1",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Pink Crystal Flower Stud Earring Handmade Fine Gift Engagement Wedding Party",
+      "slug": "pink-crystal-flower-stud-earring-handmade-fine-gift-engagement-wedding-party-lfj",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0036",
+      "drive": "https://drive.google.com/drive/folders/1oI6g6w01QzzIDnrJw2_QZbCkkKqIYbJO",
+      "variants": [
+        {
+          "sku": "LFJA0036C",
+          "token": "C",
+          "colorLabel": "Option C",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2499,
+          "stock": 1,
+          "description": "Pink Crystal Flower Stud Earring Handmade Fine Gift Engagement Wedding Party",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0036C",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0036B2",
+          "token": "B2",
+          "colorLabel": "Option B",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2499,
+          "stock": 1,
+          "description": "Pink Crystal Flower Stud Earring Handmade Fine Gift Engagement Wedding Party",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0036B2",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Flower in the Rain pink White Crystal Drop Earrings",
+      "slug": "flower-in-the-rain-pink-white-crystal-drop-earrings-lfjb0066",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0066",
+      "drive": "https://drive.google.com/drive/folders/1jiu4xBkS1TM3y2pZMt-W-kjpHPL98e6s",
+      "variants": [
+        {
+          "sku": "LFJB0066A2",
+          "token": "A2",
+          "colorLabel": "Pink",
+          "colorSwatch": "#E8B4C4",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 2599,
+          "stock": 1,
+          "description": "Flower in the Rain pink White Crystal Drop Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0066A2",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0066B1",
+          "token": "B1",
+          "colorLabel": "White",
+          "colorSwatch": "#F5F5F5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 2599,
+          "stock": 1,
+          "description": "Flower in the Rain pink White Crystal Drop Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0066B1",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0066C1",
+          "token": "C1",
+          "colorLabel": "Clear",
+          "colorSwatch": "#E8EEF2",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 2599,
+          "stock": 1,
+          "description": "Flower in the Rain pink White Crystal Drop Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0066C1",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Handmade Peony Flower Earrings",
+      "slug": "handmade-peony-flower-earrings-lfja0041",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJA0041",
+      "drive": "https://drive.google.com/drive/folders/1_BU3dv9UJXNNF9Eg-SrVtr5J6do06uvp",
+      "variants": [
+        {
+          "sku": "LFJA0041B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 5499,
+          "stock": 1,
+          "description": "Handmade Peony Flower Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0041B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0041A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 5499,
+          "stock": 1,
+          "description": "Handmade Peony Flower Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0041A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "New Bee Comb Earrings Real",
+      "slug": "new-bee-comb-earrings-real-lfja0120",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0120",
+      "drive": "https://drive.google.com/drive/folders/18vmPmUa-P-LmrgqhkaNMLcZX-Mf8L3RF",
+      "variants": [
+        {
+          "sku": "LFJA0120A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 3199,
+          "stock": 1,
+          "description": "New Bee Comb Earrings Real",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0120A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Real Cute Little Bees Honeycomb Drop Earrings Best Gift",
+      "slug": "real-cute-little-bees-honeycomb-drop-earrings-best-gift-lfjb0059",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0059",
+      "drive": "https://drive.google.com/drive/folders/1yqBAzp1M3g_EJgLz_I30aW1bqZiI0neH",
+      "variants": [
+        {
+          "sku": "LFJB0059",
+          "token": "DEFAULT",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3599,
+          "stock": 1,
+          "description": "Real Cute Little Bees Honeycomb Drop Earrings Best Gift",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0059",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Agate Stone Bee and Honey",
+      "slug": "agate-stone-bee-and-honey-lfja0086",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJA0086",
+      "drive": "https://drive.google.com/drive/folders/1wxIQs7b1k3mv66TRom2zHkeJj9lrdaT9",
+      "variants": [
+        {
+          "sku": "LFJA0086B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2499,
+          "stock": 1,
+          "description": "Agate Stone Bee and Honey",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0086B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0086A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 2999,
+          "stock": 1,
+          "description": "Agate Stone Bee and Honey",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0086A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Honey Bumble Bee Handmade",
+      "slug": "honey-bumble-bee-handmade-lfja0079",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJA0079",
+      "drive": "https://drive.google.com/drive/folders/1tb9uDLXXRvUlp25svz-xdXk1dIKZLhAq",
+      "variants": [
+        {
+          "sku": "LFJA0079C",
+          "token": "C",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 4499,
+          "stock": 1,
+          "description": "Honey Bumble Bee Handmade",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0079C",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0079A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 4999,
+          "stock": 1,
+          "description": "Honey Bumble Bee Handmade",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0079A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Bee Silver Simple Gold Earring Design",
+      "slug": "bee-silver-simple-gold-earring-design-lfja0032",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0032",
+      "drive": "https://drive.google.com/drive/folders/1u2E0wWDY6M3ZXa5a5kX4VkQyjj83ojCz",
+      "variants": [
+        {
+          "sku": "LFJA0032B",
+          "token": "B",
+          "colorLabel": "Option B",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2499,
+          "stock": 1,
+          "description": "Bee Silver Simple Gold Earring Design",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0032B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0032A",
+          "token": "A",
+          "colorLabel": "Option A",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 2,
+          "description": "Bee Silver Simple Gold Earring Design",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0032A",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Lovely Honey Bee S925 Long Drop Earrings",
+      "slug": "lovely-honey-bee-s925-long-drop-earrings-lfjb0209",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0209",
+      "drive": "https://drive.google.com/drive/folders/16ZdrMLcMGfUMVSA5wowzj-n3UKMoR5lw",
+      "variants": [
+        {
+          "sku": "LFJB0209B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2499,
+          "stock": 1,
+          "description": "Lovely Honey Bee S925 Long Drop Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0209B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Cute Bee Kiss From a Rose Ring Stud Earring Ceramic",
+      "slug": "cute-bee-kiss-from-a-rose-ring-stud-earring-ceramic-lfja0046",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0046",
+      "drive": "https://drive.google.com/drive/folders/1SkP0tA2BdRAXhK1HTnIrXGLlda3OCYM",
+      "variants": [
+        {
+          "sku": "LFJA0046A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2499,
+          "stock": 1,
+          "description": "Cute Bee Kiss From a Rose Ring Stud Earring Ceramic",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0046A",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Dragonfly Design Stud Earrings",
+      "slug": "dragonfly-design-stud-earrings-lfja0129",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0129",
+      "drive": "https://drive.google.com/drive/folders/1g-O0_ya7KzwtPziNZ38F36IprKM88wO1",
+      "variants": [
+        {
+          "sku": "LFJA0129A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 3599,
+          "stock": 1,
+          "description": "Dragonfly Design Stud Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0129A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "ver Natural Stone Stud Earring Jewelry Making Dragonfly Stud Earrings",
+      "slug": "ver-natural-stone-stud-earring-jewelry-making-dragonfly-stud-earrings-lfja0102",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0102",
+      "drive": "https://drive.google.com/drive/folders/1nM70luZRL8AmIyC2pGnaA5sQNWZVCNmU",
+      "variants": [
+        {
+          "sku": "LFJA0102A1",
+          "token": "A1",
+          "colorLabel": "Colour A",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 1999,
+          "stock": 1,
+          "description": "ver Natural Stone Stud Earring Jewelry Making Dragonfly Stud Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0102A1",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0102B1",
+          "token": "B1",
+          "colorLabel": "Colour B",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 1999,
+          "stock": 1,
+          "description": "ver Natural Stone Stud Earring Jewelry Making Dragonfly Stud Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0102B1",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Jewelry Natural Crystal Lily of the Valley Flower New Year Party",
+      "slug": "jewelry-natural-crystal-lily-of-the-valley-flower-new-year-party-lfjb0144",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0144",
+      "drive": "https://drive.google.com/drive/folders/18uMSSGEm0ZpOUo-llvMFXrTl6AQdhiJG",
+      "variants": [
+        {
+          "sku": "LFJB0144A1",
+          "token": "A1",
+          "colorLabel": "Option A",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 5499,
+          "stock": 1,
+          "description": "Jewelry Natural Crystal Lily of the Valley Flower New Year Party",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0144A1",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0144B",
+          "token": "B",
+          "colorLabel": "Option B",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 5199,
+          "stock": 1,
+          "description": "Jewelry Natural Crystal Lily of the Valley Flower New Year Party",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0144B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Fressia Flower Drop Earrings Luxury Fashion",
+      "slug": "fressia-flower-drop-earrings-luxury-fashion-lfjb0245",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJB0245",
+      "drive": "https://drive.google.com/drive/folders/1PIIFMWrJvnTMvEhWYjaZIU-0n2JxdmMg",
+      "variants": [
+        {
+          "sku": "LFJB0245A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 4999,
+          "stock": 1,
+          "description": "Fressia Flower Drop Earrings Luxury Fashion",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0245A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0245E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 4599,
+          "stock": 1,
+          "description": "Fressia Flower Drop Earrings Luxury Fashion",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0245E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Elegant Women Jewelry Pure 925 Sterling Orchid Earrings",
+      "slug": "elegant-women-jewelry-pure-925-sterling-orchid-earrings-lfjb0248",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0248",
+      "drive": "#REF!",
+      "variants": [
+        {
+          "sku": "LFJB0248A",
+          "token": "A",
+          "colorLabel": "Option A",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 5999,
+          "stock": 1,
+          "description": "Elegant Women Jewelry Pure 925 Sterling Orchid Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0248A",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0248B",
+          "token": "B",
+          "colorLabel": "Option B",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 5499,
+          "stock": 1,
+          "description": "Elegant Women Jewelry Pure 925 Sterling Orchid Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0248B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Elegant Tulip Blossom Long Leaf Dangle Earrings Gift",
+      "slug": "elegant-tulip-blossom-long-leaf-dangle-earrings-gift-lfjb0260",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0260",
+      "drive": "https://drive.google.com/drive/folders/1g6tKEx4ujp16lxf_SFl_BdFkul9nPPF0",
+      "variants": [
+        {
+          "sku": "LFJB0260E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 5999,
+          "stock": 1,
+          "description": "Elegant Tulip Blossom Long Leaf Dangle Earrings Gift",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0260E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Elegant Iris Flower Fashion Stud Earrings Jewelry Women",
+      "slug": "elegant-iris-flower-fashion-stud-earrings-jewelry-women-lfja0091",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0091",
+      "drive": "https://drive.google.com/drive/folders/1xVhr3c7SVeQX8ti4TOxXA4mXR-2Pmwu3",
+      "variants": [
+        {
+          "sku": "LFJA0091B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 4499,
+          "stock": 1,
+          "description": "Elegant Iris Flower Fashion Stud Earrings Jewelry Women",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0091B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Real Elegant Feminine Flower Dangling Earring Lady",
+      "slug": "real-elegant-feminine-flower-dangling-earring-lady-lfjb0230",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0230",
+      "drive": "https://drive.google.com/drive/folders/1SWe07PnHZ63GfhPzpD9SczhDDHi4kfU0",
+      "variants": [
+        {
+          "sku": "LFJB0230B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 5499,
+          "stock": 1,
+          "description": "Real Elegant Feminine Flower Dangling Earring Lady",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0230B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Handmade Real",
+      "slug": "handmade-real-lfjb0255",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0255",
+      "drive": "https://drive.google.com/drive/folders/1yMWHZoJbya7d7yuKjtUWzGCbTk_srMls",
+      "variants": [
+        {
+          "sku": "LFJB0255E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 5999,
+          "stock": 1,
+          "description": "Handmade Real",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0255E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "2025 Bamboo Charm Necklace Stud Earrings for Female Gift",
+      "slug": "2025-bamboo-charm-necklace-stud-earrings-for-female-gift-lfja0114",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0114",
+      "drive": "https://drive.google.com/drive/folders/1_gFqvrWUJ-0B0905YRiBtOTpDWtNqgli",
+      "variants": [
+        {
+          "sku": "LFJA0114A",
+          "token": "A",
+          "colorLabel": "Option A",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 1,
+          "description": "2025 Bamboo Charm Necklace Stud Earrings for Female Gift",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0114A",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0114E",
+          "token": "E",
+          "colorLabel": "Option E",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 2999,
+          "stock": 1,
+          "description": "2025 Bamboo Charm Necklace Stud Earrings for Female Gift",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0114E",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Hand Made With Stud Dangle Earring Pendant Necklace Set",
+      "slug": "hand-made-with-stud-dangle-earring-pendant-necklace-set-lfja0096",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0096",
+      "drive": "https://drive.google.com/drive/folders/1zPkjml-zIRRkaTt_09WDMdbWZXplQitE",
+      "variants": [
+        {
+          "sku": "LFJA0096E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 5999,
+          "stock": 1,
+          "description": "Hand Made With Stud Dangle Earring Pendant Necklace Set",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0096E",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Earring Fashion Leaf Silver Dangle Gold Earring",
+      "slug": "earring-fashion-leaf-silver-dangle-gold-earring-lfjb0139",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": true,
+      "familyKey": "LFJB0139",
+      "drive": "https://drive.google.com/drive/folders/1PQxZTOZ5mIKyNEyCLBM6ApknYClqltF6",
+      "variants": [
+        {
+          "sku": "LFJB0139B",
+          "token": "B",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 3999,
+          "stock": 1,
+          "description": "Earring Fashion Leaf Silver Dangle Gold Earring",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0139B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0139A",
+          "token": "A",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 4499,
+          "stock": 1,
+          "description": "Earring Fashion Leaf Silver Dangle Gold Earring",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0139A",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Flower Earings Elegant Lotus Long Drop Earring 2020",
+      "slug": "flower-earings-elegant-lotus-long-drop-earring-2020-lfjb0011",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0011",
+      "drive": "https://drive.google.com/drive/folders/1b2-fjwyB0IlfSB_X8mbgxB_Nk8KCWdgP",
+      "variants": [
+        {
+          "sku": "LFJB0011A",
+          "token": "A",
+          "colorLabel": "Option A",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 4499,
+          "stock": 1,
+          "description": "Flower Earings Elegant Lotus Long Drop Earring 2020",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0011A",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJB0011B",
+          "token": "B",
+          "colorLabel": "Option B",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 4499,
+          "stock": 1,
+          "description": "Flower Earings Elegant Lotus Long Drop Earring 2020",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJB0011B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "New Silver Plum Flower Stud Natural Stone Earring",
+      "slug": "new-silver-plum-flower-stud-natural-stone-earring-lfja0053",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": true,
+      "hasFinishVariants": false,
+      "familyKey": "LFJA0053",
+      "drive": "https://drive.google.com/drive/folders/1VooCpm8ID-fSnd9WRH6RE0TFXJhIsCZX",
+      "variants": [
+        {
+          "sku": "LFJA0053D",
+          "token": "D",
+          "colorLabel": "Option D",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 7999,
+          "stock": 1,
+          "description": "New Silver Plum Flower Stud Natural Stone Earring",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJA0053D",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        },
+        {
+          "sku": "LFJA0053B",
+          "token": "B",
+          "colorLabel": "Option B",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "925 Silver",
+          "material": "925 Silver",
+          "price": 7999,
+          "stock": 1,
+          "description": "New Silver Plum Flower Stud Natural Stone Earring",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": false,
+          "features": [
+            "SKU LFJA0053B",
+            "Handcrafted",
+            "925 Silver"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    },
+    {
+      "name": "Hand Made Long Hanging New Large Flower Dangle Drop Earrings",
+      "slug": "hand-made-long-hanging-new-large-flower-dangle-drop-earrings-lfjb0288",
+      "category": "earrings",
+      "collection": "the-shell-edit",
+      "badge": "",
+      "status": "active",
+      "hasColorVariants": false,
+      "hasFinishVariants": false,
+      "familyKey": "LFJB0288",
+      "drive": "https://drive.google.com/drive/folders/19NI-V_vJMgwdGGOaVab_Bo1SZ2zTXq7Z",
+      "variants": [
+        {
+          "sku": "LFJB0288E",
+          "token": "E",
+          "colorLabel": "Default",
+          "colorSwatch": "#C5C5C5",
+          "finishLabel": "18K Gold-Plated",
+          "material": "18K Gold-Plated",
+          "price": 4999,
+          "stock": 1,
+          "description": "Hand Made Long Hanging New Large Flower Dangle Drop Earrings",
+          "heroUrl": "",
+          "gallery": [],
+          "isPrimary": true,
+          "features": [
+            "SKU LFJB0288E",
+            "Handcrafted",
+            "18K Gold-Plated"
+          ],
+          "sizeTags": [
+            "One size"
+          ],
+          "length": "One size",
+          "reviews": {
+            "rating": 0,
+            "count": 0,
+            "highlights": []
+          },
+          "active": true
+        }
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "fam": "LFJA0147",
+      "reason": "no valid price",
+      "skus": [
+        "LFJA0147E1",
+        "LFJA0147B2"
+      ]
+    },
+    {
+      "fam": "LFJA0130",
+      "reason": "no valid price",
+      "skus": [
+        "LFJA0130E"
+      ]
+    },
+    {
+      "fam": "LFJC0017",
+      "reason": "no valid price",
+      "skus": [
+        "LFJC0017D",
+        "LFJC0017E"
+      ]
+    },
+    {
+      "fam": "LFJA0110",
+      "reason": "no valid price",
+      "skus": [
+        "LFJA0110D"
+      ]
+    },
+    {
+      "fam": "LFJA0083",
+      "reason": "no valid price",
+      "skus": [
+        "LFJA0083B"
+      ]
+    },
+    {
+      "fam": "LFJA0073",
+      "reason": "no valid price",
+      "skus": [
+        "LFJA0073"
+      ]
+    },
+    {
+      "fam": "LFJB0151",
+      "reason": "no valid price",
+      "skus": [
+        "LFJB0151C",
+        "LFJB0151B"
+      ]
+    },
+    {
+      "fam": "LFJB0204",
+      "reason": "no valid price",
+      "skus": [
+        "LFJB0204E"
+      ]
+    },
+    {
+      "fam": "LFJA0093",
+      "reason": "no valid price",
+      "skus": [
+        "LFJA0093E",
+        "LFJA0093D"
+      ]
+    }
+  ]
+}

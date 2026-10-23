@@ -1,4 +1,4 @@
-﻿-- Velvet Shell commerce schema (Supabase Postgres)
+-- Velvet Shell commerce schema (Supabase Postgres)
 -- Run in Supabase SQL Editor or via supabase db push
 
 create extension if not exists "pgcrypto";
