@@ -122,12 +122,34 @@ export function StoreProvider({ children }) {
         const res = await fetch('/api/catalog');
         const data = await res.json().catch(() => ({}));
         if (!cancelled && (data.products?.length || data.allProducts?.length)) {
+          const allProducts = data.allProducts || data.products || [];
           setCatalog({
             products: data.products || [],
-            allProducts: data.allProducts || data.products || [],
+            allProducts,
             colorFamilies: data.colorFamilies || [],
             collections: data.collections || [],
             source: data.source || 'supabase',
+          });
+          // Refresh cart thumbnails from live catalog (R2 URLs), not stale localStorage paths
+          setCart((current) => {
+            if (!Array.isArray(current) || !current.length) return current;
+            let changed = false;
+            const next = current.map((item) => {
+              const product =
+                allProducts.find((p) => p.slug === item.slug) ||
+                (data.products || []).find((p) => p.slug === item.slug);
+              if (!product) return item;
+              const image = productImageSrc(product);
+              if (!image || image === item.image) return item;
+              changed = true;
+              return {
+                ...item,
+                image,
+                name: product.name || item.name,
+                price: product.price ?? item.price,
+              };
+            });
+            return changed ? next : current;
           });
         }
       } catch {
@@ -229,9 +251,10 @@ export function StoreProvider({ children }) {
               ? {
                   ...item,
                   qty: item.qty + qty,
-                  image: item.image || image,
-                  name: item.name || name,
-                  price: item.price || price,
+                  // Always refresh from live catalog (R2), not stale cart snapshot
+                  image: image || item.image,
+                  name: name || item.name,
+                  price: price || item.price,
                   customization: item.customization?.length
                     ? item.customization
                     : customEntries,

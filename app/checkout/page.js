@@ -8,6 +8,7 @@ import { collectionName } from '@/lib/products';
 import { money } from '@/lib/format';
 import { loadRazorpayScript } from '@/lib/razorpay-client';
 import ProductThumb from '@/components/ProductThumb';
+import FallingPetals from '@/components/FallingPetals';
 
 const emptyForm = {
   fullName: '',
@@ -516,15 +517,25 @@ export default function CheckoutPage() {
   );
 }
 
+const SUCCESS_MIN_MS = 2800;
+const SUCCESS_AUTO_MS = 3500;
+
 function SuccessModal({ order, onContinue }) {
+  const [canLeave, setCanLeave] = useState(false);
+
   useEffect(() => {
-    const t = setTimeout(onContinue, 3200);
-    return () => clearTimeout(t);
+    const unlock = setTimeout(() => setCanLeave(true), SUCCESS_MIN_MS);
+    const auto = setTimeout(onContinue, SUCCESS_AUTO_MS);
+    return () => {
+      clearTimeout(unlock);
+      clearTimeout(auto);
+    };
   }, [onContinue]);
 
   return (
     <div className="fixed inset-0 z-[80] flex items-center justify-center bg-ink/40 p-5 backdrop-blur-sm">
-      <div className="relative w-full max-w-md overflow-hidden rounded-[2rem] border border-burgundy/10 bg-gradient-to-br from-[#faf6f1] to-[#efe4da] p-8 text-center shadow-[0_30px_80px_rgba(40,20,24,0.25)]">
+      <FallingPetals count={22} />
+      <div className="relative z-10 w-full max-w-md overflow-hidden rounded-[2rem] border border-burgundy/10 bg-gradient-to-br from-[#faf6f1] to-[#efe4da] p-8 text-center shadow-[0_30px_80px_rgba(40,20,24,0.25)]">
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-burgundy text-ivory">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
             <path
@@ -548,8 +559,11 @@ function SuccessModal({ order, onContinue }) {
         </p>
         <button
           type="button"
-          onClick={onContinue}
-          className="bg-velvet-texture mt-8 inline-flex h-12 w-full items-center justify-center rounded-full font-label text-[11px] tracking-[0.2em] text-ivory"
+          onClick={() => {
+            if (canLeave) onContinue();
+          }}
+          disabled={!canLeave}
+          className="bg-velvet-texture mt-8 inline-flex h-12 w-full items-center justify-center rounded-full font-label text-[11px] tracking-[0.2em] text-ivory disabled:opacity-70"
         >
           View orders
         </button>

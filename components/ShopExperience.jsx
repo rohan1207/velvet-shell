@@ -335,7 +335,7 @@ export default function ShopExperience({
 
           {/* Sticky strip: filters · search · count — sits under fixed site header */}
           <div
-            className="sticky z-40 mt-8 border-b border-ink/8 bg-white/95 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-white/90"
+            className="sticky z-30 mt-8 border-b border-ink/8 bg-white/95 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-white/90"
             style={{ top: 'calc(var(--site-promo-h) + var(--site-nav-h))' }}
           >
             <div className="flex flex-col gap-2.5 md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_minmax(0,1fr)] md:items-center md:gap-4">

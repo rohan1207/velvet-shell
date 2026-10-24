@@ -350,6 +350,30 @@ img {
   }
 }
 
+@keyframes velvet-petal-fall {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--petal-drift, 16px), 108vh, 0)
+      rotate(var(--petal-rotate, 220deg));
+    opacity: 0.12;
+  }
+}
+
+.velvet-petal {
+  animation-name: velvet-petal-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  filter: saturate(0.9);
+  color: #e8a0b8;
+  text-shadow: 0 0 1px rgba(232, 160, 184, 0.35);
+}
+
 [data-nav-cart].nav-cart-bump {
   animation: nav-cart-bump 0.48s var(--ease-luxe) both;
 }
@@ -363,7 +387,8 @@ img {
   .shop-dot-ping,
   .shop-dot-ping-delay,
   .skeleton-shimmer,
-  [data-nav-cart].nav-cart-bump {
+  [data-nav-cart].nav-cart-bump,
+  .velvet-petal {
     animation: none;
   }
 

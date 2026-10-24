@@ -244,7 +244,7 @@ export default function ProductCard({
       className={`group flex h-full animate-[fade-up_0.9s_var(--ease-luxe)_both] flex-col ${className}`}
       style={{ animationDelay: `${index * 70}ms` }}
     >
-      <div className="relative isolate aspect-square overflow-hidden bg-transparent">
+      <div className="relative isolate aspect-square overflow-hidden bg-[#f3eee8]">
         <AppImage
           key={currentImage}
           src={currentImage}
