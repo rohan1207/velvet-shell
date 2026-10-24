@@ -116,6 +116,96 @@ button {
     border-color 0.5s var(--ease-luxe), transform 0.5s var(--ease-luxe);
 }
 
+/* ——— Phone-first polish ——— */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Prevent iOS zoom-on-focus; keep tap targets comfortable */
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='password'],
+  input[type='search'],
+  input[type='number'],
+  select,
+  textarea {
+    min-height: 2.75rem;
+    border-radius: 1rem;
+  }
+
+  /* Tighter page rhythm on small screens */
+  .font-display {
+    letter-spacing: -0.03em;
+  }
+}
+
+.field-control {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid rgba(45, 43, 43, 0.1);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0.85rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-ink);
+  outline: none;
+  transition: border-color 0.3s var(--ease-luxe);
+}
+
+.field-control:focus {
+  border-color: rgba(94, 6, 42, 0.35);
+}
+
+/* Horizontal chip scroller used on shop / home */
+.chip-scroll {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.35rem;
+  padding-bottom: 2px;
+}
+
+.chip-scroll-wrap {
+  margin-left: -1.25rem;
+  margin-right: -1.25rem;
+  overflow-x: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.chip-scroll-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .chip-scroll-wrap {
+    margin-left: 0;
+    margin-right: 0;
+    overflow: visible;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .chip-scroll {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
 /* Pill CTAs — solid action buttons sitewide */
 button.bg-velvet-texture,
 a.bg-velvet-texture,

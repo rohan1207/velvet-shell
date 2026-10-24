@@ -44,6 +44,7 @@ function IconFilters({ className = 'h-4 w-4' }) {
 
 export default function ShopExperience({
   initialProducts = [],
+  initialAllProducts = [],
   initialCollections = [],
   initialCategories = [],
   initialColorFamilies = [],
@@ -56,6 +57,9 @@ export default function ShopExperience({
   const [sort, setSort] = useState('featured');
   const [query, setQuery] = useState(params.get('q') || '');
   const [products, setProducts] = useState(initialProducts);
+  const [allProducts, setAllProducts] = useState(
+    initialAllProducts.length ? initialAllProducts : initialProducts,
+  );
   const [collections, setCollections] = useState(initialCollections);
   const [categories, setCategories] = useState(initialCategories);
   const [colorFamilies, setColorFamilies] = useState(initialColorFamilies);
@@ -74,12 +78,20 @@ export default function ShopExperience({
 
   useEffect(() => {
     setProducts(initialProducts);
+    setAllProducts(initialAllProducts.length ? initialAllProducts : initialProducts);
     setCollections(initialCollections);
     setCategories(initialCategories);
     setColorFamilies(initialColorFamilies);
     setSource(catalogSource);
     if (initialProducts?.length) setCatalogLoading(false);
-  }, [initialProducts, initialCollections, initialCategories, initialColorFamilies, catalogSource]);
+  }, [
+    initialProducts,
+    initialAllProducts,
+    initialCollections,
+    initialCategories,
+    initialColorFamilies,
+    catalogSource,
+  ]);
 
   useEffect(() => {
     let cancelled = false;
@@ -90,6 +102,7 @@ export default function ShopExperience({
         if (cancelled) return;
         if (d.products?.length) {
           setProducts(d.products);
+          setAllProducts(d.allProducts?.length ? d.allProducts : d.products);
           if (d.collections?.length) setCollections(d.collections);
           if (d.categories?.length) setCategories(d.categories);
           if (d.colorFamilies) setColorFamilies(d.colorFamilies);
@@ -236,7 +249,8 @@ export default function ShopExperience({
         if (!applied.materials.some((m) => tags.includes(m))) return false;
       }
       const price = Number(item.price) || 0;
-      if (price < applied.priceMin || price > applied.priceMax) return false;
+      const priceMax = applied.priceMax > 0 ? applied.priceMax : Number.POSITIVE_INFINITY;
+      if (price < applied.priceMin || price > priceMax) return false;
       if (q) {
         const hay = [item.name, item.description, item.collection, item.category, item.metal?.join(' ')]
           .filter(Boolean)
@@ -255,6 +269,10 @@ export default function ShopExperience({
 
   const updateCategory = (nextCategory) => {
     setCategory(nextCategory);
+    // Clear filters immediately so the new category isn’t stuck on stale price/colour cuts
+    const next = emptyFilterState({ min: 0, max: 100000 });
+    setDraft(next);
+    setApplied(next);
     setMobileFiltersOpen(false);
     router.replace(buildShopHref({ category: nextCategory, q: query }), { scroll: false });
   };
@@ -299,24 +317,26 @@ export default function ShopExperience({
         label={`${hero.name} banners`}
       />
 
-      <section id="shop-edit" className="scroll-mt-4 bg-white pb-24 pt-12 md:pt-16">
-        <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+      <section id="shop-edit" className="scroll-mt-4 bg-white pb-20 pt-8 md:pb-24 md:pt-16">
+        <div className="mx-auto max-w-[1600px] px-4 sm:px-5 md:px-10">
           {/* Title + single-line category pills (never wrap) */}
-          <div className="flex flex-col gap-5 md:gap-6">
+          <div className="flex flex-col gap-4 md:gap-6">
             <div>
-              <p className="font-label text-gold">Shop now</p>
-              <h2 className="font-display mt-3 text-4xl text-ink md:text-5xl">
+              <p className="font-label text-[10px] tracking-[0.18em] text-gold uppercase md:text-[11px]">
+                Shop now
+              </p>
+              <h2 className="font-display mt-2 text-[1.85rem] leading-[1.1] text-ink sm:text-4xl md:mt-3 md:text-5xl">
                 {activeCategory ? activeCategory.name : 'The collection, edited.'}
               </h2>
-              <p className="mt-3 max-w-md text-sm font-light leading-relaxed text-ink/85">
+              <p className="mt-2 max-w-md text-[13px] font-light leading-relaxed text-ink/80 sm:mt-3 sm:text-sm md:text-ink/85">
                 {activeCategory
                   ? activeCategory.line
                   : 'Nature-inspired jewellery in silver and gold — selected for softness, detail, and presence.'}
               </p>
             </div>
 
-            <div className="-mx-5 overflow-x-auto px-5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:overflow-visible md:px-0">
-              <div className="flex w-max min-w-full flex-nowrap items-center gap-1 sm:gap-1.5 md:w-full md:justify-end">
+            <div className="chip-scroll-wrap">
+              <div className="chip-scroll md:justify-end">
                 <CategoryPill active={category === 'all'} onClick={() => updateCategory('all')}>
                   All
                 </CategoryPill>
@@ -335,11 +355,11 @@ export default function ShopExperience({
 
           {/* Sticky strip: filters · search · count — sits under fixed site header */}
           <div
-            className="sticky z-30 mt-8 border-b border-ink/8 bg-white/95 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-white/90"
+            className="sticky z-30 mt-5 border-b border-ink/8 bg-white/95 py-2.5 backdrop-blur-md supports-[backdrop-filter]:bg-white/90 sm:mt-8 sm:py-3"
             style={{ top: 'calc(var(--site-promo-h) + var(--site-nav-h))' }}
           >
-            <div className="flex flex-col gap-2.5 md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_minmax(0,1fr)] md:items-center md:gap-4">
-              <div className="flex items-center gap-2 md:flex-wrap md:justify-start">
+            <div className="flex flex-col gap-2 md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_minmax(0,1fr)] md:items-center md:gap-4">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 md:justify-start">
                 <button
                   type="button"
                   onClick={() => setSidebarOpen(true)}
@@ -355,7 +375,7 @@ export default function ShopExperience({
                 <button
                   type="button"
                   onClick={() => setMobileFiltersOpen(true)}
-                  className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/12 px-3.5 py-2 font-label text-[10px] tracking-[0.14em] text-ink/75 uppercase lg:hidden"
+                  className="inline-flex min-h-9 items-center gap-2 rounded-full border border-ink/12 px-3 py-1.5 font-label text-[10px] tracking-[0.14em] text-ink/75 uppercase lg:hidden"
                 >
                   <IconFilters />
                   Filters
@@ -488,7 +508,7 @@ export default function ShopExperience({
                 </div>
               ) : (
                 <div
-                  className={`grid grid-cols-2 gap-x-3 gap-y-7 transition-[grid-template-columns] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:gap-x-6 md:gap-y-12 ${
+                  className={`grid grid-cols-2 gap-x-2.5 gap-y-6 transition-[grid-template-columns] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:gap-x-3 sm:gap-y-7 md:gap-x-6 md:gap-y-12 ${
                     sidebarOpen ? 'lg:grid-cols-3' : 'lg:grid-cols-4'
                   }`}
                 >
@@ -498,7 +518,7 @@ export default function ShopExperience({
                       product={product}
                       index={index}
                       colorFamilies={colorFamilies}
-                      catalogProducts={products}
+                      catalogProducts={allProducts}
                     />
                   ))}
                 </div>
@@ -595,7 +615,7 @@ function CategoryPill({ active, onClick, children }) {
     <button
       type="button"
       onClick={onClick}
-      className={`shrink-0 rounded-full px-2.5 py-1.5 font-label text-[9px] tracking-[0.1em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-3 sm:text-[10px] sm:tracking-[0.12em] xl:px-4 xl:py-2 xl:tracking-[0.14em] ${
+      className={`shrink-0 rounded-full px-3 py-2 font-label text-[10px] tracking-[0.1em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-3 sm:py-1.5 sm:text-[10px] sm:tracking-[0.12em] xl:px-4 xl:py-2 xl:tracking-[0.14em] ${
         active
           ? 'bg-velvet-texture text-ivory'
           : 'bg-transparent text-ink/80 hover:bg-ivory hover:text-ink'

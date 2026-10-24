@@ -46,7 +46,7 @@ export default function ProductExperience({
 }) {
   void colorFamily;
   const router = useRouter();
-  const { addToCart, wishlist, toggleWishlist } = useStore();
+  const { addToCart, wishlist, toggleWishlist, catalog } = useStore();
 
   const colourVariants = useMemo(() => {
     if (!(Array.isArray(variants) && variants.length > 1)) return [];
@@ -191,10 +191,10 @@ export default function ProductExperience({
 
   return (
     <div className="bg-ivory pt-site-chrome">
-      <div className="mx-auto grid max-w-[1600px] gap-8 px-5 pt-4 pb-28 md:gap-10 md:px-10 md:pt-8 md:pb-24 lg:grid-cols-12 lg:gap-16">
+      <div className="mx-auto grid max-w-[1600px] gap-6 px-4 pt-3 pb-[calc(6rem+env(safe-area-inset-bottom))] sm:gap-8 sm:px-5 md:gap-10 md:px-10 md:pt-8 md:pb-24 lg:grid-cols-12 lg:gap-16">
         <div className="order-1 lg:sticky lg:top-[calc(var(--site-promo-h)+var(--site-nav-h)+1rem)] lg:col-span-7 lg:self-start">
-          <div className="flex h-[min(58svh,26rem)] gap-2 md:h-[min(100svh-var(--site-promo-h)-var(--site-nav-h)-3rem,920px)] md:gap-3">
-            <div className="flex w-14 shrink-0 flex-col gap-2 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] md:w-16 md:gap-2.5 lg:w-[4.5rem] [&::-webkit-scrollbar]:hidden">
+          <div className="flex h-[min(52svh,22rem)] gap-1.5 sm:h-[min(58svh,26rem)] sm:gap-2 md:h-[min(100svh-var(--site-promo-h)-var(--site-nav-h)-3rem,920px)] md:gap-3">
+            <div className="flex w-12 shrink-0 flex-col gap-1.5 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] sm:w-14 sm:gap-2 md:w-16 md:gap-2.5 lg:w-[4.5rem] [&::-webkit-scrollbar]:hidden">
               {allImages.map((tagged, index) => {
                 const isActiveColour = tagged.slug === activeSlug;
                 const isMain =
@@ -461,7 +461,13 @@ export default function ProductExperience({
         </div>
         <div className="grid grid-cols-2 gap-x-3 gap-y-7 md:gap-x-6 md:gap-y-12 lg:grid-cols-4">
           {related.map((item, index) => (
-            <ProductCard key={item.slug} product={item} index={index} />
+            <ProductCard
+              key={item.slug}
+              product={item}
+              index={index}
+              colorFamilies={catalog?.colorFamilies || []}
+              catalogProducts={catalog?.allProducts?.length ? catalog.allProducts : catalog?.products || []}
+            />
           ))}
         </div>
       </div>

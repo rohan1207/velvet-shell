@@ -3,13 +3,16 @@
 import { useEffect, useRef } from 'react';
 import { money } from '@/lib/format';
 
-export function emptyFilterState(priceBounds = { min: 0, max: 0 }) {
+export function emptyFilterState(priceBounds = { min: 0, max: 100000 }) {
+  const min = Number(priceBounds?.min) || 0;
+  // Never default max to 0 — that hides every priced product on first paint
+  const max = Number(priceBounds?.max) > 0 ? Number(priceBounds.max) : 100000;
   return {
     collections: [],
     materials: [],
     colors: [],
-    priceMin: priceBounds.min,
-    priceMax: priceBounds.max,
+    priceMin: min,
+    priceMax: Math.max(max, min),
   };
 }
 

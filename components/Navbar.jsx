@@ -233,7 +233,7 @@ function IconButton({ className = '', children, ...props }) {
   return (
     <button
       type="button"
-      className={`inline-flex h-11 w-11 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10 ${className}`}
+      className={`inline-flex h-10 w-10 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white md:h-10 md:w-10 ${className}`}
       {...props}
     >
       {children}
@@ -329,7 +329,7 @@ export default function Navbar() {
         onMouseLeave={scheduleCloseMega}
       >
         {/* ——— Row 1: house links · logo · utilities ——— */}
-        <div className="relative mx-auto grid h-[4.65rem] max-w-[1600px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 px-3 sm:h-[5.1rem] sm:px-4 md:h-[5.25rem] md:px-6 lg:px-8">
+        <div className="relative mx-auto grid h-[4.65rem] max-w-[1600px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-1 px-3.5 sm:h-[5.1rem] sm:gap-2 sm:px-4 md:h-[5.25rem] md:px-6 lg:px-8">
           <nav
             className="relative z-10 hidden min-w-0 items-center justify-start lg:flex"
             aria-label="House"
@@ -354,28 +354,29 @@ export default function Navbar() {
             className="relative z-20 justify-self-center"
             onMouseEnter={scheduleCloseMega}
           >
-            <span className="relative block h-[4.1rem] w-[4.1rem] overflow-visible sm:h-[4.75rem] sm:w-[4.75rem] md:h-[5rem] md:w-[5rem] lg:h-[4.85rem] lg:w-[4.85rem] xl:h-[5.25rem] xl:w-[5.25rem]">
+            <span className="relative block h-[3.85rem] w-[3.85rem] overflow-visible sm:h-[4.75rem] sm:w-[4.75rem] md:h-[5rem] md:w-[5rem] lg:h-[4.85rem] lg:w-[4.85rem] xl:h-[5.25rem] xl:w-[5.25rem]">
               <Image
                 src="/logo-splash.png"
                 alt="Velvet Shell"
                 fill
                 priority
-                className="origin-center object-contain scale-[1.22] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.32] sm:scale-[1.26] lg:scale-[1.2] xl:scale-[1.28]"
+                className="origin-center object-contain scale-[1.18] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.28] sm:scale-[1.26] lg:scale-[1.2] xl:scale-[1.28]"
                 sizes="(max-width: 1024px) 88px, 110px"
                 style={{ mixBlendMode: 'screen' }}
               />
             </span>
           </Link>
 
-          <div className="relative z-10 flex min-w-0 items-center justify-end gap-0.5 sm:gap-1.5">
+          {/* Phone: search · bag · menu only — wishlist/account live in the drawer */}
+          <div className="relative z-10 flex min-w-0 items-center justify-end gap-0 sm:gap-1.5">
             <button
               type="button"
               aria-label="Search"
               onClick={() => setSearchOpen(true)}
               onMouseEnter={scheduleCloseMega}
-              className="group inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white/85 transition-colors hover:text-white sm:h-9 sm:w-auto sm:max-w-none sm:gap-2.5 sm:border sm:border-white/20 sm:bg-white/10 sm:px-3.5 sm:text-white/80 sm:hover:border-white/35 sm:hover:bg-white/15 md:min-w-[10.5rem]"
+              className="group inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white/85 transition-colors hover:text-white sm:h-9 sm:w-auto sm:max-w-none sm:gap-2.5 sm:border sm:border-white/20 sm:bg-white/10 sm:px-3.5 sm:text-white/80 sm:hover:border-white/35 sm:hover:bg-white/15 md:min-w-[10.5rem]"
             >
-              <IconSearch className="h-5 w-5 shrink-0 sm:h-4 sm:w-4" />
+              <IconSearch className="h-[1.15rem] w-[1.15rem] shrink-0 sm:h-4 sm:w-4" />
               <span className="hidden truncate font-label text-[10px] tracking-[0.12em] text-white/55 uppercase transition-colors group-hover:text-white/75 sm:inline sm:text-[11px]">
                 Search
               </span>
@@ -383,7 +384,7 @@ export default function Navbar() {
             <Link
               href="/wishlist"
               aria-label={`Wishlist (${wishlistCount})`}
-              className="relative inline-flex h-11 w-11 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10"
+              className="relative hidden h-10 w-10 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white md:inline-flex"
             >
               <IconWishlist className="h-5 w-5" />
               {wishlistCount > 0 ? (
@@ -395,7 +396,7 @@ export default function Navbar() {
             <Link
               href="/account"
               aria-label="Account"
-              className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white sm:h-10 sm:w-10"
+              className="hidden h-10 w-10 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white md:inline-flex"
             >
               <IconAccount className="h-5 w-5" />
             </Link>
@@ -403,19 +404,19 @@ export default function Navbar() {
               data-nav-cart
               aria-label={`Bag (${cartCount})`}
               onClick={() => setCartOpen(true)}
-              className="relative"
+              className="relative h-10 w-10 sm:h-11 sm:w-11"
             >
-              <IconBag className="h-5 w-5" />
+              <IconBag className="h-[1.15rem] w-[1.15rem] sm:h-5 sm:w-5" />
               <span className="absolute top-1 right-0.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-white px-1 text-[9px] font-semibold text-[#5E062A] sm:top-1.5 sm:right-1">
                 {cartCount}
               </span>
             </IconButton>
             <IconButton
               aria-label="Open menu"
-              className="ml-0.5 lg:hidden"
+              className="h-10 w-10 lg:hidden"
               onClick={() => setMenuOpen(true)}
             >
-              <span className="flex w-5 flex-col gap-1.5">
+              <span className="flex w-[1.15rem] flex-col gap-1.5">
                 <span className="h-px w-full bg-white" />
                 <span className="h-px w-full bg-white" />
               </span>

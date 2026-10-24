@@ -36,9 +36,9 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed top-0 right-0 z-[70] flex h-full w-full max-w-md flex-col bg-ivory shadow-[-24px_0_60px_rgba(40,20,24,0.18)]"
+            className="fixed top-0 right-0 z-[70] flex h-full w-full max-w-md flex-col bg-ivory pt-[env(safe-area-inset-top)] shadow-[-24px_0_60px_rgba(40,20,24,0.18)]"
           >
-            <div className="flex items-center justify-between border-b border-ink/8 px-6 py-5">
+            <div className="flex items-center justify-between border-b border-ink/8 px-4 py-4 sm:px-6 sm:py-5">
               <div>
                 <p className="font-label text-[11px] tracking-[0.22em] text-ink">Bag</p>
                 <p className="mt-1 text-xs font-light text-ink/80">
@@ -54,10 +54,10 @@ export default function CartDrawer() {
               </button>
             </div>
 
-            <div className="flex-1 overflow-auto px-6">
+            <div className="flex-1 overflow-auto px-4 sm:px-6">
               {cart.length === 0 ? (
-                <div className="flex h-full flex-col items-center justify-center text-center">
-                  <p className="font-display text-3xl text-ink">Your bag is quiet.</p>
+                <div className="flex h-full flex-col items-center justify-center px-2 text-center">
+                  <p className="font-display text-[1.75rem] text-ink sm:text-3xl">Your bag is quiet.</p>
                   <Link
                     href="/shop"
                     onClick={() => setCartOpen(false)}

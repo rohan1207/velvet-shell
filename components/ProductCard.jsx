@@ -14,22 +14,24 @@ function resolveVariants(slug, colorFamilies = [], catalogProducts = []) {
     const family = colorFamilies.find(
       (f) => f.primary === slug || f.variants?.some((v) => v.slug === slug),
     );
-    if (!family) return [];
-    return sortByColourPriority(
-      family.variants
-        .map((variant) => {
-          const product = catalogProducts.find((p) => p.slug === variant.slug);
-          if (!product) return null;
-          return { ...variant, product };
-        })
-        .filter(Boolean),
-      (v) => v.label || v.product?.colorLabel,
-    );
+    if (family) {
+      const resolved = sortByColourPriority(
+        family.variants
+          .map((variant) => {
+            const product = catalogProducts.find((p) => p.slug === variant.slug);
+            if (!product) return null;
+            return { ...variant, product };
+          })
+          .filter(Boolean),
+        (v) => v.label || v.product?.colorLabel,
+      );
+      if (resolved.length) return resolved;
+    }
   }
   return sortByColourPriority(getDummyVariants(slug), (v) => v.label || v.product?.colorLabel);
 }
 
-function IconHeart({ filled = false, className = 'h-5 w-5 md:h-[1.35rem] md:w-[1.35rem]' }) {
+function IconHeart({ filled = false, className = 'h-4 w-4 md:h-[1.2rem] md:w-[1.2rem]' }) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill={filled ? 'currentColor' : 'none'} aria-hidden>
       <path
@@ -85,7 +87,7 @@ function ActionIcon({ label, onClick, children, active = false, className = '' }
         onClick?.();
       }}
       onPointerDown={(event) => event.stopPropagation()}
-      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
+      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors duration-300 md:h-10 md:w-10 ${
         active
           ? 'bg-velvet-texture text-ivory'
           : 'text-ink/85 hover:text-burgundy'
@@ -119,7 +121,16 @@ export default function ProductCard({
 }) {
   const { wishlist, toggleWishlist, addToCart, openQuickView, catalog } = useStore();
   const families = colorFamilies.length ? colorFamilies : catalog?.colorFamilies || [];
-  const pool = catalogProducts.length ? catalogProducts : catalog?.allProducts || [];
+  // Prefer the fullest product pool so colour siblings resolve everywhere —
+  // shop listings omit non-primary variants, which would hide swatches.
+  const pool = useMemo(() => {
+    const fromStore = catalog?.allProducts?.length
+      ? catalog.allProducts
+      : catalog?.products || [];
+    if (fromStore.length >= catalogProducts.length && fromStore.length) return fromStore;
+    if (catalogProducts.length) return catalogProducts;
+    return fromStore;
+  }, [catalog?.allProducts, catalog?.products, catalogProducts]);
   const variants = useMemo(
     () => resolveVariants(product.slug, families, pool),
     [product.slug, families, pool],
@@ -341,8 +352,8 @@ export default function ProductCard({
           {priceLabel}
         </p>
 
-        <div className="mt-auto flex items-center justify-between gap-1.5 px-1.5 pt-3 sm:px-4 md:px-6 md:pt-3.5">
-          <div className="flex items-center gap-0.5">
+        <div className="mt-auto flex items-center justify-between gap-1 px-0.5 pt-2.5 sm:gap-1.5 sm:px-4 md:px-6 md:pt-3.5">
+          <div className="flex items-center gap-0">
             <ActionIcon
               label={wished ? 'Remove from wishlist' : 'Add to wishlist'}
               active={wished}
@@ -369,22 +380,22 @@ export default function ProductCard({
             aria-label={bagPhase === 'done' ? 'Added to bag' : 'Add to bag'}
             onClick={handleAddToBag}
             onPointerDown={(event) => event.stopPropagation()}
-            className={`bg-velvet-texture relative inline-flex min-w-0 shrink items-center justify-center overflow-hidden rounded-full font-label text-ivory uppercase transition-[width,height,padding,opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+            className={`bg-velvet-texture relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full font-label text-ivory uppercase transition-[width,height,padding,opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
               bagPhase === 'flying'
-                ? 'h-11 w-11 px-0 py-0 opacity-0 md:h-11 md:w-11'
+                ? 'h-8 w-8 px-0 py-0 opacity-0 md:h-9 md:w-9'
                 : bagPhase === 'morph'
-                  ? 'h-11 w-11 px-0 py-0 md:h-11 md:w-11'
+                  ? 'h-8 w-8 px-0 py-0 md:h-9 md:w-9'
                   : bagPhase === 'done'
-                    ? 'h-11 min-w-[5.75rem] px-3.5 py-2 md:h-12 md:min-w-[7rem] md:px-6 md:py-3'
-                    : 'h-11 px-3.5 py-2 hover:opacity-90 active:scale-[0.98] md:h-12 md:px-6 md:py-3'
+                    ? 'h-8 min-w-[4.25rem] px-3 py-1.5 md:h-10 md:min-w-[6.5rem] md:px-5 md:py-2'
+                    : 'h-8 min-w-[4.25rem] px-3 py-1.5 hover:opacity-90 active:scale-[0.98] md:h-10 md:min-w-[6.5rem] md:px-5 md:py-2'
             } ${bagBusy ? 'cursor-default' : 'cursor-pointer'} disabled:opacity-100`}
           >
             <span
-              className={`whitespace-nowrap text-[9px] tracking-[0.1em] transition-opacity duration-200 md:text-[10px] md:tracking-[0.14em] ${
+              className={`whitespace-nowrap text-[8px] tracking-[0.1em] transition-opacity duration-200 md:text-[9px] md:tracking-[0.14em] ${
                 bagPhase === 'idle' || bagPhase === 'done' ? 'opacity-100' : 'pointer-events-none absolute opacity-0'
               }`}
             >
-              {bagPhase === 'done' ? 'Added' : 'Add to bag'}
+              {bagPhase === 'done' ? 'Added' : 'Add'}
             </span>
             <span
               className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${

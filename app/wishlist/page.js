@@ -1,13 +1,26 @@
 'use client';
 
 import Link from 'next/link';
+import { useMemo } from 'react';
 import { useStore } from '@/context/StoreContext';
-import { products } from '@/lib/products';
+import { products as dummyProducts } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
 
 export default function WishlistPage() {
-  const { wishlist, addToCart, toggleWishlist } = useStore();
-  const saved = products.filter((item) => wishlist.includes(item.slug));
+  const { wishlist, addToCart, toggleWishlist, catalog } = useStore();
+  const pool = catalog?.allProducts?.length
+    ? catalog.allProducts
+    : catalog?.products?.length
+      ? catalog.products
+      : dummyProducts;
+
+  const saved = useMemo(
+    () =>
+      wishlist
+        .map((slug) => pool.find((item) => item.slug === slug))
+        .filter(Boolean),
+    [wishlist, pool],
+  );
 
   function addAllToBag() {
     saved.forEach((product) => addToCart(product.slug));
@@ -54,7 +67,12 @@ export default function WishlistPage() {
           <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12 lg:grid-cols-4">
             {saved.map((product, index) => (
               <div key={product.slug} className="relative">
-                <ProductCard product={product} index={index} />
+                <ProductCard
+                  product={product}
+                  index={index}
+                  colorFamilies={catalog?.colorFamilies || []}
+                  catalogProducts={pool}
+                />
                 <button
                   type="button"
                   onClick={() => toggleWishlist(product.slug)}

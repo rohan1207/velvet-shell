@@ -32,6 +32,7 @@ export default async function ShopPage() {
     <Suspense fallback={<ShopFallback />}>
       <ShopExperience
         initialProducts={listing}
+        initialAllProducts={catalog.products || []}
         initialCollections={catalog.collections || []}
         initialCategories={catalog.categories || []}
         initialColorFamilies={catalog.colorFamilies || []}

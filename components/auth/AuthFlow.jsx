@@ -225,7 +225,7 @@ export default function AuthFlow({
           : 'Enter the code from your email and choose a new password.');
 
   return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-burgundy/10 bg-gradient-to-br from-[#faf6f1] via-[#f3ebe3] to-[#efe4da] shadow-[0_24px_80px_rgba(94,6,42,0.08)]">
+    <div className="relative overflow-hidden rounded-[1.5rem] border border-burgundy/10 bg-gradient-to-br from-[#faf6f1] via-[#f3ebe3] to-[#efe4da] shadow-[0_24px_80px_rgba(94,6,42,0.08)] sm:rounded-[2rem]">
       <FloralBackdrop />
 
       <div className="relative z-10 px-6 py-10 sm:px-10 sm:py-12">
@@ -534,7 +534,7 @@ function Field({
     <label className="block">
       <span className="font-label text-[10px] tracking-[0.16em] text-ink/55 uppercase">{label}</span>
       <input
-        className="mt-2 w-full rounded-2xl border border-ink/10 bg-white/70 px-4 py-3.5 text-sm text-ink outline-none transition focus:border-burgundy/40 focus:bg-white"
+        className="field-control mt-2 focus:bg-white"
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -554,7 +554,7 @@ function PasswordField({ label, value, onChange, show, onToggle, required, autoC
       <span className="font-label text-[10px] tracking-[0.16em] text-ink/55 uppercase">{label}</span>
       <div className="relative mt-2">
         <input
-          className="w-full rounded-2xl border border-ink/10 bg-white/70 px-4 py-3.5 pr-12 text-sm text-ink outline-none transition focus:border-burgundy/40 focus:bg-white"
+          className="field-control pr-12 focus:bg-white"
           type={show ? 'text' : 'password'}
           value={value}
           onChange={(e) => onChange(e.target.value)}

@@ -307,7 +307,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-28 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pt-32 md:pb-20">
+    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-[calc(var(--site-promo-h)+var(--site-nav-h)+1.25rem)] pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pt-32 md:pb-20">
       {successOrder && (
         <SuccessModal
           order={successOrder}
@@ -315,10 +315,10 @@ export default function CheckoutPage() {
         />
       )}
 
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-5 md:grid-cols-12 md:gap-12 md:px-10 lg:gap-16">
+      <div className="mx-auto grid max-w-[1400px] gap-8 px-4 sm:px-5 md:grid-cols-12 md:gap-12 md:px-10 lg:gap-16">
         <form onSubmit={onPay} className="md:col-span-6 lg:col-span-5">
           <p className="font-label text-[10px] tracking-[0.24em] text-gold uppercase">Checkout</p>
-          <h1 className="font-display mt-3 text-4xl tracking-[-0.03em] text-burgundy md:text-5xl">
+          <h1 className="font-display mt-2 text-[1.85rem] tracking-[-0.03em] text-burgundy sm:mt-3 sm:text-4xl md:text-5xl">
             Almost yours.
           </h1>
           <p className="mt-3 max-w-sm text-sm font-light text-ink/70">
@@ -374,7 +374,7 @@ export default function CheckoutPage() {
           )}
 
           {(showNewAddress || addresses.length === 0) && (
-            <div className="mt-8 space-y-5 rounded-3xl border border-ink/8 bg-white/70 p-6 md:p-8">
+            <div className="mt-6 space-y-4 rounded-[1.35rem] border border-ink/8 bg-white/70 p-4 sm:mt-8 sm:space-y-5 sm:rounded-3xl sm:p-6 md:p-8">
               <p className="font-label text-[10px] tracking-[0.16em] text-ink/50 uppercase">
                 Delivery details
               </p>
@@ -640,8 +640,9 @@ function Field({ label, value, onChange, type = 'text', required, placeholder })
         required={required}
         value={value}
         placeholder={placeholder}
+        autoComplete={type === 'email' ? 'email' : type === 'tel' ? 'tel' : undefined}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-2 w-full rounded-2xl border border-ink/10 bg-white/80 px-4 py-3.5 text-sm text-ink outline-none transition focus:border-burgundy/35"
+        className="field-control mt-2"
       />
     </label>
   );

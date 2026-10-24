@@ -123,15 +123,17 @@ function AccountInner() {
   }
 
   return (
-    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-28 pb-24 md:pt-36">
-      <div className="mx-auto max-w-[1200px] px-5 md:px-10">
-        <div className="flex flex-wrap items-end justify-between gap-6 border-b border-burgundy/10 pb-8">
-          <div>
+    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-[calc(var(--site-promo-h)+var(--site-nav-h)+1.25rem)] pb-[calc(5rem+env(safe-area-inset-bottom))] md:pt-36 md:pb-24">
+      <div className="mx-auto max-w-[1200px] px-4 sm:px-5 md:px-10">
+        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-burgundy/10 pb-6 sm:gap-6 sm:pb-8">
+          <div className="min-w-0">
             <p className="font-label text-[10px] tracking-[0.24em] text-gold uppercase">My account</p>
-            <h1 className="font-display mt-3 text-4xl tracking-[-0.03em] text-burgundy md:text-5xl">
+            <h1 className="font-display mt-2 text-[1.85rem] tracking-[-0.03em] text-burgundy sm:mt-3 sm:text-4xl md:text-5xl">
               Hello, {user.firstName || user.fullName?.split(' ')[0] || 'there'}
             </h1>
-            <p className="mt-2 text-sm font-light text-ink/70">{user.email}</p>
+            <p className="mt-1.5 truncate text-[13px] font-light text-ink/70 sm:mt-2 sm:text-sm">
+              {user.email}
+            </p>
           </div>
           <button
             type="button"
@@ -139,15 +141,15 @@ function AccountInner() {
               await logout();
               setNotice('');
             }}
-            className="rounded-full border border-ink/12 px-5 py-2.5 font-label text-[11px] tracking-[0.18em] text-ink/70 hover:border-burgundy/30 hover:text-burgundy"
+            className="rounded-full border border-ink/12 px-4 py-2.5 font-label text-[10px] tracking-[0.16em] text-ink/70 hover:border-burgundy/30 hover:text-burgundy sm:px-5 sm:text-[11px] sm:tracking-[0.18em]"
           >
             Log out
           </button>
         </div>
 
-        <div className="mt-10 grid gap-10 lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-14">
-          <aside>
-            <nav className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:gap-1">
+        <div className="mt-6 grid gap-6 sm:mt-10 sm:gap-10 lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-14">
+          <aside className="-mx-4 sm:mx-0">
+            <nav className="chip-scroll-wrap flex gap-2 pb-1 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0">
               {tabs.map((item) => (
                 <button
                   key={item.id}
@@ -158,7 +160,7 @@ function AccountInner() {
                     setError('');
                     if (item.id === 'profile') setProfileForm(null);
                   }}
-                  className={`whitespace-nowrap rounded-full px-4 py-2.5 text-left text-sm transition-colors lg:w-full ${
+                  className={`shrink-0 whitespace-nowrap rounded-full px-3.5 py-2 text-left text-[13px] transition-colors sm:px-4 sm:py-2.5 sm:text-sm lg:w-full ${
                     tab === item.id
                       ? 'bg-burgundy text-ivory'
                       : 'text-ink/70 hover:bg-cream/80 hover:text-ink'

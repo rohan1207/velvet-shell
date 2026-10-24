@@ -1,6 +1,6 @@
 function Segment() {
   return (
-    <span className="inline-flex shrink-0 items-center px-6 font-label text-[10px] tracking-[0.2em] text-ink/85 uppercase md:px-10 md:text-[11px]">
+    <span className="inline-flex shrink-0 items-center px-4 font-label text-[9px] tracking-[0.16em] text-ink/85 uppercase sm:px-6 sm:text-[10px] sm:tracking-[0.2em] md:px-10 md:text-[11px]">
       <span className="text-burgundy">First order</span>
       <span className="mx-3 text-ink/30" aria-hidden>
         ·
