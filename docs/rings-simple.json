@@ -1,0 +1,118 @@
+[
+  {
+    "name": "Silver Plated Daisy Flower Adjustable Ring",
+    "category": "Rings",
+    "type": "Flower Ring",
+    "description": "A delicate silver-plated ring featuring a charming daisy flower design. The adjustable fit makes it easy to wear, while the floral detailing adds a subtle and feminine touch to everyday jewellery styling.",
+    "material": "Silver",
+    "finish": "Silver Plated",
+    "stone": null,
+    "design": "Daisy Flower",
+    "style": null,
+    "ringSize": "Resizable",
+    "colours": ["Silver"],
+    "currency": "INR",
+    "supplierTitle": "FY-JZ605 Silver Plated Delicate Lovely Mini Small Chrysanthemum Flower Ring Adjustable Daisy Rings",
+    "variants": [
+      {
+        "sku": "YWJE0025",
+        "colour": "Silver",
+        "supplierColourCode": "JZ605",
+        "stock": 7,
+        "price": 1999,
+        "driveLink": "https://drive.google.com/drive/folders/1bLC9_0Jg8REIm_1u6D5k6gD4EeLmKBbN"
+      }
+    ]
+  },
+  {
+    "name": "Silver Leaf Opening Ring",
+    "category": "Rings",
+    "type": "Open/Adjustable Ring",
+    "description": "A contemporary silver ring featuring an elegant open-leaf design. Its adjustable silhouette and nature-inspired detailing make it a versatile piece that can be styled effortlessly for everyday or occasion wear.",
+    "material": "Silver",
+    "finish": null,
+    "stone": null,
+    "design": "Leaves",
+    "style": null,
+    "ringSize": "Resizable",
+    "colours": ["Silver"],
+    "currency": "INR",
+    "supplierTitle": "Women Gold Hot New Style Leaves Silver Ring Opening Rings Korean Jewelry",
+    "variants": [
+      {
+        "sku": "YWJE0026",
+        "colour": "Silver",
+        "supplierColourCode": null,
+        "stock": 3,
+        "price": 1099,
+        "driveLink": "https://drive.google.com/drive/folders/1jA0t6c5JEtTlnUhBNX9LteBLZSoY83pt"
+      }
+    ]
+  },
+  {
+    "name": "925 Sterling Silver Beaded Open Ring",
+    "category": "Rings",
+    "type": "Open Ring",
+    "description": "A contemporary 925 sterling silver open ring featuring a rounded, beaded design with an irregular flowing form. The adjustable silhouette offers an easy fit while the textured detailing gives the piece a distinctive finish.",
+    "material": "925 Sterling Silver",
+    "finish": null,
+    "stone": null,
+    "design": "Beaded",
+    "style": null,
+    "ringSize": "One Size / Adjustable",
+    "colours": ["Silver"],
+    "currency": "INR",
+    "supplierTitle": "Vintage Korean Blogger Fashionable Fine Silver Ring S925 Sterling Irregular Liquid Streamline Pearl Wholesale Jewelry",
+    "variants": [
+      {
+        "sku": "YWJE0055",
+        "colour": "Silver",
+        "supplierColourCode": null,
+        "stock": 7,
+        "price": 1399,
+        "driveLink": "https://drive.google.com/drive/folders/16doZwwfHaajTobRpLhjG0C_hOOrfoQAi"
+      }
+    ]
+  },
+  {
+    "name": "925 Sterling Silver Freshwater Pearl Mermaid Ring",
+    "category": "Rings",
+    "type": "Adjustable Open Ring",
+    "description": "A distinctive 925 sterling silver ring featuring two freshwater pearls in a graceful mermaid-inspired design. The open silhouette adds a contemporary touch, while the natural pearl tones bring character to the piece. Available in three colour options to suit different styles.",
+    "material": "925 Sterling Silver",
+    "finish": null,
+    "stone": "Freshwater Pearl",
+    "design": "Double Pearl Mermaid",
+    "style": null,
+    "ringSize": "Adjustable",
+    "colours": ["Purple Pearl", "Orange Pearl", "White Pearl"],
+    "currency": "INR",
+    "supplierTitle": "FY-RS797 S925 Silver Natural Freshwater Pearl Ring 14K Gold Light Luxury Niche Design Minimalist Double Pearl Ring",
+    "variants": [
+      {
+        "sku": "YWJE0125",
+        "colour": "Purple Pearl",
+        "supplierColourCode": "RS797",
+        "stock": 2,
+        "price": 1999,
+        "driveLink": "https://drive.google.com/drive/folders/1l3pyCp4iMXpvMaYkx4fW2ztRPwMdbfXh"
+      },
+      {
+        "sku": "YWJE0126",
+        "colour": "Orange Pearl",
+        "supplierColourCode": "RS797",
+        "stock": 2,
+        "price": 1999,
+        "driveLink": "https://drive.google.com/drive/folders/1l3pyCp4iMXpvMaYkx4fW2ztRPwMdbfXh"
+      },
+      {
+        "sku": "YWJE0127",
+        "colour": "White Pearl",
+        "supplierColourCode": "RS797",
+        "stock": 2,
+        "price": 1999,
+        "driveLink": "https://drive.google.com/drive/folders/1l3pyCp4iMXpvMaYkx4fW2ztRPwMdbfXh"
+      }
+    ]
+  }
+]

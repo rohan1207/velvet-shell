@@ -1,11 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import Image from 'next/image';
-import { withAssetVersion } from '@/lib/asset-version';
+import { useEffect, useState } from 'react';
+import AppImage from '@/components/AppImage';
 import {
   PRODUCT_PLACEHOLDER,
-  isRemoteImageSrc,
   productImageSrc,
 } from '@/lib/product-image';
 
@@ -23,26 +21,21 @@ export default function ProductThumb({
 }) {
   const initial = productImageSrc(product, item);
   const [src, setSrc] = useState(initial);
-  const [failed, setFailed] = useState(false);
 
-  const raw = failed ? PRODUCT_PLACEHOLDER : src || PRODUCT_PLACEHOLDER;
-  const remote = isRemoteImageSrc(raw);
-  const displaySrc = remote ? raw : withAssetVersion(raw);
+  useEffect(() => {
+    setSrc(initial);
+  }, [initial]);
 
   return (
-    <Image
-      src={displaySrc}
+    <AppImage
+      src={src || PRODUCT_PLACEHOLDER}
       alt={alt || product?.name || item?.name || 'Product'}
       fill
       sizes={sizes}
       priority={priority}
-      unoptimized={remote || displaySrc.endsWith('.svg')}
       className={className}
       onError={() => {
-        if (!failed) {
-          setFailed(true);
-          setSrc(PRODUCT_PLACEHOLDER);
-        }
+        if (src !== PRODUCT_PLACEHOLDER) setSrc(PRODUCT_PLACEHOLDER);
       }}
     />
   );
