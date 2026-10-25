@@ -123,7 +123,7 @@ function AccountInner() {
   }
 
   return (
-    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-[calc(var(--site-promo-h)+var(--site-nav-h)+1.25rem)] pb-[calc(5rem+env(safe-area-inset-bottom))] md:pt-36 md:pb-24">
+    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-[calc(var(--site-chrome-offset)+1.25rem)] pb-[calc(5rem+env(safe-area-inset-bottom))] md:pt-36 md:pb-24">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-5 md:px-10">
         <div className="flex flex-wrap items-end justify-between gap-4 border-b border-burgundy/10 pb-6 sm:gap-6 sm:pb-8">
           <div className="min-w-0">

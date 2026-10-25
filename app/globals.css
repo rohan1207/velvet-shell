@@ -27,6 +27,9 @@
   --site-promo-h: 2.25rem;
   /* Mobile / tablet: single brand row */
   --site-nav-h: 4.65rem;
+  --site-chrome-offset: calc(
+    var(--site-promo-h) + var(--site-nav-h) + env(safe-area-inset-top, 0px)
+  );
 }
 
 @media (min-width: 640px) {
@@ -57,7 +60,7 @@
 }
 
 .pt-site-chrome {
-  padding-top: calc(var(--site-promo-h) + var(--site-nav-h));
+  padding-top: var(--site-chrome-offset);
 }
 
 html,
@@ -117,10 +120,12 @@ button {
 }
 
 /* ——— Phone-first polish ——— */
-@supports (padding: env(safe-area-inset-bottom)) {
+/* Horizontal insets only — top/bottom are handled by the fixed header + page padding
+   so Safari iOS doesn’t stack a second safe-area gap above the promo strip. */
+@supports (padding: max(0px)) {
   body {
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
   }
 }
 

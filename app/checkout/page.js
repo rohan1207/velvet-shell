@@ -307,7 +307,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-[calc(var(--site-promo-h)+var(--site-nav-h)+1.25rem)] pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pt-32 md:pb-20">
+    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-[calc(var(--site-chrome-offset)+1.25rem)] pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pt-32 md:pb-20">
       {successOrder && (
         <SuccessModal
           order={successOrder}

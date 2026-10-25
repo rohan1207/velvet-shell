@@ -319,7 +319,7 @@ export default function MegaMenu({ open, onOpen, onClose }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             className="fixed inset-0 z-30 cursor-default bg-ink/30 backdrop-blur-[1px]"
-            style={{ top: 'calc(var(--site-promo-h) + var(--site-nav-h))' }}
+            style={{ top: 'var(--site-chrome-offset)' }}
             onClick={onClose}
             onMouseEnter={onClose}
           />

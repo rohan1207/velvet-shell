@@ -14,7 +14,7 @@ const FRAME_PATH = (i) => `/flower-frames/ezgif-frame-${String(i).padStart(3, '0
 const MAX_FRAME_STEP = 1.35;
 
 function getChromeOffset() {
-  // Prefer live header height so pin sits flush under promo + navbar
+  // Prefer live header height (includes iOS safe-area padding on the promo wrap)
   const header = document.querySelector('[data-site-header]');
   if (header) {
     const h = header.getBoundingClientRect().height;
@@ -107,6 +107,12 @@ export default function HeroFlowerFrames({ scrollRoot, className = '' }) {
     const canvas = canvasRef.current;
     const triggerEl = scrollRoot?.current || host;
     if (!host || !canvas || !triggerEl) return undefined;
+
+    // Phone: never pin / scrub — that scroll-lock causes home-page glitches
+    const isPhone =
+      window.matchMedia('(max-width: 767px)').matches ||
+      window.matchMedia('(pointer: coarse)').matches;
+    if (isPhone) return undefined;
 
     const ctx = canvas.getContext('2d', { alpha: true });
     const frames = framesRef.current;

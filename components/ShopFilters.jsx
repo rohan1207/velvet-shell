@@ -370,7 +370,7 @@ export default function ShopFilters({
           <div
             className="sticky z-30 flex flex-col overflow-hidden rounded-[1.25rem] border border-ink/8 bg-white p-5 shadow-[0_10px_40px_rgba(45,43,43,0.04)]"
             style={{
-              top: 'calc(var(--site-promo-h) + var(--site-nav-h) + 3.75rem)',
+              top: 'calc(var(--site-chrome-offset) + 3.75rem)',
               height:
                 'calc(100svh - var(--site-promo-h) - var(--site-nav-h) - 4.5rem)',
               maxHeight:

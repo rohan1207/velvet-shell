@@ -86,7 +86,7 @@ export default function NatureStoryHero() {
   return (
     <section
       ref={rootRef}
-      className="relative box-border h-[100svh] w-full overflow-hidden bg-ink"
+      className="relative box-border h-[100svh] max-h-[100dvh] w-full overflow-hidden bg-ink supports-[height:100dvh]:h-[100dvh]"
       aria-roledescription="carousel"
       aria-label="Nature storytelling hero"
     >

@@ -356,7 +356,7 @@ export default function ShopExperience({
           {/* Sticky strip: filters · search · count — sits under fixed site header */}
           <div
             className="sticky z-30 mt-5 border-b border-ink/8 bg-white/95 py-2.5 backdrop-blur-md supports-[backdrop-filter]:bg-white/90 sm:mt-8 sm:py-3"
-            style={{ top: 'calc(var(--site-promo-h) + var(--site-nav-h))' }}
+            style={{ top: 'var(--site-chrome-offset)' }}
           >
             <div className="flex flex-col gap-2 md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_minmax(0,1fr)] md:items-center md:gap-4">
               <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 md:justify-start">
