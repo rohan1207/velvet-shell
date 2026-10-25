@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['@google/model-viewer'],
+  // Tree-shake heavy client libs used across many components
+  experimental: {
+    optimizePackageImports: ['framer-motion', 'gsap', 'lenis'],
+  },
   images: {
     qualities: [75, 90, 100],
     // Replaced public/ assets share the same path; keep TTL low and allow ?v=

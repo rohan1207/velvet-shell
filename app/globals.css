@@ -407,6 +407,28 @@ img {
   animation: skeleton-shimmer 1.35s ease-in-out infinite;
 }
 
+@keyframes nav-progress {
+  0% {
+    transform: scaleX(0.08);
+    opacity: 1;
+  }
+  40% {
+    transform: scaleX(0.55);
+  }
+  80% {
+    transform: scaleX(0.82);
+  }
+  100% {
+    transform: scaleX(0.92);
+    opacity: 1;
+  }
+}
+
+.nav-progress-bar {
+  transform-origin: left center;
+  animation: nav-progress 8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
 /* Ultra-thin sidebar scrollbar */
 .shop-filter-scroll {
   scrollbar-width: thin;

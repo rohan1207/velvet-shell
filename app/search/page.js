@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import ProductCard from '@/components/ProductCard';
 import { useStore } from '@/context/StoreContext';
-import { collectionName, products as dummyProducts, searchProducts } from '@/lib/products';
+import { collectionName } from '@/lib/shop-meta';
 
 function searchLiveCatalog(pool, query) {
   const q = query.trim().toLowerCase();
@@ -23,22 +23,18 @@ export default function SearchPage() {
     ? catalog.allProducts
     : catalog?.products?.length
       ? catalog.products
-      : dummyProducts;
+      : [];
 
   const results = useMemo(() => {
-    if (catalog?.allProducts?.length || catalog?.products?.length) {
-      // Prefer primary listing rows when colour families exist (match shop)
-      const families = catalog.colorFamilies || [];
-      const hidden = new Set();
-      for (const family of families) {
-        for (const variant of family.variants || []) {
-          if (variant.slug !== family.primary) hidden.add(variant.slug);
-        }
+    const families = catalog?.colorFamilies || [];
+    const hidden = new Set();
+    for (const family of families) {
+      for (const variant of family.variants || []) {
+        if (variant.slug !== family.primary) hidden.add(variant.slug);
       }
-      const listing = pool.filter((p) => !hidden.has(p.slug));
-      return searchLiveCatalog(listing, query);
     }
-    return searchProducts(query);
+    const listing = pool.filter((p) => !hidden.has(p.slug));
+    return searchLiveCatalog(listing.length ? listing : pool, query);
   }, [query, catalog, pool]);
 
   return (

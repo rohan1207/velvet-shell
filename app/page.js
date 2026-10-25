@@ -1,17 +1,22 @@
+import dynamic from 'next/dynamic';
 import NatureStoryHero from '@/components/NatureStoryHero';
-import Hero3 from '@/components/Hero3';
 import CategoryCircles from '@/components/CategoryCircles';
-import BestOfVelvetShell from '@/components/BestOfVelvetShell';
-import NewArrivals from '@/components/NewArrivals';
-import ShopByLook from '@/components/ShopByLook';
-import FullBleedVideo from '@/components/FullBleedVideo';
-import ShopNow from '@/components/ShopNow';
-// import ScrollFrameStory from '@/components/ScrollFrameStory';
-import TheHouse from '@/components/TheHouse';
-// import TrustStrip from '@/components/TrustStrip';
-import BannerShowcase from '@/components/BannerShowcase';
-import Testimonials from '@/components/Testimonials';
 import { HomeProductNotes } from '@/components/ProductNotes';
+
+/** Below-the-fold / heavy client sections — load after first paint. */
+const Hero3 = dynamic(() => import('@/components/Hero3'), {
+  loading: () => <div className="min-h-[70vh] animate-pulse bg-cream/40" aria-hidden />,
+});
+const NewArrivals = dynamic(() => import('@/components/NewArrivals'));
+const BestOfVelvetShell = dynamic(() => import('@/components/BestOfVelvetShell'));
+const ShopNow = dynamic(() => import('@/components/ShopNow'));
+const FullBleedVideo = dynamic(() => import('@/components/FullBleedVideo'), {
+  loading: () => <div className="aspect-video w-full animate-pulse bg-cream/50" aria-hidden />,
+});
+const ShopByLook = dynamic(() => import('@/components/ShopByLook'));
+const BannerShowcase = dynamic(() => import('@/components/BannerShowcase'));
+const TheHouse = dynamic(() => import('@/components/TheHouse'));
+const Testimonials = dynamic(() => import('@/components/Testimonials'));
 
 export const metadata = {
   title: 'Velvet Shell — A treasure in every reveal',
@@ -27,7 +32,6 @@ export default function HomePage() {
   return (
     <>
       <NatureStoryHero />
-      {/* <TrustStrip /> */}
       <Hero3 />
       <CategoryCircles />
       <NewArrivals />
@@ -37,7 +41,6 @@ export default function HomePage() {
       <FullBleedVideo />
       <ShopByLook />
       <BannerShowcase />
-      {/* <ScrollFrameStory /> */}
       <TheHouse />
       <Testimonials />
     </>

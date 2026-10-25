@@ -2,13 +2,14 @@ import { Suspense } from 'react';
 import ShopExperience from '@/components/ShopExperience';
 import { ProductGridSkeleton } from '@/components/ProductCardSkeleton';
 import { listingFromCatalog, loadCatalog } from '@/lib/catalog';
-import { shopHero } from '@/lib/products';
+import { shopHero } from '@/lib/shop-meta';
 
 export const metadata = {
   title: 'Shop',
 };
 
-export const dynamic = 'force-dynamic';
+/** Revalidate catalog HTML every minute (pairs with unstable_cache in loadCatalog). */
+export const revalidate = 60;
 
 function ShopFallback() {
   return (

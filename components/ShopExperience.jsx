@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { shopHero as defaultShopHero } from '@/lib/products';
+import { shopHero as defaultShopHero } from '@/lib/shop-meta';
 import ProductCard from '@/components/ProductCard';
 import { ProductGridSkeleton } from '@/components/ProductCardSkeleton';
 import CategoryHeroSlider from '@/components/CategoryHeroSlider';

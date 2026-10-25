@@ -1,45 +1,25 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
-import { categories as fallbackCategories } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
 import { ProductGridSkeleton } from '@/components/ProductCardSkeleton';
+import { useStore } from '@/context/StoreContext';
 
 export default function ShopNow() {
+  const { catalog } = useStore();
   const [activeTab, setActiveTab] = useState('all');
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState(fallbackCategories);
-  const [colorFamilies, setColorFamilies] = useState([]);
-  const [allProducts, setAllProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    let cancelled = false;
-    fetch('/api/catalog')
-      .then((r) => r.json())
-      .then((d) => {
-        if (cancelled) return;
-        if (d.products?.length) {
-          setProducts(d.products);
-          setAllProducts(d.allProducts || d.products);
-          setColorFamilies(d.colorFamilies || []);
-          if (d.categories?.length) setCategories(d.categories);
-        }
-      })
-      .catch(() => {})
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const products = catalog.products || [];
+  const categories = catalog.categories || [];
+  const colorFamilies = catalog.colorFamilies || [];
+  const allProducts = catalog.allProducts || products;
+  const loading = !products.length;
 
   const tabs = useMemo(
     () => [{ slug: 'all', name: 'All' }, ...categories.map((c) => ({ slug: c.slug, name: c.name }))],
-    [categories]
+    [categories],
   );
 
   const filtered = useMemo(() => {

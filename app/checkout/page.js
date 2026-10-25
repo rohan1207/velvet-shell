@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useStore } from '@/context/StoreContext';
-import { collectionName } from '@/lib/products';
+import { collectionName } from '@/lib/shop-meta';
 import { money } from '@/lib/format';
 import { loadRazorpayScript } from '@/lib/razorpay-client';
 import ProductThumb from '@/components/ProductThumb';

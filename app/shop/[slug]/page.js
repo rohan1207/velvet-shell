@@ -8,7 +8,7 @@ import {
   variantsFromCatalog,
 } from '@/lib/catalog';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;

@@ -1,42 +1,63 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { collections, getListingProducts, products } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
 
-const featuredCollection = collections.find((c) => c.slug === 'the-shell-edit') ?? collections[0];
-const listing = getListingProducts(products);
-
-const fromCollection = listing.filter((product) => product.collection === featuredCollection.slug);
-const featured = [
-  ...fromCollection,
-  ...listing.filter((product) => product.collection !== featuredCollection.slug),
-].slice(0, 4);
-
 export default function NewCollection() {
-  return (
-    <section className="bg-ivory">
-      <div className="mx-auto max-w-[1600px] px-5 py-14 md:px-10 md:py-32">
-        <div className="mb-8 flex flex-col items-start justify-between gap-4 md:mb-14 md:flex-row md:items-end md:gap-6">
-          <div>
-            <p className="font-label text-gold">New collection</p>
-            <h2 className="font-display mt-2 text-3xl text-ink md:mt-3 md:text-6xl">
-              {featuredCollection.name}
-            </h2>
-            <p className="mt-3 max-w-md text-sm font-light leading-relaxed text-ink/85 md:mt-4">
-              {featuredCollection.line}
-            </p>
-          </div>
-          <Link
-            href={`/shop?collection=${featuredCollection.slug}`}
-            className="bg-velvet-texture inline-flex items-center rounded-full px-5 py-2.5 font-label text-[11px] text-ivory transition-opacity hover:opacity-90"
-          >
-            View collection
-          </Link>
-        </div>
+  const [featured, setFeatured] = useState([]);
+  const [colorFamilies, setColorFamilies] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [collectionName, setCollectionName] = useState('The Shell Edit');
 
-        <div className="grid grid-cols-2 gap-x-3 gap-y-7 md:gap-x-6 md:gap-y-12 lg:grid-cols-4">
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/catalog')
+      .then((r) => r.json())
+      .then((d) => {
+        if (cancelled || !d.products?.length) return;
+        const col =
+          (d.collections || []).find((c) => c.slug === 'the-shell-edit') ||
+          (d.collections || [])[0];
+        if (col?.name) setCollectionName(col.name);
+        const slug = col?.slug || 'the-shell-edit';
+        const fromCol = d.products.filter((p) => p.collection === slug);
+        const merged = [
+          ...fromCol,
+          ...d.products.filter((p) => p.collection !== slug),
+        ].slice(0, 4);
+        setFeatured(merged);
+        setAllProducts(d.allProducts || d.products);
+        setColorFamilies(d.colorFamilies || []);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (!featured.length) return null;
+
+  return (
+    <section className="bg-white py-20 md:py-28">
+      <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+        <p className="font-label text-[10px] tracking-[0.2em] text-gold uppercase">New collection</p>
+        <h2 className="font-display mt-3 text-4xl tracking-[-0.03em] md:text-6xl">{collectionName}</h2>
+        <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12 lg:grid-cols-4">
           {featured.map((product, index) => (
-            <ProductCard key={product.slug} product={product} index={index} />
+            <ProductCard
+              key={product.slug}
+              product={product}
+              index={index}
+              colorFamilies={colorFamilies}
+              catalogProducts={allProducts}
+            />
           ))}
+        </div>
+        <div className="mt-10">
+          <Link href="/shop" className="font-label text-[11px] tracking-[0.16em] text-burgundy uppercase">
+            Explore the collection
+          </Link>
         </div>
       </div>
     </section>

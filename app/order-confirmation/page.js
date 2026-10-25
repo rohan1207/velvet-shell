@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getProduct } from '@/lib/products';
+import { useStore } from '@/context/StoreContext';
 import { money } from '@/lib/format';
 
 export default function ConfirmationPage() {
+  const { getProduct } = useStore();
   const [order, setOrder] = useState(null);
 
   useEffect(() => {

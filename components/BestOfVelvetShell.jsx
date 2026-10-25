@@ -3,37 +3,33 @@
 import { useEffect, useMemo, useState } from 'react';
 import PinnedProductStrip from '@/components/PinnedProductStrip';
 import { ProductStripSkeleton } from '@/components/ProductCardSkeleton';
+import { useStore } from '@/context/StoreContext';
 
 export default function BestOfVelvetShell() {
-  const [products, setProducts] = useState([]);
-  const [colorFamilies, setColorFamilies] = useState([]);
-  const [allProducts, setAllProducts] = useState([]);
+  const { catalog } = useStore();
   const [curation, setCuration] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [curationLoading, setCurationLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
-    Promise.all([
-      fetch('/api/catalog').then((r) => r.json()),
-      fetch('/api/curations/best-sellers').then((r) => r.json()),
-    ])
-      .then(([d, c]) => {
-        if (cancelled) return;
-        if (d.products?.length) {
-          setProducts(d.products);
-          setAllProducts(d.allProducts || d.products);
-          setColorFamilies(d.colorFamilies || []);
-        }
-        if (c.curation) setCuration(c.curation);
+    fetch('/api/curations/best-sellers')
+      .then((r) => r.json())
+      .then((c) => {
+        if (!cancelled && c.curation) setCuration(c.curation);
       })
       .catch(() => {})
       .finally(() => {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) setCurationLoading(false);
       });
     return () => {
       cancelled = true;
     };
   }, []);
+
+  const products = catalog.products || [];
+  const catalogProducts = catalog.allProducts || products;
+  const colorFamilies = catalog.colorFamilies || [];
+  const catalogLoading = !products.length;
 
   const picks = useMemo(() => {
     if (!products.length || !curation?.productSlugs?.length) return [];
@@ -50,7 +46,7 @@ export default function BestOfVelvetShell() {
     return chosen.slice(0, 12);
   }, [products, curation]);
 
-  if (loading) {
+  if (catalogLoading || curationLoading) {
     return (
       <ProductStripSkeleton
         count={4}
@@ -77,7 +73,7 @@ export default function BestOfVelvetShell() {
       ctaLabel="Shop all"
       products={picks}
       colorFamilies={colorFamilies}
-      catalogProducts={allProducts}
+      catalogProducts={catalogProducts}
       bgClass="bg-ivory"
     />
   );

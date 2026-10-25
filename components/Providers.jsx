@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { StoreProvider } from '@/context/StoreContext';
 import SmoothScroll from './SmoothScroll';
 import ScrollToTop from './ScrollToTop';
+import NavigationProgress from './NavigationProgress';
 import SiteHeader from './SiteHeader';
 import Footer from './Footer';
 import CartDrawer from './CartDrawer';
@@ -16,6 +17,7 @@ export default function Providers({ children }) {
     <StoreProvider>
       <SmoothScroll>
         <Suspense fallback={null}>
+          <NavigationProgress />
           <ScrollToTop />
           <SiteHeader />
         </Suspense>

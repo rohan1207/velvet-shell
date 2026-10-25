@@ -2,19 +2,21 @@ import { Playfair_Display, Poppins, Montserrat, Bodoni_Moda, Great_Vibes } from 
 import Providers from '@/components/Providers';
 import './globals.css';
 
-/** Brand Book 2026 — Main Heading 1 */
+/** Brand Book 2026 — Main Heading 1 (trim weights for faster first paint) */
 const playfair = Playfair_Display({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '600', '700'],
   style: ['normal', 'italic'],
   variable: '--font-playfair',
+  display: 'swap',
 });
 
 /** Brand Book 2026 — Heading 2 + Body */
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600'],
   variable: '--font-poppins',
+  display: 'swap',
 });
 
 /** Brand Book 2026 — Labels */
@@ -22,13 +24,15 @@ const montserrat = Montserrat({
   subsets: ['latin'],
   weight: ['500', '600', '700'],
   variable: '--font-montserrat',
+  display: 'swap',
 });
 
 /** Hero bento — Didot / Bodoni wordmark */
 const bodoni = Bodoni_Moda({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '600'],
   variable: '--font-bodoni-face',
+  display: 'swap',
 });
 
 /** Hero bento — script accent */
@@ -36,6 +40,7 @@ const greatVibes = Great_Vibes({
   subsets: ['latin'],
   weight: '400',
   variable: '--font-script-face',
+  display: 'swap',
 });
 
 export const metadata = {

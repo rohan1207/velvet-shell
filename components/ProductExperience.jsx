@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import AppImage from '@/components/AppImage';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { collectionName as dummyCollectionName } from '@/lib/products';
+import { collectionName as dummyCollectionName } from '@/lib/shop-meta';
 import { money } from '@/lib/format';
 import { useStore } from '@/context/StoreContext';
 import { sortByColourPriority } from '@/lib/catalog/color-order';

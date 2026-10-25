@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useMemo } from 'react';
 import { useStore } from '@/context/StoreContext';
-import { products as dummyProducts } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
 
 export default function WishlistPage() {
@@ -12,7 +11,7 @@ export default function WishlistPage() {
     ? catalog.allProducts
     : catalog?.products?.length
       ? catalog.products
-      : dummyProducts;
+      : [];
 
   const saved = useMemo(
     () =>

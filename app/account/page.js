@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useStore } from '@/context/StoreContext';
-import { getProduct } from '@/lib/products';
 import { money } from '@/lib/format';
 import AuthFlow from '@/components/auth/AuthFlow';
 
@@ -594,6 +593,7 @@ function Stat({ label, value }) {
 }
 
 function OrderRow({ order, detailed = false }) {
+  const { getProduct } = useStore();
   const label = order.orderNumber || order.id;
   const ship = order.shipping || {};
   return (

@@ -1,7 +1,6 @@
 'use client';
 
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { getProduct as getDummyProduct } from '@/lib/products';
 import { productImageSrc } from '@/lib/product-image';
 
 const StoreContext = createContext(null);
@@ -81,6 +80,7 @@ export function StoreProvider({ children }) {
     allProducts: [],
     colorFamilies: [],
     collections: [],
+    categories: [],
     source: 'dummy',
   });
 
@@ -107,56 +107,64 @@ export function StoreProvider({ children }) {
         /* ignore */
       }
 
-      try {
-        const res = await fetch('/api/auth/me', { credentials: 'same-origin' });
-        const data = await res.json().catch(() => ({}));
-        if (!cancelled && data.user) {
-          setUser(data.user);
-          await syncAccountData(setAddresses, setSelectedAddressId, setOrders);
-        }
-      } catch {
-        /* offline / misconfigured — stay signed out */
-      }
-
-      try {
-        const res = await fetch('/api/catalog');
-        const data = await res.json().catch(() => ({}));
-        if (!cancelled && (data.products?.length || data.allProducts?.length)) {
-          const allProducts = data.allProducts || data.products || [];
-          setCatalog({
-            products: data.products || [],
-            allProducts,
-            colorFamilies: data.colorFamilies || [],
-            collections: data.collections || [],
-            source: data.source || 'supabase',
-          });
-          // Refresh cart thumbnails from live catalog (R2 URLs), not stale localStorage paths
-          setCart((current) => {
-            if (!Array.isArray(current) || !current.length) return current;
-            let changed = false;
-            const next = current.map((item) => {
-              const product =
-                allProducts.find((p) => p.slug === item.slug) ||
-                (data.products || []).find((p) => p.slug === item.slug);
-              if (!product) return item;
-              const image = productImageSrc(product);
-              if (!image || image === item.image) return item;
-              changed = true;
-              return {
-                ...item,
-                image,
-                name: product.name || item.name,
-                price: product.price ?? item.price,
-              };
-            });
-            return changed ? next : current;
-          });
-        }
-      } catch {
-        /* keep dummy fallback via getDummyProduct */
-      }
-
+      // Unlock UI immediately — don't wait on auth/catalog network.
       if (!cancelled) setReady(true);
+
+      const authPromise = (async () => {
+        try {
+          const res = await fetch('/api/auth/me', { credentials: 'same-origin' });
+          const data = await res.json().catch(() => ({}));
+          if (!cancelled && data.user) {
+            setUser(data.user);
+            await syncAccountData(setAddresses, setSelectedAddressId, setOrders);
+          }
+        } catch {
+          /* offline / misconfigured — stay signed out */
+        }
+      })();
+
+      const catalogPromise = (async () => {
+        try {
+          const res = await fetch('/api/catalog');
+          const data = await res.json().catch(() => ({}));
+          if (!cancelled && (data.products?.length || data.allProducts?.length)) {
+            const allProducts = data.allProducts || data.products || [];
+            setCatalog({
+              products: data.products || [],
+              allProducts,
+              colorFamilies: data.colorFamilies || [],
+              collections: data.collections || [],
+              categories: data.categories || [],
+              source: data.source || 'supabase',
+            });
+            // Refresh cart thumbnails from live catalog (R2 URLs), not stale localStorage paths
+            setCart((current) => {
+              if (!Array.isArray(current) || !current.length) return current;
+              let changed = false;
+              const next = current.map((item) => {
+                const product =
+                  allProducts.find((p) => p.slug === item.slug) ||
+                  (data.products || []).find((p) => p.slug === item.slug);
+                if (!product) return item;
+                const image = productImageSrc(product);
+                if (!image || image === item.image) return item;
+                changed = true;
+                return {
+                  ...item,
+                  image,
+                  name: product.name || item.name,
+                  price: product.price ?? item.price,
+                };
+              });
+              return changed ? next : current;
+            });
+          }
+        } catch {
+          /* keep empty catalog until next refresh */
+        }
+      })();
+
+      await Promise.all([authPromise, catalogPromise]);
     }
 
     hydrate();
@@ -204,7 +212,7 @@ export function StoreProvider({ children }) {
       return (
         catalog.allProducts.find((p) => p.slug === slug) ||
         catalog.products.find((p) => p.slug === slug) ||
-        getDummyProduct(slug)
+        null
       );
     }
 

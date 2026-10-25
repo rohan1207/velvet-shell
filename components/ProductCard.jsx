@@ -4,7 +4,6 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import AppImage from '@/components/AppImage';
 import { money } from '@/lib/format';
-import { getProductVariants as getDummyVariants } from '@/lib/products';
 import { flyToCart, prefersReducedMotion } from '@/lib/fly-to-cart';
 import { useStore } from '@/context/StoreContext';
 import { sortByColourPriority } from '@/lib/catalog/color-order';
@@ -53,7 +52,7 @@ function resolveVariants(slug, colorFamilies = [], catalogProducts = []) {
 
     if (fromFamily.length) return fromFamily;
   }
-  return sortByColourPriority(getDummyVariants(slug), (v) => v.label || v.product?.colorLabel);
+  return [];
 }
 
 function IconHeart({ filled = false, className = 'h-4 w-4 md:h-[1.2rem] md:w-[1.2rem]' }) {

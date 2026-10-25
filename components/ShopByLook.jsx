@@ -4,7 +4,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
-import { getProduct } from '@/lib/products';
+import { useStore } from '@/context/StoreContext';
 import { money } from '@/lib/format';
 
 const looks = [
@@ -53,6 +53,7 @@ function ProductPill({ product, href, className = '' }) {
 }
 
 function Hotspot({ spot, active, onActivate, onDeactivate }) {
+  const { getProduct } = useStore();
   const product = getProduct(spot.productSlug);
   if (!product) return null;
 
