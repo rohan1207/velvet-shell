@@ -273,6 +273,8 @@ export function StoreProvider({ children }) {
             image,
             name,
             price,
+            sku: product?.sku || '',
+            colorLabel: product?.colorLabel || '',
             customization: customEntries,
             customKey,
           },
@@ -478,6 +480,8 @@ export function StoreProvider({ children }) {
           name: product?.name || item.name || item.slug,
           image: productImageSrc(product, item),
           price: product?.price ?? item.price,
+          sku: item.sku || product?.sku || '',
+          colorLabel: item.colorLabel || product?.colorLabel || '',
         };
       });
 

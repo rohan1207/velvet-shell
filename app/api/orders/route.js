@@ -4,7 +4,24 @@ import { createAuthRouteClient } from '@/lib/supabase/route';
 import { createAdminSupabase } from '@/lib/supabase/admin';
 import { sendOrderEmails } from '@/lib/auth/mail';
 import { fromDbOrder, generateOrderNumber } from '@/lib/orders';
+import { loadCatalog, productFromCatalog } from '@/lib/catalog';
 import { getProduct } from '@/lib/products';
+
+function skuFromFeatures(features) {
+  if (!Array.isArray(features)) return '';
+  const hit = features.find((f) => /^SKU\s/i.test(String(f)));
+  return hit ? String(hit).replace(/^SKU\s+/i, '').trim() : '';
+}
+
+function resolveSku(product, item) {
+  return String(
+    item?.sku ||
+      product?.sku ||
+      skuFromFeatures(product?.details) ||
+      skuFromFeatures(product?.features) ||
+      '',
+  ).trim();
+}
 
 export async function GET(request) {
   try {
@@ -79,8 +96,11 @@ export async function POST(request) {
       }
     }
 
+    const catalog = await loadCatalog().catch(() => null);
+
     const lineRows = items.map((item) => {
-      const product = getProduct(item.slug) || {};
+      const live = catalog ? productFromCatalog(catalog, item.slug) : null;
+      const product = live || getProduct(item.slug) || {};
       const unit = Number(item.price ?? product.price) || 0;
       const qty = Math.max(1, Number(item.qty) || 1);
       const customization = Array.isArray(item.customization)
@@ -92,12 +112,18 @@ export async function POST(request) {
             }))
             .filter((entry) => entry.label && entry.value)
         : [];
+      const sku = resolveSku(product, item);
+      const colorLabel = String(
+        item.colorLabel || item.color || product.colorLabel || '',
+      ).trim();
       return {
         product_slug: item.slug,
         product_name: item.name || product.name || item.slug,
         image_url: item.image || product.image || product.image_url || null,
         size: item.size || 'OS',
-        metal: item.metal || item.color || '—',
+        metal: item.metal || item.color || product.material || '—',
+        sku,
+        color_label: colorLabel,
         unit_price: unit,
         qty,
         line_total: unit * qty,
@@ -149,10 +175,22 @@ export async function POST(request) {
     if (orderErr) throw orderErr;
 
     const itemsWithOrder = lineRows.map((row) => ({ ...row, order_id: orderRow.id }));
-    const { data: insertedItems, error: itemsErr } = await admin
+    let { data: insertedItems, error: itemsErr } = await admin
       .from('order_items')
       .insert(itemsWithOrder)
       .select('*');
+
+    if (itemsErr && /sku|color_label/i.test(itemsErr.message || '')) {
+      // Migration 011 not applied yet — still place the order without those columns.
+      const stripped = itemsWithOrder.map(({ sku: _s, color_label: _c, ...rest }) => rest);
+      const retry = await admin.from('order_items').insert(stripped).select('*');
+      insertedItems = (retry.data || []).map((row, i) => ({
+        ...row,
+        sku: itemsWithOrder[i]?.sku || '',
+        color_label: itemsWithOrder[i]?.color_label || '',
+      }));
+      itemsErr = retry.error;
+    }
 
     if (itemsErr) throw itemsErr;
 

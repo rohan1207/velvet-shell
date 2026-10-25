@@ -19,7 +19,6 @@ const shopMenu = {
         { href: '/shop?category=pendants', label: 'Pendants' },
         { href: '/shop?category=chokers', label: 'Chokers' },
         { href: '/shop?category=rings', label: 'Rings' },
-        { href: '/shop?category=cuffs', label: 'Brooches' },
         { href: '/shop?category=anklets', label: 'Anklets' },
         { href: '/shop?category=sets', label: 'Sets' },
         { href: '/shop', label: 'Shop all' },
@@ -129,30 +128,30 @@ const giftingMenu = {
 
 const accessoriesMenu = {
   eyebrow: 'Accessories',
-  line: 'Brooches and charms — small finishes with presence.',
-  exploreHref: '/shop?category=cuffs',
+  line: 'Chains and brooches — finishing pieces with presence.',
+  exploreHref: '/shop?category=brooches',
   exploreLabel: 'Browse accessories',
   columns: [
     {
       title: 'Accessories',
       links: [
-        { href: '/shop?category=cuffs', label: 'Brooches' },
-        { href: '/shop?category=charms', label: 'Charms' },
+        { href: '/shop?category=chains', label: 'Chains' },
+        { href: '/shop?category=brooches', label: 'Brooches' },
       ],
     },
   ],
   features: [
     {
-      href: '/shop?category=cuffs',
+      href: '/shop?category=chains',
+      image: '/images/banners/necklaces/bamboo.jpg',
+      label: 'Chains',
+      note: 'Fine links for everyday layering',
+    },
+    {
+      href: '/shop?category=brooches',
       image: '/images/banners/brooches/calla.jpg',
       label: 'Brooches',
       note: 'Pinned to lapel or dress',
-    },
-    {
-      href: '/shop?category=charms',
-      image: '/images/banners/brooches/bamboo.jpg',
-      label: 'Charms',
-      note: 'Tiny stories in metal',
     },
   ],
 };

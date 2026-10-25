@@ -1,0 +1,114 @@
+{
+  "currency": "INR",
+  "products": [
+    {
+      "product_id": "ACC-B01",
+      "name": "Nandina Flower Brooch",
+      "category": "brooches",
+      "material": "925 Sterling Silver",
+      "design": "Nandina Flower",
+      "type": "Brooch",
+      "description": "A delicate Nandina flower takes shape in this handcrafted brooch, with layered petals and contrasting metallic detailing that brings the bloom to life. Made from 925 sterling silver, the textured finish gives it a refined botanical character, making it a beautiful accent for clothing, scarves or gifting.",
+      "variants": [
+        {
+          "sku": "LFJK0063D",
+          "color": "Gold",
+          "finish": "Gold / Silver",
+          "qty": 2,
+          "price_inr": 2499,
+          "image_folder": "LFJK0063D"
+        },
+        {
+          "sku": "LFJK0063E",
+          "color": "Silver",
+          "finish": "Gold / Silver",
+          "qty": 2,
+          "price_inr": 2499,
+          "image_folder": "LFJK0063E"
+        }
+      ]
+    },
+    {
+      "product_id": "ACC-B02",
+      "name": "Silver Calla Lily Flower Brooch",
+      "category": "brooches",
+      "material": "925 Sterling Silver",
+      "design": "Calla Lily Flower",
+      "type": "Brooch",
+      "finish": "18K Gold Plated",
+      "description": "A sculpted Calla Lily forms the focal point of this elegant brooch, with its slender stem and graceful curved flower creating a refined silhouette. Crafted in 925 sterling silver with an 18K gold-plated finish, the minimalist design adds a sophisticated botanical touch to any outfit.",
+      "variants": [
+        {
+          "sku": "LFJK0055E",
+          "color": "Silver",
+          "finish": "18K Gold Plated",
+          "qty": 1,
+          "price_inr": 4599,
+          "image_folder": "LFJK0055E"
+        },
+        {
+          "sku": "LFJK0055D",
+          "color": "Gold",
+          "finish": "18K Gold Plated",
+          "qty": 1,
+          "price_inr": 4599,
+          "image_folder": "LFJK0055D"
+        }
+      ]
+    },
+    {
+      "product_id": "ACC-C01",
+      "name": "Classic Chain",
+      "category": "chains",
+      "material": "925 Sterling Silver",
+      "design": "Classic",
+      "type": "Chain",
+      "description": "A sleek, finely crafted chain designed to complement your favourite pendants and charms. Made from 925 sterling silver, its clean, understated finish makes it an effortless everyday essential.",
+      "variants": [
+        {
+          "sku": "LFJF0096A",
+          "color": "Gold",
+          "finish": "18K Gold Plated",
+          "qty": 2,
+          "price_inr": 3599,
+          "image_folder": "LFJF0096A"
+        },
+        {
+          "sku": "LFJF0096B",
+          "color": "Silver",
+          "finish": "Silver",
+          "qty": 1,
+          "price_inr": 3199,
+          "image_folder": "LFJF0096B"
+        }
+      ]
+    },
+    {
+      "product_id": "ACC-C02",
+      "name": "Minimalist Choker Chain",
+      "category": "chains",
+      "material": "925 Sterling Silver",
+      "design": "Minimalist",
+      "type": "Chain",
+      "description": "A sleek, minimalist choker designed with a fine circular silhouette and a delicate centre drop detail. Crafted from 925 sterling silver, its clean design makes it easy to layer with other necklaces or wear on its own. Available in Gold and Silver finishes.",
+      "variants": [
+        {
+          "sku": "LFJF0099A",
+          "color": "Gold",
+          "finish": "18K Gold Plated",
+          "qty": 2,
+          "price_inr": 3999,
+          "image_folder": "LFJF0099A"
+        },
+        {
+          "sku": "LFJF0099B",
+          "color": "Silver",
+          "finish": "Silver",
+          "qty": 2,
+          "price_inr": 3999,
+          "image_folder": "LFJF0099B"
+        }
+      ]
+    }
+  ]
+}

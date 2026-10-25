@@ -1,0 +1,636 @@
+{
+  "currency": "INR",
+  "image_folder_rule": "images/<variant sku>/ (folder name = variant sku)",
+  "products": [
+    {
+      "product_id": "PRD-001",
+      "name": "Silver Plated Daisy Flower Adjustable Ring",
+      "category": "Ring",
+      "material": "Silver",
+      "design": "Daisy Flower",
+      "type": "Flower Ring",
+      "finish": null,
+      "stone": null,
+      "collection": null,
+      "description": "A delicate silver-plated ring featuring a charming daisy flower design. The adjustable fit makes it easy to wear, while the floral detailing adds a subtle and feminine touch to everyday jewellery styling.",
+      "variants": [
+        {
+          "sku": "YWJE0025",
+          "color": "Silver",
+          "finish": null,
+          "ring_size": "Resizable",
+          "qty": 7,
+          "price_inr": 1999,
+          "image_folder": "YWJE0025"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-002",
+      "name": "Silver Leaf Opening Ring",
+      "category": "Ring",
+      "material": "Silver",
+      "design": "Leaves",
+      "type": "Open/Adjustable Ring",
+      "finish": null,
+      "stone": null,
+      "collection": null,
+      "description": "A contemporary silver ring featuring an elegant open-leaf design. Its adjustable silhouette and nature-inspired detailing make it a versatile piece that can be styled effortlessly for everyday or occasion wear.",
+      "variants": [
+        {
+          "sku": "YWJE0026",
+          "color": "Silver",
+          "finish": null,
+          "ring_size": "Resizable",
+          "qty": 3,
+          "price_inr": 1099,
+          "image_folder": "YWJE0026"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-003",
+      "name": "925 Sterling Silver Beaded Open Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Beaded",
+      "type": "Open Ring",
+      "finish": null,
+      "stone": null,
+      "collection": null,
+      "description": "A contemporary 925 sterling silver open ring featuring a rounded, beaded design with an irregular flowing form. The adjustable silhouette offers an easy fit while the textured detailing gives the piece a distinctive finish.",
+      "variants": [
+        {
+          "sku": "YWJE0055",
+          "color": "Silver",
+          "finish": null,
+          "ring_size": "One Size / Adjustable",
+          "qty": 7,
+          "price_inr": 1399,
+          "image_folder": "YWJE0055"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-004",
+      "name": "925 Sterling Silver Freshwater Pearl Mermaid Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Double Pearl Mermaid",
+      "type": "Adjustable Open Ring",
+      "finish": null,
+      "stone": "Freshwater Pearl",
+      "collection": null,
+      "description": "A distinctive 925 sterling silver ring featuring two freshwater pearls in a graceful mermaid-inspired design. The open silhouette adds a contemporary touch, while the natural pearl tones bring character to the piece. Available in three colour options to suit different styles.",
+      "variants": [
+        {
+          "sku": "YWJE0125",
+          "color": "Purple Pearl",
+          "finish": null,
+          "ring_size": "Adjustable",
+          "qty": 2,
+          "price_inr": 1999,
+          "image_folder": "YWJE0125"
+        },
+        {
+          "sku": "YWJE0126",
+          "color": "Orange Pearl",
+          "finish": null,
+          "ring_size": "Adjustable",
+          "qty": 2,
+          "price_inr": 1999,
+          "image_folder": "YWJE0126"
+        },
+        {
+          "sku": "YWJE0127",
+          "color": "White Pearl",
+          "finish": null,
+          "ring_size": "Adjustable",
+          "qty": 2,
+          "price_inr": 1999,
+          "image_folder": "YWJE0127"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-005",
+      "name": "Forget-Me-Not Flower Adjustable Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Forget-Me-Not Flower",
+      "type": "Adjustable Ring",
+      "finish": "18K Gold Plated / Silver",
+      "stone": null,
+      "collection": null,
+      "description": "A delicate arrangement of forget-me-not flowers brings a graceful floral touch to this handcrafted ring. Made from 925 sterling silver with an 18K gold-plated finish, the adjustable band makes it easy to fit and wear comfortably. A charming piece for everyday styling, special occasions or gifting.",
+      "variants": [
+        {
+          "sku": "LFJD0153A",
+          "color": "Gold",
+          "finish": "18K Gold Plated",
+          "ring_size": "Adjustable",
+          "qty": 1,
+          "price_inr": 3599,
+          "image_folder": "LFJD0153A"
+        },
+        {
+          "sku": "LFJD0153E",
+          "color": "Silver",
+          "finish": "Silver",
+          "ring_size": "Adjustable",
+          "qty": 1,
+          "price_inr": 3199,
+          "image_folder": "LFJD0153E"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-006",
+      "name": "Swallow Willow Bird Asymmetric Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Swallow Bird & Willow Branch",
+      "type": "Asymmetric Adjustable Ring",
+      "finish": "18K Gold Plated",
+      "stone": null,
+      "collection": null,
+      "description": "Graceful bird and branch details come together in this distinctive asymmetric ring. Crafted in 925 sterling silver with an 18K gold-plated finish, the open design creates an artistic silhouette while the adjustable structure allows for an easy fit.",
+      "variants": [
+        {
+          "sku": "LFJD0159E",
+          "color": "Silver",
+          "finish": "18K Gold Plated",
+          "ring_size": "Adjustable",
+          "qty": 1,
+          "price_inr": 3499,
+          "image_folder": "LFJD0159E"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-007",
+      "name": "Phalaenopsis Flower Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Phalaenopsis Flower",
+      "type": "Ring",
+      "finish": "18K Gold Plated",
+      "stone": null,
+      "collection": null,
+      "description": "Elegant phalaenopsis blooms form the centrepiece of this delicate ring. Crafted in 925 sterling silver with an 18K gold-plated finish, the layered petals and fine detailing create a refined floral statement that works beautifully for both everyday and occasion styling.",
+      "variants": [
+        {
+          "sku": "LFJD0205E",
+          "color": "Silver",
+          "finish": "18K Gold Plated",
+          "ring_size": null,
+          "qty": 1,
+          "price_inr": 3599,
+          "image_folder": "LFJD0205E"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-008",
+      "name": "Flying Swallow Adjustable Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Flying Swallow",
+      "type": "Adjustable Ring",
+      "finish": "18K Gold Plated",
+      "stone": null,
+      "collection": null,
+      "description": "A pair of flying swallows creates a sense of movement across this open ring design. Crafted in 925 sterling silver with an 18K gold-plated finish, the delicate bird detailing gives the piece a graceful, free-spirited character.",
+      "variants": [
+        {
+          "sku": "LFJD0204E",
+          "color": "Silver",
+          "finish": "18K Gold Plated",
+          "ring_size": "Adjustable",
+          "qty": 1,
+          "price_inr": 2999,
+          "image_folder": "LFJD0204E"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-009",
+      "name": "Open Flower Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Floral",
+      "type": "Open Adjustable Ring",
+      "finish": "18K Gold Plated",
+      "stone": null,
+      "collection": null,
+      "description": "Delicate flowers are arranged along an open ring silhouette, creating a feminine and detailed design. Crafted in 925 sterling silver with an 18K gold-plated finish, the adjustable style makes it versatile and comfortable to wear.",
+      "variants": [
+        {
+          "sku": "LFJD0191R7",
+          "color": "Silver",
+          "finish": "18K Gold Plated",
+          "ring_size": "7",
+          "qty": 1,
+          "price_inr": 3999,
+          "image_folder": "LFJD0191R7"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-010",
+      "name": "Calla Lily Flower Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Calla Lily",
+      "type": "Ring",
+      "finish": "18K Gold Plated",
+      "stone": null,
+      "collection": null,
+      "description": "Inspired by the elegant form of the calla lily, this ring features a sculpted floral design with a graceful open silhouette. Crafted in 925 sterling silver with an 18K gold-plated finish, it brings a sophisticated botanical touch to your jewellery collection.",
+      "variants": [
+        {
+          "sku": "LFJD0161E",
+          "color": "Silver",
+          "finish": "18K Gold Plated",
+          "ring_size": null,
+          "qty": 1,
+          "price_inr": 3599,
+          "image_folder": "LFJD0161E"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-011",
+      "name": "Lotus Natural Stone Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Lotus Flower",
+      "type": "Ring",
+      "finish": null,
+      "stone": "Natural Stone",
+      "collection": null,
+      "description": "A sculpted lotus flower meets a natural stone centre in this handcrafted statement ring. The open design frames the stone beautifully, while the detailed petals add an artistic floral touch. Its distinctive form makes it a standout piece for everyday styling or special occasions.",
+      "variants": [
+        {
+          "sku": "LFJD0089B",
+          "color": "Pink",
+          "finish": null,
+          "ring_size": null,
+          "qty": 1,
+          "price_inr": 4999,
+          "image_folder": "LFJD0089B"
+        },
+        {
+          "sku": "LFJD0089A",
+          "color": "Green",
+          "finish": null,
+          "ring_size": null,
+          "qty": 2,
+          "price_inr": 4999,
+          "image_folder": "LFJD0089A"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-012",
+      "name": "Natural Flower Adjustable Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Natural Flower",
+      "type": "Adjustable Ring",
+      "finish": null,
+      "stone": null,
+      "collection": null,
+      "description": "A delicate floral design with layered petals and a slender open band, this handcrafted ring brings together soft botanical detailing with a subtle gold-toned accent. Made from 925 sterling silver, its adjustable design allows for a comfortable and versatile fit.",
+      "variants": [
+        {
+          "sku": "LFJD0176E",
+          "color": "Silver",
+          "finish": null,
+          "ring_size": "Adjustable",
+          "qty": 1,
+          "price_inr": 4599,
+          "image_folder": "LFJD0176E"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-013",
+      "name": "Long Feather Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Long Feather",
+      "type": "Open Adjustable Ring",
+      "finish": "18K Gold Plated / Silver",
+      "stone": null,
+      "collection": null,
+      "description": "A sculpted feather forms the focal point of this elegant open ring. The elongated feather detailing gives the design a sense of movement and texture, while the adjustable silhouette makes it easy to style and wear.",
+      "variants": [
+        {
+          "sku": "LFJD0160D",
+          "color": "Gold",
+          "finish": "18K Gold Plated",
+          "ring_size": "Adjustable",
+          "qty": 1,
+          "price_inr": 3499,
+          "image_folder": "LFJD0160D"
+        },
+        {
+          "sku": "LFJD0160E",
+          "color": "Silver",
+          "finish": "Silver",
+          "ring_size": "Adjustable",
+          "qty": 1,
+          "price_inr": 3499,
+          "image_folder": "LFJD0160E"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-014",
+      "name": "Aquamarine Butterfly Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Butterfly",
+      "type": "Ring",
+      "finish": "18K Gold Plated",
+      "stone": "Aquamarine",
+      "collection": null,
+      "description": "A delicate butterfly rests against a natural aquamarine stone in this distinctive open ring. Crafted in 925 sterling silver with an 18K gold-plated finish, the soft blue stone adds a subtle pop of colour to the nature-inspired design.",
+      "variants": [
+        {
+          "sku": "LFJD0146E",
+          "color": "Gold",
+          "finish": "18K Gold Plated",
+          "ring_size": null,
+          "qty": 1,
+          "price_inr": 3999,
+          "image_folder": "LFJD0146E"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-016",
+      "name": "Crystal Flower in the Rain Adjustable Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Crystal Flower",
+      "type": "Adjustable Ring",
+      "finish": "18K Gold Plated / Silver",
+      "stone": null,
+      "collection": null,
+      "description": "Inspired by a flower touched by raindrops, this 925 sterling silver ring features a sculptural floral design with sparkling crystal-like details. The adjustable band allows for a comfortable fit, while the artistic form adds a distinctive touch to your jewellery collection.",
+      "variants": [
+        {
+          "sku": "LFJD0051C2",
+          "color": "Gold",
+          "finish": "18K Gold Plated",
+          "ring_size": "Adjustable",
+          "qty": 1,
+          "price_inr": 3999,
+          "image_folder": "LFJD0051C2"
+        },
+        {
+          "sku": "LFJD0051A1",
+          "color": "Silver",
+          "finish": "Silver",
+          "ring_size": "Adjustable",
+          "qty": 1,
+          "price_inr": 3599,
+          "image_folder": "LFJD0051A1"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-017",
+      "name": "Bee & Honey Agate Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Bee & Honey",
+      "type": "Ring",
+      "finish": "18K Gold Plated / Silver",
+      "stone": "Agate",
+      "collection": null,
+      "description": "Inspired by the charm of bees and the sweetness of honey, this ring features a detailed bee motif paired with an agate stone accent. Crafted in 925 sterling silver with an 18K gold-plated finish, its sculptural design adds a distinctive, nature-inspired touch to your jewellery collection.",
+      "variants": [
+        {
+          "sku": "LFJD0136AR8",
+          "color": "Gold",
+          "finish": "18K Gold Plated",
+          "ring_size": "8",
+          "qty": 1,
+          "price_inr": 3999,
+          "image_folder": "LFJD0136AR8"
+        },
+        {
+          "sku": "LFJD0136ER7",
+          "color": "Silver",
+          "finish": "Silver",
+          "ring_size": "7",
+          "qty": 1,
+          "price_inr": 3599,
+          "image_folder": "LFJD0136ER7"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-018",
+      "name": "Bee Kiss From a Rose Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Rose & Bee",
+      "type": "Ring",
+      "finish": null,
+      "stone": null,
+      "collection": null,
+      "description": "Inspired by the charm of a blooming rose and the delicate beauty of a visiting bee, this 925 sterling silver ring brings a playful, nature-inspired character to your jewellery collection. The floral detailing creates a distinctive look, while the elegant finish makes it suitable for both everyday styling and special occasions.",
+      "variants": [
+        {
+          "sku": "LFJD0103A1",
+          "color": "Silver",
+          "finish": null,
+          "ring_size": "8",
+          "qty": 1,
+          "price_inr": 2499,
+          "image_folder": "LFJD0103A1",
+          "folder_hint": "Bee Kiss"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-019",
+      "name": "Pomegranate Leaf Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Pomegranate, Leaf & Branch",
+      "type": "Adjustable Ring",
+      "finish": "Silver with Gold-Toned Accent",
+      "stone": null,
+      "collection": null,
+      "description": "Inspired by the natural forms of pomegranate leaves and branches, this adjustable ring features sculpted silver leaves with a contrasting gold-toned accent. Crafted in 925 sterling silver, its organic design adds an artistic touch to both everyday and occasion styling.",
+      "variants": [
+        {
+          "sku": "LFJD0149E",
+          "color": "Silver with Gold-Toned Accent",
+          "finish": null,
+          "ring_size": "Adjustable",
+          "qty": 1,
+          "price_inr": 4499,
+          "image_folder": "LFJD0149E"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-020",
+      "name": "Pencil Shavings Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Pencil Shavings",
+      "type": "Ring",
+      "finish": "Gold / Silver",
+      "stone": null,
+      "collection": null,
+      "description": "Inspired by the delicate, curled form of pencil shavings, this sculptural ring brings an artistic and contemporary touch to everyday jewellery. Its layered, textured design creates a distinctive statement while maintaining an elegant silhouette.",
+      "variants": [
+        {
+          "sku": "LFJD0139DR75",
+          "color": "Gold",
+          "finish": "Gold",
+          "ring_size": "7.5",
+          "qty": 1,
+          "price_inr": 3999,
+          "image_folder": "LFJD0139DR75"
+        },
+        {
+          "sku": "LFJD0139ER75",
+          "color": "Silver",
+          "finish": "Silver",
+          "ring_size": "7.5",
+          "qty": 1,
+          "price_inr": 3599,
+          "image_folder": "LFJD0139ER75"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-021",
+      "name": "Gemstone Floral Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Floral",
+      "type": "Ring",
+      "finish": "Gold / Silver",
+      "stone": "Pink Gemstone",
+      "collection": null,
+      "description": "A statement ring featuring a smooth pink gemstone centre framed by a delicate floral detail. Crafted in 925 sterling silver, the design is available in both gold and silver finishes, bringing a soft, elegant touch to your jewellery collection.",
+      "variants": [
+        {
+          "sku": "LFJD0093D85",
+          "color": "Gold",
+          "finish": "Gold",
+          "ring_size": "8.5",
+          "qty": 1,
+          "price_inr": 5499,
+          "image_folder": "LFJD0093D85"
+        },
+        {
+          "sku": "LFJD0093B75",
+          "color": "Silver",
+          "finish": "Silver",
+          "ring_size": "7.5",
+          "qty": 1,
+          "price_inr": 5499,
+          "image_folder": "LFJD0093B75"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-022",
+      "name": "Natural Pearl Leaf Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Leaf & Pearl",
+      "type": "Ring",
+      "finish": "18K Gold Plated",
+      "stone": "Natural Pearl",
+      "collection": null,
+      "description": "Inspired by the organic form of a leaf, this ring combines a sculpted leaf design with a natural pearl centre. Crafted in 925 sterling silver with an 18K gold-plated finish, it brings together nature-inspired detailing and a refined, elegant look.",
+      "variants": [
+        {
+          "sku": "LFJD0162A",
+          "color": "Gold",
+          "finish": "18K Gold Plated",
+          "ring_size": null,
+          "qty": 3,
+          "price_inr": 3999,
+          "image_folder": "LFJD0162A"
+        },
+        {
+          "sku": "LFJD0162E",
+          "color": "Silver",
+          "finish": "Silver",
+          "ring_size": null,
+          "qty": 3,
+          "price_inr": 3999,
+          "image_folder": "LFJD0162E"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-023",
+      "name": "Flower Adjustable Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver with Gold Plating",
+      "design": "Flower",
+      "type": "Adjustable Ring",
+      "finish": null,
+      "stone": null,
+      "collection": "Flora",
+      "description": "Inspired by the natural beauty of blooming flowers, this adjustable ring features a gold-plated finish over 925 sterling silver, adding a warm, polished touch to its floral design. Its open, resizable structure offers a comfortable fit, while the detailed flower motif brings a graceful finish to everyday and occasion styling.",
+      "variants": [
+        {
+          "sku": "LFJD0152A",
+          "color": "Gold",
+          "finish": "Gold Plated",
+          "ring_size": "Resizable",
+          "qty": 1,
+          "price_inr": 3599,
+          "image_folder": "LFJD0152A"
+        },
+        {
+          "sku": "LFJD0152E",
+          "color": "Silver",
+          "finish": "Silver",
+          "ring_size": "Resizable",
+          "qty": 1,
+          "price_inr": 3599,
+          "image_folder": "LFJD0152E"
+        }
+      ]
+    },
+    {
+      "product_id": "PRD-024",
+      "name": "Lily of the Valley Crystal Ring",
+      "category": "Ring",
+      "material": "925 Sterling Silver",
+      "design": "Lily of the Valley",
+      "type": "Ring",
+      "finish": null,
+      "stone": "Natural Crystal",
+      "collection": null,
+      "description": "A delicate Lily of the Valley flower rests on a sculpted band in this elegant ring. Featuring a translucent natural crystal bloom with fine golden detailing at the centre, the design brings together botanical form and understated sophistication. A distinctive piece for everyday styling or special occasions.",
+      "variants": [
+        {
+          "sku": "LFJD0103A1-LILY",
+          "color": "Silver",
+          "finish": null,
+          "ring_size": null,
+          "qty": 1,
+          "price_inr": 3999,
+          "image_folder": "LFJD0103A1",
+          "folder_hint": "Lily of the Valley"
+        }
+      ]
+    }
+  ]
+}

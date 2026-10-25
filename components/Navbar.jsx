@@ -26,20 +26,20 @@ const categoryLinks = [
   { href: '/shop?category=chokers', label: 'Chokers', match: 'chokers' },
   { href: '/shop?category=rings', label: 'Rings', match: 'rings' },
   {
-    href: '/shop?category=cuffs',
+    href: '/shop?category=brooches',
     label: 'Accessories',
     match: 'accessories',
     mega: 'accessories',
     children: [
-      { href: '/shop?category=cuffs', label: 'Brooches', match: 'cuffs' },
-      { href: '/shop?category=charms', label: 'Charms', match: 'charms' },
+      { href: '/shop?category=chains', label: 'Chains', match: 'chains' },
+      { href: '/shop?category=brooches', label: 'Brooches', match: 'brooches' },
     ],
   },
   { href: '/shop?category=anklets', label: 'Anklets', match: 'anklets' },
   { href: '/shop?category=sets', label: 'Sets', match: 'sets' },
 ];
 
-/** Mobile drawer — house + categories; Accessories expands to Brooches / Charms */
+/** Mobile drawer — house + categories; Accessories expands to Chains / Brooches */
 const mobileLinks = [
   ...houseLinks,
   ...categoryLinks.flatMap((link) =>
@@ -302,7 +302,7 @@ export default function Navbar() {
     if (link.match === 'gifting') return pathname.startsWith('/gifting');
     if (link.match === 'shop') return pathname === '/shop' && !category;
     if (link.match === 'accessories') {
-      return pathname.startsWith('/shop') && (category === 'cuffs' || category === 'charms');
+      return pathname.startsWith('/shop') && (category === 'brooches' || category === 'chains');
     }
     if (pathname.startsWith('/shop')) return category === link.match;
     return false;
@@ -508,7 +508,7 @@ export default function Navbar() {
                           : isActive(link)
                             ? 'text-white'
                             : 'text-white/75'
-                      } ${link.match === 'cuffs' || link.match === 'charms' ? 'pl-3 text-[1.25rem] sm:text-2xl' : ''}`}
+                      } ${link.match === 'brooches' || link.match === 'chains' ? 'pl-3 text-[1.25rem] sm:text-2xl' : ''}`}
                     >
                       {link.icon ? <HouseIcon name={link.icon} className="h-6 w-6" /> : null}
                       <span>{link.label}</span>
