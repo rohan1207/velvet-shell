@@ -9,24 +9,49 @@ import { flyToCart, prefersReducedMotion } from '@/lib/fly-to-cart';
 import { useStore } from '@/context/StoreContext';
 import { sortByColourPriority } from '@/lib/catalog/color-order';
 
+function resolveFromFamily(family, catalogProducts) {
+  if (!family?.variants?.length) return [];
+  return sortByColourPriority(
+    family.variants
+      .map((variant) => {
+        const product = catalogProducts.find((p) => p.slug === variant.slug);
+        if (!product) return null;
+        return { ...variant, product };
+      })
+      .filter(Boolean),
+    (v) => v.label || v.product?.colorLabel,
+  );
+}
+
+function resolveFromFamilyId(slug, catalogProducts) {
+  const current = catalogProducts.find((p) => p.slug === slug);
+  if (!current?.familyId) return [];
+  const siblings = catalogProducts.filter((p) => p.familyId === current.familyId);
+  if (siblings.length < 2) return [];
+  return sortByColourPriority(
+    siblings.map((product) => ({
+      slug: product.slug,
+      label: product.colorLabel,
+      swatch: product.colorSwatch,
+      active: product.active !== false,
+      product,
+    })),
+    (v) => v.label || v.product?.colorLabel,
+  );
+}
+
 function resolveVariants(slug, colorFamilies = [], catalogProducts = []) {
-  if (colorFamilies?.length && catalogProducts?.length) {
-    const family = colorFamilies.find(
+  if (catalogProducts?.length) {
+    const family = (colorFamilies || []).find(
       (f) => f.primary === slug || f.variants?.some((v) => v.slug === slug),
     );
-    if (family) {
-      const resolved = sortByColourPriority(
-        family.variants
-          .map((variant) => {
-            const product = catalogProducts.find((p) => p.slug === variant.slug);
-            if (!product) return null;
-            return { ...variant, product };
-          })
-          .filter(Boolean),
-        (v) => v.label || v.product?.colorLabel,
-      );
-      if (resolved.length) return resolved;
-    }
+    const fromFamily = resolveFromFamily(family, catalogProducts);
+    if (fromFamily.length > 1) return fromFamily;
+
+    const fromId = resolveFromFamilyId(slug, catalogProducts);
+    if (fromId.length > 1) return fromId;
+
+    if (fromFamily.length) return fromFamily;
   }
   return sortByColourPriority(getDummyVariants(slug), (v) => v.label || v.product?.colorLabel);
 }
