@@ -6,6 +6,7 @@ import { sendOrderEmails } from '@/lib/auth/mail';
 import { fromDbOrder, generateOrderNumber } from '@/lib/orders';
 import { loadCatalog, productFromCatalog } from '@/lib/catalog';
 import { getProduct } from '@/lib/products';
+import { applyPromoCode, recordPromoRedemption } from '@/lib/discounts/apply';
 
 function skuFromFeatures(features) {
   if (!Array.isArray(features)) return '';
@@ -73,6 +74,7 @@ export async function POST(request) {
       subtotal,
       shippingFee = 0,
       total,
+      discountCode = '',
     } = body;
 
     if (!Array.isArray(items) || !items.length) {
@@ -132,9 +134,38 @@ export async function POST(request) {
     });
 
     const computedSubtotal = lineRows.reduce((s, l) => s + l.line_total, 0);
-    const finalSubtotal = Number(subtotal) || computedSubtotal;
+    const finalSubtotal = computedSubtotal;
     const finalShipping = Number(shippingFee) || 0;
-    const finalTotal = Number(total) || finalSubtotal + finalShipping;
+
+    let discountAmount = 0;
+    let appliedCode = '';
+    let discountId = null;
+    if (discountCode) {
+      const promo = await applyPromoCode({
+        code: discountCode,
+        lines: lineRows.map((row) => {
+          const live = catalog ? productFromCatalog(catalog, row.product_slug) : null;
+          return {
+            slug: row.product_slug,
+            qty: row.qty,
+            price: row.unit_price,
+            category: live?.category || '',
+            collection: live?.collection || '',
+          };
+        }),
+        customerEmail: orderEmail,
+      });
+      if (promo.ok) {
+        discountAmount = promo.discountAmount;
+        appliedCode = promo.code;
+        discountId = promo.discountId;
+      }
+    }
+
+    const finalTotal = Math.max(0, finalSubtotal - discountAmount + finalShipping);
+    // Ignore client total/subtotal — server recomputes from catalog + promo.
+    void subtotal;
+    void total;
 
     const shippingPayload = {
       fullName: shipping.fullName || [shipping.firstName, shipping.lastName].filter(Boolean).join(' '),
@@ -154,23 +185,47 @@ export async function POST(request) {
     const admin = createAdminSupabase();
     const orderNumber = generateOrderNumber();
 
-    const { data: orderRow, error: orderErr } = await admin
+    const orderPayload = {
+      order_number: orderNumber,
+      user_id: user.id,
+      email: orderEmail,
+      status: 'paid',
+      subtotal: finalSubtotal,
+      shipping_fee: finalShipping,
+      total: finalTotal,
+      currency: 'INR',
+      shipping: shippingPayload,
+      razorpay_order_id: razorpayOrderId || null,
+      notes: [
+        demo ? 'Demo payment' : '',
+        appliedCode ? `Promo ${appliedCode} (−₹${discountAmount})` : '',
+      ]
+        .filter(Boolean)
+        .join(' · '),
+      discount_code: appliedCode,
+      discount_amount: discountAmount,
+      discount_id: discountId,
+    };
+
+    let { data: orderRow, error: orderErr } = await admin
       .from('orders')
-      .insert({
-        order_number: orderNumber,
-        user_id: user.id,
-        email: orderEmail,
-        status: 'paid',
-        subtotal: finalSubtotal,
-        shipping_fee: finalShipping,
-        total: finalTotal,
-        currency: 'INR',
-        shipping: shippingPayload,
-        razorpay_order_id: razorpayOrderId || null,
-        notes: demo ? 'Demo payment' : '',
-      })
+      .insert(orderPayload)
       .select('*')
       .single();
+
+    if (orderErr && /discount_code|discount_amount|discount_id/i.test(orderErr.message || '')) {
+      const {
+        discount_code: _dc,
+        discount_amount: _da,
+        discount_id: _di,
+        ...withoutDiscountCols
+      } = orderPayload;
+      const retry = await admin.from('orders').insert(withoutDiscountCols).select('*').single();
+      orderRow = retry.data
+        ? { ...retry.data, discount_code: appliedCode, discount_amount: discountAmount }
+        : retry.data;
+      orderErr = retry.error;
+    }
 
     if (orderErr) throw orderErr;
 
@@ -208,9 +263,34 @@ export async function POST(request) {
       });
     }
 
+    if (discountId && discountAmount > 0) {
+      try {
+        await recordPromoRedemption({
+          discountId,
+          orderId: orderRow.id,
+          orderNumber,
+          customerEmail: orderEmail,
+          discountAmount,
+          orderSubtotal: finalSubtotal,
+          orderTotal: finalTotal,
+        });
+      } catch (redErr) {
+        console.error('[orders] discount redemption failed', redErr);
+      }
+    }
+
     try {
       await sendOrderEmails({
-        order: orderRow,
+        order: {
+          ...orderRow,
+          discount_code: orderRow.discount_code || appliedCode || '',
+          discount_amount: orderRow.discount_amount ?? discountAmount ?? 0,
+          razorpay_payment_id: paymentId || orderRow.razorpay_payment_id || null,
+          razorpay_order_id: razorpayOrderId || orderRow.razorpay_order_id || null,
+          paymentId: paymentId || null,
+          paymentMethod: demo ? 'Demo (Razorpay)' : 'Razorpay',
+          demo: Boolean(demo),
+        },
         items: insertedItems || itemsWithOrder,
         customerName: shippingPayload.fullName,
       });
@@ -220,6 +300,8 @@ export async function POST(request) {
 
     const order = fromDbOrder(orderRow, insertedItems || itemsWithOrder);
     order.paymentId = paymentId || null;
+    order.discountCode = appliedCode;
+    order.discountAmount = discountAmount;
 
     return json({ ok: true, order }, { status: 201 });
   } catch (err) {

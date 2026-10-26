@@ -4,9 +4,19 @@ import Link from 'next/link';
 import { useStore } from '@/context/StoreContext';
 import { money } from '@/lib/format';
 import ProductThumb from '@/components/ProductThumb';
+import PromoCodeField from '@/components/PromoCodeField';
 
 export default function CartPage() {
-  const { cart, updateQty, removeFromCart, cartTotal, getProduct } = useStore();
+  const {
+    cart,
+    updateQty,
+    removeFromCart,
+    cartTotal,
+    cartPayable,
+    discountAmount,
+    promo,
+    getProduct,
+  } = useStore();
 
   return (
     <div className="bg-ivory pt-28 pb-24 md:pt-36">
@@ -95,10 +105,19 @@ export default function CartPage() {
                 );
               })}
             </ul>
-            <div className="mt-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
-              <div>
+            <div className="mt-10 max-w-sm">
+              <PromoCodeField />
+            </div>
+            <div className="mt-8 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+              <div className="space-y-1">
                 <p className="text-sm text-stone">Subtotal</p>
-                <p className="font-num text-3xl text-ink md:text-4xl">{money(cartTotal)}</p>
+                <p className="font-num text-xl text-ink/70">{money(cartTotal)}</p>
+                {discountAmount > 0 ? (
+                  <p className="text-sm text-emerald-800">
+                    Discount{promo?.code ? ` (${promo.code})` : ''} −{money(discountAmount)}
+                  </p>
+                ) : null}
+                <p className="font-num text-3xl text-ink md:text-4xl">{money(cartPayable)}</p>
               </div>
               <Link
                 href="/checkout"

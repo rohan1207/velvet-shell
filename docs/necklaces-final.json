@@ -1,0 +1,399 @@
+{
+  "currency": "INR",
+  "image_folder_rule": "images/<variant sku>/ (folder name = variant sku)",
+  "products": [
+    {
+      "product_id": "NCK-001",
+      "name": "925 Sterling Silver Geometric Cat Pendant Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Geometric",
+      "type": "Pendant Necklace",
+      "finish": null,
+      "stone": null,
+      "description": "A unique geometric pendant necklace featuring a contemporary cat-inspired design set within a sleek square silhouette. Crafted in 925 sterling silver, it adds a distinctive touch to everyday and occasion styling.",
+      "variants": [
+        {
+          "sku": "YWJE0028",
+          "color": "Gold",
+          "finish": null,
+          "length": "18 inches",
+          "qty": 2,
+          "price_inr": 1699,
+          "image_folder": "YWJE0028"
+        },
+        {
+          "sku": "YWJE0029",
+          "color": "Silver",
+          "finish": null,
+          "length": "18 inches",
+          "qty": 2,
+          "price_inr": 1699,
+          "image_folder": "YWJE0029"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-002",
+      "name": "925 Sterling Silver High Heel Pendant Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "High Heel",
+      "type": "Chain Necklace",
+      "finish": null,
+      "stone": null,
+      "description": "Make a stylish statement with this 925 sterling silver pendant necklace featuring a charming high-heel-inspired pendant. A playful choice for fashion lovers, it adds personality to everyday outfits while making a thoughtful gift for someone who loves distinctive jewellery.",
+      "variants": [
+        {
+          "sku": "YWJE0038",
+          "color": "Silver",
+          "finish": null,
+          "length": "18 inches",
+          "qty": 2,
+          "price_inr": 1299,
+          "image_folder": "YWJE0038"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-003",
+      "name": "925 Sterling Silver Lotus Flower Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Lotus Flower",
+      "type": "Chain Necklace",
+      "finish": null,
+      "stone": null,
+      "description": "Inspired by the beauty of the lotus, this 925 sterling silver necklace features a floral pendant with graceful layered detailing. The design brings together elegance and nature in a piece that can transition effortlessly from everyday styling to festive occasions.",
+      "variants": [
+        {
+          "sku": "YWJE0039",
+          "color": "Gold",
+          "finish": null,
+          "length": "18 inches",
+          "qty": 6,
+          "price_inr": 1599,
+          "image_folder": "YWJE0039"
+        },
+        {
+          "sku": "YWJE0040",
+          "color": "Silver",
+          "finish": null,
+          "length": "18 inches",
+          "qty": 5,
+          "price_inr": 1599,
+          "image_folder": "YWJE0040"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-004",
+      "name": "925 Sterling Silver Pine Cone Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Pine Cone",
+      "type": "Choker Necklace",
+      "finish": null,
+      "stone": null,
+      "description": "A nature-inspired statement piece featuring a pine cone pendant suspended from a classic 925 sterling silver chain. Its distinctive design brings an organic character to your jewellery collection and makes an interesting choice for everyday or occasion styling.",
+      "variants": [
+        {
+          "sku": "YWJE0041",
+          "color": "Silver",
+          "finish": null,
+          "length": "18 inches",
+          "qty": 4,
+          "price_inr": 1599,
+          "image_folder": "YWJE0041"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-005",
+      "name": "925 Sterling Silver Clover Pearl Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Clover & Pearl",
+      "type": "Pendant Necklace",
+      "finish": null,
+      "stone": "Pearl",
+      "description": "A refined 925 sterling silver necklace featuring a pearl accent set within a charming clover-inspired design. Its understated elegance makes it easy to pair with everyday outfits while adding a subtle touch of sophistication.",
+      "variants": [
+        {
+          "sku": "YWJE0045",
+          "color": "Silver",
+          "finish": null,
+          "length": "40 + 5 cm extension chain",
+          "qty": 5,
+          "price_inr": 1999,
+          "image_folder": "YWJE0045"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-006",
+      "name": "925 Sterling Silver Flower Branch Bird Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Flower, Branch & Bird",
+      "type": "Pendant Necklace",
+      "finish": null,
+      "stone": null,
+      "description": "A nature-inspired 925 sterling silver necklace featuring an intricate arrangement of flowers, branches and bird motifs. The layered design creates a distinctive statement while retaining an elegant, feminine character.",
+      "variants": [
+        {
+          "sku": "YWJE0052",
+          "color": "Silver",
+          "finish": null,
+          "length": "40 + 5 cm extension chain",
+          "qty": 7,
+          "price_inr": 1699,
+          "image_folder": "YWJE0052"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-007",
+      "name": "925 Sterling Silver Flower Pendant Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Flower",
+      "type": "Necklace",
+      "finish": null,
+      "stone": null,
+      "description": "A graceful 925 sterling silver necklace centred around a slender flower-inspired pendant. The elongated design creates an elegant vertical silhouette, making it a versatile piece for everyday wear and occasion styling.",
+      "variants": [
+        {
+          "sku": "YWJE0063",
+          "color": "Silver",
+          "finish": null,
+          "length": null,
+          "qty": 5,
+          "price_inr": 1699,
+          "image_folder": "YWJE0063"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-008",
+      "name": "925 Sterling Silver Pearl Pendant Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Pearl",
+      "type": "Pendant Necklace",
+      "finish": null,
+      "stone": "Pearl",
+      "description": "A classic 925 sterling silver pendant necklace featuring a single pearl suspended from a fine chain. The understated design lets the pearl take centre stage, making it suitable for everyday elegance, festive occasions and gifting.",
+      "variants": [
+        {
+          "sku": "YWJE0065",
+          "color": "Silver",
+          "finish": null,
+          "length": null,
+          "qty": 4,
+          "price_inr": 1699,
+          "image_folder": "YWJE0065"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-009",
+      "name": "925 Sterling Silver Waterdrop Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Waterdrop",
+      "type": "Necklace",
+      "finish": null,
+      "stone": null,
+      "description": "Inspired by the simple beauty of a water droplet, this 925 sterling silver necklace features a flowing, sculptural chain with a soft organic form. Its minimalist character makes it an effortless piece for everyday styling.",
+      "variants": [
+        {
+          "sku": "YWJE0066",
+          "color": "Silver",
+          "finish": null,
+          "length": null,
+          "qty": 5,
+          "price_inr": 1999,
+          "image_folder": "YWJE0066"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-010",
+      "name": "925 Sterling Silver Round Pearl Pendant Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Round Pearl",
+      "type": "Pendant Necklace",
+      "finish": null,
+      "stone": "Pearl",
+      "description": "A classic 925 sterling silver pendant necklace featuring a smooth round pearl suspended from a fine chain. Its clean silhouette and understated finish make it an effortless choice for everyday styling, elegant occasions and gifting.",
+      "variants": [
+        {
+          "sku": "YWJE0067",
+          "color": "Silver",
+          "finish": null,
+          "length": null,
+          "qty": 6,
+          "price_inr": 1999,
+          "image_folder": "YWJE0067"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-011",
+      "name": "925 Sterling Silver Pearl Zircon Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Pearl & Zircon",
+      "type": "Necklace",
+      "finish": null,
+      "stone": "Pearl & Zircon",
+      "description": "A sophisticated 925 sterling silver necklace combining pearl and zircon detailing for a refined finish. The classic chain design makes it easy to style with both contemporary and occasion wear, while the choice of finishes offers versatility.",
+      "variants": [
+        {
+          "sku": "YWJE0133",
+          "color": "White Gold",
+          "finish": null,
+          "length": null,
+          "qty": 2,
+          "price_inr": 3499,
+          "image_folder": "YWJE0133"
+        },
+        {
+          "sku": "YWJE0134",
+          "color": "Gold",
+          "finish": null,
+          "length": null,
+          "qty": 2,
+          "price_inr": 3499,
+          "image_folder": "YWJE0134"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-012",
+      "name": "Redbud Bell Flower Pendant Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Redbud Bell Flower",
+      "type": "Pendant Necklace",
+      "finish": "18K Gold Plated",
+      "stone": null,
+      "description": "A delicate redbud bell flower takes centre stage in this elegant pendant necklace. Crafted in 925 sterling silver with an 18K gold-plated finish, the textured floral form is paired with fine hanging accents for a graceful, vintage-inspired silhouette.",
+      "variants": [
+        {
+          "sku": "LFJF0114D",
+          "color": "Gold",
+          "finish": null,
+          "length": null,
+          "qty": 1,
+          "price_inr": 3999,
+          "image_folder": "LFJF0114D"
+        },
+        {
+          "sku": "LFJF0114E",
+          "color": "Silver",
+          "finish": null,
+          "length": null,
+          "qty": 1,
+          "price_inr": 3999,
+          "image_folder": "LFJF0114E"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-013",
+      "name": "Flower in the Rain Crystal Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Flower in the Rain",
+      "type": "Necklace",
+      "finish": null,
+      "stone": "Natural Crystal",
+      "description": "A delicate flower rests along a graceful branch-like setting in this 925 sterling silver necklace. Featuring a soft pink crystal bloom and fine botanical detailing, the design captures a light, natural elegance with a vintage jewellery feel.",
+      "variants": [
+        {
+          "sku": "LFJF0027B",
+          "color": "Silver + Pink",
+          "finish": null,
+          "length": null,
+          "qty": 1,
+          "price_inr": 5499,
+          "image_folder": "LFJF0027B"
+        },
+        {
+          "sku": "LFJF0027A",
+          "color": "Silver + White",
+          "finish": null,
+          "length": null,
+          "qty": 1,
+          "price_inr": 5499,
+          "image_folder": "LFJF0027A"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-014",
+      "name": "Bamboo Charm Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Bamboo Charm",
+      "type": "Necklace",
+      "finish": "Gold / Silver",
+      "stone": null,
+      "description": "Slender bamboo leaves form a graceful charm in this minimalist necklace. Crafted in 925 sterling silver, the elongated leaf detailing gives the piece a clean, natural look that works effortlessly with both everyday and occasion styling.",
+      "variants": [
+        {
+          "sku": "LFJF0081A",
+          "color": "Gold",
+          "finish": null,
+          "length": null,
+          "qty": 1,
+          "price_inr": 3599,
+          "image_folder": "LFJF0081A"
+        },
+        {
+          "sku": "LFJF0081E",
+          "color": "Silver",
+          "finish": null,
+          "length": null,
+          "qty": 1,
+          "price_inr": 3199,
+          "image_folder": "LFJF0081E"
+        }
+      ]
+    },
+    {
+      "product_id": "NCK-015",
+      "name": "Butterfly Openwork Necklace",
+      "category": "Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Butterfly Openwork",
+      "type": "Necklace",
+      "finish": "18K Gold Plated / Silver",
+      "stone": null,
+      "description": "A delicate butterfly takes shape through intricate openwork detailing in this handcrafted necklace. Made from 925 sterling silver with an 18K gold-plated finish, the sculpted wings and fine chain create an elegant design that adds a subtle statement to everyday looks.",
+      "variants": [
+        {
+          "sku": "LFJF0117A",
+          "color": "Gold",
+          "finish": null,
+          "length": null,
+          "qty": 2,
+          "price_inr": 3999,
+          "image_folder": "LFJF0117A"
+        },
+        {
+          "sku": "LFJF0117B",
+          "color": "Silver",
+          "finish": null,
+          "length": null,
+          "qty": 2,
+          "price_inr": 3599,
+          "image_folder": "LFJF0117B"
+        }
+      ]
+    }
+  ]
+}

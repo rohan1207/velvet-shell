@@ -75,6 +75,9 @@ export function StoreProvider({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [quickViewSlug, setQuickViewSlug] = useState(null);
   const [ready, setReady] = useState(false);
+  const [promo, setPromo] = useState(null); // { code, discountAmount, label, name, discountId }
+  const [promoError, setPromoError] = useState('');
+  const [promoBusy, setPromoBusy] = useState(false);
   const [catalog, setCatalog] = useState({
     products: [],
     allProducts: [],
@@ -207,6 +210,63 @@ export function StoreProvider({ children }) {
     };
   }, [menuOpen, cartOpen, searchOpen, quickViewSlug]);
 
+  // Keep promo in sync when bag changes (qty / items).
+  useEffect(() => {
+    if (!promo?.code) return undefined;
+    if (!cart.length) {
+      setPromo(null);
+      return undefined;
+    }
+    let cancelled = false;
+    const t = setTimeout(async () => {
+      try {
+        const items = cart.map((item) => {
+          const product =
+            catalog.allProducts.find((p) => p.slug === item.slug) ||
+            catalog.products.find((p) => p.slug === item.slug);
+          return {
+            slug: item.slug,
+            qty: item.qty,
+            price: product?.price ?? item.price ?? 0,
+            category: product?.category || '',
+            collection: product?.collection || '',
+          };
+        });
+        const res = await fetch('/api/discounts/apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            code: promo.code,
+            items,
+            email: user?.email || '',
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (cancelled) return;
+        if (!res.ok || !data.ok) {
+          setPromo(null);
+          setPromoError(data.error || 'Promo no longer applies to this bag.');
+          return;
+        }
+        setPromo({
+          code: data.code,
+          discountId: data.discountId,
+          discountAmount: data.discountAmount,
+          label: data.label,
+          name: data.name,
+        });
+        setPromoError('');
+      } catch {
+        /* keep current promo until next attempt */
+      }
+    }, 350);
+    return () => {
+      cancelled = true;
+      clearTimeout(t);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- revalidate on cart shape / code only
+  }, [cart, promo?.code, catalog.allProducts, catalog.products, user?.email]);
+
   const value = useMemo(() => {
     function getProduct(slug) {
       return (
@@ -219,8 +279,14 @@ export function StoreProvider({ children }) {
     const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
     const cartTotal = cart.reduce((sum, item) => {
       const product = getProduct(item.slug);
-      return sum + (product ? product.price * item.qty : 0);
+      const price = product?.price ?? item.price ?? 0;
+      return sum + price * item.qty;
     }, 0);
+    const discountAmount = Math.min(
+      cartTotal,
+      Math.max(0, Number(promo?.discountAmount) || 0),
+    );
+    const cartPayable = Math.max(0, cartTotal - discountAmount);
 
     function addToCart(slug, options = {}) {
       const product = getProduct(slug);
@@ -306,6 +372,60 @@ export function StoreProvider({ children }) {
 
     function clearCart() {
       setCart([]);
+      setPromo(null);
+      setPromoError('');
+    }
+
+    async function applyPromoCode(code, email) {
+      setPromoBusy(true);
+      setPromoError('');
+      try {
+        const items = cart.map((item) => {
+          const product = getProduct(item.slug);
+          return {
+            slug: item.slug,
+            qty: item.qty,
+            price: product?.price ?? item.price ?? 0,
+            category: product?.category || '',
+            collection: product?.collection || '',
+          };
+        });
+        const res = await fetch('/api/discounts/apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            code,
+            items,
+            email: email || user?.email || '',
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) {
+          setPromo(null);
+          setPromoError(data.error || 'Could not apply this code.');
+          return { ok: false, error: data.error || 'Could not apply this code.' };
+        }
+        setPromo({
+          code: data.code,
+          discountId: data.discountId,
+          discountAmount: data.discountAmount,
+          label: data.label,
+          name: data.name,
+        });
+        return { ok: true, ...data };
+      } catch (err) {
+        setPromo(null);
+        const msg = err.message || 'Could not apply this code.';
+        setPromoError(msg);
+        return { ok: false, error: msg };
+      } finally {
+        setPromoBusy(false);
+      }
+    }
+
+    function clearPromo() {
+      setPromo(null);
+      setPromoError('');
     }
 
     function toggleWishlist(slug) {
@@ -505,30 +625,20 @@ export function StoreProvider({ children }) {
           subtotal: order.subtotal ?? order.total,
           shippingFee: order.shippingFee || 0,
           total: order.total,
+          discountCode: order.discountCode || promo?.code || '',
         });
         const next = data.order;
         setOrders((current) => [next, ...current.filter((o) => o.id !== next.id)]);
         clearCart();
         return next;
       } catch (err) {
-        if (err.status !== 401) throw err;
+        if (err.status === 401) {
+          const authErr = new Error('Please sign in again to complete your order.');
+          authErr.status = 401;
+          throw authErr;
+        }
+        throw err;
       }
-
-      const next = {
-        id: order.id || `VS${Date.now().toString().slice(-8)}`,
-        orderNumber: order.id,
-        createdAt: order.createdAt || new Date().toISOString(),
-        status: order.status || 'Confirmed',
-        total: order.total,
-        items: enriched,
-        shipping: order.shipping,
-        paymentId: order.paymentId || null,
-        paymentMethod: order.paymentMethod || 'Razorpay',
-        email: order.email || user?.email || '',
-      };
-      setOrders((current) => [next, ...current]);
-      clearCart();
-      return next;
     }
 
     async function refreshOrders() {
@@ -562,6 +672,13 @@ export function StoreProvider({ children }) {
       closeQuickView,
       cartCount,
       cartTotal,
+      cartPayable,
+      discountAmount,
+      promo,
+      promoError,
+      promoBusy,
+      applyPromoCode,
+      clearPromo,
       addToCart,
       updateQty,
       removeFromCart,
@@ -594,6 +711,9 @@ export function StoreProvider({ children }) {
     quickViewSlug,
     ready,
     catalog,
+    promo,
+    promoError,
+    promoBusy,
   ]);
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;

@@ -9,6 +9,7 @@ import { money } from '@/lib/format';
 import { loadRazorpayScript } from '@/lib/razorpay-client';
 import ProductThumb from '@/components/ProductThumb';
 import FallingPetals from '@/components/FallingPetals';
+import PromoCodeField from '@/components/PromoCodeField';
 
 const emptyForm = {
   fullName: '',
@@ -27,6 +28,9 @@ export default function CheckoutPage() {
   const {
     cart,
     cartTotal,
+    cartPayable,
+    discountAmount,
+    promo,
     cartCount,
     user,
     ready,
@@ -153,8 +157,9 @@ export default function CheckoutPage() {
     };
 
     const order = await placeOrder({
-      total: cartTotal,
+      total: cartPayable,
       subtotal: cartTotal,
+      discountCode: promo?.code || '',
       items: cart,
       shipping,
       paymentId,
@@ -196,7 +201,7 @@ export default function CheckoutPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          amount: cartTotal,
+          amount: cartPayable,
           currency: 'INR',
           receipt: `vs_${Date.now()}`,
         }),
@@ -498,7 +503,7 @@ export default function CheckoutPage() {
               'Opening Razorpay…'
             ) : (
               <>
-                Pay securely · <span className="font-num">{money(cartTotal)}</span>
+                Pay securely · <span className="font-num">{money(cartPayable)}</span>
               </>
             )}
           </button>
@@ -509,7 +514,15 @@ export default function CheckoutPage() {
 
         <aside className="md:col-span-6 lg:col-span-7">
           <div className="md:sticky md:top-[7.25rem]">
-            <OrderSummaryCard lines={lines} cartCount={cartCount} cartTotal={cartTotal} />
+            <OrderSummaryCard
+              lines={lines}
+              cartCount={cartCount}
+              cartTotal={cartTotal}
+              cartPayable={cartPayable}
+              discountAmount={discountAmount}
+              promo={promo}
+              email={form.email || user?.email}
+            />
           </div>
         </aside>
       </div>
@@ -572,7 +585,15 @@ function SuccessModal({ order, onContinue }) {
   );
 }
 
-function OrderSummaryCard({ lines, cartCount, cartTotal }) {
+function OrderSummaryCard({
+  lines,
+  cartCount,
+  cartTotal,
+  cartPayable,
+  discountAmount,
+  promo,
+  email,
+}) {
   return (
     <div className="flex max-h-[calc(100svh-8.5rem)] flex-col overflow-hidden rounded-[1.75rem] border border-ink/8 bg-white/80 shadow-[0_20px_60px_rgba(40,20,24,0.06)]">
       <div className="border-b border-ink/8 px-6 py-5">
@@ -618,14 +639,27 @@ function OrderSummaryCard({ lines, cartCount, cartTotal }) {
           </li>
         ))}
       </ul>
-      <div className="border-t border-ink/8 px-6 py-5">
-        <div className="flex items-center justify-between">
-          <span className="font-label text-[10px] tracking-[0.16em] text-ink/50 uppercase">
-            Total
-          </span>
-          <span className="font-num text-2xl text-burgundy">{money(cartTotal)}</span>
+      <div className="space-y-4 border-t border-ink/8 px-6 py-5">
+        <PromoCodeField email={email} />
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-ink/60">Subtotal</span>
+            <span className="font-num text-ink">{money(cartTotal)}</span>
+          </div>
+          {discountAmount > 0 ? (
+            <div className="flex items-center justify-between text-sm text-emerald-800">
+              <span>Discount{promo?.code ? ` (${promo.code})` : ''}</span>
+              <span className="font-num">−{money(discountAmount)}</span>
+            </div>
+          ) : null}
+          <div className="flex items-center justify-between pt-1">
+            <span className="font-label text-[10px] tracking-[0.16em] text-ink/50 uppercase">
+              Total
+            </span>
+            <span className="font-num text-2xl text-burgundy">{money(cartPayable)}</span>
+          </div>
         </div>
-        <p className="mt-2 text-xs font-light text-ink/50">Incl. complimentary shipping</p>
+        <p className="text-xs font-light text-ink/50">Incl. complimentary shipping</p>
       </div>
     </div>
   );

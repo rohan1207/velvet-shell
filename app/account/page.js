@@ -592,14 +592,31 @@ function Stat({ label, value }) {
   );
 }
 
+const ORDER_STATUS_STYLE = {
+  Pending: 'bg-amber-50 text-amber-900',
+  Confirmed: 'bg-sky-50 text-sky-900',
+  Processing: 'bg-violet-50 text-violet-900',
+  Shipped: 'bg-indigo-50 text-indigo-900',
+  Delivered: 'bg-emerald-50 text-emerald-900',
+  Cancelled: 'bg-rose-50 text-rose-900',
+  Refunded: 'bg-rose-50 text-rose-900',
+};
+
 function OrderRow({ order, detailed = false }) {
   const { getProduct } = useStore();
   const label = order.orderNumber || order.id;
   const ship = order.shipping || {};
+  const status = order.status || 'Confirmed';
+  const trackingUrl =
+    order.trackingUrl ||
+    (order.awb
+      ? `https://www.delhivery.com/track/package/${encodeURIComponent(order.awb)}`
+      : '');
+
   return (
     <li className="rounded-2xl border border-ink/8 bg-white/80 px-5 py-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
+        <div className="min-w-0">
           <p className="font-label text-[10px] tracking-[0.16em] text-gold uppercase">
             Order {label}
           </p>
@@ -610,9 +627,42 @@ function OrderRow({ order, detailed = false }) {
               year: 'numeric',
             })}
           </p>
-          <p className="mt-1 text-xs font-light text-ink/60">
-            {order.status} · {order.paymentMethod || 'Razorpay'}
-          </p>
+          <div className="mt-2.5 flex flex-wrap items-center gap-2">
+            <span
+              className={`inline-flex rounded-full px-2.5 py-1 font-label text-[9px] tracking-[0.14em] uppercase ${
+                ORDER_STATUS_STYLE[status] || 'bg-cream text-ink/70'
+              }`}
+            >
+              {status}
+            </span>
+            {order.shipmentStatus ? (
+              <span className="text-[11px] font-light text-ink/55">
+                Courier · {order.shipmentStatus}
+              </span>
+            ) : (
+              <span className="text-[11px] font-light text-ink/55">
+                {order.paymentMethod || 'Razorpay'}
+              </span>
+            )}
+          </div>
+          {order.awb ? (
+            <p className="mt-2 font-num text-xs text-ink/70">
+              AWB {order.awb}
+              {trackingUrl ? (
+                <>
+                  {' · '}
+                  <a
+                    href={trackingUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-burgundy underline-offset-2 hover:underline"
+                  >
+                    Track on Delhivery
+                  </a>
+                </>
+              ) : null}
+            </p>
+          ) : null}
         </div>
         <p className="font-num text-2xl text-ink">{money(order.total)}</p>
       </div>

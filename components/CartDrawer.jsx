@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from '@/context/StoreContext';
 import { money } from '@/lib/format';
 import ProductThumb from '@/components/ProductThumb';
+import PromoCodeField from '@/components/PromoCodeField';
 
 export default function CartDrawer() {
   const {
@@ -14,6 +15,9 @@ export default function CartDrawer() {
     updateQty,
     removeFromCart,
     cartTotal,
+    cartPayable,
+    discountAmount,
+    promo,
     cartCount,
     getProduct,
   } = useStore();
@@ -149,9 +153,24 @@ export default function CartDrawer() {
 
             {cart.length > 0 && (
               <div className="border-t border-ink/8 px-6 pt-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
-                <div className="flex justify-between text-sm">
-                  <span className="text-ink/85">Subtotal</span>
-                  <span className="font-num text-ink">{money(cartTotal)}</span>
+                <PromoCodeField compact />
+                <div className="mt-4 space-y-1.5 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-ink/85">Subtotal</span>
+                    <span className="font-num text-ink">{money(cartTotal)}</span>
+                  </div>
+                  {discountAmount > 0 ? (
+                    <div className="flex justify-between text-emerald-800">
+                      <span>
+                        Discount{promo?.code ? ` (${promo.code})` : ''}
+                      </span>
+                      <span className="font-num">−{money(discountAmount)}</span>
+                    </div>
+                  ) : null}
+                  <div className="flex justify-between font-medium">
+                    <span className="text-ink">Total</span>
+                    <span className="font-num text-ink">{money(cartPayable)}</span>
+                  </div>
                 </div>
                 <p className="mt-2 text-xs font-light text-ink/80">
                   Shipping calculated at checkout. Payments via Razorpay.
@@ -161,7 +180,7 @@ export default function CartDrawer() {
                   onClick={() => setCartOpen(false)}
                   className="bg-velvet-texture mt-5 flex h-12 items-center justify-center rounded-full font-label text-[11px] tracking-[0.2em] text-ivory"
                 >
-                  Checkout · <span className="font-num">{money(cartTotal)}</span>
+                  Checkout · <span className="font-num">{money(cartPayable)}</span>
                 </Link>
                 <Link
                   href="/cart"
