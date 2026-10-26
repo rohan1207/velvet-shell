@@ -3,6 +3,7 @@ import ShopExperience from '@/components/ShopExperience';
 import { ProductGridSkeleton } from '@/components/ProductCardSkeleton';
 import { listingFromCatalog, loadCatalog } from '@/lib/catalog';
 import { shopHero } from '@/lib/shop-meta';
+import { listActiveSets, setToListingCard } from '@/lib/sets';
 
 export const metadata = {
   title: 'Shop',
@@ -26,8 +27,9 @@ function ShopFallback() {
 }
 
 export default async function ShopPage() {
-  const catalog = await loadCatalog();
+  const [catalog, setsRaw] = await Promise.all([loadCatalog(), listActiveSets()]);
   const listing = listingFromCatalog(catalog);
+  const sets = (setsRaw || []).map(setToListingCard);
 
   return (
     <Suspense fallback={<ShopFallback />}>
@@ -37,6 +39,7 @@ export default async function ShopPage() {
         initialCollections={catalog.collections || []}
         initialCategories={catalog.categories || []}
         initialColorFamilies={catalog.colorFamilies || []}
+        initialSets={sets}
         shopHeroData={shopHero}
         catalogSource={catalog.source}
       />

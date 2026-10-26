@@ -237,6 +237,11 @@ export default function ProductCard({
     event.preventDefault();
     event.stopPropagation();
     if (bagBusy) return;
+    if (active.outOfStock) {
+      // OOS: open PDP where Notify me lives
+      window.location.href = `/shop/${active.slug}`;
+      return;
+    }
 
     const token = (animTokenRef.current += 1);
     const slug = active.slug;

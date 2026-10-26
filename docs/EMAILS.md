@@ -29,6 +29,7 @@ Professional single card, mobile-width (~560px), sections for customer / items /
 | 5 | **Admin “Resend tracking email”** | Admin notify `{ type: "shipped" }` | Same as #2 | Same as #2 |
 | 6 | **Forgot password** | Storefront `POST /api/auth/forgot-password` → `sendPasswordResetEmail` | Reset code | — |
 | 7 | **Gifting enquiry form** | Storefront `POST /api/gifting/enquiry` → `sendGiftingEnquiryEmail` | — | `GIFTING_NOTIFY_EMAIL` (fallback: order notify list) |
+| 8 | **Back in stock** (admin restocks a product that had Notify me) | Admin `upsertFamily` → `flushStockNotify` | Waitlist emails for that SKU, then rows deleted | — |
 
 Owners are parsed from comma/semicolon lists in env (e.g. `info.velvetshell@gmail.com,sales@velvetshell.in`).  
 `ADMIN_EMAIL` login username is **not** used as a mail recipient.

@@ -1,0 +1,305 @@
+{
+  "currency": "INR",
+  "products": [
+    {
+      "product_id": "EAR-001",
+      "name": "925 Silver Flower Long Drop Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Floral",
+      "type": "Long/Drop Hoop Earrings",
+      "description": "Elegant long drop earrings crafted in 925 sterling silver, featuring delicate floral detailing and slender hanging elements. Their elongated silhouette adds graceful movement, making them ideal for festive occasions, evening looks and special celebrations.",
+      "variants": [
+        { "sku": "YWJE0001", "color": "Silver", "qty": 10, "price_inr": 1599, "image_folder": "YWJE0001" }
+      ]
+    },
+    {
+      "product_id": "EAR-002",
+      "name": "925 Silver Flower Long Tassel Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Flower",
+      "type": "Needle Earrings",
+      "description": "A delicate pair of 925 sterling silver earrings featuring a floral motif with long, flowing tassel-style drops. Their graceful design adds a feminine touch to both festive and occasion wear.",
+      "variants": [
+        { "sku": "YWJE0002", "color": "Silver", "qty": 5, "price_inr": 1599, "image_folder": "YWJE0002" }
+      ]
+    },
+    {
+      "product_id": "EAR-003",
+      "name": "925 Silver Flower Drop Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Flower",
+      "type": "Long Tassel Earrings",
+      "description": "These elegant 925 sterling silver drop earrings feature a delicate floral design with an elongated drop silhouette. Lightweight-looking and versatile, they can add a subtle statement to everyday outfits or dressier occasions.",
+      "variants": [
+        { "sku": "YWJE0003", "color": "Silver", "qty": 6, "price_inr": 1599, "image_folder": "YWJE0003" }
+      ]
+    },
+    {
+      "product_id": "EAR-004",
+      "name": "925 Silver Long Lotus Flower Drop Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Lotus Flower",
+      "type": "Long Tassel Earrings",
+      "description": "Inspired by the graceful lotus, these 925 sterling silver drop earrings feature a delicate floral motif with a long, slender drop. A refined choice for adding elegance and movement to festive and special-occasion looks.",
+      "variants": [
+        { "sku": "YWJE0004", "color": "Silver", "qty": 6, "price_inr": 1399, "image_folder": "YWJE0004" }
+      ]
+    },
+    {
+      "product_id": "EAR-005",
+      "name": "Silver Personality Long Flower Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Flower",
+      "type": "Drop Earrings",
+      "description": "A graceful pair of 925 sterling silver flower earrings designed with an elongated drop silhouette. The delicate floral detailing and flowing form make them a beautiful choice for adding a refined statement to your look.",
+      "variants": [
+        { "sku": "YWJE0005", "color": "Silver", "qty": 6, "price_inr": 1399, "image_folder": "YWJE0005" }
+      ]
+    },
+    {
+      "product_id": "EAR-006",
+      "name": "925 Silver Flower Long Drop Earrings (Hoop)",
+      "material": "925 Sterling Silver",
+      "design": "Flower",
+      "type": "Hoop Earrings",
+      "description": "Delicate 925 sterling silver earrings featuring a floral motif with a long, slender drop design. Their elegant silhouette makes them a versatile choice for festive occasions, celebrations and evening styling.",
+      "variants": [
+        { "sku": "YWJE0006", "color": "Silver", "qty": 5, "price_inr": 1599, "image_folder": "YWJE0006" }
+      ]
+    },
+    {
+      "product_id": "EAR-007",
+      "name": "Round Cat Pearl Stud Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Cat-inspired",
+      "type": "Stud Earrings",
+      "stone": "Pearl",
+      "description": "A charming pair of round pearl stud earrings featuring a playful cat-inspired silhouette. Their delicate design and soft pearl detailing make them an elegant choice for everyday wear, while adding a subtle touch of personality to any look.",
+      "variants": [
+        { "sku": "YWJE0007", "color": "White", "qty": 6, "price_inr": 1099, "image_folder": "YWJE0007" }
+      ]
+    },
+    {
+      "product_id": "EAR-008",
+      "name": "925 Sterling Silver Daisy Flower Stud Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Daisy Flower",
+      "type": "Stud Earrings",
+      "description": "Delicate 925 sterling silver stud earrings featuring a graceful daisy flower design with intricate floral detailing. Their feminine and timeless silhouette makes them perfect for everyday styling as well as festive and special occasions.",
+      "variants": [
+        { "sku": "YWJE0008", "color": "Silver", "qty": 20, "price_inr": 1099, "image_folder": "YWJE0008" }
+      ]
+    },
+    {
+      "product_id": "EAR-009",
+      "name": "Reeti Freshwater Pearl Stud Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Pearl",
+      "type": "Stud Earrings",
+      "stone": "Freshwater Pearl",
+      "description": "A timeless pair of freshwater pearl stud earrings set in 925 sterling silver. Designed with a simple, elegant silhouette, these pearl studs bring a refined touch to everyday looks while also making a thoughtful choice for gifting and special occasions.",
+      "variants": [
+        { "sku": "YWJE0009", "color": "Pearl A", "qty": 1, "price_inr": 1099, "image_folder": "YWJE0009" },
+        { "sku": "YWJE0010", "color": "Pearl B", "qty": 1, "price_inr": 1099, "image_folder": "YWJE0010" },
+        { "sku": "YWJE0011", "color": "Pearl C", "qty": 1, "price_inr": 1099, "image_folder": "YWJE0011" },
+        { "sku": "YWJE0012", "color": "Pearl D", "qty": 1, "price_inr": 1099, "image_folder": "YWJE0012" },
+        { "sku": "YWJE0013", "color": "Pearl E", "qty": 1, "price_inr": 1099, "image_folder": "YWJE0013" },
+        { "sku": "YWJE0014", "color": "Pearl F", "qty": 1, "price_inr": 1099, "image_folder": "YWJE0014" }
+      ]
+    },
+    {
+      "product_id": "EAR-010",
+      "name": "Chic Lotus Flower Stud Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Lotus Flower",
+      "type": "Stud Earrings",
+      "description": "Delicate lotus flower stud earrings crafted in 925 sterling silver, featuring a detailed floral design with a subtle, elegant finish. Lightweight and versatile, they make a beautiful choice for everyday styling as well as special occasions.",
+      "variants": [
+        { "sku": "YWJE0018", "color": "Gold", "qty": 4, "price_inr": 1199, "image_folder": "YWJE0018" },
+        { "sku": "YWJE0019", "color": "Silver", "qty": 3, "price_inr": 1199, "image_folder": "YWJE0019" }
+      ]
+    },
+    {
+      "product_id": "EAR-011",
+      "name": "Freshwater Pearl Flower Stud Earrings",
+      "material": "Sterling Silver",
+      "design": "Flower",
+      "type": "Stud Earrings",
+      "stone": "Freshwater Pearl",
+      "description": "Delicate flower-shaped stud earrings crafted in sterling silver and adorned with freshwater pearls. With their elegant floral silhouette and subtle pearl detailing, they are perfect for adding a refined touch to everyday looks or special occasions.",
+      "variants": [
+        { "sku": "YWJE0021", "color": "White", "qty": 8, "price_inr": 1099, "image_folder": "YWJE0021" }
+      ]
+    },
+    {
+      "product_id": "EAR-012",
+      "name": "Silver Round Drop Earrings",
+      "material": "Silver",
+      "design": "Round",
+      "type": "Drop Earrings",
+      "description": "A delicate pair of silver round drop earrings featuring a simple, elegant silhouette. Their minimal design makes them easy to style for everyday wear while adding a subtle finishing touch to occasion looks.",
+      "variants": [
+        { "sku": "YWJE0022", "color": "Silver", "qty": 2, "price_inr": 1099, "image_folder": "YWJE0022" }
+      ]
+    },
+    {
+      "product_id": "EAR-013",
+      "name": "925 Silver Four-Leaf Clover Earrings",
+      "material": "Silver",
+      "design": "Four-Leaf Clover",
+      "type": "Drop Earrings",
+      "description": "Delicate 925 silver drop earrings featuring a charming four-leaf clover-inspired design. Their graceful floral-leaf detailing adds a feminine touch, making them suitable for everyday styling and thoughtful gifting.",
+      "variants": [
+        { "sku": "YWJE0023", "color": "Silver", "qty": 6, "price_inr": 1099, "image_folder": "YWJE0023" }
+      ]
+    },
+    {
+      "product_id": "EAR-014",
+      "name": "925 Silver Long Leaf Drop Earrings",
+      "material": "Silver",
+      "design": "Leaf",
+      "type": "Drop Earrings",
+      "description": "Inspired by the natural form of leaves, these 925 silver drop earrings feature an elongated silhouette with intricate leaf detailing. Their statement shape adds movement and elegance, making them ideal for festive occasions and evening looks.",
+      "variants": [
+        { "sku": "YWJE0024", "color": "Silver", "qty": 4, "price_inr": 1599, "image_folder": "YWJE0024" }
+      ]
+    },
+    {
+      "product_id": "EAR-015",
+      "name": "925 Sterling Silver Flower Stud Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Flower",
+      "type": "Stud Earrings",
+      "description": "Contemporary 925 sterling silver flower stud earrings featuring an elegant floral design with subtle detailing. Their classic silhouette makes them easy to style for everyday looks as well as special occasions.",
+      "variants": [
+        { "sku": "YWJE0036", "color": "Silver", "qty": 6, "price_inr": 1299, "image_folder": "YWJE0036" }
+      ]
+    },
+    {
+      "product_id": "EAR-016",
+      "name": "925 Sterling Silver Clover Pearl Stud Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Clover",
+      "type": "Stud Earrings",
+      "stone": "Pearl",
+      "description": "A graceful take on classic pearl studs, these 925 sterling silver earrings feature a rounded pearl framed by a clover-inspired setting. The combination of soft pearl and polished silver creates a timeless look that works beautifully for everyday wear and special occasions.",
+      "variants": [
+        { "sku": "YWJE0037", "color": "White", "qty": 12, "price_inr": 1299, "image_folder": "YWJE0037" }
+      ]
+    },
+    {
+      "product_id": "EAR-017",
+      "name": "925 Sterling Silver Clover Stud Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Clover",
+      "type": "Stud Earrings",
+      "description": "A timeless pair of 925 sterling silver clover stud earrings featuring an interlocking four-leaf design. Their clean silhouette adds a subtle statement to everyday looks and makes them an easy gifting choice.",
+      "variants": [
+        { "sku": "YWJE0043", "color": "Silver", "qty": 1, "price_inr": 1099, "image_folder": "YWJE0043" }
+      ]
+    },
+    {
+      "product_id": "EAR-018",
+      "name": "925 Sterling Silver Heart Stud Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Heart",
+      "type": "Stud Earrings",
+      "description": "Celebrate a classic symbol of love with these 925 sterling silver heart stud earrings. Intricate detailing adds character to the heart-shaped design, making them a meaningful choice for everyday wear or gifting.",
+      "variants": [
+        { "sku": "YWJE0044", "color": "Silver", "qty": 6, "price_inr": 1099, "image_folder": "YWJE0044" }
+      ]
+    },
+    {
+      "product_id": "EAR-019",
+      "name": "925 Sterling Silver Rose Stud Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Rose",
+      "type": "Stud Earrings",
+      "description": "Inspired by the timeless beauty of roses, these 925 sterling silver stud earrings feature detailed floral forms with a textured finish. A classic choice for adding a refined floral accent to everyday and occasion looks.",
+      "variants": [
+        { "sku": "YWJE0054", "color": "Silver", "qty": 5, "price_inr": 1099, "image_folder": "YWJE0054" }
+      ]
+    },
+    {
+      "product_id": "EAR-020",
+      "name": "925 Sterling Silver Flower Branch Stud Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Flower Branch",
+      "type": "Stud Earrings",
+      "description": "Inspired by nature, these 925 sterling silver stud earrings feature a graceful flower-and-branch design with subtle floral detailing. Their charming silhouette adds a fresh touch to everyday outfits and pairs beautifully with festive or occasion wear.",
+      "variants": [
+        { "sku": "YWJE0068", "color": "Silver", "qty": 4, "price_inr": 1099, "image_folder": "YWJE0068" }
+      ]
+    },
+    {
+      "product_id": "EAR-021",
+      "name": "925 Sterling Silver Pearl Shell Stud Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Pearl Shell",
+      "type": "Stud Earrings",
+      "description": "These 925 sterling silver stud earrings bring together the natural forms of a shell and pearl in a simple, elegant design. Their understated look makes them versatile enough for everyday wear while adding a refined touch to special occasions.",
+      "variants": [
+        { "sku": "YWJE0069", "color": "Silver", "qty": 6, "price_inr": 1099, "image_folder": "YWJE0069" }
+      ]
+    },
+    {
+      "product_id": "EAR-022",
+      "name": "925 Sterling Silver Lava Texture Pearl Stud Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Lava Texture Pearl",
+      "type": "Stud Earrings",
+      "description": "Featuring a distinctive lava-textured setting with a pearl centre, these 925 sterling silver stud earrings offer a contemporary take on classic pearl jewellery. The textured finish adds character while keeping the overall look refined and easy to style.",
+      "variants": [
+        { "sku": "YWJE0070", "color": "Silver", "qty": 6, "price_inr": 1099, "image_folder": "YWJE0070" }
+      ]
+    },
+    {
+      "product_id": "EAR-023",
+      "name": "925 Sterling Silver Double Pearl Clip-On Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Double Pearl",
+      "type": "Clip-On Earrings",
+      "stone": "Pearl",
+      "description": "A classic pair of 925 sterling silver clip-on earrings featuring two pearl accents in a simple, elegant arrangement. Designed for a comfortable, non-pierced styling option, these earrings bring a timeless pearl touch to everyday and occasion looks.",
+      "variants": [
+        { "sku": "YWJE0128", "color": "Silver", "qty": 2, "price_inr": 1499, "image_folder": "YWJE0128" },
+        { "sku": "YWJE0129", "color": "Gold", "qty": 2, "price_inr": 1499, "image_folder": "YWJE0129" }
+      ]
+    },
+    {
+      "product_id": "EAR-024",
+      "name": "925 Sterling Silver Pearl Hoop Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Pearl",
+      "type": "Hoop Earrings",
+      "stone": "Pearl",
+      "description": "A refined pair of 925 sterling silver hoop earrings featuring a rounded pearl accent within the hoop design. Their elegant silhouette balances classic pearl detailing with a contemporary shape, making them suitable for everyday wear and special occasions.",
+      "variants": [
+        { "sku": "YWJE0135", "color": "Silver", "qty": 2, "price_inr": 1099, "image_folder": "YWJE0135" }
+      ]
+    },
+    {
+      "product_id": "EAR-025",
+      "name": "925 Sterling Silver Beaded Hoop Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Bead",
+      "type": "Hoop Earrings",
+      "description": "Simple and versatile, these 925 sterling silver hoop earrings feature subtle beaded detailing for added texture. Their petite, minimalist design makes them an easy choice for everyday styling and effortless gifting.",
+      "variants": [
+        { "sku": "YWJE0136", "color": "Silver", "qty": 4, "price_inr": 1099, "image_folder": "YWJE0136" }
+      ]
+    },
+    {
+      "product_id": "EAR-026",
+      "name": "Sterling Silver Shell Hoop Earrings",
+      "material": "925 Sterling Silver",
+      "design": "Shell",
+      "type": "Hoop Earrings",
+      "description": "A stylish pair of 925 sterling silver hoop earrings featuring shell-inspired detailing. The simple hoop silhouette paired with the sculpted shell accents creates a refined, nature-inspired look that works effortlessly for everyday wear.",
+      "variants": [
+        { "sku": "YWJE0123", "color": "Silver", "qty": 3, "price_inr": 1099, "image_folder": "YWJE0123" },
+        { "sku": "YWJE0124", "color": "Gold", "qty": 2, "price_inr": 1099, "image_folder": "YWJE0124" }
+      ]
+    }
+  ]
+}

@@ -10,6 +10,7 @@ import { useStore } from '@/context/StoreContext';
 import { sortByColourPriority } from '@/lib/catalog/color-order';
 import ProductCard from './ProductCard';
 import { ProductPageNotes } from './ProductNotes';
+import NotifyMeButton from './NotifyMeButton';
 
 function labelCollection(slug, collections = []) {
   return collections.find((c) => c.slug === slug)?.name || dummyCollectionName(slug) || slug;
@@ -367,34 +368,42 @@ export default function ProductExperience({
           </div>
 
           <div className="mt-8 flex gap-3">
-            <button
-              type="button"
-              onClick={() => {
-                const missing = customizationFields.find(
-                  (field) => field.required && !String(customValues[field.id] ?? '').trim(),
-                );
-                if (missing) {
-                  setCustomError(`Please fill in: ${missing.label}`);
-                  return;
-                }
-                const customization = customizationFields
-                  .map((field) => ({
-                    id: field.id,
-                    label: field.label,
-                    value: String(customValues[field.id] ?? '').trim(),
-                  }))
-                  .filter((entry) => entry.value);
-                addToCart(activeProduct.slug, {
-                  size,
-                  metal: activeProduct.colorLabel || '',
-                  qty,
-                  customization,
-                });
-              }}
-              className="flex h-[52px] flex-1 items-center justify-center rounded-full bg-ink text-[11px] tracking-[0.28em] text-ivory uppercase"
-            >
-              Add to bag · <span className="font-num">{money(activeProduct.price * qty)}</span>
-            </button>
+            {activeProduct.outOfStock ? (
+              <NotifyMeButton
+                slug={activeProduct.slug}
+                kind="product"
+                name={displayTitle(activeProduct.name)}
+              />
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  const missing = customizationFields.find(
+                    (field) => field.required && !String(customValues[field.id] ?? '').trim(),
+                  );
+                  if (missing) {
+                    setCustomError(`Please fill in: ${missing.label}`);
+                    return;
+                  }
+                  const customization = customizationFields
+                    .map((field) => ({
+                      id: field.id,
+                      label: field.label,
+                      value: String(customValues[field.id] ?? '').trim(),
+                    }))
+                    .filter((entry) => entry.value);
+                  addToCart(activeProduct.slug, {
+                    size,
+                    metal: activeProduct.colorLabel || '',
+                    qty,
+                    customization,
+                  });
+                }}
+                className="flex h-[52px] flex-1 items-center justify-center rounded-full bg-ink text-[11px] tracking-[0.28em] text-ivory uppercase"
+              >
+                Add to bag · <span className="font-num">{money(activeProduct.price * qty)}</span>
+              </button>
+            )}
             <button
               type="button"
               onClick={() => toggleWishlist(activeProduct.slug)}

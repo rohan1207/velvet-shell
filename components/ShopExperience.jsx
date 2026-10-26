@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { shopHero as defaultShopHero } from '@/lib/shop-meta';
 import ProductCard from '@/components/ProductCard';
+import SetCard from '@/components/SetCard';
 import { ProductGridSkeleton } from '@/components/ProductCardSkeleton';
 import CategoryHeroSlider from '@/components/CategoryHeroSlider';
 import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
@@ -48,6 +49,7 @@ export default function ShopExperience({
   initialCollections = [],
   initialCategories = [],
   initialColorFamilies = [],
+  initialSets = [],
   shopHeroData = defaultShopHero,
   catalogSource = 'dummy',
 } = {}) {
@@ -63,6 +65,7 @@ export default function ShopExperience({
   const [collections, setCollections] = useState(initialCollections);
   const [categories, setCategories] = useState(initialCategories);
   const [colorFamilies, setColorFamilies] = useState(initialColorFamilies);
+  const [sets, setSets] = useState(initialSets);
   const [source, setSource] = useState(catalogSource);
   const [catalogLoading, setCatalogLoading] = useState(!initialProducts?.length);
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -79,6 +82,7 @@ export default function ShopExperience({
   useEffect(() => {
     setProducts(initialProducts);
     setAllProducts(initialAllProducts.length ? initialAllProducts : initialProducts);
+    setSets(initialSets || []);
     setCollections(initialCollections);
     setCategories(initialCategories);
     setColorFamilies(initialColorFamilies);
@@ -90,6 +94,7 @@ export default function ShopExperience({
     initialCollections,
     initialCategories,
     initialColorFamilies,
+    initialSets,
     catalogSource,
   ]);
 
@@ -137,11 +142,12 @@ export default function ShopExperience({
       }
     : shopHero;
 
-  /** Products in the active category (basis for filter options). */
+  /** Products in the active category (basis for filter options). Sets use dedicated cards. */
   const categoryProducts = useMemo(() => {
+    if (category === 'sets') return sets;
     if (category === 'all') return products;
     return products.filter((p) => p.category === category);
-  }, [products, category]);
+  }, [products, category, sets]);
 
   const priceBounds = useMemo(() => {
     const prices = categoryProducts.map((p) => Number(p.price) || 0).filter((n) => n > 0);
@@ -512,15 +518,19 @@ export default function ShopExperience({
                     sidebarOpen ? 'lg:grid-cols-3' : 'lg:grid-cols-4'
                   }`}
                 >
-                  {list.map((product, index) => (
-                    <ProductCard
-                      key={product.slug}
-                      product={product}
-                      index={index}
-                      colorFamilies={colorFamilies}
-                      catalogProducts={allProducts}
-                    />
-                  ))}
+                  {list.map((product, index) =>
+                    category === 'sets' || product.kind === 'set' ? (
+                      <SetCard key={product.slug} set={product} />
+                    ) : (
+                      <ProductCard
+                        key={product.slug}
+                        product={product}
+                        index={index}
+                        colorFamilies={colorFamilies}
+                        catalogProducts={allProducts}
+                      />
+                    ),
+                  )}
                 </div>
               )}
             </div>
