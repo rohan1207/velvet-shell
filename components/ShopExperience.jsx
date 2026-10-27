@@ -5,6 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { shopHero as defaultShopHero } from '@/lib/shop-meta';
+import {
+  ACCESSORY_META,
+  productMatchesShopCategory,
+  withAccessoriesShopCategories,
+} from '@/lib/accessories';
 import ProductCard from '@/components/ProductCard';
 import SetCard from '@/components/SetCard';
 import { ProductGridSkeleton } from '@/components/ProductCardSkeleton';
@@ -124,7 +129,16 @@ export default function ShopExperience({
   }, [initialProducts?.length]);
 
   const shopHero = shopHeroData || defaultShopHero;
-  const activeCategory = categories.find((item) => item.slug === category) ?? null;
+  const shopCategories = useMemo(
+    () => withAccessoriesShopCategories(categories),
+    [categories],
+  );
+  const activeCategory =
+    category === 'accessories'
+      ? shopCategories.find((item) => item.slug === 'accessories') || ACCESSORY_META
+      : shopCategories.find((item) => item.slug === category) ??
+        categories.find((item) => item.slug === category) ??
+        null;
   const heroSlides = useMemo(() => {
     if (activeCategory?.banners?.length) return activeCategory.banners;
     if (activeCategory?.banner) {
@@ -146,7 +160,7 @@ export default function ShopExperience({
   const categoryProducts = useMemo(() => {
     if (category === 'sets') return sets;
     if (category === 'all') return products;
-    return products.filter((p) => p.category === category);
+    return products.filter((p) => productMatchesShopCategory(p.category, category));
   }, [products, category, sets]);
 
   const priceBounds = useMemo(() => {
@@ -346,7 +360,7 @@ export default function ShopExperience({
                 <CategoryPill active={category === 'all'} onClick={() => updateCategory('all')}>
                   All
                 </CategoryPill>
-                {categories.map((item) => (
+                {shopCategories.map((item) => (
                   <CategoryPill
                     key={item.slug}
                     active={category === item.slug}
@@ -541,7 +555,7 @@ export default function ShopExperience({
           </p>
 
           <PairUpWith
-            categories={categories}
+            categories={shopCategories}
             currentCategory={category}
             onSelect={(slug) => updateCategory(slug)}
           />

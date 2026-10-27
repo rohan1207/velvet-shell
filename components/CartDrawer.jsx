@@ -58,7 +58,7 @@ export default function CartDrawer() {
               </button>
             </div>
 
-            <div className="flex-1 overflow-auto px-4 sm:px-6">
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 sm:px-6">
               {cart.length === 0 ? (
                 <div className="flex h-full flex-col items-center justify-center px-2 text-center">
                   <p className="font-display text-[1.75rem] text-ink sm:text-3xl">Your bag is quiet.</p>
@@ -152,7 +152,7 @@ export default function CartDrawer() {
             </div>
 
             {cart.length > 0 && (
-              <div className="border-t border-ink/8 px-6 pt-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
+              <div className="shrink-0 border-t border-ink/8 px-6 pt-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
                 <PromoCodeField compact />
                 <div className="mt-4 space-y-1.5 text-sm">
                   <div className="flex justify-between">

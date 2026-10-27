@@ -24,10 +24,11 @@ const categoryLinks = [
   { href: '/shop?category=necklaces', label: 'Necklaces', match: 'necklaces' },
   // Pendants folded into Necklaces — keep out of nav
   // { href: '/shop?category=pendants', label: 'Pendants', match: 'pendants' },
-  { href: '/shop?category=chokers', label: 'Chokers', match: 'chokers' },
+  // Chokers live under Accessories (with chains + brooches)
+  // { href: '/shop?category=chokers', label: 'Chokers', match: 'chokers' },
   { href: '/shop?category=rings', label: 'Rings', match: 'rings' },
   {
-    href: '/shop?category=brooches',
+    href: '/shop?category=accessories',
     label: 'Accessories',
     match: 'accessories',
     mega: 'accessories',
@@ -303,7 +304,13 @@ export default function Navbar() {
     if (link.match === 'gifting') return pathname.startsWith('/gifting');
     if (link.match === 'shop') return pathname === '/shop' && !category;
     if (link.match === 'accessories') {
-      return pathname.startsWith('/shop') && (category === 'brooches' || category === 'chains');
+      return (
+        pathname.startsWith('/shop') &&
+        (category === 'accessories' ||
+          category === 'brooches' ||
+          category === 'chains' ||
+          category === 'chokers')
+      );
     }
     if (pathname.startsWith('/shop')) return category === link.match;
     return false;

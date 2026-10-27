@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import SetExperience from '@/components/SetExperience';
-import { getSetBySlug } from '@/lib/sets';
+import { getSetBySlug, listActiveSets, setToListingCard } from '@/lib/sets';
 
 export const revalidate = 60;
 
@@ -16,7 +16,10 @@ export async function generateMetadata({ params }) {
 
 export default async function SetDetailPage({ params }) {
   const { slug } = await params;
-  const set = await getSetBySlug(slug);
+  const [set, allSets] = await Promise.all([getSetBySlug(slug), listActiveSets()]);
   if (!set) notFound();
-  return <SetExperience set={set} />;
+  const otherSets = (allSets || [])
+    .filter((s) => s.slug !== set.slug)
+    .map(setToListingCard);
+  return <SetExperience set={set} otherSets={otherSets} />;
 }

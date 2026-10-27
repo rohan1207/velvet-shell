@@ -17,7 +17,8 @@ const shopMenu = {
         { href: '/shop?category=bracelets', label: 'Bracelets' },
         { href: '/shop?category=necklaces', label: 'Necklaces' },
         // { href: '/shop?category=pendants', label: 'Pendants' },
-        { href: '/shop?category=chokers', label: 'Chokers' },
+        // { href: '/shop?category=chokers', label: 'Chokers' },
+        { href: '/shop?category=accessories', label: 'Accessories' },
         { href: '/shop?category=rings', label: 'Rings' },
         { href: '/shop?category=anklets', label: 'Anklets' },
         { href: '/shop?category=sets', label: 'Sets' },
@@ -62,10 +63,10 @@ const shopMenu = {
       note: 'Worn at the collarbone',
     },
     {
-      href: '/shop?category=chokers',
+      href: '/shop?category=accessories',
       image: '/images/banners/necklaces/flower.jpg',
-      label: 'Chokers',
-      note: 'Worn close to the neck',
+      label: 'Accessories',
+      note: 'Brooches, chains & chokers',
     },
     {
       href: '/shop?category=earrings',
@@ -135,19 +136,26 @@ const giftingMenu = {
 
 const accessoriesMenu = {
   eyebrow: 'Accessories',
-  line: 'Chains and brooches — finishing pieces with presence.',
-  exploreHref: '/shop?category=brooches',
+  line: 'Brooches, chains, and chokers — finishing pieces with presence.',
+  exploreHref: '/shop?category=accessories',
   exploreLabel: 'Browse accessories',
   columns: [
     {
       title: 'Accessories',
       links: [
+        { href: '/shop?category=accessories', label: 'All accessories' },
         { href: '/shop?category=chains', label: 'Chains' },
         { href: '/shop?category=brooches', label: 'Brooches' },
       ],
     },
   ],
   features: [
+    {
+      href: '/shop?category=accessories',
+      image: '/images/banners/necklaces/flower.jpg',
+      label: 'All accessories',
+      note: 'Brooches, chains & chokers',
+    },
     {
       href: '/shop?category=chains',
       image: '/images/banners/necklaces/bamboo.jpg',

@@ -4,13 +4,14 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import AppImage from '@/components/AppImage';
 import ProductCard from '@/components/ProductCard';
+import SetCard from '@/components/SetCard';
 import NotifyMeButton from '@/components/NotifyMeButton';
 import { money } from '@/lib/format';
 import { useStore } from '@/context/StoreContext';
 import { ProductPageNotes } from '@/components/ProductNotes';
 
-export default function SetExperience({ set }) {
-  const { addToCart, catalog } = useStore();
+export default function SetExperience({ set, otherSets = [] }) {
+  const { addItemsToCart, catalog } = useStore();
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState('');
 
@@ -45,20 +46,50 @@ export default function SetExperience({ set }) {
     });
   }, [set.members, catalog]);
 
-  async function addWholeSet() {
+  const relatedProducts = useMemo(() => {
+    const listing = (catalog?.products || []).filter((p) => p.active !== false);
+    const memberSlugs = new Set((set.members || []).map((m) => m.slug).filter(Boolean));
+    const memberCats = new Set(
+      (set.members || []).map((m) => m.category).filter(Boolean),
+    );
+    return listing
+      .filter((p) => !memberSlugs.has(p.slug) && p.kind !== 'set')
+      .sort((a, b) => {
+        const aScore = memberCats.has(a.category) ? 1 : 0;
+        const bScore = memberCats.has(b.category) ? 1 : 0;
+        return bScore - aScore;
+      })
+      .slice(0, 4);
+  }, [catalog, set.members]);
+
+  const moreSets = useMemo(
+    () => (otherSets || []).filter((s) => s.slug && s.slug !== set.slug).slice(0, 8),
+    [otherSets, set.slug],
+  );
+
+  function addWholeSet() {
     if (set.outOfStock || busy) return;
     setBusy(true);
     setNotice('');
     try {
-      for (const m of set.members || []) {
-        if (m.outOfStock || !m.slug) continue;
-        addToCart(m.slug, {
+      const entries = (set.members || [])
+        .filter((m) => m.slug && !m.outOfStock)
+        .map((m) => ({
+          slug: m.slug,
           size: 'One size',
-          metal: m.colorLabel || '',
+          metal: m.colorLabel || 'Sterling Silver',
           qty: 1,
-        });
-      }
-      setNotice('Full set added to your bag');
+          name: m.name,
+          price: m.price,
+          image: m.image,
+          colorLabel: m.colorLabel || '',
+        }));
+      addItemsToCart(entries);
+      setNotice(
+        entries.length
+          ? `${entries.length} pieces added to your bag`
+          : 'Nothing available to add',
+      );
     } finally {
       setBusy(false);
     }
@@ -197,11 +228,72 @@ export default function SetExperience({ set }) {
             Pieces will appear here once linked in the admin Sets panel.
           </p>
         ) : null}
-        <p className="mt-10">
-          <Link href="/shop?category=sets" className="font-label text-[11px] tracking-[0.18em] text-burgundy uppercase">
-            ← All sets
-          </Link>
-        </p>
+      </div>
+
+      {relatedProducts.length ? (
+        <div className="mx-auto mt-20 max-w-[1200px] px-5">
+          <div className="mb-8 flex items-end justify-between gap-4">
+            <div>
+              <p className="font-label text-[10px] tracking-[0.18em] text-gold uppercase">
+                More from the house
+              </p>
+              <h2 className="font-display mt-2 text-2xl text-ink md:text-3xl">People also like</h2>
+            </div>
+            <Link
+              href="/shop"
+              className="font-label hidden text-[11px] tracking-[0.18em] text-burgundy uppercase sm:inline"
+            >
+              The shop
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+            {relatedProducts.map((product, index) => (
+              <ProductCard
+                key={product.slug}
+                product={product}
+                index={index}
+                colorFamilies={catalog?.colorFamilies || []}
+                catalogProducts={
+                  catalog?.allProducts?.length
+                    ? catalog.allProducts
+                    : catalog?.products || []
+                }
+              />
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {moreSets.length ? (
+        <div className="mx-auto mt-20 max-w-[1200px] px-5">
+          <div className="mb-8 flex items-end justify-between gap-4">
+            <div>
+              <p className="font-label text-[10px] tracking-[0.18em] text-gold uppercase">
+                Keep exploring
+              </p>
+              <h2 className="font-display mt-2 text-2xl text-ink md:text-3xl">Other sets</h2>
+            </div>
+            <Link
+              href="/shop?category=sets"
+              className="font-label text-[11px] tracking-[0.18em] text-burgundy uppercase"
+            >
+              All sets
+            </Link>
+          </div>
+          <div className="-mx-5 flex gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:thin] md:mx-0 md:grid md:grid-cols-4 md:gap-6 md:overflow-visible md:px-0">
+            {moreSets.map((s) => (
+              <div key={s.slug} className="w-[11.5rem] shrink-0 md:w-auto">
+                <SetCard set={s} />
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      <div className="mx-auto mt-12 max-w-[1200px] px-5">
+        <Link href="/shop?category=sets" className="font-label text-[11px] tracking-[0.18em] text-burgundy uppercase">
+          ← All sets
+        </Link>
       </div>
     </div>
   );

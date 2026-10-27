@@ -288,19 +288,29 @@ export function StoreProvider({ children }) {
     );
     const cartPayable = Math.max(0, cartTotal - discountAmount);
 
-    function addToCart(slug, options = {}) {
+    function buildCartLine(slug, options = {}) {
       const product = getProduct(slug);
-      const {
-        size = product?.sizes?.[0] || 'One size',
-        metal = product?.metal?.[0] || 'S925 Silver',
-        qty = 1,
-        customization = [],
-      } = options;
-      const image = productImageSrc(product);
-      const name = product?.name || slug;
-      const price = product?.price || 0;
-      const customEntries = Array.isArray(customization)
-        ? customization
+      const size =
+        options.size ||
+        product?.sizes?.[0] ||
+        'One size';
+      const metal =
+        options.metal ||
+        product?.colorLabel ||
+        product?.metal?.[0] ||
+        'Sterling Silver';
+      const qty = Math.max(1, Number(options.qty) || 1);
+      const image =
+        productImageSrc(product) ||
+        options.image ||
+        '';
+      const name = product?.name || options.name || slug;
+      const price =
+        Number(product?.price) ||
+        Number(options.price) ||
+        0;
+      const customEntries = Array.isArray(options.customization)
+        ? options.customization
             .map((entry) => ({
               id: String(entry?.id || ''),
               label: String(entry?.label || '').trim(),
@@ -311,49 +321,68 @@ export function StoreProvider({ children }) {
       const customKey = customEntries
         .map((entry) => `${entry.id}:${entry.value}`)
         .join('|');
-      setCart((current) => {
-        const existing = current.find(
+      return {
+        id: `${slug}-${size}-${metal}${customKey ? `-${customKey}` : ''}`,
+        slug,
+        size,
+        metal,
+        qty,
+        image,
+        name,
+        price,
+        sku: product?.sku || options.sku || '',
+        colorLabel: product?.colorLabel || options.colorLabel || '',
+        customization: customEntries,
+        customKey,
+      };
+    }
+
+    function mergeCartLines(current, lines) {
+      let next = current;
+      for (const line of lines) {
+        const existing = next.find(
           (item) =>
-            item.slug === slug &&
-            item.size === size &&
-            item.metal === metal &&
-            (item.customKey || '') === customKey,
+            item.slug === line.slug &&
+            item.size === line.size &&
+            item.metal === line.metal &&
+            (item.customKey || '') === (line.customKey || ''),
         );
         if (existing) {
-          return current.map((item) =>
+          next = next.map((item) =>
             item.id === existing.id
               ? {
                   ...item,
-                  qty: item.qty + qty,
-                  // Always refresh from live catalog (R2), not stale cart snapshot
-                  image: image || item.image,
-                  name: name || item.name,
-                  price: price || item.price,
+                  qty: item.qty + line.qty,
+                  image: line.image || item.image,
+                  name: line.name || item.name,
+                  price: line.price || item.price,
                   customization: item.customization?.length
                     ? item.customization
-                    : customEntries,
+                    : line.customization,
                 }
-              : item
+              : item,
           );
+        } else {
+          next = [...next, line];
         }
-        return [
-          ...current,
-          {
-            id: `${slug}-${size}-${metal}${customKey ? `-${customKey}` : ''}`,
-            slug,
-            size,
-            metal,
-            qty,
-            image,
-            name,
-            price,
-            sku: product?.sku || '',
-            colorLabel: product?.colorLabel || '',
-            customization: customEntries,
-            customKey,
-          },
-        ];
-      });
+      }
+      return next;
+    }
+
+    function addToCart(slug, options = {}) {
+      const line = buildCartLine(slug, options);
+      setCart((current) => mergeCartLines(current, [line]));
+      setCartOpen(true);
+      setQuickViewSlug(null);
+    }
+
+    /** Add several lines in one cart update (sets / bundles). */
+    function addItemsToCart(entries = []) {
+      const lines = (entries || [])
+        .filter((e) => e?.slug)
+        .map((e) => buildCartLine(e.slug, e));
+      if (!lines.length) return;
+      setCart((current) => mergeCartLines(current, lines));
       setCartOpen(true);
       setQuickViewSlug(null);
     }
@@ -680,6 +709,7 @@ export function StoreProvider({ children }) {
       applyPromoCode,
       clearPromo,
       addToCart,
+      addItemsToCart,
       updateQty,
       removeFromCart,
       clearCart,

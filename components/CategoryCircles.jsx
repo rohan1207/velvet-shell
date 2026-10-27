@@ -25,8 +25,8 @@ const categories = [
     image: '/categories/ring-g1.png',
   },
   {
-    label: 'Chokers',
-    href: '/shop?category=chokers',
+    label: 'Accessories',
+    href: '/shop?category=accessories',
     image: '/categories/choker-g1.png',
   },
   {
