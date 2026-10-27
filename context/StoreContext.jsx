@@ -204,9 +204,36 @@ export function StoreProvider({ children }) {
 
   useEffect(() => {
     const locked = menuOpen || cartOpen || searchOpen || Boolean(quickViewSlug);
-    document.body.style.overflow = locked ? 'hidden' : '';
+    if (!locked) return undefined;
+
+    const html = document.documentElement;
+    const body = document.body;
+    const scrollY = window.scrollY;
+    const prev = {
+      htmlOverflow: html.style.overflow,
+      bodyOverflow: body.style.overflow,
+      bodyPosition: body.style.position,
+      bodyTop: body.style.top,
+      bodyWidth: body.style.width,
+      bodyPaddingRight: body.style.paddingRight,
+    };
+    const scrollbar = Math.max(0, window.innerWidth - html.clientWidth);
+
+    html.style.overflow = 'hidden';
+    body.style.overflow = 'hidden';
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.width = '100%';
+    if (scrollbar) body.style.paddingRight = `${scrollbar}px`;
+
     return () => {
-      document.body.style.overflow = '';
+      html.style.overflow = prev.htmlOverflow;
+      body.style.overflow = prev.bodyOverflow;
+      body.style.position = prev.bodyPosition;
+      body.style.top = prev.bodyTop;
+      body.style.width = prev.bodyWidth;
+      body.style.paddingRight = prev.bodyPaddingRight;
+      window.scrollTo(0, scrollY);
     };
   }, [menuOpen, cartOpen, searchOpen, quickViewSlug]);
 

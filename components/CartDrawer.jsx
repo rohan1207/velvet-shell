@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from '@/context/StoreContext';
@@ -21,6 +22,27 @@ export default function CartDrawer() {
     cartCount,
     getProduct,
   } = useStore();
+  const listRef = useRef(null);
+
+  // Keep wheel / trackpad scroll inside the bag list (don't chain to the page).
+  useEffect(() => {
+    if (!cartOpen) return undefined;
+    const el = listRef.current;
+    if (!el) return undefined;
+
+    const onWheel = (event) => {
+      const { scrollTop, scrollHeight, clientHeight } = el;
+      const atTop = scrollTop <= 0;
+      const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
+      if ((event.deltaY < 0 && atTop) || (event.deltaY > 0 && atBottom)) {
+        event.preventDefault();
+      }
+      event.stopPropagation();
+    };
+
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, [cartOpen, cart.length]);
 
   return (
     <AnimatePresence>
@@ -33,6 +55,7 @@ export default function CartDrawer() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setCartOpen(false)}
+            onWheel={(e) => e.preventDefault()}
             className="fixed inset-0 z-[60] bg-ink/40"
           />
           <motion.aside
@@ -40,9 +63,10 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed top-0 right-0 z-[70] flex h-full w-full max-w-md flex-col bg-ivory pt-[env(safe-area-inset-top)] shadow-[-24px_0_60px_rgba(40,20,24,0.18)]"
+            className="fixed inset-y-0 right-0 z-[70] flex h-dvh max-h-dvh w-full max-w-md flex-col overflow-hidden overscroll-none bg-ivory pt-[env(safe-area-inset-top)] shadow-[-24px_0_60px_rgba(40,20,24,0.18)]"
+            onWheel={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-ink/8 px-4 py-4 sm:px-6 sm:py-5">
+            <div className="flex shrink-0 items-center justify-between border-b border-ink/8 px-4 py-4 sm:px-6 sm:py-5">
               <div>
                 <p className="font-label text-[11px] tracking-[0.22em] text-ink">Bag</p>
                 <p className="mt-1 text-xs font-light text-ink/80">
@@ -58,7 +82,10 @@ export default function CartDrawer() {
               </button>
             </div>
 
-            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 sm:px-6">
+            <div
+              ref={listRef}
+              className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 touch-pan-y sm:px-6"
+            >
               {cart.length === 0 ? (
                 <div className="flex h-full flex-col items-center justify-center px-2 text-center">
                   <p className="font-display text-[1.75rem] text-ink sm:text-3xl">Your bag is quiet.</p>
