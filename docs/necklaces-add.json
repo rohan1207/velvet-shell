@@ -1,0 +1,23 @@
+{
+  "currency": "INR",
+  "products": [
+    {
+      "product_id": "NCK-016",
+      "name": "Fairy-Like Fringed Collarbone Chain with Heart-Shaped Pearl Bead",
+      "material": "925 Sterling Silver",
+      "design": "Fairy-Like Fringed",
+      "type": "Chain",
+      "stone": "Pearl",
+      "description": "Inspired by the lightness of fairy-like details, this 925 sterling silver bracelet features a beaded chain with a heart-shaped pearl accent and fringed detailing. A charming choice for gifting or adding a playful touch to an elegant look.",
+      "variants": [
+        {
+          "sku": "YWJE0074",
+          "color": "Silver",
+          "qty": 2,
+          "price_inr": 11999,
+          "image_folder": "YWJE0074"
+        }
+      ]
+    }
+  ]
+}

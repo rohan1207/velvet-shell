@@ -160,7 +160,9 @@ export default function ProductCard({
     () => resolveVariants(product.slug, families, pool),
     [product.slug, families, pool],
   );
-  const [activeSlug, setActiveSlug] = useState(product.slug);
+  // Default to Gold (first after sort), not whatever the listing row happened to be
+  const defaultSlug = variants[0]?.slug || product.slug;
+  const [activeSlug, setActiveSlug] = useState(defaultSlug);
   const [previewSlug, setPreviewSlug] = useState(null);
   const [imageIndex, setImageIndex] = useState(0);
   /** idle | morph | flying | done */
@@ -170,9 +172,11 @@ export default function ProductCard({
   const timersRef = useRef([]);
 
   useEffect(() => {
-    setActiveSlug(product.slug);
+    setActiveSlug(variants[0]?.slug || product.slug);
     setPreviewSlug(null);
-  }, [product.slug]);
+    // Only re-default when the card product or gold-first sibling changes —
+    // don't wipe a manual silver/other pick on catalog refresh.
+  }, [product.slug, variants[0]?.slug]);
 
   useEffect(() => {
     setImageIndex(0);

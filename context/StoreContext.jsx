@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { productImageSrc } from '@/lib/product-image';
+import { computeOrderMoney } from '@/lib/shipping-fee';
 
 const StoreContext = createContext(null);
 
@@ -313,7 +314,14 @@ export function StoreProvider({ children }) {
       cartTotal,
       Math.max(0, Number(promo?.discountAmount) || 0),
     );
-    const cartPayable = Math.max(0, cartTotal - discountAmount);
+    const money = computeOrderMoney({
+      subtotal: cartTotal,
+      discountAmount,
+    });
+    const cartMerchandise = money.merchandisePayable;
+    const cartShippingFee = cart.length ? money.shippingFee : 0;
+    // Final amount charged (merchandise + shipping)
+    const cartPayable = cart.length ? money.total : 0;
 
     function buildCartLine(slug, options = {}) {
       const product = getProduct(slug);
@@ -679,7 +687,13 @@ export function StoreProvider({ children }) {
           razorpaySignature: order.razorpaySignature,
           demo: order.demo,
           subtotal: order.subtotal ?? order.total,
-          shippingFee: order.shippingFee || 0,
+          shippingFee:
+            order.shippingFee != null
+              ? order.shippingFee
+              : computeOrderMoney({
+                  subtotal: order.subtotal ?? order.total,
+                  discountAmount: Number(promo?.discountAmount) || 0,
+                }).shippingFee,
           total: order.total,
           discountCode: order.discountCode || promo?.code || '',
         });
@@ -728,6 +742,8 @@ export function StoreProvider({ children }) {
       closeQuickView,
       cartCount,
       cartTotal,
+      cartMerchandise,
+      cartShippingFee,
       cartPayable,
       discountAmount,
       promo,

@@ -12,6 +12,7 @@ export default function CartPage() {
     updateQty,
     removeFromCart,
     cartTotal,
+    cartShippingFee,
     cartPayable,
     discountAmount,
     promo,
@@ -117,7 +118,18 @@ export default function CartPage() {
                     Discount{promo?.code ? ` (${promo.code})` : ''} −{money(discountAmount)}
                   </p>
                 ) : null}
+                <p className="text-sm text-stone">
+                  Shipping{' '}
+                  <span className="font-num text-ink">
+                    {cartShippingFee > 0 ? money(cartShippingFee) : 'Free'}
+                  </span>
+                </p>
                 <p className="font-num text-3xl text-ink md:text-4xl">{money(cartPayable)}</p>
+                <p className="text-xs text-stone">
+                  {cartShippingFee > 0
+                    ? 'Free shipping on orders ₹3,999 and above'
+                    : 'Complimentary shipping on this order'}
+                </p>
               </div>
               <Link
                 href="/checkout"

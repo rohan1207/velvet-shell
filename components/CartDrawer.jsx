@@ -16,6 +16,7 @@ export default function CartDrawer() {
     updateQty,
     removeFromCart,
     cartTotal,
+    cartShippingFee,
     cartPayable,
     discountAmount,
     promo,
@@ -194,13 +195,21 @@ export default function CartDrawer() {
                       <span className="font-num">−{money(discountAmount)}</span>
                     </div>
                   ) : null}
+                  <div className="flex justify-between">
+                    <span className="text-ink/85">Shipping</span>
+                    <span className="font-num text-ink">
+                      {cartShippingFee > 0 ? money(cartShippingFee) : 'Free'}
+                    </span>
+                  </div>
                   <div className="flex justify-between font-medium">
                     <span className="text-ink">Total</span>
                     <span className="font-num text-ink">{money(cartPayable)}</span>
                   </div>
                 </div>
                 <p className="mt-2 text-xs font-light text-ink/80">
-                  Shipping calculated at checkout. Payments via Razorpay.
+                  {cartShippingFee > 0
+                    ? 'Free shipping on orders ₹3,999 and above. Payments via Razorpay.'
+                    : 'Complimentary shipping on this order. Payments via Razorpay.'}
                 </p>
                 <Link
                   href="/checkout"

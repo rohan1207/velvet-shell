@@ -7,6 +7,7 @@ import { fromDbOrder, generateOrderNumber } from '@/lib/orders';
 import { loadCatalog, productFromCatalog } from '@/lib/catalog';
 import { getProduct } from '@/lib/products';
 import { applyPromoCode, recordPromoRedemption } from '@/lib/discounts/apply';
+import { shippingFeeForAmount } from '@/lib/shipping-fee';
 
 function skuFromFeatures(features) {
   if (!Array.isArray(features)) return '';
@@ -135,7 +136,6 @@ export async function POST(request) {
 
     const computedSubtotal = lineRows.reduce((s, l) => s + l.line_total, 0);
     const finalSubtotal = computedSubtotal;
-    const finalShipping = Number(shippingFee) || 0;
 
     let discountAmount = 0;
     let appliedCode = '';
@@ -162,10 +162,14 @@ export async function POST(request) {
       }
     }
 
-    const finalTotal = Math.max(0, finalSubtotal - discountAmount + finalShipping);
-    // Ignore client total/subtotal — server recomputes from catalog + promo.
+    // Server is source of truth: ₹99 shipping under ₹3999 after discount; free at ₹3999+.
+    const merchandise = Math.max(0, finalSubtotal - discountAmount);
+    const finalShipping = shippingFeeForAmount(merchandise);
+    const finalTotal = merchandise + finalShipping;
+    // Ignore client money fields — recomputed from catalog + promo + shipping rules.
     void subtotal;
     void total;
+    void shippingFee;
 
     const shippingPayload = {
       fullName: shipping.fullName || [shipping.firstName, shipping.lastName].filter(Boolean).join(' '),

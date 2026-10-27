@@ -28,6 +28,7 @@ export default function CheckoutPage() {
   const {
     cart,
     cartTotal,
+    cartShippingFee,
     cartPayable,
     discountAmount,
     promo,
@@ -159,6 +160,7 @@ export default function CheckoutPage() {
     const order = await placeOrder({
       total: cartPayable,
       subtotal: cartTotal,
+      shippingFee: cartShippingFee,
       discountCode: promo?.code || '',
       items: cart,
       shipping,
@@ -327,8 +329,8 @@ export default function CheckoutPage() {
             Almost yours.
           </h1>
           <p className="mt-3 max-w-sm text-sm font-light text-ink/70">
-            Confirm delivery, then pay securely with Razorpay. Complimentary insured shipping across
-            India.
+            Confirm delivery, then pay securely with Razorpay. Free shipping on orders ₹3,999 and
+            above · ₹99 below.
           </p>
 
           {addresses.length > 0 && (
@@ -518,6 +520,7 @@ export default function CheckoutPage() {
               lines={lines}
               cartCount={cartCount}
               cartTotal={cartTotal}
+              cartShippingFee={cartShippingFee}
               cartPayable={cartPayable}
               discountAmount={discountAmount}
               promo={promo}
@@ -589,6 +592,7 @@ function OrderSummaryCard({
   lines,
   cartCount,
   cartTotal,
+  cartShippingFee = 0,
   cartPayable,
   discountAmount,
   promo,
@@ -652,6 +656,12 @@ function OrderSummaryCard({
               <span className="font-num">−{money(discountAmount)}</span>
             </div>
           ) : null}
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-ink/60">Shipping</span>
+            <span className="font-num text-ink">
+              {cartShippingFee > 0 ? money(cartShippingFee) : 'Free'}
+            </span>
+          </div>
           <div className="flex items-center justify-between pt-1">
             <span className="font-label text-[10px] tracking-[0.16em] text-ink/50 uppercase">
               Total
@@ -659,7 +669,11 @@ function OrderSummaryCard({
             <span className="font-num text-2xl text-burgundy">{money(cartPayable)}</span>
           </div>
         </div>
-        <p className="text-xs font-light text-ink/50">Incl. complimentary shipping</p>
+        <p className="text-xs font-light text-ink/50">
+          {cartShippingFee > 0
+            ? 'Free shipping on orders ₹3,999 and above'
+            : 'Complimentary shipping on this order'}
+        </p>
       </div>
     </div>
   );
