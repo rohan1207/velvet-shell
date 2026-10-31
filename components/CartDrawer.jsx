@@ -7,6 +7,7 @@ import { useStore } from '@/context/StoreContext';
 import { money } from '@/lib/format';
 import ProductThumb from '@/components/ProductThumb';
 import PromoCodeField from '@/components/PromoCodeField';
+import GiftOptions from '@/components/GiftOptions';
 
 export default function CartDrawer() {
   const {
@@ -18,6 +19,7 @@ export default function CartDrawer() {
     cartTotal,
     cartShippingFee,
     cartPayable,
+    cartGiftWrapFee,
     discountAmount,
     promo,
     cartCount,
@@ -99,88 +101,92 @@ export default function CartDrawer() {
                   </Link>
                 </div>
               ) : (
-                <ul className="space-y-7 py-6">
-                  {cart.map((item) => {
-                    const product = getProduct(item.slug);
-                    const name = product?.name || item.name || item.slug;
-                    const price = product?.price ?? item.price ?? 0;
-                    const line = price * item.qty;
-                    const href = `/shop/${product?.slug || item.slug}`;
-                    return (
-                      <li key={item.id} className="flex gap-4">
-                        <Link
-                          href={href}
-                          onClick={() => setCartOpen(false)}
-                          className="relative h-28 w-24 shrink-0 overflow-hidden rounded-lg bg-pearl ring-1 ring-ink/6"
-                        >
-                          <ProductThumb
-                            product={product}
-                            item={item}
-                            alt={name}
-                            sizes="96px"
-                            className="object-cover object-center"
-                          />
-                        </Link>
-                        <div className="flex min-w-0 flex-1 flex-col">
-                          <div className="flex justify-between gap-3">
-                            <div className="min-w-0">
-                              <p className="font-display text-xl leading-tight text-ink">{name}</p>
-                              <p className="mt-1.5 text-xs font-light text-ink/85">
-                                {item.metal} · {item.size}
-                              </p>
-                              {Array.isArray(item.customization) && item.customization.length > 0 ? (
-                                <ul className="mt-2 space-y-1 text-[11px] text-ink/70">
-                                  {item.customization.map((entry, i) => (
-                                    <li key={`${entry.id || entry.label}-${i}`}>
-                                      <span className="text-ink/50">{entry.label}:</span> {entry.value}
-                                    </li>
-                                  ))}
-                                </ul>
-                              ) : null}
-                              <p className="mt-1 text-xs font-light text-ink/85">
-                                <span className="font-num">{money(price)}</span> each
-                              </p>
+                <div className="py-6">
+                  <ul className="space-y-7">
+                    {cart.map((item) => {
+                      const product = getProduct(item.slug);
+                      const name = product?.name || item.name || item.slug;
+                      const price = product?.price ?? item.price ?? 0;
+                      const line = price * item.qty;
+                      const href = `/shop/${product?.slug || item.slug}`;
+                      return (
+                        <li key={item.id} className="flex gap-4">
+                          <Link
+                            href={href}
+                            onClick={() => setCartOpen(false)}
+                            className="relative h-28 w-24 shrink-0 overflow-hidden rounded-lg bg-pearl ring-1 ring-ink/6"
+                          >
+                            <ProductThumb
+                              product={product}
+                              item={item}
+                              alt={name}
+                              sizes="96px"
+                              className="object-cover object-center"
+                            />
+                          </Link>
+                          <div className="flex min-w-0 flex-1 flex-col">
+                            <div className="flex justify-between gap-3">
+                              <div className="min-w-0">
+                                <p className="font-display text-xl leading-tight text-ink">{name}</p>
+                                <p className="mt-1.5 text-xs font-light text-ink/85">
+                                  {item.metal} · {item.size}
+                                </p>
+                                {Array.isArray(item.customization) && item.customization.length > 0 ? (
+                                  <ul className="mt-2 space-y-1 text-[11px] text-ink/70">
+                                    {item.customization.map((entry, i) => (
+                                      <li key={`${entry.id || entry.label}-${i}`}>
+                                        <span className="text-ink/50">{entry.label}:</span> {entry.value}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                ) : null}
+                                <p className="mt-1 text-xs font-light text-ink/85">
+                                  <span className="font-num">{money(price)}</span> each
+                                </p>
+                              </div>
+                              <p className="font-num shrink-0 text-sm text-ink">{money(line)}</p>
                             </div>
-                            <p className="font-num shrink-0 text-sm text-ink">{money(line)}</p>
-                          </div>
-                          <div className="mt-auto flex items-center justify-between pt-4">
-                            <div className="inline-flex items-center rounded-full border border-ink/10 px-1.5 text-sm">
+                            <div className="mt-auto flex items-center justify-between pt-4">
+                              <div className="inline-flex items-center rounded-full border border-ink/10 px-1.5 text-sm">
+                                <button
+                                  type="button"
+                                  aria-label="Decrease quantity"
+                                  onClick={() => updateQty(item.id, item.qty - 1)}
+                                  className="flex h-11 w-11 items-center justify-center"
+                                >
+                                  −
+                                </button>
+                                <span className="min-w-5 text-center">{item.qty}</span>
+                                <button
+                                  type="button"
+                                  aria-label="Increase quantity"
+                                  onClick={() => updateQty(item.id, item.qty + 1)}
+                                  className="flex h-11 w-11 items-center justify-center"
+                                >
+                                  +
+                                </button>
+                              </div>
                               <button
                                 type="button"
-                                aria-label="Decrease quantity"
-                                onClick={() => updateQty(item.id, item.qty - 1)}
-                                className="flex h-11 w-11 items-center justify-center"
+                                onClick={() => removeFromCart(item.id)}
+                                className="font-label min-h-11 px-2 text-[10px] tracking-[0.16em] text-ink/80 uppercase hover:text-burgundy"
                               >
-                                −
-                              </button>
-                              <span className="min-w-5 text-center">{item.qty}</span>
-                              <button
-                                type="button"
-                                aria-label="Increase quantity"
-                                onClick={() => updateQty(item.id, item.qty + 1)}
-                                className="flex h-11 w-11 items-center justify-center"
-                              >
-                                +
+                                Remove
                               </button>
                             </div>
-                            <button
-                              type="button"
-                              onClick={() => removeFromCart(item.id)}
-                              className="font-label min-h-11 px-2 text-[10px] tracking-[0.16em] text-ink/80 uppercase hover:text-burgundy"
-                            >
-                              Remove
-                            </button>
                           </div>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  {/* Gift options scroll with items — keeps sticky footer short on phones */}
+                  <GiftOptions compact className="mt-6" />
+                </div>
               )}
             </div>
 
             {cart.length > 0 && (
-              <div className="shrink-0 border-t border-ink/8 px-6 pt-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
+              <div className="shrink-0 border-t border-ink/8 px-6 pt-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
                 <PromoCodeField compact />
                 <div className="mt-4 space-y-1.5 text-sm">
                   <div className="flex justify-between">
@@ -193,6 +199,12 @@ export default function CartDrawer() {
                         Discount{promo?.code ? ` (${promo.code})` : ''}
                       </span>
                       <span className="font-num">−{money(discountAmount)}</span>
+                    </div>
+                  ) : null}
+                  {cartGiftWrapFee > 0 ? (
+                    <div className="flex justify-between">
+                      <span className="text-ink/85">Gift wrap</span>
+                      <span className="font-num text-ink">{money(cartGiftWrapFee)}</span>
                     </div>
                   ) : null}
                   <div className="flex justify-between">

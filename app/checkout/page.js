@@ -10,6 +10,7 @@ import { loadRazorpayScript } from '@/lib/razorpay-client';
 import ProductThumb from '@/components/ProductThumb';
 import FallingPetals from '@/components/FallingPetals';
 import PromoCodeField from '@/components/PromoCodeField';
+import GiftOptions from '@/components/GiftOptions';
 
 const emptyForm = {
   fullName: '',
@@ -30,7 +31,10 @@ export default function CheckoutPage() {
     cartTotal,
     cartShippingFee,
     cartPayable,
+    cartGiftWrapFee,
     discountAmount,
+    giftWrap,
+    giftMessage,
     promo,
     cartCount,
     user,
@@ -162,6 +166,8 @@ export default function CheckoutPage() {
       subtotal: cartTotal,
       shippingFee: cartShippingFee,
       discountCode: promo?.code || '',
+      giftWrap,
+      giftMessage,
       items: cart,
       shipping,
       paymentId,
@@ -281,7 +287,7 @@ export default function CheckoutPage() {
 
   if (!ready || !user) {
     return (
-      <div className="bg-ivory pt-28 pb-24 md:pt-36">
+      <div className="bg-ivory pt-page pb-24">
         <div className="mx-auto max-w-md px-5 text-center">
           <p className="font-label text-gold">Checkout</p>
           <h1 className="font-display mt-3 text-4xl text-ink">Signing you in…</h1>
@@ -295,7 +301,7 @@ export default function CheckoutPage() {
 
   if (!cart.length && !successOrder) {
     return (
-      <div className="bg-ivory pt-28 pb-24 md:pt-36">
+      <div className="bg-ivory pt-page pb-24">
         <div className="mx-auto max-w-xl px-5 text-center md:px-10">
           <p className="font-label text-gold">Checkout</p>
           <h1 className="font-display mt-3 text-4xl tracking-[-0.03em] text-ink md:text-5xl">
@@ -314,7 +320,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-[calc(var(--site-chrome-offset)+1.25rem)] pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pt-32 md:pb-20">
+    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-page pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-20">
       {successOrder && (
         <SuccessModal
           order={successOrder}
@@ -521,6 +527,7 @@ export default function CheckoutPage() {
               cartCount={cartCount}
               cartTotal={cartTotal}
               cartShippingFee={cartShippingFee}
+              cartGiftWrapFee={cartGiftWrapFee}
               cartPayable={cartPayable}
               discountAmount={discountAmount}
               promo={promo}
@@ -593,6 +600,7 @@ function OrderSummaryCard({
   cartCount,
   cartTotal,
   cartShippingFee = 0,
+  cartGiftWrapFee = 0,
   cartPayable,
   discountAmount,
   promo,
@@ -644,6 +652,7 @@ function OrderSummaryCard({
         ))}
       </ul>
       <div className="space-y-4 border-t border-ink/8 px-6 py-5">
+        <GiftOptions compact />
         <PromoCodeField email={email} />
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-sm">
@@ -654,6 +663,12 @@ function OrderSummaryCard({
             <div className="flex items-center justify-between text-sm text-emerald-800">
               <span>Discount{promo?.code ? ` (${promo.code})` : ''}</span>
               <span className="font-num">−{money(discountAmount)}</span>
+            </div>
+          ) : null}
+          {cartGiftWrapFee > 0 ? (
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-ink/60">Gift wrap</span>
+              <span className="font-num text-ink">{money(cartGiftWrapFee)}</span>
             </div>
           ) : null}
           <div className="flex items-center justify-between text-sm">

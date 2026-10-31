@@ -8,7 +8,7 @@ export function ProductCardSkeleton({ className = '', index = 0 }) {
       aria-hidden
       style={{ animationDelay: `${index * 60}ms` }}
     >
-      <div className="skeleton-shimmer relative aspect-square overflow-hidden bg-cream/50" />
+      <div className="skeleton-shimmer relative aspect-square overflow-hidden bg-white" />
       <div className="mt-3 flex flex-1 flex-col">
         <div className="skeleton-shimmer mx-auto h-3.5 w-14 rounded-full bg-cream/80" />
         <div className="skeleton-shimmer mx-auto mt-2 h-8 w-[75%] max-w-[12rem] rounded-full bg-cream/80" />

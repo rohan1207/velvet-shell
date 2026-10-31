@@ -1,0 +1,44 @@
+{
+  "currency": "INR",
+  "products": [
+    {
+      "product_id": "A01",
+      "name": "Ginkgo Anklet",
+      "material": "925 Sterling Silver",
+      "finish": "Sterling Silver",
+      "design": "Ginkgo leaf",
+      "type": "Anklet",
+      "description": "A delicate 925 sterling silver anklet inspired by the graceful form of ginkgo leaves. Designed with fine detailing and a refined silhouette, it adds a subtle touch of elegance to everyday styling. Lightweight and versatile, this piece pairs effortlessly with both casual and occasion looks.",
+      "folder": "Ginkgo Anklet",
+      "variants": [
+        { "sku": null, "color": "Silver", "price_inr": 1699, "qty": 5 }
+      ]
+    },
+    {
+      "product_id": "A02",
+      "name": "Palace Bell Anklet",
+      "material": "925 Sterling Silver",
+      "finish": "Sterling Silver",
+      "design": "Palace Bell",
+      "type": "Anklet",
+      "description": "A graceful 925 sterling silver anklet featuring delicate palace bell-inspired details. Its fine chain and charming accents create an elegant, feminine look that works beautifully for everyday wear as well as festive and special occasions.",
+      "folder": "Palace Bell Anklet",
+      "variants": [
+        { "sku": null, "color": "Silver", "price_inr": 1699, "qty": 5 }
+      ]
+    },
+    {
+      "product_id": "A03",
+      "name": "Ruyi Lock Anklet",
+      "material": "925 Sterling Silver",
+      "finish": "Sterling Silver",
+      "design": "Ruyi Lock",
+      "type": "Anklet",
+      "description": "A minimalist 925 sterling silver anklet featuring a refined Ruyi-inspired design. The clean chain silhouette is complemented by a delicate central detail, creating an understated piece that can be styled effortlessly on its own or paired with other jewellery.",
+      "folder": "Ruyi Lock Anklet",
+      "variants": [
+        { "sku": null, "color": "Silver", "price_inr": 1699, "qty": 5 }
+      ]
+    }
+  ]
+}

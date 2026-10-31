@@ -38,7 +38,7 @@ export default function AccountPage() {
 
 function AccountShell() {
   return (
-    <div className="relative min-h-[70svh] overflow-hidden bg-gradient-to-b from-[#faf6f1] to-ivory pt-28 pb-24 md:pt-36">
+    <div className="relative min-h-[70svh] overflow-hidden bg-gradient-to-b from-[#faf6f1] to-ivory pt-page pb-24">
       <div className="mx-auto max-w-md px-5">
         <p className="font-label text-gold">Account</p>
         <h1 className="font-display mt-3 text-5xl text-ink">Welcome</h1>
@@ -109,7 +109,7 @@ function AccountInner() {
 
   if (!user) {
     return (
-      <div className="relative min-h-[100svh] overflow-hidden bg-gradient-to-br from-[#faf6f1] via-[#f5eee8] to-[#ebe3da] pt-28 pb-24 md:pt-36">
+      <div className="relative min-h-[100svh] overflow-hidden bg-gradient-to-br from-[#faf6f1] via-[#f5eee8] to-[#ebe3da] pt-page pb-24">
         <div className="pointer-events-none absolute inset-0 opacity-40">
           <div className="absolute top-20 left-[10%] h-64 w-64 rounded-full bg-blush/30 blur-3xl" />
           <div className="absolute right-[8%] bottom-32 h-72 w-72 rounded-full bg-burgundy/5 blur-3xl" />
@@ -122,7 +122,7 @@ function AccountInner() {
   }
 
   return (
-    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-[calc(var(--site-chrome-offset)+1.25rem)] pb-[calc(5rem+env(safe-area-inset-bottom))] md:pt-36 md:pb-24">
+    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-page pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-24">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-5 md:px-10">
         <div className="flex flex-wrap items-end justify-between gap-4 border-b border-burgundy/10 pb-6 sm:gap-6 sm:pb-8">
           <div className="min-w-0">
@@ -688,6 +688,15 @@ function OrderRow({ order, detailed = false }) {
               {ship.city ? `, ${ship.city}` : ''}
             </li>
           )}
+          {order.giftWrap ? (
+            <li className="text-xs text-ink/60">
+              Gift wrap
+              {order.giftWrapFee > 0 ? ` · ${money(order.giftWrapFee)}` : ''}
+            </li>
+          ) : null}
+          {order.giftMessage ? (
+            <li className="text-xs italic text-ink/65">“{order.giftMessage}”</li>
+          ) : null}
           {order.paymentId && (
             <li className="text-xs text-ink/50">Payment ID: {order.paymentId}</li>
           )}

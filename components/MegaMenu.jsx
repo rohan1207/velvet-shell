@@ -51,13 +51,13 @@ const shopMenu = {
   features: [
     {
       href: '/shop?category=pendants',
-      image: '/images/banners/necklaces/pomegranate.jpg',
+      image: '/images/banners/pendants/monstera-leaf.jpg',
       label: 'Pendants',
       note: 'A single quiet focus',
     },
     {
       href: '/shop?category=necklaces',
-      image: '/images/banners/necklaces/bamboo.jpg',
+      image: '/images/banners/necklaces/pinecone.jpg',
       label: 'Necklaces',
       note: 'Worn at the collarbone',
     },
@@ -120,7 +120,7 @@ const giftingMenu = {
     },
     {
       href: '/shop?category=sets',
-      image: '/images/banners/sets/forget-me-not.jpg',
+      image: '/images/banners/sets/daisy-chain-set.jpg',
       label: 'Gift sets',
       note: 'Pieces meant together',
     },

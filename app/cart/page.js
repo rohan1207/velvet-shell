@@ -5,6 +5,7 @@ import { useStore } from '@/context/StoreContext';
 import { money } from '@/lib/format';
 import ProductThumb from '@/components/ProductThumb';
 import PromoCodeField from '@/components/PromoCodeField';
+import GiftOptions from '@/components/GiftOptions';
 
 export default function CartPage() {
   const {
@@ -14,13 +15,14 @@ export default function CartPage() {
     cartTotal,
     cartShippingFee,
     cartPayable,
+    cartGiftWrapFee,
     discountAmount,
     promo,
     getProduct,
   } = useStore();
 
   return (
-    <div className="bg-ivory pt-28 pb-24 md:pt-36">
+    <div className="bg-ivory pt-page pb-24">
       <div className="mx-auto max-w-4xl px-5">
         <h1 className="font-display text-4xl tracking-[-0.03em] md:text-7xl">Bag</h1>
         {cart.length === 0 ? (
@@ -106,7 +108,8 @@ export default function CartPage() {
                 );
               })}
             </ul>
-            <div className="mt-10 max-w-sm">
+            <div className="mt-10 max-w-md space-y-5">
+              <GiftOptions />
               <PromoCodeField />
             </div>
             <div className="mt-8 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
@@ -116,6 +119,12 @@ export default function CartPage() {
                 {discountAmount > 0 ? (
                   <p className="text-sm text-emerald-800">
                     Discount{promo?.code ? ` (${promo.code})` : ''} −{money(discountAmount)}
+                  </p>
+                ) : null}
+                {cartGiftWrapFee > 0 ? (
+                  <p className="text-sm text-stone">
+                    Gift wrap{' '}
+                    <span className="font-num text-ink">{money(cartGiftWrapFee)}</span>
                   </p>
                 ) : null}
                 <p className="text-sm text-stone">

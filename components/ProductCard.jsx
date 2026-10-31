@@ -7,6 +7,7 @@ import { money } from '@/lib/format';
 import { flyToCart, prefersReducedMotion } from '@/lib/fly-to-cart';
 import { useStore } from '@/context/StoreContext';
 import { sortByColourPriority } from '@/lib/catalog/color-order';
+import VariantDropdown from '@/components/VariantDropdown';
 
 function resolveFromFamily(family, catalogProducts) {
   if (!family?.variants?.length) return [];
@@ -167,6 +168,7 @@ export default function ProductCard({
   const [imageIndex, setImageIndex] = useState(0);
   /** idle | morph | flying | done */
   const [bagPhase, setBagPhase] = useState('idle');
+  const [variantMenuOpen, setVariantMenuOpen] = useState(false);
   const bagBtnRef = useRef(null);
   const animTokenRef = useRef(0);
   const timersRef = useRef([]);
@@ -213,13 +215,8 @@ export default function ProductCard({
   const wished = wishlist.includes(active.slug);
   const href = `/shop/${active.slug}`;
   const title = displayName(product.name);
-  const prices = variants.length ? variants.map((item) => item.product.price) : [product.price];
-  const minPrice = Math.min(...prices);
-  const maxPrice = Math.max(...prices);
-  const priceLabel =
-    variants.length > 1 && minPrice !== maxPrice
-      ? `From ${money(minPrice)}`
-      : money(active.price);
+  // Show the selected / previewed variant price (dropdown picks one colour).
+  const priceLabel = money(displayProduct.price ?? active.price);
 
   const bagBusy = bagPhase !== 'idle';
   const bagCollapsed = bagPhase === 'morph' || bagPhase === 'flying';
@@ -286,10 +283,12 @@ export default function ProductCard({
 
   return (
     <article
-      className={`group flex h-full animate-[fade-up_0.9s_var(--ease-luxe)_both] flex-col ${className}`}
+      className={`group flex h-full animate-[fade-up_0.9s_var(--ease-luxe)_both] flex-col ${
+        variantMenuOpen ? 'relative z-40' : 'relative z-0'
+      } ${className}`}
       style={{ animationDelay: `${index * 70}ms` }}
     >
-      <div className="relative isolate aspect-square overflow-hidden bg-[#f3eee8]">
+      <div className="relative isolate aspect-square overflow-hidden bg-white">
         <AppImage
           key={currentImage}
           src={currentImage}
@@ -335,49 +334,10 @@ export default function ProductCard({
         ) : null}
       </div>
 
-      <div className="mt-2.5 flex flex-1 flex-col md:mt-3">
-        <div className="flex min-h-4 items-center justify-center gap-1.5 md:min-h-5 md:gap-2">
-          {variants.length > 1
-            ? variants.map((variant) => {
-                const selected = variant.slug === active.slug;
-                const previewing = previewSlug === variant.slug;
-                return (
-                  <button
-                    key={variant.slug}
-                    type="button"
-                    aria-label={variant.label}
-                    aria-pressed={selected}
-                    title={variant.label}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      event.stopPropagation();
-                      setActiveSlug(variant.slug);
-                      setPreviewSlug(null);
-                      setImageIndex(0);
-                    }}
-                    onMouseEnter={() => setPreviewSlug(variant.slug)}
-                    onMouseLeave={() => setPreviewSlug(null)}
-                    onFocus={() => setPreviewSlug(variant.slug)}
-                    onBlur={() => setPreviewSlug(null)}
-                    className={`flex h-7 w-7 items-center justify-center rounded-full transition-all duration-300 md:h-5 md:w-5 ${
-                      selected || previewing
-                        ? 'ring-1 ring-ink ring-offset-1 ring-offset-white md:ring-offset-2'
-                        : ''
-                    }`}
-                  >
-                    <span
-                      className="block h-3.5 w-3.5 rounded-full border border-ink/15 md:h-3.5 md:w-3.5"
-                      style={{ backgroundColor: variant.swatch }}
-                    />
-                  </button>
-                );
-              })
-            : null}
-        </div>
-
+      <div className="relative mt-2.5 flex flex-1 flex-col md:mt-3">
         <Link
           href={href}
-          className="font-label mt-1.5 line-clamp-2 min-h-[2.6em] w-full px-0.5 text-center text-[10px] leading-[1.25] tracking-[0.08em] text-ink uppercase transition-colors hover:text-burgundy md:mt-2 md:text-[11px] md:tracking-[0.14em]"
+          className="font-label line-clamp-2 min-h-[2.6em] w-full px-0.5 text-center text-[10px] leading-[1.25] tracking-[0.08em] text-ink uppercase transition-colors hover:text-burgundy md:text-[11px] md:tracking-[0.14em]"
         >
           {title}
         </Link>
@@ -385,6 +345,25 @@ export default function ProductCard({
         <p className="font-num mt-1.5 text-center text-[13px] tracking-[0.04em] text-ink/75 md:mt-2">
           {priceLabel}
         </p>
+
+        {variants.length > 1 ? (
+          <div className="mt-2 px-0.5 sm:px-1 md:mt-2.5 md:px-2">
+            <p className="mb-1 font-label text-[9px] tracking-[0.14em] text-ink/45 uppercase md:text-[10px]">
+              Colour
+            </p>
+            <VariantDropdown
+              variants={variants}
+              value={active.slug}
+              onChange={(slug) => {
+                setActiveSlug(slug);
+                setPreviewSlug(null);
+                setImageIndex(0);
+              }}
+              onPreview={setPreviewSlug}
+              onOpenChange={setVariantMenuOpen}
+            />
+          </div>
+        ) : null}
 
         <div className="mt-auto flex items-center justify-between gap-1 px-0.5 pt-2.5 sm:gap-1.5 sm:px-4 md:px-6 md:pt-3.5">
           <div className="flex items-center gap-0">

@@ -10,17 +10,23 @@ export function shippingFeeForAmount(merchandisePayable) {
   return amount >= FREE_SHIPPING_MIN_INR ? 0 : SHIPPING_FEE_INR;
 }
 
-export function computeOrderMoney({ subtotal, discountAmount = 0 } = {}) {
+export function computeOrderMoney({
+  subtotal,
+  discountAmount = 0,
+  giftWrapFee = 0,
+} = {}) {
   const goods = Math.max(0, Number(subtotal) || 0);
   const discount = Math.min(goods, Math.max(0, Number(discountAmount) || 0));
   const merchandisePayable = Math.max(0, goods - discount);
   const shippingFee = shippingFeeForAmount(merchandisePayable);
-  const total = merchandisePayable + shippingFee;
+  const wrapFee = Math.max(0, Number(giftWrapFee) || 0);
+  const total = merchandisePayable + shippingFee + wrapFee;
   return {
     subtotal: goods,
     discountAmount: discount,
     merchandisePayable,
     shippingFee,
+    giftWrapFee: wrapFee,
     total,
     freeShipping: shippingFee === 0,
   };

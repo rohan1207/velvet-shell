@@ -28,7 +28,7 @@ function features({ material, design, type, length, sku }) {
   if (type) out.push(type);
   if (length) out.push(`Length: ${length}`);
   out.push('Ships within India in 5–7 working days');
-  out.push(`SKU ${sku}`);
+  if (sku) out.push(`SKU ${sku}`);
   return out;
 }
 
@@ -193,6 +193,7 @@ function family(def) {
     design = '',
     type = '',
     length = '',
+    description: familyDescription = '',
     variants,
     hasColorVariants,
   } = def;
@@ -229,6 +230,7 @@ function family(def) {
         sizeTags,
         description:
           x.description ||
+          familyDescription ||
           desc({ name, design: des, type: typ, material: mat, closing: x.closing }),
         features: features({
           material: mat,
@@ -242,7 +244,7 @@ function family(def) {
         gallery: [],
         outOfStock: (x.stock ?? 0) <= 0,
         active: true,
-        sku: x.sku,
+        sku: x.sku || '',
       };
     }),
   };
@@ -809,14 +811,16 @@ export const FAMILIES = [
     variants: [v('YWJE0056', 'Silver', SILVER, 1699, 4)],
   }),
   family({
-    slug: 'ginkgo-light-anklet',
-    name: 'Ginkgo Light Anklet',
+    slug: 'ginkgo-anklet',
+    name: 'Ginkgo Anklet',
     category: 'anklets',
-    collection: 'leaf-whisper',
+    collection: 'the-shell-edit',
     badge: 'Anklet',
-    design: 'Round brilliant cut',
+    design: 'Ginkgo leaf',
     type: 'Anklet',
-    variants: [v('YWJE0057', 'Silver', SILVER, 1699, 5)],
+    description:
+      'A delicate 925 sterling silver anklet inspired by the graceful form of ginkgo leaves. Designed with fine detailing and a refined silhouette, it adds a subtle touch of elegance to everyday styling. Lightweight and versatile, this piece pairs effortlessly with both casual and occasion looks.',
+    variants: [v('', 'Silver', SILVER, 1699, 5)],
   }),
   family({
     slug: 'bamboo-joint-bracelet',
@@ -856,11 +860,13 @@ export const FAMILIES = [
     slug: 'ruyi-lock-anklet',
     name: 'Ruyi Lock Anklet',
     category: 'anklets',
-    collection: 'tea-garden',
+    collection: 'the-shell-edit',
     badge: 'Anklet',
-    design: 'Round brilliant cut',
+    design: 'Ruyi Lock',
     type: 'Anklet',
-    variants: [v('YWJE0062', 'Silver', SILVER, 1699, 5)],
+    description:
+      'A minimalist 925 sterling silver anklet featuring a refined Ruyi-inspired design. The clean chain silhouette is complemented by a delicate central detail, creating an understated piece that can be styled effortlessly on its own or paired with other jewellery.',
+    variants: [v('', 'Silver', SILVER, 1699, 5)],
   }),
   family({
     slug: 'clavicle-flower-necklace',
@@ -876,11 +882,13 @@ export const FAMILIES = [
     slug: 'palace-bell-anklet',
     name: 'Palace Bell Anklet',
     category: 'anklets',
-    collection: 'tea-garden',
+    collection: 'the-shell-edit',
     badge: 'Anklet',
-    design: 'Palace bell',
+    design: 'Palace Bell',
     type: 'Anklet',
-    variants: [v('YWJE0064', 'Silver', SILVER, 1699, 6)],
+    description:
+      'A graceful 925 sterling silver anklet featuring delicate palace bell-inspired details. Its fine chain and charming accents create an elegant, feminine look that works beautifully for everyday wear as well as festive and special occasions.',
+    variants: [v('', 'Silver', SILVER, 1699, 5)],
   }),
   family({
     slug: 'pearl-pendant-necklace',

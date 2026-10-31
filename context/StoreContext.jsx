@@ -12,6 +12,8 @@ const USER_KEY = 'velvet-shell-user';
 const ORDERS_KEY = 'velvet-shell-orders';
 const ADDR_KEY = 'velvet-shell-addresses';
 const SELECTED_ADDR_KEY = 'velvet-shell-selected-address';
+const GIFT_WRAP_KEY = 'velvet-shell-gift-wrap';
+const GIFT_MESSAGE_KEY = 'velvet-shell-gift-message';
 
 function loadJson(key, fallback) {
   try {
@@ -79,6 +81,9 @@ export function StoreProvider({ children }) {
   const [promo, setPromo] = useState(null); // { code, discountAmount, label, name, discountId }
   const [promoError, setPromoError] = useState('');
   const [promoBusy, setPromoBusy] = useState(false);
+  const [giftOptions, setGiftOptions] = useState(null);
+  const [giftWrap, setGiftWrap] = useState(false);
+  const [giftMessage, setGiftMessage] = useState('');
   const [catalog, setCatalog] = useState({
     products: [],
     allProducts: [],
@@ -97,12 +102,16 @@ export function StoreProvider({ children }) {
       const savedOrders = loadJson(ORDERS_KEY, []);
       const savedAddresses = loadJson(ADDR_KEY, []);
       const savedSelected = localStorage.getItem(SELECTED_ADDR_KEY);
+      const savedGiftWrap = localStorage.getItem(GIFT_WRAP_KEY);
+      const savedGiftMessage = localStorage.getItem(GIFT_MESSAGE_KEY);
 
       if (Array.isArray(savedCart)) setCart(savedCart);
       if (Array.isArray(savedWish)) setWishlist(savedWish);
       if (Array.isArray(savedOrders)) setOrders(savedOrders);
       if (Array.isArray(savedAddresses)) setAddresses(savedAddresses);
       if (savedSelected) setSelectedAddressId(savedSelected);
+      if (savedGiftWrap === '1') setGiftWrap(true);
+      if (savedGiftMessage) setGiftMessage(String(savedGiftMessage).slice(0, 500));
 
       // Drop legacy local demo user (may contain plaintext password)
       try {
@@ -168,7 +177,34 @@ export function StoreProvider({ children }) {
         }
       })();
 
-      await Promise.all([authPromise, catalogPromise]);
+      const giftPromise = (async () => {
+        const fallback = {
+          giftWrapEnabled: true,
+          giftWrapFee: 25,
+          giftWrapLabel: 'Gift wrap?',
+          giftWrapDescription:
+            'Ribbon-tied packaging — a soft finishing touch for someone special.',
+          messageEnabled: true,
+          messageLabel: 'Add a custom message?',
+          messageDescription: 'We will include a short note with your order.',
+          messageMaxLength: 200,
+          messagePlaceholder: 'Write a short note…',
+        };
+        try {
+          const res = await fetch('/api/gift-options');
+          const data = await res.json().catch(() => ({}));
+          const options = data.options || fallback;
+          if (!cancelled) {
+            setGiftOptions(options);
+            if (!options.giftWrapEnabled) setGiftWrap(false);
+            if (!options.messageEnabled) setGiftMessage('');
+          }
+        } catch {
+          if (!cancelled) setGiftOptions(fallback);
+        }
+      })();
+
+      await Promise.all([authPromise, catalogPromise, giftPromise]);
     }
 
     hydrate();
@@ -181,6 +217,16 @@ export function StoreProvider({ children }) {
     if (!ready) return;
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
   }, [cart, ready]);
+
+  useEffect(() => {
+    if (!ready) return;
+    localStorage.setItem(GIFT_WRAP_KEY, giftWrap ? '1' : '0');
+  }, [giftWrap, ready]);
+
+  useEffect(() => {
+    if (!ready) return;
+    localStorage.setItem(GIFT_MESSAGE_KEY, giftMessage || '');
+  }, [giftMessage, ready]);
 
   useEffect(() => {
     if (!ready) return;
@@ -314,13 +360,20 @@ export function StoreProvider({ children }) {
       cartTotal,
       Math.max(0, Number(promo?.discountAmount) || 0),
     );
+    const wrapAllowed = Boolean(giftOptions?.giftWrapEnabled);
+    const messageAllowed = Boolean(giftOptions?.messageEnabled);
+    const wrapSelected = wrapAllowed && giftWrap;
+    const cartGiftWrapFee = wrapSelected
+      ? Math.max(0, Number(giftOptions?.giftWrapFee) || 0)
+      : 0;
     const money = computeOrderMoney({
       subtotal: cartTotal,
       discountAmount,
+      giftWrapFee: cartGiftWrapFee,
     });
     const cartMerchandise = money.merchandisePayable;
     const cartShippingFee = cart.length ? money.shippingFee : 0;
-    // Final amount charged (merchandise + shipping)
+    // Final amount charged (merchandise + shipping + gift wrap)
     const cartPayable = cart.length ? money.total : 0;
 
     function buildCartLine(slug, options = {}) {
@@ -438,6 +491,8 @@ export function StoreProvider({ children }) {
       setCart([]);
       setPromo(null);
       setPromoError('');
+      setGiftWrap(false);
+      setGiftMessage('');
     }
 
     async function applyPromoCode(code, email) {
@@ -693,9 +748,17 @@ export function StoreProvider({ children }) {
               : computeOrderMoney({
                   subtotal: order.subtotal ?? order.total,
                   discountAmount: Number(promo?.discountAmount) || 0,
+                  giftWrapFee: cartGiftWrapFee,
                 }).shippingFee,
           total: order.total,
           discountCode: order.discountCode || promo?.code || '',
+          giftWrap: order.giftWrap != null ? order.giftWrap : wrapSelected,
+          giftMessage:
+            order.giftMessage != null
+              ? order.giftMessage
+              : messageAllowed
+                ? giftMessage
+                : '',
         });
         const next = data.order;
         setOrders((current) => [next, ...current.filter((o) => o.id !== next.id)]);
@@ -745,7 +808,13 @@ export function StoreProvider({ children }) {
       cartMerchandise,
       cartShippingFee,
       cartPayable,
+      cartGiftWrapFee,
       discountAmount,
+      giftOptions,
+      giftWrap,
+      setGiftWrap,
+      giftMessage,
+      setGiftMessage,
       promo,
       promoError,
       promoBusy,
@@ -787,6 +856,9 @@ export function StoreProvider({ children }) {
     promo,
     promoError,
     promoBusy,
+    giftOptions,
+    giftWrap,
+    giftMessage,
   ]);
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;

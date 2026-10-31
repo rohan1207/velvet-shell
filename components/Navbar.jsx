@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useStore } from '@/context/StoreContext';
+import SocialLinks from '@/components/SocialIcons';
 import MegaMenu from './MegaMenu';
 
 /** Top row — house links (left of logo) */
@@ -342,16 +343,25 @@ export default function Navbar() {
             className="relative z-10 hidden min-w-0 items-center justify-start lg:flex"
             aria-label="House"
           >
-            <div className="flex items-center gap-0.5">
-              {houseLinks.map((link) => (
-                <HouseLink
-                  key={link.label}
-                  link={link}
-                  active={isActive(link)}
-                  onOpenMega={openMega}
-                  onCloseMega={scheduleCloseMega}
-                />
-              ))}
+            <div className="flex min-w-0 items-center gap-1 xl:gap-2">
+              <div className="flex items-center gap-0.5">
+                {houseLinks.map((link) => (
+                  <HouseLink
+                    key={link.label}
+                    link={link}
+                    active={isActive(link)}
+                    onOpenMega={openMega}
+                    onCloseMega={scheduleCloseMega}
+                  />
+                ))}
+              </div>
+              <span
+                className="mx-0.5 hidden h-3.5 w-px shrink-0 bg-white/20 xl:mx-1 xl:block"
+                aria-hidden
+              />
+              <div className="hidden shrink-0 xl:block" onMouseEnter={scheduleCloseMega}>
+                <SocialLinks variant="navbar" />
+              </div>
             </div>
           </nav>
           <div className="lg:hidden" aria-hidden />
@@ -524,33 +534,39 @@ export default function Navbar() {
                 ))}
               </nav>
 
-              <div className="flex items-center gap-6 border-t border-white/10 pt-8 text-white/80">
-                <button
-                  type="button"
-                  aria-label="Search"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    setSearchOpen(true);
-                  }}
-                >
-                  <IconSearch className="h-6 w-6" />
-                </button>
-                <Link href="/wishlist" aria-label="Wishlist" onClick={() => setMenuOpen(false)}>
-                  <IconWishlist className="h-6 w-6" />
-                </Link>
-                <Link href="/account" aria-label="Account" onClick={() => setMenuOpen(false)}>
-                  <IconAccount className="h-6 w-6" />
-                </Link>
-                <button
-                  type="button"
-                  aria-label="Bag"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    setCartOpen(true);
-                  }}
-                >
-                  <IconBag className="h-6 w-6" />
-                </button>
+              <div className="border-t border-white/10 pt-8">
+                <p className="font-label text-[10px] tracking-[0.22em] text-gold/90 uppercase">
+                  Follow
+                </p>
+                <SocialLinks variant="drawer" className="mt-3" />
+                <div className="mt-6 flex items-center gap-6 text-white/80">
+                  <button
+                    type="button"
+                    aria-label="Search"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setSearchOpen(true);
+                    }}
+                  >
+                    <IconSearch className="h-6 w-6" />
+                  </button>
+                  <Link href="/wishlist" aria-label="Wishlist" onClick={() => setMenuOpen(false)}>
+                    <IconWishlist className="h-6 w-6" />
+                  </Link>
+                  <Link href="/account" aria-label="Account" onClick={() => setMenuOpen(false)}>
+                    <IconAccount className="h-6 w-6" />
+                  </Link>
+                  <button
+                    type="button"
+                    aria-label="Bag"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setCartOpen(true);
+                    }}
+                  >
+                    <IconBag className="h-6 w-6" />
+                  </button>
+                </div>
               </div>
             </div>
           </motion.div>

@@ -8,6 +8,7 @@ import { loadCatalog, productFromCatalog } from '@/lib/catalog';
 import { getProduct } from '@/lib/products';
 import { applyPromoCode, recordPromoRedemption } from '@/lib/discounts/apply';
 import { shippingFeeForAmount } from '@/lib/shipping-fee';
+import { loadGiftOptions, resolveGiftSelection } from '@/lib/gift-options';
 
 function skuFromFeatures(features) {
   if (!Array.isArray(features)) return '';
@@ -76,6 +77,8 @@ export async function POST(request) {
       shippingFee = 0,
       total,
       discountCode = '',
+      giftWrap: giftWrapRequested = false,
+      giftMessage: giftMessageRequested = '',
     } = body;
 
     if (!Array.isArray(items) || !items.length) {
@@ -165,8 +168,13 @@ export async function POST(request) {
     // Server is source of truth: ₹99 shipping under ₹3999 after discount; free at ₹3999+.
     const merchandise = Math.max(0, finalSubtotal - discountAmount);
     const finalShipping = shippingFeeForAmount(merchandise);
-    const finalTotal = merchandise + finalShipping;
-    // Ignore client money fields — recomputed from catalog + promo + shipping rules.
+    const giftSettings = await loadGiftOptions();
+    const gift = resolveGiftSelection(giftSettings, {
+      giftWrap: giftWrapRequested,
+      giftMessage: giftMessageRequested,
+    });
+    const finalTotal = merchandise + finalShipping + gift.giftWrapFee;
+    // Ignore client money fields — recomputed from catalog + promo + shipping + gift rules.
     void subtotal;
     void total;
     void shippingFee;
@@ -203,12 +211,17 @@ export async function POST(request) {
       notes: [
         demo ? 'Demo payment' : '',
         appliedCode ? `Promo ${appliedCode} (−₹${discountAmount})` : '',
+        gift.giftWrap ? `Gift wrap (+₹${gift.giftWrapFee})` : '',
+        gift.giftMessage ? 'Gift message included' : '',
       ]
         .filter(Boolean)
         .join(' · '),
       discount_code: appliedCode,
       discount_amount: discountAmount,
       discount_id: discountId,
+      gift_wrap: gift.giftWrap,
+      gift_wrap_fee: gift.giftWrapFee,
+      gift_message: gift.giftMessage,
     };
 
     let { data: orderRow, error: orderErr } = await admin
@@ -217,16 +230,47 @@ export async function POST(request) {
       .select('*')
       .single();
 
-    if (orderErr && /discount_code|discount_amount|discount_id/i.test(orderErr.message || '')) {
+    if (
+      orderErr &&
+      /discount_code|discount_amount|discount_id|gift_wrap|gift_message/i.test(
+        orderErr.message || '',
+      )
+    ) {
       const {
         discount_code: _dc,
         discount_amount: _da,
         discount_id: _di,
-        ...withoutDiscountCols
+        gift_wrap: _gw,
+        gift_wrap_fee: _gf,
+        gift_message: _gm,
+        ...withoutExtraCols
       } = orderPayload;
-      const retry = await admin.from('orders').insert(withoutDiscountCols).select('*').single();
+      let retryPayload = withoutExtraCols;
+      if (!/gift_wrap|gift_message/i.test(orderErr.message || '')) {
+        retryPayload = {
+          ...withoutExtraCols,
+          gift_wrap: gift.giftWrap,
+          gift_wrap_fee: gift.giftWrapFee,
+          gift_message: gift.giftMessage,
+        };
+      } else if (!/discount_code|discount_amount|discount_id/i.test(orderErr.message || '')) {
+        retryPayload = {
+          ...withoutExtraCols,
+          discount_code: appliedCode,
+          discount_amount: discountAmount,
+          discount_id: discountId,
+        };
+      }
+      const retry = await admin.from('orders').insert(retryPayload).select('*').single();
       orderRow = retry.data
-        ? { ...retry.data, discount_code: appliedCode, discount_amount: discountAmount }
+        ? {
+            ...retry.data,
+            discount_code: appliedCode,
+            discount_amount: discountAmount,
+            gift_wrap: gift.giftWrap,
+            gift_wrap_fee: gift.giftWrapFee,
+            gift_message: gift.giftMessage,
+          }
         : retry.data;
       orderErr = retry.error;
     }
@@ -240,7 +284,6 @@ export async function POST(request) {
       .select('*');
 
     if (itemsErr && /sku|color_label/i.test(itemsErr.message || '')) {
-      // Migration 011 not applied yet — still place the order without those columns.
       const stripped = itemsWithOrder.map(({ sku: _s, color_label: _c, ...rest }) => rest);
       const retry = await admin.from('order_items').insert(stripped).select('*');
       insertedItems = (retry.data || []).map((row, i) => ({
@@ -289,6 +332,9 @@ export async function POST(request) {
           ...orderRow,
           discount_code: orderRow.discount_code || appliedCode || '',
           discount_amount: orderRow.discount_amount ?? discountAmount ?? 0,
+          gift_wrap: orderRow.gift_wrap ?? gift.giftWrap,
+          gift_wrap_fee: orderRow.gift_wrap_fee ?? gift.giftWrapFee,
+          gift_message: orderRow.gift_message ?? gift.giftMessage,
           razorpay_payment_id: paymentId || orderRow.razorpay_payment_id || null,
           razorpay_order_id: razorpayOrderId || orderRow.razorpay_order_id || null,
           paymentId: paymentId || null,
@@ -302,7 +348,15 @@ export async function POST(request) {
       console.error('[orders] email failed', mailErr);
     }
 
-    const order = fromDbOrder(orderRow, insertedItems || itemsWithOrder);
+    const order = fromDbOrder(
+      {
+        ...orderRow,
+        gift_wrap: orderRow.gift_wrap ?? gift.giftWrap,
+        gift_wrap_fee: orderRow.gift_wrap_fee ?? gift.giftWrapFee,
+        gift_message: orderRow.gift_message ?? gift.giftMessage,
+      },
+      insertedItems || itemsWithOrder,
+    );
     order.paymentId = paymentId || null;
     order.discountCode = appliedCode;
     order.discountAmount = discountAmount;

@@ -27,8 +27,11 @@
   --site-promo-h: 2.25rem;
   /* Mobile / tablet: single brand row */
   --site-nav-h: 4.65rem;
+  /* Small clear gap under fixed promo + nav (rounded nav bleeds into content) */
+  --site-chrome-gap: 0.85rem;
   --site-chrome-offset: calc(
-    var(--site-promo-h) + var(--site-nav-h) + env(safe-area-inset-top, 0px)
+    var(--site-promo-h) + var(--site-nav-h) + env(safe-area-inset-top, 0px) +
+      var(--site-chrome-gap)
   );
 }
 
@@ -59,7 +62,8 @@
   }
 }
 
-.pt-site-chrome {
+.pt-site-chrome,
+.pt-page {
   padding-top: var(--site-chrome-offset);
 }
 

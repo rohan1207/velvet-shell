@@ -191,11 +191,15 @@ export default function ProductExperience({
   const mainSrc = activeImages[active] || activeImages[0];
 
   return (
-    <div className="bg-ivory pt-site-chrome">
-      <div className="mx-auto grid max-w-[1600px] gap-6 px-4 pt-3 pb-[calc(6rem+env(safe-area-inset-bottom))] sm:gap-8 sm:px-5 md:gap-10 md:px-10 md:pt-8 md:pb-24 lg:grid-cols-12 lg:gap-16">
-        <div className="order-1 lg:sticky lg:top-[calc(var(--site-promo-h)+var(--site-nav-h)+1rem)] lg:col-span-7 lg:self-start">
-          <div className="flex h-[min(52svh,22rem)] gap-1.5 sm:h-[min(58svh,26rem)] sm:gap-2 md:h-[min(100svh-var(--site-promo-h)-var(--site-nav-h)-3rem,920px)] md:gap-3">
-            <div className="flex w-12 shrink-0 flex-col gap-1.5 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] sm:w-14 sm:gap-2 md:w-16 md:gap-2.5 lg:w-[4.5rem] [&::-webkit-scrollbar]:hidden">
+    <div className="bg-ivory pt-page">
+      {/*
+        pt-page clears the fixed promo+nav so both columns start below the chrome.
+        Desktop: left gallery sticks under the nav; right details scroll with the page.
+      */}
+      <div className="mx-auto grid w-full max-w-[1600px] min-w-0 items-start gap-6 px-4 pt-2 pb-[calc(6rem+env(safe-area-inset-bottom))] sm:gap-8 sm:px-5 md:gap-10 md:px-10 md:pt-5 md:pb-24 lg:grid-cols-12 lg:gap-10 xl:gap-14">
+        <div className="order-1 min-w-0 max-w-full overflow-hidden lg:sticky lg:top-[calc(var(--site-chrome-offset)+0.5rem)] lg:col-span-7 lg:self-start">
+          <div className="flex h-[min(52svh,22rem)] min-w-0 gap-1.5 sm:h-[min(58svh,26rem)] sm:gap-2 md:h-[min(100svh-var(--site-chrome-offset)-2.5rem,920px)] md:gap-3">
+            <div className="flex w-12 shrink-0 flex-col gap-1.5 overflow-y-auto overflow-x-hidden px-0.5 py-1 [scrollbar-width:none] [-ms-overflow-style:none] sm:w-14 sm:gap-2 md:w-16 md:gap-2.5 lg:w-[4.5rem] [&::-webkit-scrollbar]:hidden">
               {allImages.map((tagged, index) => {
                 const isActiveColour = tagged.slug === activeSlug;
                 const isMain =
@@ -210,34 +214,42 @@ export default function ProductExperience({
                     title={tagged.colour}
                     aria-label={`${tagged.colour} image ${index + 1}`}
                     aria-current={isMain}
-                    className={`relative aspect-square w-full shrink-0 overflow-hidden rounded-lg bg-cream transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                      isMain ? 'z-10 scale-[1.08] ring-2 ring-gold/70' : 'scale-100 hover:scale-[1.03]'
+                    className={`relative aspect-square w-full shrink-0 overflow-hidden rounded-lg bg-white ring-1 ring-ink/6 transition-[box-shadow,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      isMain ? 'ring-2 ring-gold/70' : 'hover:ring-ink/20'
                     } ${!isActiveColour ? 'opacity-70' : ''}`}
                   >
-                    <AppImage src={tagged.src} alt="" fill className="object-cover" sizes="72px" />
+                    <AppImage
+                      src={tagged.src}
+                      alt=""
+                      fill
+                      className="object-contain object-center"
+                      sizes="72px"
+                    />
                   </button>
                 );
               })}
             </div>
 
-            <div className="relative min-h-0 min-w-0 flex-1 overflow-hidden rounded-[1.25rem] bg-cream md:rounded-[1.5rem]">
-              <AppImage
-                src={mainSrc}
-                alt={`${activeProduct.name}${activeProduct.colorLabel ? ` — ${activeProduct.colorLabel}` : ''}`}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 55vw"
-                className="object-cover object-center"
-              />
+            <div className="relative min-h-0 min-w-0 flex-1 overflow-hidden rounded-[1.25rem] bg-white p-3 ring-1 ring-ink/6 sm:p-4 md:rounded-[1.5rem] md:p-5">
+              <div className="relative h-full w-full">
+                <AppImage
+                  src={mainSrc}
+                  alt={`${activeProduct.name}${activeProduct.colorLabel ? ` — ${activeProduct.colorLabel}` : ''}`}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 55vw"
+                  className="object-contain object-center"
+                />
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="order-2 lg:sticky lg:top-[calc(var(--site-promo-h)+var(--site-nav-h)+1rem)] lg:col-span-5 lg:self-start">
+        <div className="relative z-10 order-2 min-w-0 w-full max-w-full lg:col-span-5 lg:self-start lg:pl-1">
           <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
             {labelCollection(activeProduct.collection, collections)}
           </p>
-          <h1 className="font-display mt-3 text-[1.85rem] leading-[1.08] tracking-[-0.03em] sm:text-3xl md:text-[2.75rem] md:leading-[1.05]">
+          <h1 className="font-display mt-3 max-w-full break-words text-[1.85rem] leading-[1.12] tracking-[-0.03em] sm:text-3xl md:text-[2.35rem] md:leading-[1.1] xl:text-[2.65rem]">
             {title}
           </h1>
           <p className="font-num mt-4 text-lg text-ink/90">{money(activeProduct.price)}</p>
