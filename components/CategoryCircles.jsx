@@ -20,6 +20,11 @@ const categories = [
     image: '/categories/necklace-g1.png',
   },
   {
+    label: 'Pendants',
+    href: '/shop?category=pendants',
+    image: '/categories/pendant-g1.png',
+  },
+  {
     label: 'Rings',
     href: '/shop?category=rings',
     image: '/categories/ring-g1.png',
@@ -28,11 +33,6 @@ const categories = [
     label: 'Accessories',
     href: '/shop?category=accessories',
     image: '/categories/choker-g1.png',
-  },
-  {
-    label: 'Sets',
-    href: '/shop?category=sets',
-    image: '/categories/necklace-g1.png',
   },
 ];
 

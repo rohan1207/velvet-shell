@@ -16,7 +16,7 @@ const shopMenu = {
         { href: '/shop?category=earrings', label: 'Earrings' },
         { href: '/shop?category=bracelets', label: 'Bracelets' },
         { href: '/shop?category=necklaces', label: 'Necklaces' },
-        // { href: '/shop?category=pendants', label: 'Pendants' },
+        { href: '/shop?category=pendants', label: 'Pendants' },
         // { href: '/shop?category=chokers', label: 'Chokers' },
         { href: '/shop?category=accessories', label: 'Accessories' },
         { href: '/shop?category=rings', label: 'Rings' },
@@ -49,16 +49,15 @@ const shopMenu = {
     },
   ],
   features: [
-    // Pendants folded into Necklaces
-    // {
-    //   href: '/shop?category=pendants',
-    //   image: '/images/banners/necklaces/pomegranate.jpg',
-    //   label: 'Pendants',
-    //   note: 'A single quiet focus',
-    // },
+    {
+      href: '/shop?category=pendants',
+      image: '/images/banners/necklaces/pomegranate.jpg',
+      label: 'Pendants',
+      note: 'A single quiet focus',
+    },
     {
       href: '/shop?category=necklaces',
-      image: '/images/banners/necklaces/pomegranate.jpg',
+      image: '/images/banners/necklaces/bamboo.jpg',
       label: 'Necklaces',
       note: 'Worn at the collarbone',
     },

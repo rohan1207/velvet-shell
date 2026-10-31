@@ -1,0 +1,258 @@
+{
+  "currency": "INR",
+  "products": [
+    {
+      "product_id": "P01",
+      "name": "Two-Tone Flower Pendant",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated",
+      "design": "Two-Tone Flower",
+      "type": "Pendant Only",
+      "description": "A delicate five-petal flower pendant featuring a graceful combination of silver and gold-toned detailing. Crafted in 925 sterling silver with an 18K gold-plated finish, the two-tone design adds depth and character while keeping the overall look elegant and versatile.",
+      "variants": [
+        { "sku": "LFJE0244D", "color": "Gold", "price_inr": 2499, "qty": 1 },
+        { "sku": "LFJE0244E", "color": "Silver", "price_inr": 2999, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P02",
+      "name": "Forget-Me-Not Flower Pendant",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated",
+      "design": "Forget-Me-Not Flower",
+      "type": "Pendant Only",
+      "description": "A delicate forget-me-not flower pendant featuring softly textured petals with subtle gold-toned detailing at the centre. Crafted in 925 sterling silver with an 18K gold-plated finish, this petite floral design adds a refined touch to everyday jewellery and can be paired with your favourite chain.",
+      "variants": [
+        { "sku": "LFJE0237E", "color": "Silver & Gold", "price_inr": 3599, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P03",
+      "name": "Camellia Flower Baroque Pearl Pendant",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated",
+      "design": "Camellia Flower",
+      "stone": "Natural Baroque Pearl",
+      "type": "Pendant",
+      "description": "A graceful camellia flower paired with a naturally shaped baroque pearl creates the focal point of this elegant pendant. Crafted in 925 sterling silver with an 18K gold-plated finish, the sculpted floral detail adds character while the organic pearl brings a soft, timeless touch.",
+      "variants": [
+        { "sku": "LFJE0217A", "color": "Gold", "price_inr": 3599, "qty": 1 },
+        { "sku": "LFJE0217B", "color": "Silver", "price_inr": 3199, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P04",
+      "name": "Camellia Flower Crystal Pendant",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated",
+      "design": "Camellia Flower",
+      "stone": "Crystal Accents",
+      "type": "Pendant Necklace",
+      "description": "A sculpted camellia bloom takes centre stage in this statement pendant, detailed with sparkling stone accents across the flower. Crafted in 925 sterling silver with an 18K gold-plated finish, the dimensional floral design adds a rich, elegant touch while the accompanying chain completes the look.",
+      "variants": [
+        { "sku": "LFJE0220D", "color": "Gold", "price_inr": 3599, "qty": 1 },
+        { "sku": "LFJE0220E", "color": "Silver", "price_inr": 3599, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P05",
+      "name": "Phalaenopsis Orchid Pendant",
+      "material": "925 Sterling Silver",
+      "design": "Phalaenopsis Orchid",
+      "type": "Pendant Only",
+      "description": "A delicate Phalaenopsis orchid takes centre stage in this handcrafted pendant, with layered petals and subtle gold-toned detailing at the centre. Made from 925 sterling silver, its sculpted floral form adds an elegant botanical touch to your jewellery collection.",
+      "variants": [
+        { "sku": "LFJE0239E", "color": "Silver", "price_inr": 3199, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P06",
+      "name": "Forget-Me-Not Flower Pendant Necklace",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated",
+      "design": "Forget-Me-Not Flower",
+      "type": "Pendant Necklace",
+      "description": "A cluster of delicate forget-me-not blooms creates a graceful floral focal point in this pendant necklace. Crafted in 925 sterling silver with an 18K gold-plated finish, the layered flowers bring a soft, nature-inspired character to an elegant everyday necklace.",
+      "variants": [
+        { "sku": "LFJE0194E", "color": "Silver", "price_inr": 3599, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P07",
+      "name": "Calla Lily Pendant",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated",
+      "design": "Calla Lily",
+      "type": "Pendant Only",
+      "description": "Featuring two gracefully curved Calla Lily forms, this pendant combines sculptural lines with contrasting silver and gold-toned detailing. Crafted in 925 sterling silver with an 18K gold-plated finish, its sleek floral silhouette makes it a distinctive addition to a fine jewellery collection.",
+      "variants": [
+        { "sku": "LFJE0214E1", "color": "Silver", "price_inr": 5999, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P08",
+      "name": "Lotus Flower Gemstone Pendant",
+      "material": "925 Sterling Silver",
+      "design": "Lotus Flower",
+      "stone": "Pink Natural Gemstone",
+      "type": "Pendant",
+      "description": "A delicate lotus flower rests against a smooth, round pink gemstone in this distinctive pendant design. Crafted in 925 sterling silver, the floral detailing and soft gemstone colour create a graceful piece suited to everyday styling, special occasions and gifting.",
+      "variants": [
+        { "sku": "LFJE0118B", "color": "Pink", "price_inr": 5999, "qty": 1 },
+        { "sku": "LFJE0118A", "color": "Green", "price_inr": 4999, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P09",
+      "name": "Small Flowering Crabapple with Pearl Pendant",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated",
+      "design": "Small Flowering Crabapple",
+      "stone": "Pearl",
+      "type": "Pendant Necklace",
+      "description": "A sculpted flowering crabapple pendant featuring layered, textured petals surrounding a lustrous pearl at the centre. Crafted in 925 sterling silver with an 18K gold-plated finish, the delicate floral form and soft pearl detail create an elegant statement piece for everyday styling and special occasions.",
+      "variants": [
+        { "sku": "LFJE0223A", "color": "Gold", "price_inr": 1999, "qty": 1 },
+        { "sku": "LFJE0223B", "color": "Silver", "price_inr": 1799, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P10",
+      "name": "Long Feather Pendant Necklace",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated",
+      "design": "Feather",
+      "type": "Pendant Necklace",
+      "description": "A slender feather takes centre stage in this elegant pendant necklace, featuring finely detailed contours and a delicate drop accent. Crafted in 925 sterling silver with an 18K gold-plated finish, the elongated design adds a graceful, lightweight touch to everyday and occasion styling.",
+      "variants": [
+        { "sku": "LFJE0211D", "color": "Gold", "price_inr": 3299, "qty": 1 },
+        { "sku": "LFJE0211E", "color": "Silver", "price_inr": 3299, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P11",
+      "name": "Plum & Snowflake Floral Pendant Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Plum & Snowflake Flower",
+      "stone": "Natural Pearl",
+      "type": "Pendant Necklace",
+      "description": "A delicate floral cluster combines soft pearl detailing with sculpted botanical elements in this distinctive pendant necklace. Crafted in 925 sterling silver, the layered design brings together graceful forms and subtle detailing for an elegant nature-inspired look.",
+      "variants": [
+        { "sku": "LFJE0213E", "color": "Gold", "price_inr": 2999, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P12",
+      "name": "Blooming Anemone Flower Pendant",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated",
+      "design": "Blooming Anemone Flower",
+      "type": "Pendant Necklace",
+      "description": "A blooming anemone flower forms the centrepiece of this delicate pendant, with layered petals surrounding a subtle gemstone-like centre. Crafted in 925 sterling silver with an 18K gold-plated finish, its dimensional floral design adds a refined botanical touch to any jewellery collection.",
+      "variants": [
+        { "sku": "LFJE0179D1", "color": "Gold", "price_inr": 4499, "qty": 1 },
+        { "sku": "LFJE0179B", "color": "Silver", "price_inr": 4499, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P13",
+      "name": "Peony Flower Gemstone Pendant",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated Detailing",
+      "design": "Peony Flower",
+      "stone": "Natural Gemstone",
+      "type": "Pendant",
+      "description": "A beautifully sculpted peony flower forms the centre of this statement pendant, with layered silver petals highlighted by fine gold-toned detailing. A colourful gemstone at the centre adds a striking focal point to the floral design, giving the piece a distinctive and elegant character.",
+      "variants": [
+        { "sku": "LFJE0087D", "color": "Silver with Yellow Stone", "price_inr": 4499, "qty": 1 },
+        { "sku": "LFJE0087B", "color": "Silver with Pink Stone", "price_inr": 4499, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P14",
+      "name": "Botanical Branch Pendant",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated Detailing",
+      "design": "Botanical Branch & Leaves",
+      "type": "Pendant Necklace",
+      "description": "A graceful botanical branch forms the silhouette of this delicate pendant, detailed with elongated silver leaves and a textured golden berry accent. Crafted in 925 sterling silver with subtle 18K gold-plated detailing, the nature-inspired design brings an elegant, organic character to your jewellery collection.",
+      "variants": [
+        { "sku": "LFJE0195E", "color": "Silver", "price_inr": 5999, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P15",
+      "name": "Olive Branch Pendant Necklace",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated Detailing",
+      "design": "Olive Branch",
+      "type": "Pendant Necklace",
+      "description": "A graceful olive branch forms the centre of this nature-inspired pendant, featuring slender silver leaves and textured golden olive details. Crafted in 925 sterling silver with 18K gold-plated accents, the contrasting finishes give the design a refined, organic character.",
+      "variants": [
+        { "sku": "LFJE0188E", "color": "Silver", "price_inr": 4499, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P16",
+      "name": "Pencil Shavings Pendant Necklace",
+      "material": "925 Sterling Silver",
+      "design": "Pencil Shavings",
+      "type": "Pendant Necklace",
+      "description": "Inspired by the curled form of pencil shavings, this sculptural pendant features an irregular, layered silhouette with finely textured edges. Crafted in 925 sterling silver, the distinctive design is available in both silver and gold finishes, making it a contemporary statement piece for everyday or occasion wear.",
+      "variants": [
+        { "sku": "LFJE0174D", "color": "Gold", "price_inr": 4499, "qty": 1 },
+        { "sku": "LFJE0174E", "color": "Silver", "price_inr": 3999, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P17",
+      "name": "Pearl Long Leaf Pendant",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated",
+      "design": "Long Leaf",
+      "stone": "Natural Pearl",
+      "type": "Pendant",
+      "description": "A graceful elongated leaf pendant featuring a lustrous pearl nestled within its sculpted form. The flowing leaf silhouette and textured detailing create an elegant botanical look, while the pearl adds a soft, refined accent.",
+      "variants": [
+        { "sku": "LFJE0227A", "color": "Gold", "price_inr": 2299, "qty": 1 },
+        { "sku": "LFJE0227B", "color": "Silver", "price_inr": 2299, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P18",
+      "name": "Monstera Leaf Pendant",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated",
+      "design": "Monstera Leaf",
+      "type": "Pendant Necklace",
+      "description": "A sculpted Monstera leaf forms the centre of this contemporary pendant, with distinctive cut-out details that give the design a graceful, organic silhouette. Crafted in 925 sterling silver with an 18K gold-plated finish, it makes a refined nature-inspired addition to any jewellery collection.",
+      "variants": [
+        { "sku": "LFJE0142A", "color": "Gold", "price_inr": 3599, "qty": 1 },
+        { "sku": "LFJE0142B", "color": "Silver", "price_inr": 3199, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P19",
+      "name": "Heart Honeycomb Bee Pendant",
+      "material": "925 Sterling Silver",
+      "design": "Heart, Honeycomb & Bee",
+      "type": "Pendant Necklace",
+      "description": "A heart-shaped honeycomb frames a delicate bee motif in this distinctive pendant design. Crafted in 925 sterling silver, the geometric honeycomb pattern contrasts beautifully with the floral-inspired bee detail, creating a playful yet refined statement piece.",
+      "variants": [
+        { "sku": "LFJE0056", "color": "Gold", "price_inr": 3999, "qty": 1 }
+      ]
+    },
+    {
+      "product_id": "P20",
+      "name": "Forget-Me-Not Flower Pendant",
+      "material": "925 Sterling Silver",
+      "finish": "18K Gold Plated",
+      "design": "Forget-Me-Not Flower",
+      "type": "Pendant",
+      "description": "A delicate cluster of forget-me-not blooms creates an elegant vertical silhouette in this handcrafted pendant. Crafted in 925 sterling silver with an 18K gold-plated finish, the layered white flowers and subtle gold detailing give the piece a graceful botanical character.",
+      "variants": [
+        { "sku": "LFJE0193E", "color": "Silver", "price_inr": 3599, "qty": 1 }
+      ]
+    }
+  ]
+}

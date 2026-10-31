@@ -22,8 +22,7 @@ const categoryLinks = [
   { href: '/shop?category=earrings', label: 'Earrings', match: 'earrings' },
   { href: '/shop?category=bracelets', label: 'Bracelets', match: 'bracelets' },
   { href: '/shop?category=necklaces', label: 'Necklaces', match: 'necklaces' },
-  // Pendants folded into Necklaces — keep out of nav
-  // { href: '/shop?category=pendants', label: 'Pendants', match: 'pendants' },
+  { href: '/shop?category=pendants', label: 'Pendants', match: 'pendants' },
   // Chokers live under Accessories (with chains + brooches)
   // { href: '/shop?category=chokers', label: 'Chokers', match: 'chokers' },
   { href: '/shop?category=rings', label: 'Rings', match: 'rings' },
