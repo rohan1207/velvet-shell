@@ -355,8 +355,8 @@ export default function ShopExperience({
               </p>
             </div>
 
-            <div className="chip-scroll-wrap">
-              <div className="chip-scroll md:justify-end">
+            <div className="chip-scroll-wrap -mx-4 px-4 sm:-mx-5 sm:px-5 md:mx-0 md:px-0">
+              <div className="chip-scroll lg:justify-end">
                 <CategoryPill active={category === 'all'} onClick={() => updateCategory('all')}>
                   All
                 </CategoryPill>

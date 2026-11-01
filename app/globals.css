@@ -160,7 +160,10 @@ button {
 }
 
 .field-control {
+  box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   border-radius: 1rem;
   border: 1px solid rgba(45, 43, 43, 0.1);
   background: rgba(255, 255, 255, 0.85);
@@ -175,7 +178,7 @@ button {
   border-color: rgba(94, 6, 42, 0.35);
 }
 
-/* Horizontal chip scroller used on shop / home */
+/* Horizontal chip scroller used on shop / home / account */
 .chip-scroll {
   display: flex;
   width: max-content;
@@ -187,24 +190,36 @@ button {
 }
 
 .chip-scroll-wrap {
-  margin-left: -1.25rem;
-  margin-right: -1.25rem;
   overflow-x: auto;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  touch-action: pan-x;
 }
 
 .chip-scroll-wrap::-webkit-scrollbar {
   display: none;
 }
 
-@media (min-width: 768px) {
+/* Edge-bleed only when parent padding is 1.25rem (px-5). Prefer explicit
+   padding on the scroller when parent uses px-4. */
+.chip-scroll-wrap.chip-scroll-bleed {
+  margin-left: -1.25rem;
+  margin-right: -1.25rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 1024px) {
   .chip-scroll-wrap {
+    overflow: visible;
+    touch-action: auto;
+  }
+
+  .chip-scroll-wrap.chip-scroll-bleed {
     margin-left: 0;
     margin-right: 0;
-    overflow: visible;
     padding-left: 0;
     padding-right: 0;
   }
@@ -352,17 +367,29 @@ img {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-ivory);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-gold-light);
+  background: rgba(45, 43, 43, 0.18);
   border-radius: 99px;
+}
+
+/* Bag drawer / sheets — no visible scrollbar */
+.cart-drawer-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.cart-drawer-scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 @keyframes shop-dot-ping {

@@ -97,8 +97,8 @@ export default function PromoCodeField({ email, compact = false }) {
   if (promo?.code) {
     return (
       <div
-        className={`rounded-2xl border border-emerald-200/80 bg-emerald-50/50 ${
-          compact ? 'px-3 py-2.5' : 'px-4 py-3'
+        className={`border border-emerald-200/80 bg-emerald-50/50 ${
+          compact ? 'rounded-lg px-2.5 py-2' : 'rounded-2xl px-4 py-3'
         }`}
       >
         <div className="flex items-start justify-between gap-3">
@@ -135,15 +135,19 @@ export default function PromoCodeField({ email, compact = false }) {
       <button
         type="button"
         onClick={() => setSheetOpen(true)}
-        className={`flex w-full items-center justify-between gap-3 rounded-2xl border border-dashed border-ink/15 bg-white/80 text-left transition hover:border-burgundy/30 ${
-          compact ? 'px-3 py-2.5' : 'px-4 py-3'
+        className={`flex w-full items-center justify-between gap-2.5 border border-dashed border-ink/15 bg-white/80 text-left transition hover:border-burgundy/30 ${
+          compact ? 'rounded-lg px-2.5 py-2' : 'rounded-2xl px-4 py-3'
         }`}
       >
         <div className="min-w-0">
-          <p className="font-label text-[10px] tracking-[0.14em] text-ink/55 uppercase">
+          <p
+            className={`font-label tracking-[0.14em] text-ink/55 uppercase ${
+              compact ? 'text-[9px]' : 'text-[10px]'
+            }`}
+          >
             Apply coupon
           </p>
-          <p className="mt-0.5 truncate text-sm text-ink">
+          <p className={`mt-0.5 truncate text-ink ${compact ? 'text-[12px]' : 'text-sm'}`}>
             {listBusy
               ? 'Loading offers…'
               : eligibleCount > 0
@@ -153,7 +157,7 @@ export default function PromoCodeField({ email, compact = false }) {
                   : 'Have a promo code?'}
           </p>
         </div>
-        <span className="font-label shrink-0 text-[10px] tracking-[0.14em] text-burgundy uppercase">
+        <span className="font-label shrink-0 text-[9px] tracking-[0.14em] text-burgundy uppercase sm:text-[10px]">
           View
         </span>
       </button>

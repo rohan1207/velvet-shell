@@ -320,7 +320,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-page pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-20">
+    <div className="min-h-[100svh] overflow-x-clip bg-gradient-to-b from-[#faf6f1] to-ivory pt-page pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-20">
       {successOrder && (
         <SuccessModal
           order={successOrder}
@@ -328,8 +328,8 @@ export default function CheckoutPage() {
         />
       )}
 
-      <div className="mx-auto grid max-w-[1400px] gap-8 px-4 sm:px-5 md:grid-cols-12 md:gap-12 md:px-10 lg:gap-16">
-        <form onSubmit={onPay} className="md:col-span-6 lg:col-span-5">
+      <div className="mx-auto grid max-w-[1400px] gap-6 px-4 sm:gap-8 sm:px-5 md:grid-cols-12 md:gap-12 md:px-10 lg:gap-16">
+        <form onSubmit={onPay} className="min-w-0 md:col-span-6 lg:col-span-5">
           <p className="font-label text-[10px] tracking-[0.24em] text-gold uppercase">Checkout</p>
           <h1 className="font-display mt-2 text-[1.85rem] tracking-[-0.03em] text-burgundy sm:mt-3 sm:text-4xl md:text-5xl">
             Almost yours.
@@ -397,7 +397,7 @@ export default function CheckoutPage() {
                 onChange={(v) => updateField('fullName', v)}
                 required
               />
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
                 <Field
                   label="Email"
                   type="email"
@@ -425,7 +425,7 @@ export default function CheckoutPage() {
                 value={form.line2}
                 onChange={(v) => updateField('line2', v)}
               />
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
                 <Field
                   label="City"
                   value={form.city}
@@ -439,7 +439,7 @@ export default function CheckoutPage() {
                   required
                 />
               </div>
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
                 <Field
                   label="PIN code"
                   value={form.postal}
@@ -467,7 +467,7 @@ export default function CheckoutPage() {
           )}
 
           {!showNewAddress && addresses.length > 0 && (
-            <div className="mt-6 rounded-2xl border border-ink/8 bg-white/50 px-5 py-4">
+            <div className="mt-6 rounded-2xl border border-ink/8 bg-white/50 px-4 py-4 sm:px-5">
               <p className="text-xs font-light text-ink/60">
                 Shipping to the selected address. Need a tweak?{' '}
                 <button
@@ -478,7 +478,7 @@ export default function CheckoutPage() {
                   Edit details
                 </button>
               </p>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <Field
                   label="Email"
                   type="email"
@@ -520,7 +520,7 @@ export default function CheckoutPage() {
           </p>
         </form>
 
-        <aside className="md:col-span-6 lg:col-span-7">
+        <aside className="min-w-0 md:col-span-6 lg:col-span-7">
           <div className="md:sticky md:top-[7.25rem]">
             <OrderSummaryCard
               lines={lines}
@@ -607,17 +607,17 @@ function OrderSummaryCard({
   email,
 }) {
   return (
-    <div className="flex max-h-[calc(100svh-8.5rem)] flex-col overflow-hidden rounded-[1.75rem] border border-ink/8 bg-white/80 shadow-[0_20px_60px_rgba(40,20,24,0.06)]">
-      <div className="border-b border-ink/8 px-6 py-5">
+    <div className="flex flex-col overflow-visible rounded-[1.35rem] border border-ink/8 bg-white/80 shadow-[0_20px_60px_rgba(40,20,24,0.06)] sm:rounded-[1.75rem] md:max-h-[calc(100svh-8.5rem)] md:overflow-hidden">
+      <div className="shrink-0 border-b border-ink/8 px-4 py-4 sm:px-6 sm:py-5">
         <p className="font-label text-[10px] tracking-[0.18em] text-gold uppercase">Your bag</p>
         <p className="mt-1 text-sm text-ink/70">
           {cartCount} {cartCount === 1 ? 'piece' : 'pieces'}
         </p>
       </div>
-      <ul className="flex-1 space-y-4 overflow-y-auto px-6 py-5">
+      <ul className="space-y-4 px-4 py-4 sm:px-6 sm:py-5 md:min-h-0 md:flex-1 md:overflow-y-auto">
         {lines.map(({ item, product, lineTotal }) => (
-          <li key={item.id} className="flex gap-4">
-            <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-xl bg-cream ring-1 ring-ink/6">
+          <li key={item.id} className="flex min-w-0 gap-3 sm:gap-4">
+            <div className="relative h-16 w-14 shrink-0 overflow-hidden rounded-xl bg-cream ring-1 ring-ink/6 sm:h-20 sm:w-16">
               <ProductThumb
                 product={product}
                 item={item}
@@ -639,7 +639,7 @@ function OrderSummaryCard({
               {Array.isArray(item.customization) && item.customization.length > 0 ? (
                 <ul className="mt-1.5 space-y-0.5 text-[11px] text-ink/65">
                   {item.customization.map((entry, i) => (
-                    <li key={`${entry.id || entry.label}-${i}`}>
+                    <li key={`${entry.id || entry.label}-${i}`} className="break-words">
                       {entry.label}: {entry.value}
                     </li>
                   ))}
@@ -647,44 +647,48 @@ function OrderSummaryCard({
               ) : null}
               <p className="mt-1 text-xs text-ink/60">Qty {item.qty}</p>
             </div>
-            <p className="font-num text-sm text-ink">{money(lineTotal)}</p>
+            <p className="font-num shrink-0 text-sm text-ink">{money(lineTotal)}</p>
           </li>
         ))}
       </ul>
-      <div className="space-y-4 border-t border-ink/8 px-6 py-5">
+      <div className="min-w-0 space-y-2 border-t border-ink/8 px-4 py-3 sm:space-y-2.5 sm:px-6 sm:py-4">
         <GiftOptions compact />
-        <PromoCodeField email={email} />
-        <div className="space-y-1.5">
-          <div className="flex items-center justify-between text-sm">
+        <PromoCodeField email={email} compact />
+        <div className="space-y-0.5 pt-0.5 text-[12px] sm:text-[13px]">
+          <div className="flex items-center justify-between gap-3">
             <span className="text-ink/60">Subtotal</span>
-            <span className="font-num text-ink">{money(cartTotal)}</span>
+            <span className="font-num shrink-0 text-ink">{money(cartTotal)}</span>
           </div>
           {discountAmount > 0 ? (
-            <div className="flex items-center justify-between text-sm text-emerald-800">
-              <span>Discount{promo?.code ? ` (${promo.code})` : ''}</span>
-              <span className="font-num">−{money(discountAmount)}</span>
+            <div className="flex items-center justify-between gap-3 text-emerald-800">
+              <span className="min-w-0 truncate">
+                Discount{promo?.code ? ` (${promo.code})` : ''}
+              </span>
+              <span className="font-num shrink-0">−{money(discountAmount)}</span>
             </div>
           ) : null}
           {cartGiftWrapFee > 0 ? (
-            <div className="flex items-center justify-between text-sm">
+            <div className="flex items-center justify-between gap-3">
               <span className="text-ink/60">Gift wrap</span>
-              <span className="font-num text-ink">{money(cartGiftWrapFee)}</span>
+              <span className="font-num shrink-0 text-ink">{money(cartGiftWrapFee)}</span>
             </div>
           ) : null}
-          <div className="flex items-center justify-between text-sm">
+          <div className="flex items-center justify-between gap-3">
             <span className="text-ink/60">Shipping</span>
-            <span className="font-num text-ink">
+            <span className="font-num shrink-0 text-ink">
               {cartShippingFee > 0 ? money(cartShippingFee) : 'Free'}
             </span>
           </div>
-          <div className="flex items-center justify-between pt-1">
-            <span className="font-label text-[10px] tracking-[0.16em] text-ink/50 uppercase">
+          <div className="flex items-center justify-between gap-3 pt-0.5">
+            <span className="font-label text-[9px] tracking-[0.14em] text-ink/50 uppercase sm:text-[10px]">
               Total
             </span>
-            <span className="font-num text-2xl text-burgundy">{money(cartPayable)}</span>
+            <span className="font-num shrink-0 text-lg text-burgundy sm:text-xl">
+              {money(cartPayable)}
+            </span>
           </div>
         </div>
-        <p className="text-xs font-light text-ink/50">
+        <p className="text-[11px] font-light leading-relaxed text-ink/50">
           {cartShippingFee > 0
             ? 'Free shipping on orders ₹3,999 and above'
             : 'Complimentary shipping on this order'}
@@ -696,7 +700,7 @@ function OrderSummaryCard({
 
 function Field({ label, value, onChange, type = 'text', required, placeholder }) {
   return (
-    <label className="block">
+    <label className="block min-w-0">
       <span className="font-label text-[10px] tracking-[0.14em] text-ink/50 uppercase">{label}</span>
       <input
         type={type}

@@ -110,7 +110,7 @@ export default function GiftOptions({ compact = false, className = '' }) {
   }
 
   const shell = compact
-    ? 'rounded-xl border border-ink/10 bg-[#faf7f2]/90'
+    ? 'rounded-lg border border-ink/10 bg-white/70'
     : 'rounded-2xl border border-ink/8 bg-[#faf7f2]/70';
 
   return (
@@ -120,18 +120,26 @@ export default function GiftOptions({ compact = false, className = '' }) {
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((v) => !v)}
-        className={`flex w-full items-center gap-2.5 text-left transition-colors hover:bg-ink/[0.02] ${
-          compact ? 'min-h-11 px-3 py-2.5' : 'min-h-12 px-4 py-3'
+        className={`flex w-full items-center gap-2 text-left transition-colors hover:bg-ink/[0.02] ${
+          compact ? 'min-h-9 px-2.5 py-2' : 'min-h-12 px-4 py-3'
         }`}
       >
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-burgundy/8 text-burgundy">
-          <IconGift className="h-3.5 w-3.5" />
+        <span
+          className={`flex shrink-0 items-center justify-center rounded-full bg-burgundy/8 text-burgundy ${
+            compact ? 'h-7 w-7' : 'h-8 w-8'
+          }`}
+        >
+          <IconGift className={compact ? 'h-3 w-3' : 'h-3.5 w-3.5'} />
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block text-[13px] font-medium text-ink">
-            {hasSelection ? 'Gift options' : 'This is a gift'}
+          <span className={`block font-medium text-ink ${compact ? 'text-[12px]' : 'text-[13px]'}`}>
+            {hasSelection ? 'Gift options' : 'This is a gift?'}
           </span>
-          <span className="mt-0.5 block truncate text-[11px] font-light text-ink/55">
+          <span
+            className={`mt-0.5 block truncate font-light text-ink/55 ${
+              compact ? 'text-[10px]' : 'text-[11px]'
+            }`}
+          >
             {hasSelection
               ? summaryBits().join(' · ')
               : showWrap
@@ -145,10 +153,16 @@ export default function GiftOptions({ compact = false, className = '' }) {
       {open ? (
         <div
           id={panelId}
-          className={`space-y-2 border-t border-ink/8 ${compact ? 'px-3 pb-3 pt-2.5' : 'px-4 pb-4 pt-3'}`}
+          className={`space-y-1.5 border-t border-ink/8 ${
+            compact ? 'px-2.5 pb-2.5 pt-2' : 'px-4 pb-4 pt-3'
+          }`}
         >
           {showWrap ? (
-            <label className="flex min-h-10 cursor-pointer items-center gap-2.5 rounded-lg px-1 py-1.5 hover:bg-white/60">
+            <label
+              className={`flex cursor-pointer items-center gap-2.5 rounded-lg px-1 hover:bg-white/60 ${
+                compact ? 'min-h-9 py-1' : 'min-h-10 py-1.5'
+              }`}
+            >
               <input
                 type="checkbox"
                 className="sr-only"
@@ -156,8 +170,10 @@ export default function GiftOptions({ compact = false, className = '' }) {
                 onChange={(e) => setGiftWrap(e.target.checked)}
               />
               <Check checked={giftWrap} />
-              <span className="min-w-0 flex-1 text-[13px] text-ink">{wrapLabel}</span>
-              <span className="font-num shrink-0 text-[12px] text-burgundy">
+              <span className={`min-w-0 flex-1 text-ink ${compact ? 'text-[12px]' : 'text-[13px]'}`}>
+                {wrapLabel}
+              </span>
+              <span className="font-num shrink-0 text-[11px] text-burgundy sm:text-[12px]">
                 +{money(wrapFee)}
               </span>
             </label>
@@ -165,7 +181,11 @@ export default function GiftOptions({ compact = false, className = '' }) {
 
           {showMessage ? (
             <div>
-              <label className="flex min-h-10 cursor-pointer items-center gap-2.5 rounded-lg px-1 py-1.5 hover:bg-white/60">
+              <label
+                className={`flex cursor-pointer items-center gap-2.5 rounded-lg px-1 hover:bg-white/60 ${
+                  compact ? 'min-h-9 py-1' : 'min-h-10 py-1.5'
+                }`}
+              >
                 <input
                   type="checkbox"
                   className="sr-only"
@@ -173,9 +193,11 @@ export default function GiftOptions({ compact = false, className = '' }) {
                   onChange={(e) => toggleNote(e.target.checked)}
                 />
                 <Check checked={noteOn} />
-                <span className="min-w-0 flex-1 text-[13px] text-ink">{messageLabel}</span>
+                <span className={`min-w-0 flex-1 text-ink ${compact ? 'text-[12px]' : 'text-[13px]'}`}>
+                  {messageLabel}
+                </span>
                 {noteOn ? (
-                  <span className="font-num shrink-0 text-[11px] text-ink/40">
+                  <span className="font-num shrink-0 text-[10px] text-ink/40 sm:text-[11px]">
                     {giftMessage.length}/{maxLen}
                   </span>
                 ) : null}
@@ -187,7 +209,9 @@ export default function GiftOptions({ compact = false, className = '' }) {
                   rows={compact ? 2 : 3}
                   maxLength={maxLen}
                   placeholder={giftOptions.messagePlaceholder || 'Write a short note…'}
-                  className="mt-1 w-full resize-none rounded-lg border border-ink/10 bg-white px-3 py-2 text-[13px] leading-snug text-ink placeholder:text-ink/35 outline-none focus:border-burgundy/30 focus:ring-2 focus:ring-burgundy/10"
+                  className={`mt-1 w-full resize-none rounded-lg border border-ink/10 bg-white px-3 py-2 leading-snug text-ink placeholder:text-ink/35 outline-none focus:border-burgundy/30 focus:ring-2 focus:ring-burgundy/10 ${
+                    compact ? 'text-[12px]' : 'text-[13px]'
+                  }`}
                 />
               ) : null}
             </div>

@@ -8,13 +8,13 @@ import HeroEarringReel from './HeroEarringReel';
 import HeroFlowerFrames from './HeroFlowerFrames';
 import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
 
-function ArrowCircle({ className = '' }) {
+function ArrowCircle({ className = '', iconClassName = 'h-3.5 w-3.5' }) {
   return (
     <span
-      className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-white text-burgundy ${className}`}
+      className={`inline-flex shrink-0 items-center justify-center rounded-full border border-ink/10 bg-white text-burgundy ${className}`}
       aria-hidden
     >
-      <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.7">
+      <svg viewBox="0 0 24 24" className={iconClassName} fill="none" stroke="currentColor" strokeWidth="1.7">
         <path d="M7 17L17 7M10 7h7v7" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </span>
@@ -92,7 +92,7 @@ export default function Hero3() {
                     <span className="text-[9px] font-semibold tracking-[0.14em] text-ivory uppercase">
                       Gifting
                     </span>
-                    <ArrowCircle className="border-gold/40 bg-ivory text-burgundy" />
+                    <ArrowCircle className="h-8 w-8 border-gold/40 bg-ivory text-burgundy" />
                   </span>
                 </Link>
               </div>
@@ -114,53 +114,54 @@ export default function Hero3() {
             </Link>
           </div>
         ) : (
-          /* Phone: simple 3-card bento — no scroll-pin / frame scrub */
-          <div className="flex flex-col gap-2.5">
-            <div className="relative grid min-h-[11.5rem] grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] overflow-hidden rounded-[1.35rem] bg-pearl">
+          /* Phone: 4-card bento — shared 2-col grid so right edges align */
+          <div className="grid grid-cols-2 gap-2.5">
+            <div className="relative flex min-h-[12rem] flex-col justify-center overflow-hidden rounded-[1.25rem] bg-pearl px-3.5 py-4 sm:min-h-[13rem] sm:px-4 sm:py-5">
               <span className="pointer-events-none absolute top-0 left-0 z-10 h-full w-1 bg-burgundy" />
-              <div className="relative z-10 flex flex-col justify-center px-4 py-5 pr-2 sm:px-5">
-                <h1 className="font-bodoni text-[1.45rem] leading-[1.08] tracking-[0.01em] text-ink sm:text-[1.65rem]">
-                  The Beauty Of Becoming
-                </h1>
-                <span className="mt-2.5 block h-px w-12 bg-gradient-to-r from-gold via-gold to-transparent" />
-                <p className="mt-3 text-[11.5px] leading-[1.55] text-ink/80 sm:text-[12.5px] sm:leading-[1.65]">
-                  Jewellery, gifting and lifestyle — considered design, made to be worn, given, and kept.
-                </p>
-              </div>
-              <div className="relative min-h-[11.5rem] self-stretch">
-                <AppImage
-                  src="/hero/floral_ring.png"
-                  alt="Velvet Shell floral rings"
-                  fill
-                  sizes="50vw"
-                  className="object-contain object-center"
-                  priority
-                />
-              </div>
+              <h1 className="font-bodoni text-[1.35rem] leading-[1.08] tracking-[0.01em] text-ink sm:text-[1.55rem]">
+                The Beauty Of Becoming
+              </h1>
+              <span className="mt-2 block h-px w-10 bg-gradient-to-r from-gold via-gold to-transparent" />
+              <p className="mt-2.5 text-[11px] leading-[1.5] text-ink/80 sm:text-[12px] sm:leading-[1.6]">
+                Jewellery, gifting and lifestyle — considered design, made to be worn, given, and kept.
+              </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-2.5">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem]">
-                <HeroEarringReel />
-              </div>
-              <Link
-                href={giftingHref()}
-                className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] bg-[#ebe6df]"
-              >
-                <ResponsiveBannerImage
-                  src="/images/hero-gifting-beach.jpg"
-                  alt="Velvet Shell gift bag and shell boxes on the beach at sunrise"
-                  sizes="50vw"
-                  className="object-cover object-center"
-                />
-                <span className="bg-velvet-texture absolute bottom-2.5 left-2.5 z-10 inline-flex items-center gap-2 rounded-full py-1.5 pr-1.5 pl-3 shadow-sm">
-                  <span className="text-[9px] font-semibold tracking-[0.14em] text-ivory uppercase">
-                    Gifting
-                  </span>
-                  <ArrowCircle className="border-gold/40 bg-ivory text-burgundy" />
-                </span>
-              </Link>
+            <div className="relative min-h-[12rem] overflow-hidden rounded-[1.25rem] bg-pearl sm:min-h-[13rem]">
+              <AppImage
+                src="/hero/floral_ring.png"
+                alt="Velvet Shell floral rings"
+                fill
+                sizes="50vw"
+                className="object-cover object-[center_18%]"
+                priority
+              />
             </div>
+
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem]">
+              <HeroEarringReel compact />
+            </div>
+
+            <Link
+              href={giftingHref()}
+              className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] bg-[#ebe6df]"
+            >
+              <ResponsiveBannerImage
+                src="/images/hero-gifting-beach.jpg"
+                alt="Velvet Shell gift bag and shell boxes on the beach at sunrise"
+                sizes="50vw"
+                className="object-cover object-center"
+              />
+              <span className="bg-velvet-texture absolute bottom-2 left-2 z-10 inline-flex items-center gap-1 rounded-full py-1 pr-1 pl-2.5 shadow-sm">
+                <span className="text-[8px] font-semibold tracking-[0.12em] text-ivory uppercase">
+                  Gifting
+                </span>
+                <ArrowCircle
+                  className="h-5 w-5 border-gold/40 bg-ivory text-burgundy"
+                  iconClassName="h-2.5 w-2.5"
+                />
+              </span>
+            </Link>
           </div>
         )}
       </div>

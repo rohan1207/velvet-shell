@@ -225,12 +225,12 @@ export default function AuthFlow({
           : 'Enter the code from your email and choose a new password.');
 
   return (
-    <div className="relative overflow-hidden rounded-[1.5rem] border border-burgundy/10 bg-gradient-to-br from-[#faf6f1] via-[#f3ebe3] to-[#efe4da] shadow-[0_24px_80px_rgba(94,6,42,0.08)] sm:rounded-[2rem]">
+    <div className="relative min-w-0 overflow-hidden rounded-[1.25rem] border border-burgundy/10 bg-gradient-to-br from-[#faf6f1] via-[#f3ebe3] to-[#efe4da] shadow-[0_24px_80px_rgba(94,6,42,0.08)] sm:rounded-[2rem]">
       <FloralBackdrop />
 
-      <div className="relative z-10 px-6 py-10 sm:px-10 sm:py-12">
+      <div className="relative z-10 px-4 py-8 sm:px-10 sm:py-12">
         <p className="font-label text-[10px] tracking-[0.28em] text-gold uppercase">Velvet Shell</p>
-        <h1 className="font-display mt-3 text-4xl tracking-[-0.03em] text-burgundy sm:text-5xl">
+        <h1 className="font-display mt-3 text-[2rem] tracking-[-0.03em] text-burgundy sm:text-4xl md:text-5xl">
           {title}
         </h1>
         <p className="mt-3 max-w-sm text-sm font-light leading-relaxed text-ink/75">{copy}</p>

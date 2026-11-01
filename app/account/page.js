@@ -114,7 +114,7 @@ function AccountInner() {
           <div className="absolute top-20 left-[10%] h-64 w-64 rounded-full bg-blush/30 blur-3xl" />
           <div className="absolute right-[8%] bottom-32 h-72 w-72 rounded-full bg-burgundy/5 blur-3xl" />
         </div>
-        <div className="relative mx-auto max-w-lg px-5">
+        <div className="relative mx-auto max-w-lg px-4 sm:px-5">
           <AuthFlow initialMode={initialMode} returnUrl={returnUrl} />
         </div>
       </div>
@@ -122,10 +122,10 @@ function AccountInner() {
   }
 
   return (
-    <div className="min-h-[100svh] bg-gradient-to-b from-[#faf6f1] to-ivory pt-page pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-24">
+    <div className="min-h-[100svh] overflow-x-clip bg-gradient-to-b from-[#faf6f1] to-ivory pt-page pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-24">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-5 md:px-10">
         <div className="flex flex-wrap items-end justify-between gap-4 border-b border-burgundy/10 pb-6 sm:gap-6 sm:pb-8">
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <p className="font-label text-[10px] tracking-[0.24em] text-gold uppercase">My account</p>
             <h1 className="font-display mt-2 text-[1.85rem] tracking-[-0.03em] text-burgundy sm:mt-3 sm:text-4xl md:text-5xl">
               Hello, {user.firstName || user.fullName?.split(' ')[0] || 'there'}
@@ -140,35 +140,47 @@ function AccountInner() {
               await logout();
               setNotice('');
             }}
-            className="rounded-full border border-ink/12 px-4 py-2.5 font-label text-[10px] tracking-[0.16em] text-ink/70 hover:border-burgundy/30 hover:text-burgundy sm:px-5 sm:text-[11px] sm:tracking-[0.18em]"
+            className="shrink-0 rounded-full border border-ink/12 px-4 py-2.5 font-label text-[10px] tracking-[0.16em] text-ink/70 hover:border-burgundy/30 hover:text-burgundy sm:px-5 sm:text-[11px] sm:tracking-[0.18em]"
           >
             Log out
           </button>
         </div>
 
-        <div className="mt-6 grid gap-6 sm:mt-10 sm:gap-10 lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-14">
-          <aside className="-mx-4 sm:mx-0">
-            <nav className="chip-scroll-wrap flex gap-2 pb-1 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0">
-              {tabs.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => {
-                    setTab(item.id);
-                    setNotice('');
-                    setError('');
-                    if (item.id === 'profile') setProfileForm(null);
-                  }}
-                  className={`shrink-0 whitespace-nowrap rounded-full px-3.5 py-2 text-left text-[13px] transition-colors sm:px-4 sm:py-2.5 sm:text-sm lg:w-full ${
-                    tab === item.id
-                      ? 'bg-burgundy text-ivory'
-                      : 'text-ink/70 hover:bg-cream/80 hover:text-ink'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </nav>
+        <div className="mt-6 grid min-w-0 gap-6 sm:mt-10 sm:gap-10 lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-14">
+          <aside className="min-w-0">
+            <div className="-mx-4 sm:-mx-5 md:mx-0">
+              <nav
+                className="chip-scroll-wrap flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:gap-1 lg:overflow-visible"
+                aria-label="Account sections"
+              >
+                <span className="w-4 shrink-0 sm:w-5 md:hidden" aria-hidden />
+                {tabs.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={(e) => {
+                      setTab(item.id);
+                      setNotice('');
+                      setError('');
+                      if (item.id === 'profile') setProfileForm(null);
+                      e.currentTarget.scrollIntoView({
+                        behavior: 'smooth',
+                        inline: 'nearest',
+                        block: 'nearest',
+                      });
+                    }}
+                    className={`shrink-0 whitespace-nowrap rounded-full px-3.5 py-2 text-left text-[13px] transition-colors sm:px-4 sm:py-2.5 sm:text-sm lg:w-full lg:rounded-xl ${
+                      tab === item.id
+                        ? 'bg-burgundy text-ivory'
+                        : 'text-ink/70 hover:bg-cream/80 hover:text-ink'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+                <span className="w-4 shrink-0 sm:w-5 md:hidden" aria-hidden />
+              </nav>
+            </div>
             <div className="mt-8 hidden space-y-3 border-t border-ink/8 pt-6 text-sm lg:block">
               <Link href="/wishlist" className="block text-ink/70 hover:text-burgundy">
                 Wishlist ({wishlist.length})
@@ -179,7 +191,7 @@ function AccountInner() {
             </div>
           </aside>
 
-          <div>
+          <div className="min-w-0">
             {(notice || error) && (
               <p
                 className={`mb-6 rounded-2xl px-4 py-3 text-sm ${
@@ -191,18 +203,18 @@ function AccountInner() {
             )}
 
             {tab === 'overview' && (
-              <div className="space-y-10">
-                <section className="grid gap-4 sm:grid-cols-3">
+              <div className="space-y-8 sm:space-y-10">
+                <section className="grid grid-cols-3 gap-2.5 sm:gap-4">
                   <Stat label="Orders" value={String(orders.length)} />
-                  <Stat label="Saved pieces" value={String(wishlist.length)} />
+                  <Stat label="Saved" value={String(wishlist.length)} />
                   <Stat label="Addresses" value={String(addresses.length)} />
                 </section>
-                <section>
-                  <div className="flex items-end justify-between gap-4">
-                    <h2 className="font-display text-3xl text-ink">Recent orders</h2>
+                <section className="min-w-0">
+                  <div className="flex items-end justify-between gap-3">
+                    <h2 className="font-display text-[1.65rem] text-ink sm:text-3xl">Recent orders</h2>
                     <button
                       type="button"
-                      className="font-label text-[10px] tracking-[0.16em] text-burgundy"
+                      className="shrink-0 font-label text-[10px] tracking-[0.16em] text-burgundy"
                       onClick={() => setTab('orders')}
                     >
                       View all
@@ -216,7 +228,7 @@ function AccountInner() {
                       </Link>
                     </p>
                   ) : (
-                    <ul className="mt-6 space-y-4">
+                    <ul className="mt-5 space-y-3 sm:mt-6 sm:space-y-4">
                       {orders.slice(0, 3).map((order) => (
                         <OrderRow key={order.id} order={order} />
                       ))}
@@ -227,15 +239,15 @@ function AccountInner() {
             )}
 
             {tab === 'orders' && (
-              <div>
-                <h2 className="font-display text-3xl text-ink">Order history</h2>
+              <div className="min-w-0">
+                <h2 className="font-display text-[1.65rem] text-ink sm:text-3xl">Order history</h2>
                 <p className="mt-2 text-sm font-light text-ink/70">
                   Confirmation emails are sent when each order is placed.
                 </p>
                 {orders.length === 0 ? (
                   <p className="mt-6 text-sm font-light text-ink/70">You have no orders yet.</p>
                 ) : (
-                  <ul className="mt-8 space-y-5">
+                  <ul className="mt-6 space-y-4 sm:mt-8 sm:space-y-5">
                     {orders.map((order) => (
                       <OrderRow key={order.id} order={order} detailed />
                     ))}
@@ -269,7 +281,7 @@ function AccountInner() {
                   }
                 }}
               >
-                <h2 className="font-display text-3xl text-ink">Personal details</h2>
+                <h2 className="font-display text-[1.65rem] text-ink sm:text-3xl">Personal details</h2>
                 <Field
                   label="Full name"
                   value={
@@ -294,45 +306,45 @@ function AccountInner() {
                   onChange={(v) => setProfileForm({ ...displayProfile, phone: v })}
                   required
                 />
-                <button type="submit" disabled={busy} className={pillBtn}>
+                <button type="submit" disabled={busy} className={`${pillBtn} w-full sm:w-auto`}>
                   {busy ? 'Saving…' : 'Save details'}
                 </button>
               </form>
             )}
 
             {tab === 'addresses' && (
-              <div className="space-y-10">
-                <div>
-                  <h2 className="font-display text-3xl text-ink">Saved addresses</h2>
+              <div className="space-y-8 sm:space-y-10">
+                <div className="min-w-0">
+                  <h2 className="font-display text-[1.65rem] text-ink sm:text-3xl">Saved addresses</h2>
                   <p className="mt-2 text-sm font-light text-ink/70">
                     Select a default for faster checkout — you can change it anytime.
                   </p>
                   {addresses.length === 0 ? (
                     <p className="mt-6 text-sm font-light text-ink/70">No addresses saved yet.</p>
                   ) : (
-                    <ul className="mt-6 grid gap-4 md:grid-cols-2">
+                    <ul className="mt-6 grid gap-3 sm:gap-4 md:grid-cols-2">
                       {addresses.map((address) => {
                         const selected = address.id === selectedAddressId || address.isDefault;
                         return (
                           <li
                             key={address.id}
-                            className={`rounded-2xl border px-5 py-5 ${
+                            className={`min-w-0 rounded-2xl border px-4 py-4 sm:px-5 sm:py-5 ${
                               selected
                                 ? 'border-burgundy/40 bg-white shadow-[0_8px_30px_rgba(94,6,42,0.06)]'
                                 : 'border-ink/8 bg-white/60'
                             }`}
                           >
                             <div className="flex items-start justify-between gap-3">
-                              <div>
+                              <div className="min-w-0">
                                 <p className="font-label text-[10px] tracking-[0.16em] text-gold uppercase">
                                   {address.label}
                                 </p>
-                                <p className="mt-2 text-sm text-ink">{address.fullName}</p>
-                                <p className="mt-1 text-sm font-light text-ink/70">
+                                <p className="mt-2 break-words text-sm text-ink">{address.fullName}</p>
+                                <p className="mt-1 break-words text-sm font-light text-ink/70">
                                   {address.line1}
                                   {address.line2 ? `, ${address.line2}` : ''}
                                 </p>
-                                <p className="text-sm font-light text-ink/70">
+                                <p className="break-words text-sm font-light text-ink/70">
                                   {address.city}, {address.state} {address.postal}
                                 </p>
                                 <p className="mt-2 text-xs text-ink/60">{address.phone}</p>
@@ -397,7 +409,7 @@ function AccountInner() {
                 </div>
 
                 <form
-                  className="max-w-2xl space-y-5 rounded-3xl border border-ink/8 bg-white/70 p-6 md:p-8"
+                  className="max-w-2xl space-y-5 rounded-[1.35rem] border border-ink/8 bg-white/70 p-4 sm:rounded-3xl sm:p-6 md:p-8"
                   onSubmit={async (event) => {
                     event.preventDefault();
                     setError('');
@@ -419,10 +431,10 @@ function AccountInner() {
                     }
                   }}
                 >
-                  <h3 className="font-display text-2xl text-ink">
+                  <h3 className="font-display text-xl text-ink sm:text-2xl">
                     {editingAddressId ? 'Edit address' : 'Add address'}
                   </h3>
-                  <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
                     <Field
                       label="Label"
                       value={addressForm.label}
@@ -490,11 +502,12 @@ function AccountInner() {
                       onChange={(event) =>
                         setAddressForm((f) => ({ ...f, isDefault: event.target.checked }))
                       }
+                      className="h-4 w-4 shrink-0 accent-[var(--color-burgundy,#5E062A)]"
                     />
                     Set as default address
                   </label>
-                  <div className="flex flex-wrap gap-3">
-                    <button type="submit" disabled={busy} className={pillBtn}>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                    <button type="submit" disabled={busy} className={`${pillBtn} w-full sm:w-auto`}>
                       {busy
                         ? 'Saving…'
                         : editingAddressId
@@ -540,7 +553,7 @@ function AccountInner() {
                   setNotice('Password updated.');
                 }}
               >
-                <h2 className="font-display text-3xl text-ink">Manage password</h2>
+                <h2 className="font-display text-[1.65rem] text-ink sm:text-3xl">Manage password</h2>
                 <p className="text-sm font-light text-ink/70">
                   Choose a strong password (8+ characters, letters and a number).
                 </p>
@@ -568,7 +581,7 @@ function AccountInner() {
                   onChange={(v) => setPasswordForm((f) => ({ ...f, confirm: v }))}
                   autoComplete="new-password"
                 />
-                <button type="submit" disabled={busy} className={pillBtn}>
+                <button type="submit" disabled={busy} className={`${pillBtn} w-full sm:w-auto`}>
                   {busy ? 'Updating…' : 'Update password'}
                 </button>
               </form>
@@ -585,9 +598,11 @@ const pillBtn =
 
 function Stat({ label, value }) {
   return (
-    <div className="rounded-2xl border border-ink/8 bg-white/80 px-5 py-6">
-      <p className="font-label text-[10px] tracking-[0.14em] text-ink/50 uppercase">{label}</p>
-      <p className="font-display mt-2 text-3xl text-burgundy">{value}</p>
+    <div className="min-w-0 overflow-hidden rounded-2xl border border-ink/8 bg-white/80 px-2.5 py-3.5 sm:px-5 sm:py-6">
+      <p className="truncate font-label text-[8px] tracking-[0.1em] text-ink/50 uppercase sm:text-[10px] sm:tracking-[0.14em]">
+        {label}
+      </p>
+      <p className="font-display mt-1.5 text-xl text-burgundy sm:mt-2 sm:text-3xl">{value}</p>
     </div>
   );
 }
@@ -614,12 +629,20 @@ function OrderRow({ order, detailed = false }) {
       : '');
 
   return (
-    <li className="rounded-2xl border border-ink/8 bg-white/80 px-5 py-5">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="font-label text-[10px] tracking-[0.16em] text-gold uppercase">
-            Order {label}
-          </p>
+    <li className="min-w-0 overflow-hidden rounded-2xl border border-ink/8 bg-white/80 px-4 py-4 sm:px-5 sm:py-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0 flex-1 overflow-hidden">
+          <div className="flex items-start justify-between gap-3 sm:block">
+            <div className="min-w-0 flex-1 overflow-hidden">
+              <p className="font-label text-[9px] tracking-[0.14em] text-gold uppercase sm:text-[10px] sm:tracking-[0.16em]">
+                Order
+              </p>
+              <p className="mt-0.5 truncate font-num text-[12px] tracking-normal text-ink/75 sm:text-[13px]">
+                {label}
+              </p>
+            </div>
+            <p className="font-num shrink-0 text-lg text-ink sm:hidden">{money(order.total)}</p>
+          </div>
           <p className="mt-2 text-sm text-ink">
             {new Date(order.createdAt).toLocaleDateString('en-IN', {
               day: 'numeric',
@@ -636,17 +659,17 @@ function OrderRow({ order, detailed = false }) {
               {status}
             </span>
             {order.shipmentStatus ? (
-              <span className="text-[11px] font-light text-ink/55">
+              <span className="max-w-full truncate text-[11px] font-light text-ink/55">
                 Courier · {order.shipmentStatus}
               </span>
             ) : (
-              <span className="text-[11px] font-light text-ink/55">
+              <span className="max-w-full truncate text-[11px] font-light text-ink/55">
                 {order.paymentMethod || 'Razorpay'}
               </span>
             )}
           </div>
           {order.awb ? (
-            <p className="mt-2 font-num text-xs text-ink/70">
+            <p className="mt-2 break-all font-num text-xs text-ink/70">
               AWB {order.awb}
               {trackingUrl ? (
                 <>
@@ -664,7 +687,7 @@ function OrderRow({ order, detailed = false }) {
             </p>
           ) : null}
         </div>
-        <p className="font-num text-2xl text-ink">{money(order.total)}</p>
+        <p className="font-num hidden shrink-0 text-2xl text-ink sm:block">{money(order.total)}</p>
       </div>
       {detailed && (
         <ul className="mt-4 space-y-2 border-t border-ink/8 pt-4 text-sm text-ink/70">
@@ -673,16 +696,19 @@ function OrderRow({ order, detailed = false }) {
             const name = item.name || product?.name || item.slug;
             const line = item.lineTotal ?? (product ? product.price * item.qty : null);
             return (
-              <li key={item.id || `${item.slug}-${idx}`} className="flex justify-between gap-3">
-                <span>
+              <li
+                key={item.id || `${item.slug}-${idx}`}
+                className="flex items-start justify-between gap-3"
+              >
+                <span className="min-w-0 break-words">
                   {name} · {item.size} · Qty {item.qty}
                 </span>
-                {line != null && <span className="font-num">{money(line)}</span>}
+                {line != null && <span className="font-num shrink-0">{money(line)}</span>}
               </li>
             );
           })}
           {(ship.fullName || ship.firstName || ship.line1 || ship.address) && (
-            <li className="pt-2 text-xs text-ink/60">
+            <li className="break-words pt-2 text-xs text-ink/60">
               Ship to {ship.fullName || `${ship.firstName || ''} ${ship.lastName || ''}`.trim()},{' '}
               {ship.line1 || ship.address}
               {ship.city ? `, ${ship.city}` : ''}
@@ -695,10 +721,10 @@ function OrderRow({ order, detailed = false }) {
             </li>
           ) : null}
           {order.giftMessage ? (
-            <li className="text-xs italic text-ink/65">“{order.giftMessage}”</li>
+            <li className="break-words text-xs italic text-ink/65">“{order.giftMessage}”</li>
           ) : null}
           {order.paymentId && (
-            <li className="text-xs text-ink/50">Payment ID: {order.paymentId}</li>
+            <li className="break-all text-xs text-ink/50">Payment ID: {order.paymentId}</li>
           )}
         </ul>
       )}
@@ -718,7 +744,7 @@ function Field({
   placeholder,
 }) {
   return (
-    <label className="block">
+    <label className="block min-w-0">
       <span className="font-label text-[10px] tracking-[0.14em] text-ink/50 uppercase">{label}</span>
       <input
         type={type}
@@ -728,7 +754,7 @@ function Field({
         placeholder={placeholder}
         autoComplete={autoComplete}
         onChange={(event) => onChange?.(event.target.value)}
-        className="mt-2 w-full rounded-2xl border border-ink/10 bg-white/80 px-4 py-3.5 text-[15px] font-light text-ink outline-none transition focus:border-burgundy/35 disabled:opacity-60"
+        className="field-control mt-2 disabled:opacity-60"
       />
       {hint && <span className="mt-2 block text-xs font-light text-ink/55">{hint}</span>}
     </label>

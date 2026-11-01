@@ -22,9 +22,9 @@ export default function CartPage() {
   } = useStore();
 
   return (
-    <div className="bg-ivory pt-page pb-24">
-      <div className="mx-auto max-w-4xl px-5">
-        <h1 className="font-display text-4xl tracking-[-0.03em] md:text-7xl">Bag</h1>
+    <div className="overflow-x-clip bg-ivory pt-page pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-24">
+      <div className="mx-auto max-w-4xl px-4 sm:px-5">
+        <h1 className="font-display text-[2rem] tracking-[-0.03em] sm:text-4xl md:text-7xl">Bag</h1>
         {cart.length === 0 ? (
           <div className="mt-16">
             <p className="text-stone">Nothing here yet.</p>
@@ -108,12 +108,12 @@ export default function CartPage() {
                 );
               })}
             </ul>
-            <div className="mt-10 max-w-md space-y-5">
-              <GiftOptions />
-              <PromoCodeField />
+            <div className="mt-8 w-full max-w-md min-w-0 space-y-2.5 sm:mt-10 sm:space-y-3">
+              <GiftOptions compact />
+              <PromoCodeField compact />
             </div>
-            <div className="mt-8 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
-              <div className="space-y-1">
+            <div className="mt-8 flex w-full flex-col items-stretch justify-between gap-6 sm:flex-row sm:items-end">
+              <div className="min-w-0 space-y-1">
                 <p className="text-sm text-stone">Subtotal</p>
                 <p className="font-num text-xl text-ink/70">{money(cartTotal)}</p>
                 {discountAmount > 0 ? (
@@ -142,7 +142,7 @@ export default function CartPage() {
               </div>
               <Link
                 href="/checkout"
-                className="flex h-12 items-center rounded-full bg-ink px-10 text-[11px] tracking-[0.28em] text-ivory uppercase"
+                className="flex h-12 w-full shrink-0 items-center justify-center rounded-full bg-ink px-10 text-[11px] tracking-[0.28em] text-ivory uppercase sm:w-auto"
               >
                 Checkout
               </Link>
