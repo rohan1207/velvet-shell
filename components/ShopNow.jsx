@@ -7,6 +7,18 @@ import ProductCard from '@/components/ProductCard';
 import { ProductGridSkeleton } from '@/components/ProductCardSkeleton';
 import { useStore } from '@/context/StoreContext';
 
+function pickRandom(list, count = 8) {
+  if (!Array.isArray(list) || list.length === 0) return [];
+  const copy = list.slice();
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = copy[i];
+    copy[i] = copy[j];
+    copy[j] = tmp;
+  }
+  return copy.slice(0, Math.min(count, copy.length));
+}
+
 export default function ShopNow() {
   const { catalog } = useStore();
   const [activeTab, setActiveTab] = useState('all');
@@ -23,8 +35,11 @@ export default function ShopNow() {
   );
 
   const filtered = useMemo(() => {
-    if (activeTab === 'all') return products.slice(0, 8);
-    return products.filter((product) => product.category === activeTab).slice(0, 8);
+    const pool =
+      activeTab === 'all'
+        ? products
+        : products.filter((product) => product.category === activeTab);
+    return pickRandom(pool, 8);
   }, [activeTab, products]);
 
   return (

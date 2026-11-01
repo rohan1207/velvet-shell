@@ -40,7 +40,7 @@ const columns = [
     links: [
       { href: '/about', label: 'About us' },
       { href: '/blogs', label: 'Blogs' },
-      { href: '/#testimonials', label: 'Testimonials' },
+      { href: '/testimonials', label: 'Testimonials' },
       { href: '/contact', label: 'Contact us' },
       { href: '/faq', label: 'FAQs' },
       { href: '/wishlist', label: 'Saved' },

@@ -181,7 +181,7 @@ const brandMenu = {
       links: [
         { href: '/about', label: 'About us' },
         { href: '/blogs', label: 'Blogs' },
-        { href: '/#testimonials', label: 'Testimonials' },
+        { href: '/testimonials', label: 'Testimonials' },
         { href: '/contact', label: 'Contact us' },
         { href: '/faq', label: 'FAQs' },
       ],
@@ -219,10 +219,10 @@ const brandMenu = {
       note: 'Notes from the house',
     },
     {
-      href: '/#testimonials',
-      image: '/images/home-slide-meadow.jpg',
+      href: '/testimonials',
+      image: '/images/testimonials/review-packaging-unbox.jpg',
       label: 'Testimonials',
-      note: 'Words from guests',
+      note: 'Customer photos & reviews',
     },
   ],
 };

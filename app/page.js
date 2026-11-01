@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import NatureStoryHero from '@/components/NatureStoryHero';
 import CategoryCircles from '@/components/CategoryCircles';
 import { HomeProductNotes } from '@/components/ProductNotes';
+import ShopByLookSection from '@/components/ShopByLookSection';
 
 /** Below-the-fold / heavy client sections — load after first paint. */
 const Hero3 = dynamic(() => import('@/components/Hero3'), {
@@ -13,7 +14,6 @@ const ShopNow = dynamic(() => import('@/components/ShopNow'));
 const FullBleedVideo = dynamic(() => import('@/components/FullBleedVideo'), {
   loading: () => <div className="aspect-video w-full animate-pulse bg-cream/50" aria-hidden />,
 });
-const ShopByLook = dynamic(() => import('@/components/ShopByLook'));
 const BannerShowcase = dynamic(() => import('@/components/BannerShowcase'));
 const TheHouse = dynamic(() => import('@/components/TheHouse'));
 const Testimonials = dynamic(() => import('@/components/Testimonials'));
@@ -39,7 +39,7 @@ export default function HomePage() {
       <ShopNow />
       <HomeProductNotes />
       <FullBleedVideo />
-      <ShopByLook />
+      <ShopByLookSection />
       <BannerShowcase />
       <TheHouse />
       <Testimonials />
