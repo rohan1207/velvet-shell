@@ -11,42 +11,74 @@ import AppImage from '@/components/AppImage';
 
 const looks = [
   {
-    id: 'daisy-garden-set',
-    image: '/images/look-daisy-garden.jpg',
-    alt: 'Indian model in a daisy meadow wearing the Daisy Flower jewellery set — hoop earrings and pendant necklace',
+    id: 'pearl-fairy-set',
+    image: '/images/look-pearl-set-v2.jpg',
+    alt: 'Model wearing the Fairy-Like Fringed pearl collarbone chain and matching bracelet',
     hotspots: [
-      { id: 'earrings', productSlug: 'daisy-hoop-earrings-ywje0091', x: 20, y: 40 },
-      { id: 'necklace', productSlug: 'daisy-pendant-necklace-ywje0092', x: 46, y: 66 },
+      // Silver heart charm on the pearl necklace at collarbone
+      {
+        id: 'necklace',
+        productSlug: 'fairy-like-fringed-collarbone-chain-with-heart-shaped-pearl-bead-nck-016',
+        x: 48,
+        y: 58,
+      },
+      // Matching bracelet on the wrist at the shoulder
+      {
+        id: 'bracelet',
+        productSlug: 'fairy-like-fringed-bracelet-with-heart-shaped-pearl-bead-brc-028',
+        x: 57,
+        y: 48,
+      },
     ],
   },
   {
-    id: 'dolphin-waterside-set',
-    image: '/images/look-dolphin-waterside.jpg',
-    alt: 'Indian model by the water wearing the Dolphin jewellery set — stud earrings and pendant necklace',
+    id: 'daisy-chain-set',
+    image: '/images/look-daisy-set-v2.jpg',
+    alt: 'Model wearing the Daisy necklace, ring and bracelet set with fine chain links',
     hotspots: [
-      { id: 'earrings', productSlug: 'dolphin-stud-earrings-ywje0088-er', x: 72, y: 40 },
-      { id: 'necklace', productSlug: 'dolphin-pendant-necklace-ywje0088-nk', x: 52, y: 68 },
+      // Daisy pendant on the collarbone
+      {
+        id: 'necklace',
+        productSlug: 'daisy-necklace-with-fine-chain-links-ywje0076',
+        x: 51,
+        y: 45,
+      },
+      // Daisy ring on the raised hand
+      {
+        id: 'ring',
+        productSlug: 'daisy-ring-with-fine-chain-links-ywje0077',
+        x: 33,
+        y: 52,
+      },
+      // Daisy bracelet on the wrist
+      {
+        id: 'bracelet',
+        productSlug: 'daisy-bracelet-with-fine-chain-links-ywje0075',
+        x: 39,
+        y: 71,
+      },
     ],
   },
 ];
 
-/** Fallback only if live set data is unavailable — prices match set price_override (full set). */
+/** Fallback only if live set data is unavailable — prices match live member sums. */
 const FALLBACK_SETS = [
   {
-    slug: 'daisy-flower-jewellery-set-s07',
-    name: 'Daisy Flower Jewellery Set',
-    image: '/products/sets/daisy-flower-jewellery-set-s07/03.png',
-    price: 1999,
+    slug: 'fairy-like-fringed-collarbone-chain-bracelet-with-heart-shaped-pearl-bea',
+    name: 'Fairy-Like Fringed Collarbone Chain Bracelet with Heart-Shaped Pearl Bead',
+    image:
+      'https://pub-0389e1de118b4372bc8e3672b0b59760.r2.dev/products/2026-10-27/f2389014-0caa-4fbd-b3df-1ad6d98f7aa9-10sl32-d.avif',
+    price: 18998,
     pieceCount: 2,
-    line: 'Complete set',
+    href: '/sets/fairy-like-fringed-collarbone-chain-bracelet-with-heart-shaped-pearl-bea',
   },
   {
-    slug: 'dolphin-jewellery-set-s06',
-    name: 'Dolphin Jewellery Set',
-    image: '/products/sets/dolphin-jewellery-set-s06/01.png',
-    price: 1699,
-    pieceCount: 2,
-    line: 'Complete set',
+    slug: 'daisy-necklace-ring-bracelet-set-with-fine-chain-links-s02',
+    name: 'Daisy Necklace, Ring & Bracelet Set with Fine Chain Links',
+    image: '/products/sets/daisy-necklace-ring-bracelet-set-with-fine-chain-links-s02/01.png',
+    price: 12497,
+    pieceCount: 3,
+    href: '/sets/daisy-necklace-ring-bracelet-set-with-fine-chain-links-s02',
   },
 ];
 
@@ -169,7 +201,7 @@ function LookCard({ look }) {
         alt={look.alt}
         fill
         sizes="(max-width:768px) 48vw, 28vw"
-        className="object-contain object-center transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02]"
+        className="object-cover object-center transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02]"
         priority
       />
 
@@ -205,6 +237,7 @@ function LookCard({ look }) {
   );
 }
 
+/** Square set card — same language as Sets page SetCard. */
 function SetPromoCard({ set }) {
   const href = set.href || `/sets/${set.slug}`;
   const pieceCount =
@@ -212,42 +245,49 @@ function SetPromoCard({ set }) {
     (Array.isArray(set.members) ? set.members.length : 0);
 
   return (
-    <Link
-      href={href}
-      className="group flex min-h-0 flex-1 flex-col overflow-hidden rounded-[1.15rem] bg-white ring-1 ring-ink/8 transition-shadow duration-500 hover:shadow-[0_16px_40px_rgba(40,20,24,0.08)] sm:rounded-[1.35rem]"
-    >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-pearl sm:aspect-[5/4] lg:aspect-auto lg:min-h-0 lg:flex-1">
-        <AppImage
-          src={set.image}
-          alt={set.name}
-          fill
-          sizes="(max-width:1024px) 100vw, 30vw"
-          className="object-contain object-center p-2 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03] sm:p-3"
-        />
-      </div>
-      <div className="flex shrink-0 flex-col justify-center px-3.5 py-3 sm:px-4 sm:py-3.5">
-        <p className="font-label text-[9px] tracking-[0.16em] text-gold uppercase">Jewellery set</p>
-        <p className="font-display mt-1 line-clamp-2 text-[1.05rem] leading-snug tracking-[-0.02em] text-ink sm:text-[1.15rem]">
-          {set.name}
-        </p>
-        {set.line ? (
-          <p className="mt-1 truncate text-[11px] font-light text-ink/55">{set.line}</p>
-        ) : null}
-        <div className="mt-2 flex items-center justify-between gap-2">
-          <p className="font-num text-[13px] text-burgundy">
-            {money(set.price)}
-            {pieceCount > 0 ? (
-              <span className="ml-1.5 text-[11px] font-light tracking-normal text-ink/45">
-                · {pieceCount} pcs
-              </span>
-            ) : null}
-          </p>
-          <span className="font-label text-[9px] tracking-[0.14em] text-ink/40 uppercase transition-colors group-hover:text-burgundy">
-            View set →
-          </span>
+    <article className="group flex min-h-0 flex-1 flex-col overflow-hidden rounded-[1rem] bg-white shadow-[0_8px_28px_rgba(40,20,24,0.06)] ring-1 ring-ink/8 sm:rounded-[1.15rem]">
+      <Link
+        href={href}
+        className="relative block min-h-0 flex-1"
+        aria-label={`View ${set.name}`}
+      >
+        <div className="relative isolate h-full min-h-[7.5rem] w-full overflow-hidden bg-white sm:min-h-[8.5rem]">
+          <AppImage
+            src={set.image}
+            alt={set.name}
+            fill
+            sizes="220px"
+            className="object-contain object-center p-2.5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] [@media(hover:hover)]:group-hover:scale-[1.03] sm:p-3"
+          />
+          {set.outOfStock ? (
+            <span className="absolute top-2 left-2 rounded-full bg-white/95 px-2 py-0.5 font-label text-[8px] tracking-[0.14em] text-burgundy uppercase ring-1 ring-ink/6">
+              Out of stock
+            </span>
+          ) : (
+            <span className="absolute top-2 left-2 rounded-full bg-white/95 px-2 py-0.5 font-label text-[8px] tracking-[0.14em] text-ink uppercase ring-1 ring-ink/6">
+              {set.badge || 'Set'}
+            </span>
+          )}
         </div>
+      </Link>
+
+      <div className="relative flex shrink-0 flex-col px-2.5 py-2 sm:px-3 sm:py-2.5">
+        <Link
+          href={href}
+          className="font-label line-clamp-2 min-h-[2.2em] w-full text-center text-[9px] leading-[1.25] tracking-[0.08em] text-ink uppercase transition-colors hover:text-burgundy sm:text-[10px]"
+        >
+          {set.name}
+        </Link>
+        <p className="font-num mt-1 text-center text-[12px] tracking-[0.04em] text-ink/75 sm:text-[13px]">
+          {money(set.price)}
+          {pieceCount > 0 ? (
+            <span className="ml-1 text-[10px] tracking-normal text-ink/45">
+              · {pieceCount} pcs
+            </span>
+          ) : null}
+        </p>
       </div>
-    </Link>
+    </article>
   );
 }
 
@@ -257,9 +297,9 @@ export default function ShopByLook({ featuredSets }) {
     Array.isArray(featuredSets) && featuredSets.length > 0 ? featuredSets : FALLBACK_SETS;
 
   return (
-    <section className="box-border flex min-h-[100svh] flex-col bg-ivory px-4 py-6 sm:px-5 sm:py-8 md:px-10 md:py-9">
-      <div className="mx-auto flex min-h-0 w-full max-w-[1600px] flex-1 flex-col">
-        <div className="mb-4 flex shrink-0 flex-col gap-2 sm:mb-5 md:flex-row md:items-end md:justify-between">
+    <section className="box-border bg-ivory px-4 py-6 sm:px-5 sm:py-8 md:px-10 md:py-9">
+      <div className="mx-auto w-full max-w-[1600px]">
+        <div className="mb-4 flex flex-col gap-2 sm:mb-5 md:flex-row md:items-end md:justify-between">
           <div className="min-w-0">
             <p className="font-label text-[10px] tracking-[0.22em] text-gold uppercase">The edit</p>
             <h2 className="font-display mt-2 max-w-2xl text-[1.85rem] leading-[1.08] text-ink sm:text-3xl md:text-5xl">
@@ -271,23 +311,24 @@ export default function ShopByLook({ featuredSets }) {
           </p>
         </div>
 
-        <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,0.85fr)] lg:gap-4 xl:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.8fr)]">
-          {/* Left: two vertical look cards side by side */}
-          <div className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:h-full lg:min-h-[min(72svh,40rem)]">
+        {/* Single composition: left looks (screen-height) + right set cards */}
+        <div className="flex w-full flex-col gap-3 sm:gap-4 lg:h-[min(82svh,46rem)] lg:flex-row lg:items-stretch lg:justify-between lg:gap-5 xl:gap-6">
+          {/* Left-aligned model pair — fills most of the viewport height */}
+          <div className="grid min-h-0 w-full grid-cols-2 gap-2.5 sm:gap-3 lg:h-full lg:min-w-0 lg:flex-1 lg:self-stretch">
             {looks.map((look) => (
               <LookCard key={look.id} look={look} />
             ))}
           </div>
 
-          {/* Right: two set cards stacked (side-by-side on small tablets) */}
-          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3 lg:grid-cols-1 lg:grid-rows-2 lg:gap-4 lg:h-full lg:min-h-[min(72svh,40rem)]">
+          {/* Right-aligned set stack — same height as the looks */}
+          <div className="ml-auto flex w-[min(100%,11.75rem)] shrink-0 flex-col gap-2.5 sm:w-[13rem] sm:gap-3 md:w-[14rem] lg:ml-0 lg:h-full lg:w-[13.25rem] xl:w-[14.5rem]">
             {setCards.map((set) => (
               <SetPromoCard key={set.slug} set={set} />
             ))}
           </div>
         </div>
 
-        <div className="mt-5 flex shrink-0 justify-center sm:mt-6">
+        <div className="mt-5 flex justify-center sm:mt-6">
           <Link
             href={setsHref}
             className="bg-velvet-texture inline-flex h-11 items-center rounded-full px-7 font-label text-[11px] tracking-[0.18em] text-ivory transition-opacity hover:opacity-90"

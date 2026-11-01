@@ -78,12 +78,9 @@ export default function GiftOptions({ compact = false, className = '' }) {
   const showMessage = Boolean(giftOptions?.messageEnabled);
   const hasSelection = giftWrap || Boolean(String(giftMessage || '').trim());
 
-  const [open, setOpen] = useState(hasSelection);
+  // Always start collapsed — summary line shows wrap / note when selected.
+  const [open, setOpen] = useState(false);
   const [noteOn, setNoteOn] = useState(() => Boolean(String(giftMessage || '').trim()));
-
-  useEffect(() => {
-    if (hasSelection) setOpen(true);
-  }, [hasSelection]);
 
   useEffect(() => {
     if (String(giftMessage || '').trim()) setNoteOn(true);

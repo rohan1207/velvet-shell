@@ -168,7 +168,6 @@ export default function ProductCard({
   const [imageIndex, setImageIndex] = useState(0);
   /** idle | morph | flying | done */
   const [bagPhase, setBagPhase] = useState('idle');
-  const [variantMenuOpen, setVariantMenuOpen] = useState(false);
   const bagBtnRef = useRef(null);
   const animTokenRef = useRef(0);
   const timersRef = useRef([]);
@@ -215,7 +214,7 @@ export default function ProductCard({
   const wished = wishlist.includes(active.slug);
   const href = `/shop/${active.slug}`;
   const title = displayName(product.name);
-  // Show the selected / previewed variant price (dropdown picks one colour).
+  // Selected / previewed variant price (swatch hover or click).
   const priceLabel = money(displayProduct.price ?? active.price);
 
   const bagBusy = bagPhase !== 'idle';
@@ -283,9 +282,7 @@ export default function ProductCard({
 
   return (
     <article
-      className={`group flex h-full animate-[fade-up_0.9s_var(--ease-luxe)_both] flex-col ${
-        variantMenuOpen ? 'relative z-40' : 'relative z-0'
-      } ${className}`}
+      className={`group relative z-0 flex h-full animate-[fade-up_0.9s_var(--ease-luxe)_both] flex-col ${className}`}
       style={{ animationDelay: `${index * 70}ms` }}
     >
       <div className="relative isolate aspect-square overflow-hidden bg-white">
@@ -347,10 +344,7 @@ export default function ProductCard({
         </p>
 
         {variants.length > 1 ? (
-          <div className="mt-2 px-0.5 sm:px-1 md:mt-2.5 md:px-2">
-            <p className="mb-1 font-label text-[9px] tracking-[0.14em] text-ink/45 uppercase md:text-[10px]">
-              Colour
-            </p>
+          <div className="mt-2 flex justify-center px-0.5 md:mt-2.5">
             <VariantDropdown
               variants={variants}
               value={active.slug}
@@ -360,7 +354,6 @@ export default function ProductCard({
                 setImageIndex(0);
               }}
               onPreview={setPreviewSlug}
-              onOpenChange={setVariantMenuOpen}
             />
           </div>
         ) : null}

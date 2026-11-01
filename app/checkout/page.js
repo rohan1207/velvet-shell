@@ -320,7 +320,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-[100svh] overflow-x-clip bg-gradient-to-b from-[#faf6f1] to-ivory pt-page pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-20">
+    <div className="min-h-[100svh] overflow-x-clip bg-gradient-to-b from-[#faf6f1] to-ivory pt-page pb-[calc(5.75rem+env(safe-area-inset-bottom))] md:pb-20">
       {successOrder && (
         <SuccessModal
           order={successOrder}
@@ -328,26 +328,44 @@ export default function CheckoutPage() {
         />
       )}
 
-      <div className="mx-auto grid max-w-[1400px] gap-6 px-4 sm:gap-8 sm:px-5 md:grid-cols-12 md:gap-12 md:px-10 lg:gap-16">
-        <form onSubmit={onPay} className="min-w-0 md:col-span-6 lg:col-span-5">
+      <div className="mx-auto grid max-w-[1400px] gap-5 px-4 sm:gap-8 sm:px-5 md:grid-cols-12 md:items-start md:gap-10 md:px-10 lg:gap-14">
+        {/* Bag first on phone so totals are visible before the long form */}
+        <aside className="order-1 min-w-0 md:order-2 md:col-span-6 lg:col-span-7">
+          {/* Explicit height so the bag card can scroll internally (max-height alone is not enough). */}
+          <div className="flex h-[min(68svh,30rem)] flex-col sm:h-[min(72svh,36rem)] md:sticky md:top-[7.25rem] md:h-[calc(100svh-8.75rem)]">
+            <OrderSummaryCard
+              lines={lines}
+              cartCount={cartCount}
+              cartTotal={cartTotal}
+              cartShippingFee={cartShippingFee}
+              cartGiftWrapFee={cartGiftWrapFee}
+              cartPayable={cartPayable}
+              discountAmount={discountAmount}
+              promo={promo}
+              email={form.email || user?.email}
+            />
+          </div>
+        </aside>
+
+        <form onSubmit={onPay} className="order-2 min-w-0 md:order-1 md:col-span-6 lg:col-span-5">
           <p className="font-label text-[10px] tracking-[0.24em] text-gold uppercase">Checkout</p>
-          <h1 className="font-display mt-2 text-[1.85rem] tracking-[-0.03em] text-burgundy sm:mt-3 sm:text-4xl md:text-5xl">
+          <h1 className="font-display mt-2 text-[1.75rem] tracking-[-0.03em] text-burgundy sm:mt-3 sm:text-4xl md:text-5xl">
             Almost yours.
           </h1>
-          <p className="mt-3 max-w-sm text-sm font-light text-ink/70">
+          <p className="mt-2.5 max-w-sm text-[13px] font-light leading-relaxed text-ink/70 sm:mt-3 sm:text-sm">
             Confirm delivery, then pay securely with Razorpay. Free shipping on orders ₹3,999 and
             above · ₹99 below.
           </p>
 
           {addresses.length > 0 && (
-            <div className="mt-8 space-y-3">
+            <div className="mt-6 space-y-3 sm:mt-8">
               <div className="flex items-center justify-between gap-3">
                 <p className="font-label text-[10px] tracking-[0.16em] text-ink/50 uppercase">
                   Deliver to
                 </p>
                 <button
                   type="button"
-                  className="font-label text-[10px] tracking-[0.14em] text-burgundy"
+                  className="font-label shrink-0 text-[10px] tracking-[0.14em] text-burgundy"
                   onClick={() => setShowNewAddress((v) => !v)}
                 >
                   {showNewAddress ? 'Use saved' : 'Add new address'}
@@ -362,7 +380,7 @@ export default function CheckoutPage() {
                         key={addr.id}
                         type="button"
                         onClick={() => selectAddress(addr.id)}
-                        className={`w-full rounded-2xl border px-4 py-3.5 text-left transition ${
+                        className={`w-full rounded-2xl border px-3.5 py-3 text-left transition sm:px-4 sm:py-3.5 ${
                           active
                             ? 'border-burgundy/40 bg-white shadow-[0_8px_24px_rgba(94,6,42,0.06)]'
                             : 'border-ink/8 bg-white/50 hover:border-ink/15'
@@ -387,7 +405,7 @@ export default function CheckoutPage() {
           )}
 
           {(showNewAddress || addresses.length === 0) && (
-            <div className="mt-6 space-y-4 rounded-[1.35rem] border border-ink/8 bg-white/70 p-4 sm:mt-8 sm:space-y-5 sm:rounded-3xl sm:p-6 md:p-8">
+            <div className="mt-5 space-y-3.5 rounded-[1.25rem] border border-ink/8 bg-white/70 p-3.5 sm:mt-8 sm:space-y-5 sm:rounded-3xl sm:p-6 md:p-8">
               <p className="font-label text-[10px] tracking-[0.16em] text-ink/50 uppercase">
                 Delivery details
               </p>
@@ -397,7 +415,7 @@ export default function CheckoutPage() {
                 onChange={(v) => updateField('fullName', v)}
                 required
               />
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
+              <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-5">
                 <Field
                   label="Email"
                   type="email"
@@ -425,7 +443,7 @@ export default function CheckoutPage() {
                 value={form.line2}
                 onChange={(v) => updateField('line2', v)}
               />
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
+              <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-5">
                 <Field
                   label="City"
                   value={form.city}
@@ -439,7 +457,7 @@ export default function CheckoutPage() {
                   required
                 />
               </div>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
+              <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-5">
                 <Field
                   label="PIN code"
                   value={form.postal}
@@ -504,8 +522,7 @@ export default function CheckoutPage() {
           <button
             type="submit"
             disabled={paying || Boolean(successOrder)}
-            className="bg-velvet-texture mt-8 inline-flex w-full items-center justify-center rounded-full px-8 font-label text-[11px] tracking-[0.2em] text-ivory disabled:opacity-60 sm:w-auto sm:min-w-[260px]"
-            style={{ height: 52 }}
+            className="bg-velvet-texture mt-7 inline-flex h-[3.25rem] w-full items-center justify-center rounded-full px-6 font-label text-[11px] tracking-[0.18em] text-ivory disabled:opacity-60 sm:mt-8 sm:h-[3.25rem] sm:w-auto sm:min-w-[260px] sm:px-8 sm:tracking-[0.2em]"
           >
             {paying ? (
               'Opening Razorpay…'
@@ -519,22 +536,6 @@ export default function CheckoutPage() {
             Card details are collected by Razorpay — never on this page.
           </p>
         </form>
-
-        <aside className="min-w-0 md:col-span-6 lg:col-span-7">
-          <div className="md:sticky md:top-[7.25rem]">
-            <OrderSummaryCard
-              lines={lines}
-              cartCount={cartCount}
-              cartTotal={cartTotal}
-              cartShippingFee={cartShippingFee}
-              cartGiftWrapFee={cartGiftWrapFee}
-              cartPayable={cartPayable}
-              discountAmount={discountAmount}
-              promo={promo}
-              email={form.email || user?.email}
-            />
-          </div>
-        </aside>
       </div>
     </div>
   );
@@ -607,51 +608,65 @@ function OrderSummaryCard({
   email,
 }) {
   return (
-    <div className="flex flex-col overflow-visible rounded-[1.35rem] border border-ink/8 bg-white/80 shadow-[0_20px_60px_rgba(40,20,24,0.06)] sm:rounded-[1.75rem] md:max-h-[calc(100svh-8.5rem)] md:overflow-hidden">
-      <div className="shrink-0 border-b border-ink/8 px-4 py-4 sm:px-6 sm:py-5">
+    <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-[1.25rem] border border-ink/8 bg-white/80 shadow-[0_20px_60px_rgba(40,20,24,0.06)] sm:rounded-[1.5rem] lg:rounded-[1.75rem]">
+      <div className="shrink-0 border-b border-ink/8 px-3.5 py-3.5 sm:px-5 sm:py-4 md:px-6 md:py-5">
         <p className="font-label text-[10px] tracking-[0.18em] text-gold uppercase">Your bag</p>
         <p className="mt-1 text-sm text-ink/70">
           {cartCount} {cartCount === 1 ? 'piece' : 'pieces'}
         </p>
       </div>
-      <ul className="space-y-4 px-4 py-4 sm:px-6 sm:py-5 md:min-h-0 md:flex-1 md:overflow-y-auto">
-        {lines.map(({ item, product, lineTotal }) => (
-          <li key={item.id} className="flex min-w-0 gap-3 sm:gap-4">
-            <div className="relative h-16 w-14 shrink-0 overflow-hidden rounded-xl bg-cream ring-1 ring-ink/6 sm:h-20 sm:w-16">
-              <ProductThumb
-                product={product}
-                item={item}
-                alt={product.name || item.name}
-                sizes="64px"
-                className="object-cover object-center"
-              />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="truncate text-sm text-ink">{product.name || item.name}</p>
-              <p className="mt-0.5 text-[11px] font-light text-ink/55">
-                {collectionName(
-                  typeof product.collection === 'string'
-                    ? product.collection
-                    : product.collection_slug || product.collection?.slug || '',
-                )}{' '}
-                · {item.metal} · {item.size}
-              </p>
-              {Array.isArray(item.customization) && item.customization.length > 0 ? (
-                <ul className="mt-1.5 space-y-0.5 text-[11px] text-ink/65">
-                  {item.customization.map((entry, i) => (
-                    <li key={`${entry.id || entry.label}-${i}`} className="break-words">
-                      {entry.label}: {entry.value}
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-              <p className="mt-1 text-xs text-ink/60">Qty {item.qty}</p>
-            </div>
-            <p className="font-num shrink-0 text-sm text-ink">{money(lineTotal)}</p>
-          </li>
-        ))}
-      </ul>
-      <div className="min-w-0 space-y-2 border-t border-ink/8 px-4 py-3 sm:space-y-2.5 sm:px-6 sm:py-4">
+
+      {/* Bounded flex child — this is the only scroll surface for line items */}
+      <div
+        className="checkout-bag-scroll min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-3.5 py-3.5 sm:px-5 sm:py-4 md:px-6 md:py-5"
+        style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y' }}
+        onWheel={(e) => {
+          // Keep wheel focus on the bag list so the page doesn't scroll instead.
+          e.stopPropagation();
+        }}
+      >
+        <ul className="space-y-3.5 sm:space-y-4">
+          {lines.map(({ item, product, lineTotal }) => (
+            <li key={item.id} className="flex min-w-0 gap-2.5 sm:gap-4">
+              <div className="relative h-14 w-12 shrink-0 overflow-hidden rounded-xl bg-cream ring-1 ring-ink/6 sm:h-20 sm:w-16">
+                <ProductThumb
+                  product={product}
+                  item={item}
+                  alt={product.name || item.name}
+                  sizes="64px"
+                  className="object-cover object-center"
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-[13px] text-ink sm:text-sm">
+                  {product.name || item.name}
+                </p>
+                <p className="mt-0.5 truncate text-[10px] font-light text-ink/55 sm:text-[11px]">
+                  {collectionName(
+                    typeof product.collection === 'string'
+                      ? product.collection
+                      : product.collection_slug || product.collection?.slug || '',
+                  )}{' '}
+                  · {item.metal} · {item.size}
+                </p>
+                {Array.isArray(item.customization) && item.customization.length > 0 ? (
+                  <ul className="mt-1 space-y-0.5 text-[10px] text-ink/65 sm:text-[11px]">
+                    {item.customization.map((entry, i) => (
+                      <li key={`${entry.id || entry.label}-${i}`} className="break-words">
+                        {entry.label}: {entry.value}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+                <p className="mt-1 text-[11px] text-ink/60 sm:text-xs">Qty {item.qty}</p>
+              </div>
+              <p className="font-num shrink-0 text-[13px] text-ink sm:text-sm">{money(lineTotal)}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="min-w-0 shrink-0 space-y-2 border-t border-ink/8 px-3.5 py-3 sm:space-y-2.5 sm:px-5 sm:py-4 md:px-6">
         <GiftOptions compact />
         <PromoCodeField email={email} compact />
         <div className="space-y-0.5 pt-0.5 text-[12px] sm:text-[13px]">
@@ -707,9 +722,12 @@ function Field({ label, value, onChange, type = 'text', required, placeholder })
         required={required}
         value={value}
         placeholder={placeholder}
-        autoComplete={type === 'email' ? 'email' : type === 'tel' ? 'tel' : undefined}
+        inputMode={type === 'tel' ? 'tel' : type === 'email' ? 'email' : undefined}
+        autoComplete={
+          type === 'email' ? 'email' : type === 'tel' ? 'tel' : undefined
+        }
         onChange={(e) => onChange(e.target.value)}
-        className="field-control mt-2"
+        className="field-control mt-1.5 sm:mt-2"
       />
     </label>
   );

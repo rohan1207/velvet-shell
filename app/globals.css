@@ -392,6 +392,26 @@ img {
   height: 0;
 }
 
+/* Checkout bag card — internal product list scroll */
+.checkout-bag-scroll {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(94, 6, 42, 0.35) transparent;
+}
+
+.checkout-bag-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.checkout-bag-scroll::-webkit-scrollbar-thumb {
+  background: rgba(94, 6, 42, 0.28);
+  border-radius: 99px;
+}
+
 @keyframes shop-dot-ping {
   0% {
     transform: scale(0.55);

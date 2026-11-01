@@ -1,9 +1,10 @@
 import ShopByLook from '@/components/ShopByLook';
 import { listActiveSets } from '@/lib/sets';
 
+/** Pearl (S01) + Daisy chain (S02) — same cards as the Sets shop grid. */
 const FEATURED_SLUGS = [
-  'daisy-flower-jewellery-set-s07',
-  'dolphin-jewellery-set-s06',
+  'fairy-like-fringed-collarbone-chain-bracelet-with-heart-shaped-pearl-bea',
+  'daisy-necklace-ring-bracelet-set-with-fine-chain-links-s02',
 ];
 
 /**
@@ -24,8 +25,14 @@ export default async function ShopByLookSection() {
         image: set.image,
         href: `/sets/${set.slug}`,
         pieceCount: Array.isArray(set.members) ? set.members.length : 0,
-        line: 'Complete set',
+        badge: set.badge || '',
         outOfStock: set.outOfStock,
+        members: (set.members || []).map((m) => ({
+          slug: m.slug,
+          name: m.name,
+          price: m.price,
+          image: m.image,
+        })),
       }));
   } catch {
     featuredSets = [];
