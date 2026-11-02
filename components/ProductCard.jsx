@@ -282,6 +282,7 @@ export default function ProductCard({
 
   return (
     <article
+      data-restore-id={active?.slug || product?.slug || undefined}
       className={`group relative z-0 flex h-full animate-[fade-up_0.9s_var(--ease-luxe)_both] flex-col ${className}`}
       style={{ animationDelay: `${index * 70}ms` }}
     >

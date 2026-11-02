@@ -1,77 +1,65 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import {
+  consumePopNavigation,
+  currentRouteKey,
   getScrollY,
+  installScrollRestoreListeners,
+  isRestoreLocked,
+  readReturnFocus,
   readScrollPosition,
-  routeKey,
+  restoreViewport,
+  saveReturnFocus,
   saveScrollPosition,
   scrollToY,
 } from '@/lib/scroll-restore';
 
 /**
- * Forward navigations land at the top. Back/forward restore the last scroll
- * for that route. Search-param-only updates (shop filters) keep position.
+ * Forward path changes → top.
+ * Browser back/forward → restore saved Y + last product/set card.
+ * Same-path query changes (filters) → keep viewport.
+ *
+ * Pathname-only (no useSearchParams) so this never remounts inside Suspense.
  */
 export default function ScrollToTop() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const search = searchParams?.toString() ?? '';
-  const key = routeKey(pathname, search);
-
-  const prevPathname = useRef(pathname);
-  const prevKey = useRef(key);
-  const navigationType = useRef('push');
+  const prevPathname = useRef(null);
+  const cancelRestore = useRef(null);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return undefined;
-    try {
-      window.history.scrollRestoration = 'manual';
-    } catch {
-      /* ignore */
-    }
-
-    const onPopState = () => {
-      navigationType.current = 'pop';
-    };
-    const onPageShow = (event) => {
-      // Back-forward cache: restore without waiting for a React route effect.
-      if (!event.persisted) return;
-      navigationType.current = 'pop';
-      const y = readScrollPosition(routeKey(window.location.pathname, window.location.search.slice(1)));
-      if (y != null) {
-        scrollToY(y);
-        requestAnimationFrame(() => scrollToY(y));
-      }
-    };
-    window.addEventListener('popstate', onPopState);
-    window.addEventListener('pageshow', onPageShow);
-    return () => {
-      window.removeEventListener('popstate', onPopState);
-      window.removeEventListener('pageshow', onPageShow);
-    };
+    installScrollRestoreListeners();
   }, []);
 
-  // Persist scroll for the current route (native + Lenis).
   useEffect(() => {
     if (typeof window === 'undefined') return undefined;
 
     let ticking = false;
     const persist = () => {
+      if (isRestoreLocked()) return;
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         ticking = false;
-        saveScrollPosition(key, getScrollY());
+        if (isRestoreLocked()) return;
+        saveScrollPosition(currentRouteKey(), getScrollY());
       });
     };
 
     const onPointerDown = (event) => {
+      if (isRestoreLocked()) return;
       const anchor = event.target?.closest?.('a[href]');
       if (!anchor) return;
-      saveScrollPosition(key, getScrollY());
-      if (navigationType.current !== 'pop') navigationType.current = 'push';
+      const href = anchor.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+        return;
+      }
+      saveScrollPosition(currentRouteKey(), getScrollY());
+
+      const card = event.target?.closest?.('[data-restore-id]');
+      const id = card?.getAttribute('data-restore-id');
+      if (id) saveReturnFocus(id);
     };
 
     window.addEventListener('scroll', persist, { passive: true });
@@ -84,52 +72,90 @@ export default function ScrollToTop() {
       document.removeEventListener('pointerdown', onPointerDown, true);
       lenis?.off?.('scroll', persist);
     };
-  }, [key]);
+  }, [pathname]);
 
   useEffect(() => {
-    const pathChanged = prevPathname.current !== pathname;
-    const keyChanged = prevKey.current !== key;
-    if (!keyChanged) return undefined;
+    if (typeof window === 'undefined') return undefined;
 
-    // Filter / query-string updates on the same page: keep the viewport still.
-    if (!pathChanged) {
+    const key = currentRouteKey();
+    const prev = prevPathname.current;
+    const pathChanged = prev != null && prev !== pathname;
+    const isFirst = prev == null;
+    prevPathname.current = pathname;
+
+    cancelRestore.current?.();
+    cancelRestore.current = null;
+
+    if (isFirst) {
       saveScrollPosition(key, getScrollY());
-      prevKey.current = key;
-      if (navigationType.current === 'pop') navigationType.current = 'push';
       return undefined;
     }
 
-    const type = navigationType.current;
-    prevPathname.current = pathname;
-    prevKey.current = key;
+    // Filters / query-only: keep still. If this was a back into same path+new
+    // search, popstate handler below restores.
+    if (!pathChanged) {
+      if (consumePopNavigation()) {
+        const y = readScrollPosition(key) ?? getScrollY();
+        const focusId = readReturnFocus(key);
+        cancelRestore.current = restoreViewport({ y, focusId });
+        return () => {
+          cancelRestore.current?.();
+          cancelRestore.current = null;
+        };
+      }
+      saveScrollPosition(key, getScrollY());
+      return undefined;
+    }
 
-    if (type === 'pop') {
+    const wasPop = consumePopNavigation();
+
+    if (wasPop) {
       const y = readScrollPosition(key) ?? 0;
-      const restore = () => scrollToY(y);
-      restore();
-      const raf = requestAnimationFrame(restore);
-      const t1 = window.setTimeout(restore, 50);
-      const t2 = window.setTimeout(restore, 160);
-      const t3 = window.setTimeout(restore, 360);
-      navigationType.current = 'push';
+      const focusId = readReturnFocus(key);
+      cancelRestore.current = restoreViewport({ y, focusId });
       return () => {
-        cancelAnimationFrame(raf);
-        window.clearTimeout(t1);
-        window.clearTimeout(t2);
-        window.clearTimeout(t3);
+        cancelRestore.current?.();
+        cancelRestore.current = null;
       };
     }
 
     const reset = () => scrollToY(0);
     reset();
     const raf = requestAnimationFrame(reset);
-    const t = window.setTimeout(reset, 50);
-    navigationType.current = 'push';
+    const t = window.setTimeout(reset, 40);
+    saveScrollPosition(key, 0);
     return () => {
       cancelAnimationFrame(raf);
       window.clearTimeout(t);
     };
-  }, [pathname, key]);
+  }, [pathname]);
+
+  // Catch back/forward when Next restores the same pathname (or before React
+  // commits). Location is already the destination when popstate fires.
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+
+    const onPopState = () => {
+      const run = () => {
+        const key = currentRouteKey();
+        const y = readScrollPosition(key);
+        const focusId = readReturnFocus(key);
+        if (y == null && !focusId) return;
+        cancelRestore.current?.();
+        cancelRestore.current = restoreViewport({
+          y: y ?? 0,
+          focusId,
+        });
+      };
+      requestAnimationFrame(() => requestAnimationFrame(run));
+      window.setTimeout(run, 90);
+      window.setTimeout(run, 280);
+      window.setTimeout(run, 600);
+    };
+
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
 
   return null;
 }

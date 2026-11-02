@@ -73,8 +73,7 @@ export default function ShopExperience({
   const [sets, setSets] = useState(initialSets);
   const [source, setSource] = useState(catalogSource);
   const [catalogLoading, setCatalogLoading] = useState(!initialProducts?.length);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const [draft, setDraft] = useState(() => emptyFilterState());
   const [applied, setApplied] = useState(() => emptyFilterState());
@@ -334,7 +333,7 @@ export default function ShopExperience({
     const next = emptyFilterState({ min: 0, max: 100000 });
     setDraft(next);
     setApplied(next);
-    setMobileFiltersOpen(false);
+    setFiltersOpen(false);
     replaceShopUrl(buildShopHref({ category: nextCategory, q: query }));
   };
 
@@ -352,7 +351,7 @@ export default function ShopExperience({
     replaceShopUrl(
       buildShopHref({ category, collection: primaryCollection, q: query }),
     );
-    setMobileFiltersOpen(false);
+    setFiltersOpen(false);
   };
 
   const clearFilters = () => {
@@ -360,7 +359,7 @@ export default function ShopExperience({
     setDraft(next);
     setApplied(next);
     replaceShopUrl(buildShopHref({ category, q: query }));
-    setMobileFiltersOpen(false);
+    setFiltersOpen(false);
   };
 
   const onSearchChange = (value) => {
@@ -428,20 +427,13 @@ export default function ShopExperience({
               <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 md:justify-start">
                 <button
                   type="button"
-                  onClick={() => setSidebarOpen(true)}
-                  className={`hidden items-center gap-2 rounded-full border px-3.5 py-2 font-label text-[10px] tracking-[0.14em] uppercase transition-all lg:inline-flex ${
-                    sidebarOpen
-                      ? 'pointer-events-none border-transparent text-ink/30'
+                  onClick={() => setFiltersOpen(true)}
+                  aria-expanded={filtersOpen}
+                  className={`inline-flex min-h-9 items-center gap-2 rounded-full border px-3.5 py-2 font-label text-[10px] tracking-[0.14em] uppercase transition-colors ${
+                    hasActive || filtersOpen
+                      ? 'border-burgundy/35 bg-burgundy/[0.04] text-burgundy'
                       : 'border-ink/12 text-ink/75 hover:border-burgundy/30 hover:text-burgundy'
                   }`}
-                >
-                  <IconFilters />
-                  Show filters
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setMobileFiltersOpen(true)}
-                  className="inline-flex min-h-9 items-center gap-2 rounded-full border border-ink/12 px-3 py-1.5 font-label text-[10px] tracking-[0.14em] text-ink/75 uppercase lg:hidden"
                 >
                   <IconFilters />
                   Filters
@@ -458,15 +450,6 @@ export default function ShopExperience({
                     className="min-h-11 rounded-full border border-ink/10 px-3.5 py-2 font-label text-[10px] tracking-[0.14em] text-ink/65 uppercase transition-colors hover:border-burgundy/25 hover:text-burgundy"
                   >
                     Clear
-                  </button>
-                ) : null}
-                {dirty ? (
-                  <button
-                    type="button"
-                    onClick={applyFilters}
-                    className="bg-velvet-texture min-h-11 rounded-full px-3.5 py-2 font-label text-[10px] tracking-[0.14em] text-ivory uppercase"
-                  >
-                    Apply
                   </button>
                 ) : null}
                 <div className="ml-auto flex items-center gap-2 md:hidden">
@@ -531,33 +514,22 @@ export default function ShopExperience({
             </div>
           </div>
 
-          {/* Sidebar + grid — stretch so sticky sidebar has a tall containing block */}
-          <div className="mt-6 flex items-stretch gap-6 xl:gap-8">
-            <ShopFilters
-              draft={draft}
-              onDraftChange={setDraft}
-              options={filterOptions}
-              priceBounds={priceBounds}
-              onApply={applyFilters}
-              onClear={clearFilters}
-              dirty={dirty}
-              hasActive={hasActive}
-              collapsed={!sidebarOpen}
-              onToggleCollapsed={() => setSidebarOpen(false)}
-              mobileOpen={mobileFiltersOpen}
-              onCloseMobile={() => setMobileFiltersOpen(false)}
-            />
+          <ShopFilters
+            draft={draft}
+            onDraftChange={setDraft}
+            options={filterOptions}
+            priceBounds={priceBounds}
+            onApply={applyFilters}
+            onClear={clearFilters}
+            dirty={dirty}
+            hasActive={hasActive}
+            open={filtersOpen}
+            onClose={() => setFiltersOpen(false)}
+          />
 
-            <div className="min-h-[32rem] min-w-0 flex-1 self-start md:min-h-[40rem]">
+          <div className="mt-6 min-h-[32rem] md:min-h-[40rem]">
               {catalogLoading ? (
-                <ProductGridSkeleton
-                  count={sidebarOpen ? 6 : 8}
-                  className={
-                    sidebarOpen
-                      ? 'lg:grid-cols-3'
-                      : 'lg:grid-cols-4'
-                  }
-                />
+                <ProductGridSkeleton count={8} className="lg:grid-cols-4" />
               ) : list.length === 0 ? (
                 <div className="flex min-h-[32rem] items-center justify-center rounded-[1.25rem] border border-ink/8 bg-ivory/40 px-6 py-20 text-center md:min-h-[40rem]">
                   <div>
@@ -575,11 +547,7 @@ export default function ShopExperience({
                   </div>
                 </div>
               ) : (
-                <div
-                  className={`grid grid-cols-2 gap-x-2.5 gap-y-6 transition-[grid-template-columns] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:gap-x-3 sm:gap-y-7 md:gap-x-6 md:gap-y-12 ${
-                    sidebarOpen ? 'lg:grid-cols-3' : 'lg:grid-cols-4'
-                  }`}
-                >
+                <div className="grid grid-cols-2 gap-x-2.5 gap-y-6 sm:gap-x-3 sm:gap-y-7 md:gap-x-6 md:gap-y-12 lg:grid-cols-4">
                   {list.map((product, index) =>
                     category === 'sets' || product.kind === 'set' ? (
                       <SetCard key={product.slug} set={product} />
@@ -595,7 +563,6 @@ export default function ShopExperience({
                   )}
                 </div>
               )}
-            </div>
           </div>
 
           <p className="sr-only" data-catalog-source={source}>

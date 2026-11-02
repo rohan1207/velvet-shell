@@ -16,9 +16,10 @@ export default function Providers({ children }) {
   return (
     <StoreProvider>
       <SmoothScroll>
+        {/* ScrollToTop stays outside Suspense so it never remounts on searchParams. */}
+        <ScrollToTop />
         <Suspense fallback={null}>
           <NavigationProgress />
-          <ScrollToTop />
           <SiteHeader />
         </Suspense>
         <CartDrawer />

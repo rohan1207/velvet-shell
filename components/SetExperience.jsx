@@ -145,7 +145,10 @@ export default function SetExperience({ set, otherSets = [] }) {
         <div className="order-1 min-w-0 max-w-full overflow-hidden lg:sticky lg:top-[calc(var(--site-chrome-offset)+0.5rem)] lg:col-span-7 lg:self-start">
           <div className="flex h-[min(52svh,22rem)] min-w-0 gap-1.5 sm:h-[min(58svh,26rem)] sm:gap-2 md:h-[min(100svh-var(--site-chrome-offset)-2.5rem,920px)] md:gap-3">
             {gallery.length > 1 ? (
-              <div className="flex w-12 shrink-0 flex-col gap-1.5 overflow-y-auto overflow-x-hidden px-0.5 py-1 [scrollbar-width:none] [-ms-overflow-style:none] sm:w-14 sm:gap-2 md:w-16 md:gap-2.5 lg:w-[4.5rem] [&::-webkit-scrollbar]:hidden">
+              <div
+                data-lenis-prevent
+                className="flex min-h-0 w-12 shrink-0 flex-col gap-1.5 overflow-y-auto overflow-x-hidden overscroll-y-contain px-0.5 py-1 [scrollbar-width:thin] sm:w-14 sm:gap-2 md:w-16 md:gap-2.5 lg:w-[4.5rem]"
+              >
                 {gallery.map((item, index) => {
                   const isMain = index === activeImg;
                   return (
