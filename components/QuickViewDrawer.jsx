@@ -183,7 +183,7 @@ export default function QuickViewDrawer() {
                 </button>
               </div>
               <p className="mt-3 text-center text-[10px] font-light leading-relaxed text-ink/45">
-                Hand-finished — colour and detail may vary gently from the photographs.
+                Hand-finished — colour and detail may vary from the photographs.
                 {product.category === 'earrings'
                   ? ' Longer drops can be adjusted on request.'
                   : ''}

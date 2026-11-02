@@ -4,7 +4,7 @@
  */
 
 export const COLOUR_VARIATION_NOTE =
-  'As each piece is finished by hand, colour and detail may vary gently from the photographs. What you receive is uniquely yours.';
+  'As each piece is finished by hand, colour and detail may vary from the photographs. What you receive is uniquely yours.';
 
 export const EARRING_LENGTH_NOTE =
   'On longer drop styles, dangle length can be tailored to your preference — tell us when you place your order.';
