@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { HOME_BANNER_SLIDES } from '@/lib/home-banner-slides';
 import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
 
-const HOLD_MS = 2800;
+const HOLD_MS = 1900;
 const FRAMES = HOME_BANNER_SLIDES;
 
 function ArrowCircle({ className = '', iconClassName = 'h-3.5 w-3.5' }) {
@@ -51,7 +51,7 @@ export default function HeroEarringReel({ className = '', showBadge = true, comp
           initial={{ opacity: 0, scale: 1.04 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.05, ease: [0.45, 0.05, 0.25, 1] }}
+          transition={{ duration: 0.7, ease: [0.45, 0.05, 0.25, 1] }}
         >
           <motion.div
             className="absolute inset-0"
