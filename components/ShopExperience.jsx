@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -228,8 +228,35 @@ export default function ShopExperience({
     return { collections: collectionOptions, materials, colors, pricePresets };
   }, [categoryProducts, collections, priceBounds]);
 
-  // When category / price bounds change, reset filters to sensible defaults
+  // Reset filters only when the shop category changes — not on catalog refresh
+  // or Apply URL sync (those were wiping edits and collapsing the grid).
+  const prevCategoryRef = useRef(category);
   useEffect(() => {
+    const categoryChanged = prevCategoryRef.current !== category;
+    prevCategoryRef.current = category;
+
+    if (!categoryChanged) {
+      // Soft-sync a single collection from the URL without clearing other facets.
+      const urlCollection = params.get('collection');
+      if (
+        urlCollection &&
+        urlCollection !== 'all' &&
+        filterOptions.collections.some((c) => c.slug === urlCollection)
+      ) {
+        setDraft((prev) =>
+          prev.collections.length === 1 && prev.collections[0] === urlCollection
+            ? prev
+            : { ...prev, collections: [urlCollection] },
+        );
+        setApplied((prev) =>
+          prev.collections.length === 1 && prev.collections[0] === urlCollection
+            ? prev
+            : { ...prev, collections: [urlCollection] },
+        );
+      }
+      return;
+    }
+
     const next = emptyFilterState(priceBounds);
     const urlCollection = params.get('collection');
     if (
@@ -287,6 +314,20 @@ export default function ShopExperience({
     return next;
   }, [categoryProducts, applied, query, sort]);
 
+  const replaceShopUrl = (href) => {
+    if (typeof window !== 'undefined') {
+      try {
+        const next = new URL(href, window.location.origin);
+        const currentPath = `${window.location.pathname}${window.location.search}`;
+        const nextPath = `${next.pathname}${next.search}`;
+        if (nextPath === currentPath) return;
+      } catch {
+        /* fall through and replace */
+      }
+    }
+    router.replace(href, { scroll: false });
+  };
+
   const updateCategory = (nextCategory) => {
     setCategory(nextCategory);
     // Clear filters immediately so the new category isn’t stuck on stale price/colour cuts
@@ -294,16 +335,22 @@ export default function ShopExperience({
     setDraft(next);
     setApplied(next);
     setMobileFiltersOpen(false);
-    router.replace(buildShopHref({ category: nextCategory, q: query }), { scroll: false });
+    replaceShopUrl(buildShopHref({ category: nextCategory, q: query }));
   };
 
   const applyFilters = () => {
-    setApplied({ ...draft, collections: [...draft.collections], materials: [...draft.materials], colors: [...draft.colors] });
+    setApplied({
+      ...draft,
+      collections: [...draft.collections],
+      materials: [...draft.materials],
+      colors: [...draft.colors],
+    });
     const primaryCollection =
       draft.collections.length === 1 ? draft.collections[0] : 'all';
-    router.replace(
+    // Client list updates immediately; only sync URL when it actually changes
+    // so Apply never remounts the page or jumps the viewport.
+    replaceShopUrl(
       buildShopHref({ category, collection: primaryCollection, q: query }),
-      { scroll: false },
     );
     setMobileFiltersOpen(false);
   };
@@ -312,7 +359,7 @@ export default function ShopExperience({
     const next = emptyFilterState(priceBounds);
     setDraft(next);
     setApplied(next);
-    router.replace(buildShopHref({ category, q: query }), { scroll: false });
+    replaceShopUrl(buildShopHref({ category, q: query }));
     setMobileFiltersOpen(false);
   };
 
@@ -323,9 +370,8 @@ export default function ShopExperience({
   const commitSearch = () => {
     const primaryCollection =
       applied.collections.length === 1 ? applied.collections[0] : 'all';
-    router.replace(
+    replaceShopUrl(
       buildShopHref({ category, collection: primaryCollection, q: query }),
-      { scroll: false },
     );
   };
 
@@ -502,7 +548,7 @@ export default function ShopExperience({
               onCloseMobile={() => setMobileFiltersOpen(false)}
             />
 
-            <div className="min-w-0 flex-1 self-start">
+            <div className="min-h-[32rem] min-w-0 flex-1 self-start md:min-h-[40rem]">
               {catalogLoading ? (
                 <ProductGridSkeleton
                   count={sidebarOpen ? 6 : 8}
@@ -513,18 +559,20 @@ export default function ShopExperience({
                   }
                 />
               ) : list.length === 0 ? (
-                <div className="rounded-[1.25rem] border border-ink/8 bg-ivory/40 px-6 py-20 text-center">
-                  <p className="font-display text-3xl text-ink">Nothing matches this edit.</p>
-                  <p className="mx-auto mt-3 max-w-sm text-sm font-light text-ink/70">
-                    Try clearing filters or searching a different note from the garden.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={clearFilters}
-                    className="bg-velvet-texture mt-6 inline-flex rounded-full px-5 py-2.5 font-label text-[11px] text-ivory"
-                  >
-                    Clear
-                  </button>
+                <div className="flex min-h-[32rem] items-center justify-center rounded-[1.25rem] border border-ink/8 bg-ivory/40 px-6 py-20 text-center md:min-h-[40rem]">
+                  <div>
+                    <p className="font-display text-3xl text-ink">Nothing matches this edit.</p>
+                    <p className="mx-auto mt-3 max-w-sm text-sm font-light text-ink/70">
+                      Try clearing filters or searching a different note from the garden.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={clearFilters}
+                      className="bg-velvet-texture mt-6 inline-flex rounded-full px-5 py-2.5 font-label text-[11px] text-ivory"
+                    >
+                      Clear
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <div
