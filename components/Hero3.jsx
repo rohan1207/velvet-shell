@@ -83,10 +83,10 @@ export default function Hero3() {
                   className="group relative min-h-0 overflow-hidden rounded-[1.5rem] bg-[#ebe6df] lg:rounded-[1.75rem]"
                 >
                   <ResponsiveBannerImage
-                    src="/images/hero-gifting-brand.png"
-                    alt="Velvet Shell — A treasure in every reveal"
+                    src="/images/hero-gifting-box.jpg"
+                    alt="Velvet Shell gift box with burgundy branded ribbon"
                     sizes="28vw"
-                    className="object-contain object-center transition-transform duration-[1.15s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+                    className="object-cover object-center transition-transform duration-[1.15s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
                   />
                   <span className="bg-velvet-texture absolute bottom-3 left-3 z-10 inline-flex items-center gap-2 rounded-full py-2 pr-2 pl-3.5 shadow-sm">
                     <span className="text-[9px] font-semibold tracking-[0.14em] text-ivory uppercase">
@@ -147,10 +147,10 @@ export default function Hero3() {
               className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] bg-[#ebe6df]"
             >
               <ResponsiveBannerImage
-                src="/images/hero-gifting-brand.png"
-                alt="Velvet Shell — A treasure in every reveal"
+                src="/images/hero-gifting-box.jpg"
+                alt="Velvet Shell gift box with burgundy branded ribbon"
                 sizes="50vw"
-                className="object-contain object-center"
+                className="object-cover object-center"
               />
               <span className="bg-velvet-texture absolute bottom-2 left-2 z-10 inline-flex items-center gap-1 rounded-full py-1 pr-1 pl-2.5 shadow-sm">
                 <span className="text-[8px] font-semibold tracking-[0.12em] text-ivory uppercase">

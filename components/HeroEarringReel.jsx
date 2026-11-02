@@ -5,8 +5,10 @@ import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HOME_BANNER_SLIDES } from '@/lib/home-banner-slides';
 import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
+import { BANNER_INTERVAL_MS } from '@/lib/use-infinite-carousel';
 
-const HOLD_MS = 1900;
+/** Same category banners as the top BannerShowcase — keep timing in sync. */
+const HOLD_MS = BANNER_INTERVAL_MS;
 const FRAMES = HOME_BANNER_SLIDES;
 
 function ArrowCircle({ className = '', iconClassName = 'h-3.5 w-3.5' }) {
@@ -23,7 +25,7 @@ function ArrowCircle({ className = '', iconClassName = 'h-3.5 w-3.5' }) {
 }
 
 /**
- * Hero3 rings card — cycles every BannerShowcase homepage slider image.
+ * Hero3 left sliding card — same banners / labels / links as the top homepage slider.
  */
 export default function HeroEarringReel({ className = '', showBadge = true, compact = false }) {
   const [index, setIndex] = useState(0);
