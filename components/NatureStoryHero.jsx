@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
+import { HOME_BANNER_SLIDES } from '@/lib/home-banner-slides';
 import {
   BANNER_INTERVAL_MS,
   BANNER_TRANSITION_MS,
@@ -9,66 +10,7 @@ import {
   useInfiniteCarousel,
 } from '@/lib/use-infinite-carousel';
 
-import { shopCategoryHref } from '@/lib/shop-links';
-
-const slides = [
-  {
-    id: 'pomegranate',
-    image: '/images/banners/home-hero/pomegranate-story.jpg',
-    alt: 'Pomegranate pendant necklace hanging from a fruiting branch at golden hour',
-    title: 'Shop necklaces',
-    line: 'Pendants and chains — silver and gold, worn close.',
-    cta: 'Shop necklaces',
-    href: shopCategoryHref('necklaces'),
-    tone: 'dark',
-    overlay: 'soft',
-  },
-  {
-    id: 'honeybee',
-    image: '/images/banners/home-hero/honeybee-story.jpg',
-    alt: 'Honeybee ring on honeycomb among golden wildflowers',
-    title: 'Shop rings',
-    line: 'Nature-inspired rings made to be worn and kept.',
-    cta: 'Shop rings',
-    href: shopCategoryHref('rings'),
-    tone: 'light',
-    overlay: 'soft',
-  },
-  {
-    id: 'butterfly-stream',
-    image: '/images/banners/home-hero/butterfly-stream-story.jpg',
-    alt: 'Aquamarine butterfly ring on moss beside a forest stream',
-    title: 'Shop rings',
-    line: 'Quiet stones and sculptural forms for the hand.',
-    cta: 'Shop rings',
-    href: shopCategoryHref('rings'),
-    tone: 'light',
-    overlay: 'soft',
-  },
-  {
-    id: 'bracelets',
-    image: '/images/banners/home-hero/lotus-story.jpg',
-    alt: 'Bracelet resting on a dewy lily pad',
-    title: 'Shop bracelets',
-    line: 'Soft forms for the wrist — silver, stone, and light.',
-    cta: 'Shop bracelets',
-    href: shopCategoryHref('bracelets'),
-    tone: 'light',
-    overlay: 'soft',
-  },
-  {
-    id: 'floral-threader',
-    image: '/images/banners/home-hero/floral-threader-story.jpg',
-    alt: 'Floral silver threader earrings on a dewy garden leaf',
-    title: 'Shop earrings',
-    line: 'Drops, hoops, and studs for softly luminous days.',
-    cta: 'Shop earrings',
-    href: shopCategoryHref('earrings'),
-    tone: 'light',
-    overlay: 'soft',
-  },
-];
-
+const slides = HOME_BANNER_SLIDES;
 const trackSlides = buildClonedSlides(slides, (s) => s.id);
 
 export default function NatureStoryHero() {
@@ -88,7 +30,7 @@ export default function NatureStoryHero() {
       ref={rootRef}
       className="relative box-border h-[100svh] max-h-[100dvh] w-full overflow-hidden bg-ink supports-[height:100dvh]:h-[100dvh]"
       aria-roledescription="carousel"
-      aria-label="Nature storytelling hero"
+      aria-label="Shop by category"
     >
       <div className="absolute inset-0 overflow-hidden">
         <div className="flex h-full w-full will-change-transform" style={trackStyle}>
@@ -100,7 +42,7 @@ export default function NatureStoryHero() {
               <ResponsiveBannerImage
                 src={item.image}
                 alt={item.alt}
-                priority
+                priority={item.__key === slides[0]?.id}
                 quality={90}
                 className="object-cover object-center"
               />
@@ -128,7 +70,6 @@ export default function NatureStoryHero() {
             key={slide.id}
             className="flex max-w-lg flex-col items-start text-left animate-[fade-up_0.9s_var(--ease-luxe)_both]"
           >
-            {/* Phone always uses ivory on the bottom scrim; desktop keeps slide tone */}
             <h1
               className={`font-display text-[clamp(2.15rem,8vw,3.85rem)] leading-[1.05] tracking-[-0.02em] text-ivory ${
                 isDark ? 'md:text-ink' : 'md:text-ivory'
@@ -207,10 +148,10 @@ export default function NatureStoryHero() {
           <button
             key={item.id}
             type="button"
-            aria-label={`Go to banner ${i + 1}`}
+            aria-label={`Go to ${item.label}`}
             aria-current={i === logicalIndex}
             onClick={() => goTo(i)}
-            className={`min-h-11 min-w-11 inline-flex items-center justify-center md:min-h-0 md:min-w-0`}
+            className="inline-flex min-h-11 min-w-11 items-center justify-center md:min-h-0 md:min-w-0"
           >
             <span
               className={`block h-1.5 rounded-full transition-all duration-500 ${
