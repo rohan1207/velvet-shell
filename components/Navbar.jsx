@@ -338,7 +338,7 @@ export default function Navbar() {
         onMouseLeave={scheduleCloseMega}
       >
         {/* ——— Row 1: house links · logo · utilities ——— */}
-        <div className="relative mx-auto grid h-[4.65rem] max-w-[1600px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-1 px-3.5 sm:h-[5.1rem] sm:gap-2 sm:px-4 md:h-[5.25rem] md:px-6 lg:px-8">
+        <div className="relative mx-auto grid h-[5rem] max-w-[1600px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-1 px-3 sm:h-[5.1rem] sm:gap-2 sm:px-4 md:h-[5.25rem] md:px-6 lg:px-8">
           <nav
             className="relative z-10 hidden min-w-0 items-center justify-start lg:flex"
             aria-label="House"
@@ -372,14 +372,14 @@ export default function Navbar() {
             className="relative z-20 justify-self-center"
             onMouseEnter={scheduleCloseMega}
           >
-            <span className="relative block h-[3.85rem] w-[3.85rem] overflow-visible sm:h-[4.75rem] sm:w-[4.75rem] md:h-[5rem] md:w-[5rem] lg:h-[4.85rem] lg:w-[4.85rem] xl:h-[5.25rem] xl:w-[5.25rem]">
+            <span className="relative block h-[4.5rem] w-[4.5rem] overflow-visible sm:h-[4.75rem] sm:w-[4.75rem] md:h-[5rem] md:w-[5rem] lg:h-[4.85rem] lg:w-[4.85rem] xl:h-[5.25rem] xl:w-[5.25rem]">
               <Image
                 src="/logo-splash.png"
                 alt="Velvet Shell"
                 fill
                 priority
-                className="origin-center object-contain scale-[1.18] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.28] sm:scale-[1.26] lg:scale-[1.2] xl:scale-[1.28]"
-                sizes="(max-width: 1024px) 88px, 110px"
+                className="origin-center object-contain scale-[1.52] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.58] sm:scale-[1.32] sm:hover:scale-[1.38] lg:scale-[1.2] lg:hover:scale-[1.28] xl:scale-[1.28]"
+                sizes="(max-width: 640px) 120px, (max-width: 1024px) 96px, 110px"
                 style={{ mixBlendMode: 'screen' }}
               />
             </span>
@@ -479,19 +479,19 @@ export default function Navbar() {
               backgroundPosition: 'center',
             }}
           >
-            <div className="mx-auto flex h-[4.65rem] max-w-[1600px] items-center justify-between px-3 sm:h-[5.1rem] sm:px-4 md:px-8">
+            <div className="mx-auto flex h-[5rem] max-w-[1600px] items-center justify-between px-3 sm:h-[5.1rem] sm:px-4 md:px-8">
               <Link
                 href="/"
                 aria-label="Velvet Shell home"
-                className="relative block h-[4.1rem] w-[4.1rem] overflow-visible sm:h-[4.75rem] sm:w-[4.75rem]"
+                className="relative block h-[4.5rem] w-[4.5rem] overflow-visible sm:h-[4.75rem] sm:w-[4.75rem]"
                 onClick={() => setMenuOpen(false)}
               >
                 <Image
                   src="/logo-splash.png"
                   alt=""
                   fill
-                  className="origin-center object-contain scale-[1.22] sm:scale-[1.26]"
-                  sizes="88px"
+                  className="origin-center object-contain scale-[1.52] sm:scale-[1.32]"
+                  sizes="120px"
                   style={{ mixBlendMode: 'screen' }}
                 />
               </Link>
