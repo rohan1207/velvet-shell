@@ -63,7 +63,7 @@ const shopMenu = {
     },
     {
       href: '/shop?category=accessories',
-      image: '/images/banners/necklaces/flower.jpg',
+      image: '/images/banners/chains/gold-chain.jpg',
       label: 'Accessories',
       note: 'Brooches, chains & chokers',
     },
@@ -143,7 +143,7 @@ const accessoriesMenu = {
       title: 'Accessories',
       links: [
         { href: '/shop?category=accessories', label: 'All accessories' },
-        { href: '/shop?category=chains', label: 'Chains' },
+        { href: '/shop?category=chains', label: 'Chains & chokers' },
         { href: '/shop?category=brooches', label: 'Brooches' },
       ],
     },
@@ -151,19 +151,19 @@ const accessoriesMenu = {
   features: [
     {
       href: '/shop?category=accessories',
-      image: '/images/banners/necklaces/flower.jpg',
+      image: '/images/banners/chains/gold-chain.jpg',
       label: 'All accessories',
       note: 'Brooches, chains & chokers',
     },
     {
       href: '/shop?category=chains',
-      image: '/images/banners/necklaces/bamboo.jpg',
-      label: 'Chains',
+      image: '/images/banners/chains/gold-chain.jpg',
+      label: 'Chains & chokers',
       note: 'Fine links for everyday layering',
     },
     {
       href: '/shop?category=brooches',
-      image: '/images/banners/brooches/calla.jpg',
+      image: '/images/banners/brooches/gold-silver-flower.jpg',
       label: 'Brooches',
       note: 'Pinned to lapel or dress',
     },
