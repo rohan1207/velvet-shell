@@ -7,16 +7,17 @@ import ProductCard from '@/components/ProductCard';
 import { ProductGridSkeleton } from '@/components/ProductCardSkeleton';
 import { useStore } from '@/context/StoreContext';
 
-function pickRandom(list, count = 8) {
+/** Stable home grid — alphabetical, never reshuffles on reload. */
+function pickAlphabetical(list, count = 8) {
   if (!Array.isArray(list) || list.length === 0) return [];
-  const copy = list.slice();
-  for (let i = copy.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const tmp = copy[i];
-    copy[i] = copy[j];
-    copy[j] = tmp;
-  }
-  return copy.slice(0, Math.min(count, copy.length));
+  return list
+    .slice()
+    .sort((a, b) =>
+      String(a.name || a.slug || '').localeCompare(String(b.name || b.slug || ''), undefined, {
+        sensitivity: 'base',
+      }),
+    )
+    .slice(0, Math.min(count, list.length));
 }
 
 export default function ShopNow() {
@@ -39,7 +40,7 @@ export default function ShopNow() {
       activeTab === 'all'
         ? products
         : products.filter((product) => product.category === activeTab);
-    return pickRandom(pool, 8);
+    return pickAlphabetical(pool, 8);
   }, [activeTab, products]);
 
   return (

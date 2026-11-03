@@ -296,14 +296,17 @@ export default function ProductCard({
           className="pointer-events-none object-contain object-center transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] [@media(hover:hover)]:group-hover:scale-[1.03]"
         />
 
+        {/* Solid white panel masks the primary so letterboxed hover shots never show two images at once */}
         {hasGallery && variants.length <= 1 ? (
-          <AppImage
-            src={galleryImages[1]}
-            alt=""
-            fill
-            sizes={sizes}
-            className="pointer-events-none hidden object-contain object-center opacity-0 transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] [@media(hover:hover)]:block [@media(hover:hover)]:group-hover:scale-[1.03] [@media(hover:hover)]:group-hover:opacity-100"
-          />
+          <div className="pointer-events-none absolute inset-0 bg-white opacity-0 transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] [@media(hover:hover)]:group-hover:scale-[1.03] [@media(hover:hover)]:group-hover:opacity-100">
+            <AppImage
+              src={galleryImages[1]}
+              alt=""
+              fill
+              sizes={sizes}
+              className="object-contain object-center"
+            />
+          </div>
         ) : null}
 
         <Link href={href} className="absolute inset-0 z-10" aria-label={`View ${active.name}`} />

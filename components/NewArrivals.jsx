@@ -5,6 +5,9 @@ import PinnedProductStrip from '@/components/PinnedProductStrip';
 import { ProductStripSkeleton } from '@/components/ProductCardSkeleton';
 import { useStore } from '@/context/StoreContext';
 
+/**
+ * Homepage Festive Edit strip — product order comes from admin curation.
+ */
 export default function NewArrivals() {
   const { catalog } = useStore();
   const [curation, setCuration] = useState(null);
@@ -37,6 +40,7 @@ export default function NewArrivals() {
     const byFamily = new Map(products.map((p) => [p.familySlug, p]));
     const chosen = [];
     const seen = new Set();
+    // Preserve admin order exactly
     for (const slug of curation.productSlugs) {
       const p = bySlug.get(slug) || byFamily.get(slug);
       if (!p || seen.has(p.slug)) continue;
@@ -49,8 +53,8 @@ export default function NewArrivals() {
   if (catalogLoading || curationLoading) {
     return (
       <ProductStripSkeleton
-        title="New arrivals"
-        line="Loading the latest drops…"
+        title="Festive Edit"
+        line="Loading the seasonal edit…"
         count={4}
       />
     );
@@ -60,9 +64,13 @@ export default function NewArrivals() {
 
   return (
     <PinnedProductStrip
-      eyebrow="New"
-      title="New arrivals"
-      line="Fresh pieces from the house edit."
+      id="festive-edit"
+      eyebrow={curation?.eyebrow || 'Seasonal'}
+      title={curation?.title || 'Festive Edit'}
+      line={
+        curation?.line ||
+        'A celebratory selection — blooms, metals and forms for the season’s quiet shine.'
+      }
       products={picks}
       catalogProducts={catalogProducts}
       colorFamilies={colorFamilies}
