@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
-/* Velvet Shell Brand Book 2026 — approved palette & type */
+/* Velvet Shell Brand Book 2026 — approved palette & type
+   Font family names match Google Fonts CSS loaded in app/layout.js */
 @theme {
-  --font-display: var(--font-playfair), "Playfair Display", ui-serif, Georgia, serif;
-  --font-sans: var(--font-poppins), "Poppins", ui-sans-serif, system-ui, sans-serif;
-  --font-label: var(--font-montserrat), "Montserrat", ui-sans-serif, system-ui, sans-serif;
-  --font-bodoni: var(--font-bodoni-face), "Bodoni Moda", ui-serif, Georgia, serif;
-  --font-script: var(--font-script-face), "Great Vibes", cursive;
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-label: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-bodoni: "Bodoni Moda", ui-serif, Georgia, serif;
+  --font-script: "Great Vibes", cursive;
 
   --color-burgundy: #5e062a;
   --color-ivory: #ffffff;

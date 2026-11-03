@@ -1,47 +1,11 @@
-import { Playfair_Display, Poppins, Montserrat, Bodoni_Moda, Great_Vibes } from 'next/font/google';
 import Providers from '@/components/Providers';
 import './globals.css';
 
-/** Brand Book 2026 — Main Heading 1 (trim weights for faster first paint) */
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-playfair',
-  display: 'swap',
-});
-
-/** Brand Book 2026 — Heading 2 + Body */
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-poppins',
-  display: 'swap',
-});
-
-/** Brand Book 2026 — Labels */
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  variable: '--font-montserrat',
-  display: 'swap',
-});
-
-/** Hero bento — Didot / Bodoni wordmark */
-const bodoni = Bodoni_Moda({
-  subsets: ['latin'],
-  weight: ['400', '600'],
-  variable: '--font-bodoni-face',
-  display: 'swap',
-});
-
-/** Hero bento — script accent */
-const greatVibes = Great_Vibes({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-script-face',
-  display: 'swap',
-});
+/**
+ * Fonts load via Google CSS (not next/font/google).
+ * next/font + Turbopack was failing builds with:
+ * Can't resolve '@vercel/turbopack-next/internal/font/google/font'
+ */
 
 export const metadata = {
   title: {
@@ -60,14 +24,17 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`${playfair.variable} ${poppins.variable} ${montserrat.variable} ${bodoni.variable} ${greatVibes.variable}`}
-    >
+    <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;600&family=Great+Vibes&family=Montserrat:wght@500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Poppins:wght@400;500;600&display=swap"
+          rel="stylesheet"
+        />
         <link rel="preload" as="image" href="/logo-splash.png" fetchPriority="high" />
       </head>
-      <body className={`${poppins.className} bg-white font-sans text-ink antialiased`}>
+      <body className="bg-white font-sans text-ink antialiased">
         <Providers>{children}</Providers>
       </body>
     </html>
