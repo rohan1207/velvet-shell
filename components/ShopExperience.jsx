@@ -418,10 +418,17 @@ export default function ShopExperience({
             </div>
           </div>
 
-          {/* Sticky strip: filters · search · count — sits under fixed site header */}
+          {/* Spacer only — keep margin off the sticky bar so it can sit flush under the nav. */}
+          <div className="h-5 sm:h-8" aria-hidden />
+
+          {/* Sticky strip: measured header height, 1px overlap + white seal kills any slit. */}
           <div
-            className="sticky z-30 mt-5 border-b border-ink/8 bg-white/95 py-2.5 backdrop-blur-md supports-[backdrop-filter]:bg-white/90 sm:mt-8 sm:py-3"
-            style={{ top: 'var(--site-chrome-offset)' }}
+            data-shop-toolbar
+            className="sticky z-30 -mx-4 border-b border-ink/8 bg-white px-4 py-2.5 sm:-mx-5 sm:px-5 sm:py-3 md:mx-0 md:px-0"
+            style={{
+              top: 'calc(var(--site-header-h, calc(var(--site-promo-h) + var(--site-nav-h) + env(safe-area-inset-top, 0px))) - 1px)',
+              boxShadow: '0 -24px 0 0 #fff',
+            }}
           >
             <div className="flex flex-col gap-2 md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_minmax(0,1fr)] md:items-center md:gap-4">
               <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 md:justify-start">

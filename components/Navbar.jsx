@@ -364,7 +364,26 @@ export default function Navbar() {
               </div>
             </div>
           </nav>
-          <div className="lg:hidden" aria-hidden />
+          {/* Phone: account + search on the left so the logo stays clear */}
+          <div className="relative z-10 flex min-w-0 items-center justify-start gap-0 md:hidden">
+            <Link
+              href="/account"
+              aria-label="Account"
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white"
+            >
+              <IconAccount className="h-[1.3rem] w-[1.3rem]" />
+            </Link>
+            <button
+              type="button"
+              aria-label="Search"
+              onClick={() => setSearchOpen(true)}
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-white/85 transition-colors hover:text-white"
+            >
+              <IconSearch className="h-[1.3rem] w-[1.3rem]" />
+            </button>
+          </div>
+          {/* md–lg: balance the grid when house links are still hidden */}
+          <div className="relative z-10 hidden min-w-0 md:block lg:hidden" aria-hidden />
 
           <Link
             href="/"
@@ -385,17 +404,17 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Phone: search · bag · menu only — wishlist/account live in the drawer */}
-          <div className="relative z-10 flex min-w-0 items-center justify-end gap-0 sm:gap-1.5">
+          {/* Phone: bag · menu only — search moved left beside account */}
+          <div className="relative z-10 flex min-w-0 items-center justify-end gap-0.5 sm:gap-1.5">
             <button
               type="button"
               aria-label="Search"
               onClick={() => setSearchOpen(true)}
               onMouseEnter={scheduleCloseMega}
-              className="group inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white/85 transition-colors hover:text-white sm:h-9 sm:w-auto sm:max-w-none sm:gap-2.5 sm:border sm:border-white/20 sm:bg-white/10 sm:px-3.5 sm:text-white/80 sm:hover:border-white/35 sm:hover:bg-white/15 md:min-w-[10.5rem]"
+              className="group hidden h-9 shrink-0 items-center justify-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-3.5 text-white/80 transition-colors hover:border-white/35 hover:bg-white/15 hover:text-white md:inline-flex md:min-w-[10.5rem]"
             >
-              <IconSearch className="h-[1.15rem] w-[1.15rem] shrink-0 sm:h-4 sm:w-4" />
-              <span className="hidden truncate font-label text-[10px] tracking-[0.12em] text-white/55 uppercase transition-colors group-hover:text-white/75 sm:inline sm:text-[11px]">
+              <IconSearch className="h-4 w-4 shrink-0" />
+              <span className="truncate font-label text-[11px] tracking-[0.12em] text-white/55 uppercase transition-colors group-hover:text-white/75">
                 Search
               </span>
             </button>
@@ -422,19 +441,19 @@ export default function Navbar() {
               data-nav-cart
               aria-label={`Bag (${cartCount})`}
               onClick={() => setCartOpen(true)}
-              className="relative h-10 w-10 sm:h-11 sm:w-11"
+              className="relative h-11 w-11 sm:h-11 sm:w-11"
             >
-              <IconBag className="h-[1.15rem] w-[1.15rem] sm:h-5 sm:w-5" />
+              <IconBag className="h-[1.3rem] w-[1.3rem] sm:h-5 sm:w-5" />
               <span className="absolute top-1 right-0.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-white px-1 text-[9px] font-semibold text-[#5E062A] sm:top-1.5 sm:right-1">
                 {cartCount}
               </span>
             </IconButton>
             <IconButton
               aria-label="Open menu"
-              className="h-10 w-10 lg:hidden"
+              className="h-11 w-11 lg:hidden"
               onClick={() => setMenuOpen(true)}
             >
-              <span className="flex w-[1.15rem] flex-col gap-1.5">
+              <span className="flex w-[1.3rem] flex-col gap-1.5">
                 <span className="h-px w-full bg-white" />
                 <span className="h-px w-full bg-white" />
               </span>
@@ -504,30 +523,30 @@ export default function Navbar() {
               </button>
             </div>
 
-            <div className="flex h-[calc(100%-7rem)] flex-col justify-between overflow-y-auto px-6 pb-12">
-              <nav className="mt-4 flex flex-col gap-0.5 sm:mt-6 sm:gap-1">
-                <p className="mb-2 font-label text-[10px] tracking-[0.22em] text-gold/90 uppercase">
+            <div className="flex h-[calc(100%-7rem)] flex-col justify-between overflow-y-auto px-5 pb-10 sm:px-6 sm:pb-12">
+              <nav className="mt-2 flex flex-col gap-0 sm:mt-4 sm:gap-0.5">
+                <p className="mb-1.5 font-label text-[9px] tracking-[0.2em] text-gold/90 uppercase sm:mb-2 sm:text-[10px] sm:tracking-[0.22em]">
                   Menu
                 </p>
                 {mobileLinks.map((link, i) => (
                   <motion.div
                     key={link.label}
-                    initial={{ y: 28, opacity: 0 }}
+                    initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.04 * i, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ delay: 0.03 * i, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Link
                       href={link.href}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex items-center gap-2.5 py-2 text-[1.55rem] font-semibold tracking-[0.04em] uppercase sm:py-2.5 sm:text-3xl ${
+                      className={`flex items-center gap-2 py-1.5 text-[1.2rem] font-semibold tracking-[0.04em] uppercase sm:gap-2.5 sm:py-2 sm:text-[1.45rem] ${
                         link.section
-                          ? 'mt-3 text-[0.95rem] tracking-[0.18em] text-gold/90 sm:text-base'
+                          ? 'mt-2.5 text-[0.8rem] tracking-[0.16em] text-gold/90 sm:mt-3 sm:text-[0.9rem] sm:tracking-[0.18em]'
                           : isActive(link)
                             ? 'text-white'
                             : 'text-white/75'
-                      } ${link.match === 'brooches' || link.match === 'chains' ? 'pl-3 text-[1.25rem] sm:text-2xl' : ''}`}
+                      } ${link.match === 'brooches' || link.match === 'chains' ? 'pl-2.5 text-[1.05rem] sm:pl-3 sm:text-[1.25rem]' : ''}`}
                     >
-                      {link.icon ? <HouseIcon name={link.icon} className="h-6 w-6" /> : null}
+                      {link.icon ? <HouseIcon name={link.icon} className="h-5 w-5" /> : null}
                       <span>{link.label}</span>
                     </Link>
                   </motion.div>

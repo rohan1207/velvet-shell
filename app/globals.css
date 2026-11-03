@@ -25,14 +25,15 @@
 
 :root {
   --site-promo-h: 2.25rem;
-  /* Mobile / tablet: single brand row */
+  /* Mobile / tablet: single brand row — keep in sync with Navbar row heights */
   --site-nav-h: 5rem;
-  /* Small clear gap under fixed promo + nav (rounded nav bleeds into content) */
+  /* Breathing room under rounded nav for page content (not for sticky toolbars) */
   --site-chrome-gap: 0.85rem;
-  --site-chrome-offset: calc(
-    var(--site-promo-h) + var(--site-nav-h) + env(safe-area-inset-top, 0px) +
-      var(--site-chrome-gap)
+  /* Fallback until SiteHeader measures the real painted height into --site-header-h */
+  --site-header-h: calc(
+    var(--site-promo-h) + var(--site-nav-h) + env(safe-area-inset-top, 0px)
   );
+  --site-chrome-offset: calc(var(--site-header-h) + var(--site-chrome-gap));
 }
 
 @media (min-width: 640px) {
@@ -52,13 +53,13 @@
 /* Desktop: brand row + category row */
 @media (min-width: 1024px) {
   :root {
-    --site-nav-h: 7.55rem;
+    --site-nav-h: 7.4375rem;
   }
 }
 
 @media (min-width: 1280px) {
   :root {
-    --site-nav-h: 7.85rem;
+    --site-nav-h: 7.75rem;
   }
 }
 
