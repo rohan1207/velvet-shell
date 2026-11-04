@@ -337,6 +337,30 @@ export default function ShopExperience({
     replaceShopUrl(buildShopHref({ category: nextCategory, q: query }));
   };
 
+  const revealProducts = () => {
+    // Keep the listing in view after Apply — never dump users on banners or footer.
+    const run = () => {
+      const el = document.getElementById('shop-products');
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const chrome =
+        (Number.parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue('--site-header-h'),
+        ) || 0) + 72;
+      const vh = window.innerHeight || 0;
+      const tooHigh = rect.top < chrome - 8;
+      const tooLow = rect.top > vh * 0.42;
+      if (tooHigh || tooLow) {
+        el.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      }
+    };
+    requestAnimationFrame(() => {
+      requestAnimationFrame(run);
+      window.setTimeout(run, 120);
+      window.setTimeout(run, 320);
+    });
+  };
+
   const applyFilters = () => {
     setApplied({
       ...draft,
@@ -352,6 +376,7 @@ export default function ShopExperience({
       buildShopHref({ category, collection: primaryCollection, q: query }),
     );
     setFiltersOpen(false);
+    revealProducts();
   };
 
   const clearFilters = () => {
@@ -360,6 +385,7 @@ export default function ShopExperience({
     setApplied(next);
     replaceShopUrl(buildShopHref({ category, q: query }));
     setFiltersOpen(false);
+    revealProducts();
   };
 
   const onSearchChange = (value) => {
@@ -534,7 +560,10 @@ export default function ShopExperience({
             onClose={() => setFiltersOpen(false)}
           />
 
-          <div className="mt-6 min-h-[32rem] md:min-h-[40rem]">
+          <div
+            id="shop-products"
+            className="mt-6 min-h-[32rem] scroll-mt-[calc(var(--site-header-h,5rem)+4.75rem)] md:min-h-[40rem]"
+          >
               {catalogLoading ? (
                 <ProductGridSkeleton count={8} className="lg:grid-cols-4" />
               ) : list.length === 0 ? (
@@ -588,7 +617,13 @@ export default function ShopExperience({
 }
 
 function PairUpWith({ categories = [], currentCategory, onSelect }) {
-  const others = categories.filter((item) => item.slug !== currentCategory && item.banner);
+  // Accessories stays in shop pills/nav — not in this recommendation strip (use Earrings instead).
+  const others = categories.filter(
+    (item) =>
+      item.slug !== currentCategory &&
+      item.slug !== 'accessories' &&
+      item.banner,
+  );
   if (others.length === 0) return null;
 
   return (

@@ -358,6 +358,16 @@ img {
   }
 }
 
+/* Opacity-only — transform on the drawer was shifting it when checkboxes were clicked */
+@keyframes shop-filter-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes pill-nudge {
   0%,
   100% {

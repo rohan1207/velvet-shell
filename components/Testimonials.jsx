@@ -19,19 +19,6 @@ const testimonials = [
     caption: 'Shell box unboxing',
   },
   {
-    id: 'meera',
-    name: 'Meera K.',
-    place: 'Mumbai',
-    date: '3 Sep 2026',
-    rating: 5,
-    image: '/images/testimonials/review-butterfly-ring-cafe.png',
-    imageClass: 'object-cover object-[center_35%]',
-    quote:
-      'Wearing the butterfly ring on a coffee run — the blue catches every bit of daylight. Light enough I forget it’s on, but people still notice. Took this while waiting for my order. Looks even better in person than on the site.',
-    piece: 'Aquamarine Butterfly Ring',
-    caption: 'Café table, Mumbai',
-  },
-  {
     id: 'riya',
     name: 'Riya S.',
     place: 'Pune',
