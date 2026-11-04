@@ -2,8 +2,18 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-const CLIPS = ['/ring1.mp4', '/ring2.mp4'];
+const DESKTOP_CLIPS = ['/ring1_gwr_video_mvp.mp4', '/ring2_gwr_video_mvp.mp4'];
+const PHONE_CLIPS = [
+  '/ring1_gwr_video_mvp_b762bb31_gwr_video_mvp.mp4',
+  '/ring2_gwr_video_mvp_9b96a85f_gwr_video_mvp.mp4',
+];
+const PHONE_MQ = '(max-width: 767px)';
 const LEAD_S = 0.35;
+
+function clipsForViewport() {
+  if (typeof window === 'undefined') return DESKTOP_CLIPS;
+  return window.matchMedia(PHONE_MQ).matches ? PHONE_CLIPS : DESKTOP_CLIPS;
+}
 
 export default function FullBleedVideo() {
   const layerA = useRef(null);
@@ -11,6 +21,7 @@ export default function FullBleedVideo() {
   const indexRef = useRef(0);
   const layerRef = useRef('a');
   const switchingRef = useRef(false);
+  const clipsRef = useRef(DESKTOP_CLIPS);
   const [activeLayer, setActiveLayer] = useState('a');
 
   useEffect(() => {
@@ -20,11 +31,13 @@ export default function FullBleedVideo() {
 
     const layers = { a, b };
     const other = (key) => (key === 'a' ? 'b' : 'a');
+    const mq = window.matchMedia(PHONE_MQ);
 
     const playOn = (layerKey, clipIndex) => {
+      const clips = clipsRef.current;
       const el = layers[layerKey];
-      if (el.getAttribute('src') !== CLIPS[clipIndex]) {
-        el.src = CLIPS[clipIndex];
+      if (el.getAttribute('src') !== clips[clipIndex]) {
+        el.src = clips[clipIndex];
         el.load();
       }
       el.currentTime = 0;
@@ -32,21 +45,26 @@ export default function FullBleedVideo() {
       if (p?.catch) p.catch(() => {});
     };
 
-    a.src = CLIPS[0];
-    b.src = CLIPS[1];
-    a.load();
-    b.load();
-
-    indexRef.current = 0;
-    layerRef.current = 'a';
-    setActiveLayer('a');
-    playOn('a', 0);
+    const start = () => {
+      const clips = clipsForViewport();
+      clipsRef.current = clips;
+      switchingRef.current = false;
+      a.src = clips[0];
+      b.src = clips[1];
+      a.load();
+      b.load();
+      indexRef.current = 0;
+      layerRef.current = 'a';
+      setActiveLayer('a');
+      playOn('a', 0);
+    };
 
     const advance = () => {
       if (switchingRef.current) return;
       switchingRef.current = true;
 
-      const nextIndex = (indexRef.current + 1) % CLIPS.length;
+      const clips = clipsRef.current;
+      const nextIndex = (indexRef.current + 1) % clips.length;
       const nextLayer = other(layerRef.current);
 
       playOn(nextLayer, nextIndex);
@@ -72,12 +90,22 @@ export default function FullBleedVideo() {
       advance();
     };
 
+    const onViewportChange = () => {
+      a.pause();
+      b.pause();
+      start();
+    };
+
     a.addEventListener('timeupdate', onTime('a'));
     b.addEventListener('timeupdate', onTime('b'));
     a.addEventListener('ended', onEnded('a'));
     b.addEventListener('ended', onEnded('b'));
+    mq.addEventListener('change', onViewportChange);
+
+    start();
 
     return () => {
+      mq.removeEventListener('change', onViewportChange);
       a.removeEventListener('timeupdate', onTime('a'));
       b.removeEventListener('timeupdate', onTime('b'));
       a.removeEventListener('ended', onEnded('a'));
