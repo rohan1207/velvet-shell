@@ -13,8 +13,10 @@ export default function ContactForm() {
   if (sent) {
     return (
       <div className="border border-cream p-10">
-        <p className="font-display text-4xl">We have the note.</p>
-        <p className="mt-4 text-stone">The house will write back within two days. Private viewings are confirmed by hand.</p>
+        <p className="font-display text-4xl">Thank you for writing.</p>
+        <p className="mt-4 text-stone">
+          The Velvet Shell team will get back to you soon.
+        </p>
       </div>
     );
   }
@@ -23,12 +25,24 @@ export default function ContactForm() {
     <form onSubmit={onSubmit} className="space-y-8">
       <Field label="Name" name="name" required />
       <Field label="Email" name="email" type="email" required />
-      <Field label="Interest" name="interest" placeholder="A viewing, a collar, a private piece…" />
+      <Field
+        label="Interest"
+        name="interest"
+        placeholder="Orders, gifting, collaborations, product help…"
+      />
       <label className="block">
         <span className="text-[10px] tracking-[0.28em] uppercase">Message</span>
-        <textarea name="message" rows={5} required className="mt-3 w-full resize-none border-b border-cream bg-transparent py-3 outline-none" />
+        <textarea
+          name="message"
+          rows={5}
+          required
+          className="mt-3 w-full resize-none border-b border-cream bg-transparent py-3 outline-none"
+        />
       </label>
-      <button type="submit" className="h-12 rounded-full bg-ink px-10 text-[11px] tracking-[0.28em] text-ivory uppercase">
+      <button
+        type="submit"
+        className="h-12 rounded-full bg-ink px-10 text-[11px] tracking-[0.28em] text-ivory uppercase"
+      >
         Send
       </button>
     </form>
