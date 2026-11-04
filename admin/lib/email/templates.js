@@ -605,13 +605,14 @@ export function renderStockAvailableEmail({ productName, productUrl }) {
   };
 }
 
-export function renderGiftingEnquiryEmail({ name, email, occasion, note }) {
+export function renderGiftingEnquiryEmail({ name, email, phone, occasion, note }) {
 
   const body = `
     ${sectionTitle('Enquiry')}
     ${kvTable([
       { label: 'Name', value: name },
       { label: 'Email', value: email },
+      { label: 'Phone', value: phone || '—' },
       { label: 'Occasion', value: occasion || 'Not specified' },
     ])}
     ${sectionTitle('Note')}

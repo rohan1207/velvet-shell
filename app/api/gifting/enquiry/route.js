@@ -12,6 +12,7 @@ export async function POST(request) {
     const body = await request.json().catch(() => ({}));
     const name = clean(body.name);
     const email = clean(body.email).toLowerCase();
+    const phone = clean(body.phone);
     const occasion = clean(body.occasion);
     const note = clean(body.note || body.message);
 
@@ -25,7 +26,7 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Please choose an occasion.' }, { status: 400 });
     }
 
-    await sendGiftingEnquiryEmail({ name, email, occasion, note });
+    await sendGiftingEnquiryEmail({ name, email, phone, occasion, note });
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error('[gifting/enquiry]', err);
