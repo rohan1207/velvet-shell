@@ -1,8 +1,11 @@
 'use client';
 
+import { swatchStyle } from '@/lib/swatch';
+
 /**
  * Colour swatches for product cards — side-by-side circles.
  * Hover previews that variant (image + price); click selects it.
+ * Supports two-tone swatches (`#A/#B`).
  */
 export default function VariantDropdown({
   variants = [],
@@ -54,7 +57,7 @@ export default function VariantDropdown({
           >
             <span
               className="h-full w-full rounded-full border border-ink/10 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.35)]"
-              style={{ backgroundColor: swatch }}
+              style={swatchStyle(swatch)}
               aria-hidden
             />
           </button>

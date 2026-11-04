@@ -239,14 +239,35 @@ function Section({ number, title, children }) {
 }
 
 function ContactPlaceholders() {
+  // Lazy import avoided — keep privacy page self-contained with same public defaults.
+  const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'sales@velvetshell.in';
+  const phone =
+    process.env.NEXT_PUBLIC_CONTACT_PHONE ||
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ||
+    '';
+  const phoneDigits = String(phone).replace(/\D/g, '');
+  let phoneDisplay = '';
+  if (phoneDigits.length === 12 && phoneDigits.startsWith('91')) {
+    phoneDisplay = `+91 ${phoneDigits.slice(2, 7)} ${phoneDigits.slice(7)}`;
+  } else if (phoneDigits.length === 10) {
+    phoneDisplay = `+91 ${phoneDigits.slice(0, 5)} ${phoneDigits.slice(5)}`;
+  } else if (phoneDigits) {
+    phoneDisplay = `+${phoneDigits}`;
+  }
+
   return (
     <div className="my-4 space-y-1 text-[15px] font-light text-ink/80">
       <p>
-        Email: <span className="text-ink/80">[OFFICIAL EMAIL]</span>
+        Email:{' '}
+        <a href={`mailto:${email}`} className="text-ink/80 underline-offset-2 hover:underline">
+          {email}
+        </a>
       </p>
-      <p>
-        Phone: <span className="text-ink/80">[CONTACT NUMBER]</span>
-      </p>
+      {phoneDisplay ? (
+        <p>
+          Phone: <span className="text-ink/80">{phoneDisplay}</span>
+        </p>
+      ) : null}
     </div>
   );
 }

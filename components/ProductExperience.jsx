@@ -8,6 +8,7 @@ import { collectionName as dummyCollectionName } from '@/lib/shop-meta';
 import { money } from '@/lib/format';
 import { useStore } from '@/context/StoreContext';
 import { sortByColourPriority } from '@/lib/catalog/color-order';
+import { swatchStyle } from '@/lib/swatch';
 import ProductCard from './ProductCard';
 import { ProductPageNotes } from './ProductNotes';
 import NotifyMeButton from './NotifyMeButton';
@@ -290,7 +291,7 @@ export default function ProductExperience({
                     >
                       <span
                         className="h-7 w-7 rounded-full border border-ink/10 shadow-sm"
-                        style={{ backgroundColor: swatch }}
+                        style={swatchStyle(swatch)}
                       />
                     </button>
                   );

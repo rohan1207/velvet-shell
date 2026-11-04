@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react';
 import { money } from '@/lib/format';
+import { swatchStyle } from '@/lib/swatch';
 
 export function emptyFilterState(priceBounds = { min: 0, max: 100000 }) {
   const min = Number(priceBounds?.min) || 0;
@@ -125,7 +126,7 @@ function CheckRow({ checked, onChange, label, swatch, count }) {
       {swatch ? (
         <span
           className="h-3.5 w-3.5 shrink-0 rounded-full border border-ink/15 shadow-sm"
-          style={{ backgroundColor: swatch }}
+          style={swatchStyle(swatch)}
           aria-hidden
         />
       ) : null}
@@ -336,7 +337,7 @@ function FilterPanelBody({
                   >
                     <span
                       className="h-3 w-3 rounded-full border border-ink/15"
-                      style={{ backgroundColor: item.swatch }}
+                      style={swatchStyle(item.swatch)}
                       aria-hidden
                     />
                     {item.key}
