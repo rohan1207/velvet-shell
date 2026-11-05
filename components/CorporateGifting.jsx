@@ -321,10 +321,9 @@ export default function CorporateGifting() {
                   className="group relative block h-full min-w-0 w-full overflow-hidden rounded-[1rem] bg-white text-left ring-1 ring-ink/6 sm:rounded-[1.35rem] md:rounded-[1.5rem]"
                 >
                   <div className="relative aspect-[3/4] w-full overflow-hidden md:aspect-auto md:h-full md:min-h-[20rem] lg:min-h-0 lg:h-full">
-                    <AppImage
+                    <ResponsiveBannerImage
                       src={shot.src}
                       alt={shot.alt}
-                      fill
                       sizes="(max-width:768px) 50vw, 33vw"
                       className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
                     />
