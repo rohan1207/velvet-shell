@@ -14,6 +14,11 @@ export const metadata = {
   },
   description:
     'Velvet Shell is where beautiful things become meaningful discoveries. A premium house of jewellery, gifting, fragrances, home and lifestyle creations.',
+  icons: {
+    icon: [{ url: '/favicon.png', type: 'image/png' }],
+    shortcut: [{ url: '/favicon.png', type: 'image/png' }],
+    apple: [{ url: '/favicon.png', type: 'image/png' }],
+  },
 };
 
 export const viewport = {
@@ -32,6 +37,9 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;600&family=Great+Vibes&family=Montserrat:wght@500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Poppins:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
         <link rel="preload" as="image" href="/logo-splash.png" fetchPriority="high" />
       </head>
       <body className="bg-white font-sans text-ink antialiased">
