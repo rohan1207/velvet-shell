@@ -224,7 +224,7 @@ export async function upsertSet(payload) {
     shipping: normalizeShipping(payload.shipping),
     badge: String(payload.badge || '').trim(),
     status: payload.status === 'active' ? 'active' : 'draft',
-    active: payload.active !== false,
+    active: payload.status === 'active',
     sort_order: Number(payload.sortOrder) || 0,
     updated_at: new Date().toISOString(),
   };
