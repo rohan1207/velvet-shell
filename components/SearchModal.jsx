@@ -35,7 +35,7 @@ export default function SearchModal() {
         >
           <div className="mx-auto flex max-w-3xl flex-col px-6 pt-28">
             <div className="flex items-center justify-between">
-              <p className="text-[11px] tracking-[0.28em] uppercase">Search the house</p>
+              <p className="text-[11px] tracking-[0.28em] uppercase">Search</p>
               <button type="button" onClick={() => setSearchOpen(false)} className="text-[11px] tracking-[0.28em] uppercase">
                 Close
               </button>
@@ -44,7 +44,7 @@ export default function SearchModal() {
               autoFocus
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Nacre, cuff, pearl…"
+              placeholder="Ring, earring, bracelet…"
               className="font-display mt-8 w-full border-b border-ink/15 bg-transparent pb-4 text-4xl outline-none placeholder:text-ink/20 md:text-6xl"
             />
             <ul className="mt-10 space-y-4">

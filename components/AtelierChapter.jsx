@@ -4,10 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const facts = [
-  { label: 'Location', value: 'Jaipur' },
-  { label: 'Light', value: 'Daylight only' },
-  { label: 'Pace', value: 'Unhurried' },
-  { label: 'Practice', value: 'Made to measure' },
+  { label: 'Silver', value: '925 sterling' },
+  { label: 'Gold', value: '18K gold-plated' },
+  { label: 'Pearls', value: 'Freshwater' },
+  { label: 'Shipping', value: 'Across India' },
 ];
 
 export default function AtelierChapter() {
@@ -24,7 +24,7 @@ export default function AtelierChapter() {
             </h2>
           </div>
           <p className="max-w-xs text-[11px] font-medium tracking-[0.16em] text-ink/80 uppercase">
-            Jaipur atelier — bench work in natural light
+            925 silver, 18K gold plate, freshwater pearls
           </p>
         </div>
 
@@ -32,7 +32,7 @@ export default function AtelierChapter() {
           <div className="relative aspect-[4/3] overflow-hidden bg-cream lg:col-span-7 lg:aspect-auto lg:min-h-[620px]">
             <Image
               src="/images/atelier-daylight.png"
-              alt="Goldsmith working a champagne-gold ring at the Jaipur atelier bench"
+              alt="Velvet Shell jewellery"
               fill
               sizes="(max-width: 1024px) 100vw, 58vw"
               className="object-cover"
@@ -43,7 +43,7 @@ export default function AtelierChapter() {
             <div className="relative aspect-[3/4] overflow-hidden bg-cream lg:flex-1 lg:min-h-[340px]">
               <Image
                 src="/images/atelier-bench.png"
-                alt="Daylit atelier workbench with unfinished gold and nacre"
+                alt="Velvet Shell work in progress"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover"
@@ -52,11 +52,11 @@ export default function AtelierChapter() {
 
             <div className="border border-ink/10 bg-pearl px-6 py-7 md:px-8 md:py-8">
               <p className="text-[11px] font-semibold tracking-[0.16em] text-ink/80 uppercase">
-                Jaipur atelier
+                Materials
               </p>
               <p className="mt-4 max-w-sm text-[15px] leading-[1.65] text-ink/80">
-                The bench waits for daylight. Tools stay few. Each piece is finished for the body —
-                never for a tray — in a room that refuses hurry.
+                Velvet Shell jewellery is made in 925 sterling silver, 18K gold-plated finishes and
+                freshwater pearls. Material details are listed on each product page.
               </p>
 
               <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-ink/10 pt-6">

@@ -105,10 +105,13 @@ export default function SocialLinks({
       } ${className}`}
       aria-label="Social media"
     >
-      {channels.map(({ key, label, href, Icon }) => (
+      {channels.map(({ key, label, href, Icon }) => {
+        const url = href();
+        if (!url) return null;
+        return (
         <li key={key}>
           <a
-            href={href()}
+            href={url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={label}
@@ -117,7 +120,8 @@ export default function SocialLinks({
             <Icon className={iconSize} />
           </a>
         </li>
-      ))}
+        );
+      })}
     </ul>
   );
 }

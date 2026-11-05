@@ -1401,7 +1401,7 @@ export default function ProductForm({
             className="input mt-1 min-h-28 rounded-2xl"
             value={featuresText}
             onChange={(e) => setFeaturesText(e.target.value)}
-            placeholder={'S925 silver\nHandmade in Jaipur\nAdjustable extender'}
+            placeholder={'925 sterling silver\n18K gold-plated\nFreshwater pearl'}
           />
         </label>
       </section>

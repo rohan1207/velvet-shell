@@ -7,24 +7,24 @@ export default function NacreFeature() {
       <div className="bg-velvet-texture relative min-h-[70vh] overflow-hidden">
         <Image
           src="/images/look-lumen.png"
-          alt="Lumen choker on a limestone wall"
+          alt="Velvet Shell jewellery"
           fill
           sizes="50vw"
           className="object-cover"
         />
       </div>
       <div className="flex flex-col justify-between bg-ivory px-8 py-16 md:px-16 md:py-24">
-        <p className="text-[11px] font-semibold tracking-[0.18em] text-gold uppercase">Pearls of nacre</p>
+        <p className="text-[11px] font-semibold tracking-[0.18em] text-gold uppercase">Freshwater pearls</p>
         <div>
           <h2 className="font-display max-w-md text-5xl leading-[1.02] md:text-6xl">
-            Light that does not sit still.
+            Freshwater pearls.
           </h2>
           <p className="mt-8 max-w-md text-base leading-relaxed text-stone">
-            We wait for pearls that do not match. Matching is a factory idea. Kinship is slower, and it
-            is the only brief we give the atelier.
+            Pearl pieces use freshwater pearls. Each pearl can vary slightly in shape, tone and surface.
+            Care notes are on the product page.
           </p>
           <Link
-            href="/shop?collection=pearls-of-nacre"
+            href="/shop"
             className="mt-10 inline-block text-[11px] font-semibold tracking-[0.18em] uppercase"
           >
             Shop the collection

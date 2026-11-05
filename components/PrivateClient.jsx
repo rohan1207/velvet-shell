@@ -5,10 +5,10 @@ import Link from 'next/link';
 import Magnetic from './Magnetic';
 
 const details = [
-  { label: 'Cities', value: 'Paris · Jaipur' },
-  { label: 'Format', value: 'Private viewing' },
-  { label: 'Book', value: 'Made once' },
-  { label: 'Lead time', value: 'By conversation' },
+  { label: 'Shipping', value: 'Across India' },
+  { label: 'Free from', value: '₹3,999' },
+  { label: 'Below that', value: '₹99' },
+  { label: 'Email', value: 'sales@velvetshell.in' },
 ];
 
 export default function PrivateClient() {
@@ -25,8 +25,8 @@ export default function PrivateClient() {
                 By appointment, not by accident.
               </h2>
               <p className="mt-7 max-w-md text-[15px] leading-[1.7] text-ink/85 md:text-base">
-                A viewing in Paris or Jaipur. A piece made to the measure of a hand. The house keeps
-                a small book of private work — collars, signets, and objects that will not be repeated.
+                Gifting and collaborations are arranged by email. Write to sales@velvetshell.in
+                or use the form on the gifting page. We deliver across India.
               </p>
             </div>
 

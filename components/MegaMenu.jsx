@@ -172,7 +172,7 @@ const accessoriesMenu = {
 
 const brandMenu = {
   eyebrow: 'Brand',
-  line: 'The house, the story, and how we care for each piece.',
+  line: 'The story, the journal, and how we care for each piece.',
   exploreHref: '/about',
   exploreLabel: 'About us',
   columns: [
@@ -210,13 +210,13 @@ const brandMenu = {
       href: '/about',
       image: '/images/banners/home-hero/lotus-story.jpg',
       label: 'About us',
-      note: 'Our atelier story',
+      note: 'Our story',
     },
     {
       href: '/blogs',
       image: '/images/banners/home-hero/floral-whispers.jpg',
       label: 'Journal',
-      note: 'Notes from the house',
+      note: 'Materials, shipping, care',
     },
     {
       href: '/testimonials',

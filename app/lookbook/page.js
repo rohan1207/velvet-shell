@@ -12,40 +12,40 @@ function lookImage(src) {
 
 const looks = [
   {
-    src: '/images/look-lumen.png',
-    title: 'Lumen, late sun',
-    piece: 'lumen-choker',
-    name: 'Lumen Choker',
+    src: '/images/banners/rings/daisy-ladybug.jpg',
+    title: 'Rings',
+    href: '/shop?category=rings',
+    name: 'Rings',
   },
   {
-    src: '/images/look-nacre.png',
-    title: 'Quiet pearls',
-    piece: 'tide-drops',
-    name: 'Tide Drops',
+    src: '/images/banners/earrings/dragonfly.jpg',
+    title: 'Earrings',
+    href: '/shop?category=earrings',
+    name: 'Earrings',
   },
   {
-    src: '/images/look-tide.png',
-    title: 'The spiral',
-    piece: 'velvet-cuff',
-    name: 'Velvet Cuff',
+    src: '/images/banners/bracelets/daisy-cuff.jpg',
+    title: 'Bracelets',
+    href: '/shop?category=bracelets',
+    name: 'Bracelets',
   },
   {
-    src: '/images/look-chamber.png',
-    title: 'Nautilus',
-    piece: 'nautilus-ear-cuff',
-    name: 'Nautilus Ear Cuff',
+    src: '/images/banners/necklaces/bamboo-mist.jpg',
+    title: 'Necklaces',
+    href: '/shop?category=necklaces',
+    name: 'Necklaces',
   },
   {
-    src: '/images/look-collar.png',
-    title: 'The collar',
-    piece: 'nacre-collar',
-    name: 'Nacre Collar',
+    src: '/images/banners/pendants/honeycomb-bee.jpg',
+    title: 'Pendants',
+    href: '/shop?category=pendants',
+    name: 'Pendants',
   },
   {
-    src: '/images/hero-campaign.jpg',
-    title: 'Autumn 2027',
-    piece: 'nacre-collar',
-    name: 'Nacre Collar',
+    src: '/images/banners/sets/daisy-chain-set.jpg',
+    title: 'Sets',
+    href: '/shop?category=sets',
+    name: 'Sets',
   },
 ];
 
@@ -57,17 +57,17 @@ export default function LookbookPage() {
       <div className="mx-auto max-w-[1600px] px-5 md:px-10">
         <p className="text-[11px] tracking-[0.28em] text-gold uppercase">Lookbook</p>
         <h1 className="font-display mt-4 max-w-4xl text-4xl tracking-[-0.03em] md:text-8xl">
-          The body, briefly architecture.
+          The collection.
         </h1>
         <p className="mt-4 max-w-lg text-sm text-stone md:mt-6">
-          Campaign studies for Autumn 2027. Tap through to the piece.
+          Rings, earrings, bracelets, necklaces, pendants and sets. Open a category to shop.
         </p>
       </div>
       <div className="mx-auto mt-10 grid grid-cols-2 gap-3 px-5 md:mt-16 md:grid-cols-2 lg:grid-cols-3 md:gap-4 md:px-10">
         {looks.map((look, index) => (
           <Link
             key={look.title + index}
-            href={`/shop/${look.piece}`}
+            href={look.href}
             data-cursor="Shop"
             className="block overflow-hidden"
           >

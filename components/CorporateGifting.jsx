@@ -80,6 +80,15 @@ function scrollToBrief() {
   document.getElementById('gifting-brief')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+/** One type system for the gifting page — Playfair headings, Montserrat labels, Poppins body. */
+const eyebrowClass = 'font-label text-[10px] tracking-[0.22em] text-gold';
+const captionClass = 'font-label text-[10px] tracking-[0.22em] text-ivory';
+const titleClass =
+  'font-display mt-2 text-[clamp(1.7rem,5vw,2.85rem)] leading-[1.08] tracking-[-0.02em] text-ink';
+const bodyClass = 'mt-3 max-w-xl text-sm font-light leading-relaxed text-ink/75';
+const linkClass = 'font-label text-[11px] tracking-[0.18em]';
+const buttonClass = 'font-label text-[11px] tracking-[0.18em]';
+
 export default function CorporateGifting() {
   const [preferredOccasion, setPreferredOccasion] = useState('');
 
@@ -109,17 +118,17 @@ export default function CorporateGifting() {
 
         <div className="relative mx-auto grid max-w-[1600px] items-start gap-5 px-4 pb-8 pt-2 sm:gap-8 sm:px-6 sm:pb-14 sm:pt-5 md:gap-10 md:px-10 md:pb-16 lg:min-h-[calc(100svh-var(--site-chrome-offset))] lg:grid-cols-12 lg:items-center lg:gap-8 lg:pt-8">
           <div className="animate-[fade-up_0.9s_var(--ease-luxe)_both] min-w-0 lg:col-span-5 lg:self-center">
-            <p className="font-display text-[clamp(1.7rem,7.5vw,3.75rem)] leading-[0.95] tracking-[-0.04em] text-burgundy">
+            <p className="font-display text-[clamp(1.85rem,6vw,3.25rem)] leading-[1.05] tracking-[-0.02em] text-burgundy">
               Velvet Shell
             </p>
-            <p className="font-label mt-2 text-[9px] tracking-[0.2em] text-gold uppercase sm:mt-3 sm:text-[10px] sm:tracking-[0.28em]">
+            <p className={`${eyebrowClass} mt-3`}>
               Corporate gifting & wedding favours
             </p>
-            <h1 className="font-display mt-3 max-w-[16ch] text-[clamp(1.4rem,6vw,3.35rem)] leading-[1.1] tracking-[-0.03em] text-ink sm:mt-5 sm:max-w-[18ch]">
+            <h1 className="font-display mt-3 max-w-[18ch] text-[clamp(1.7rem,5vw,3rem)] leading-[1.08] tracking-[-0.02em] text-ink sm:mt-4">
               Chosen with thought.
-              <span className="mt-0.5 block text-burgundy sm:mt-1">Given with meaning.</span>
+              <span className="mt-1 block text-burgundy">Given with meaning.</span>
             </h1>
-            <p className="mt-3 max-w-md text-[13px] font-light leading-[1.65] text-ink/75 sm:mt-4 sm:text-[15px] sm:leading-[1.75]">
+            <p className="mt-3 max-w-md text-sm font-light leading-relaxed text-ink/75 sm:mt-4">
               Curated jewellery in official Velvet Shell packaging — for clients, teams, leaders and
               celebrations.
             </p>
@@ -127,7 +136,7 @@ export default function CorporateGifting() {
               <button
                 type="button"
                 onClick={() => goToForm()}
-                className="bg-velvet-texture inline-flex h-11 w-full items-center justify-center gap-3 rounded-full px-6 font-label text-[11px] tracking-[0.16em] text-ivory sm:h-12 sm:w-auto sm:justify-start sm:px-7 sm:tracking-[0.2em]"
+                className={`bg-velvet-texture inline-flex h-11 w-full items-center justify-center gap-3 rounded-full px-6 text-ivory sm:h-12 sm:w-auto sm:justify-start sm:px-7 ${buttonClass}`}
               >
                 Begin a conversation
                 <span
@@ -140,7 +149,7 @@ export default function CorporateGifting() {
               <button
                 type="button"
                 onClick={() => goToForm()}
-                className="inline-flex h-11 w-full items-center justify-center rounded-full border border-ink/15 px-6 font-label text-[11px] tracking-[0.16em] text-ink transition-colors hover:border-burgundy/40 hover:text-burgundy sm:h-12 sm:w-auto sm:tracking-[0.18em]"
+                className={`inline-flex h-11 w-full items-center justify-center rounded-full border border-ink/15 px-6 text-ink transition-colors hover:border-burgundy/40 hover:text-burgundy sm:h-12 sm:w-auto ${buttonClass}`}
               >
                 Share a brief
               </button>
@@ -166,7 +175,7 @@ export default function CorporateGifting() {
                   className="object-cover object-center"
                 />
               </div>
-              <p className="font-label mt-1.5 hidden px-1 pb-0.5 text-[9px] tracking-[0.2em] text-ink/55 uppercase sm:mt-2 sm:block">
+              <p className={`${eyebrowClass} mt-2 hidden px-1 pb-0.5 text-ink/55 sm:block`}>
                 A treasure in every reveal
               </p>
             </div>
@@ -181,20 +190,16 @@ export default function CorporateGifting() {
       >
         <div className="mx-auto flex w-full max-w-[1600px] flex-1 flex-col justify-center gap-5 px-4 py-8 sm:gap-7 sm:px-6 sm:py-10 md:px-10 md:py-12 lg:min-h-0 lg:grid lg:grid-cols-12 lg:items-center lg:gap-10 lg:py-10 xl:gap-14">
           <div className="min-w-0 lg:col-span-5">
-            <p className="font-label text-[9px] tracking-[0.22em] text-gold uppercase sm:text-[10px] sm:tracking-[0.28em]">
-              Enquiry
-            </p>
-            <h2 className="font-display mt-2 text-[clamp(1.45rem,5.5vw,2.85rem)] leading-[1.08] tracking-[-0.03em] sm:mt-3">
-              Have a gifting brief?
-            </h2>
-            <p className="mt-3 max-w-md text-[13px] font-light leading-[1.65] text-ink/75 sm:mt-4 sm:text-[14px] sm:leading-[1.75]">
+            <p className={eyebrowClass}>Enquiry</p>
+            <h2 className={titleClass}>Have a gifting brief?</h2>
+            <p className={bodyClass}>
               A few details are enough — we will write back with considered options for corporate
               gifts, wedding favours, or team edits.
             </p>
             <button
               type="button"
               onClick={() => goToForm()}
-              className="mt-4 inline-flex items-center gap-2 font-label text-[11px] tracking-[0.16em] text-burgundy sm:mt-5"
+              className={`mt-4 inline-flex items-center gap-2 text-burgundy sm:mt-5 ${linkClass}`}
             >
               Fill the form
               <span aria-hidden>→</span>
@@ -246,24 +251,22 @@ export default function CorporateGifting() {
               />
             </div>
 
-            <p className="font-label text-[9px] tracking-[0.28em] text-gold uppercase sm:text-[10px]">
-              The approach
-            </p>
-            <p className="font-bodoni mt-2 text-[clamp(1.35rem,5.5vw,2.75rem)] font-semibold tracking-[0.18em] text-ink uppercase sm:mt-3 sm:tracking-[0.28em]">
+            <p className={eyebrowClass}>The approach</p>
+            <p className="font-display mt-2 text-[clamp(1.7rem,5vw,2.85rem)] leading-[1.08] tracking-[-0.02em] text-ink sm:mt-3">
               Velvet Shell
             </p>
-            <p className="font-script mt-2 text-[clamp(1.25rem,4.5vw,2.2rem)] leading-none text-burgundy sm:mt-3">
+            <p className="font-display-italic mt-2 text-[clamp(1.35rem,3.5vw,2rem)] leading-snug text-burgundy sm:mt-3">
               A treasure in every reveal
             </p>
             <span className="mt-3 h-px w-10 bg-gold sm:mt-4 sm:w-14" aria-hidden />
-            <p className="mt-3 max-w-[22rem] text-[13px] font-light leading-[1.65] text-stone sm:mt-4 sm:max-w-[28rem] sm:text-[14px] sm:leading-[1.75]">
+            <p className="mt-3 max-w-[28rem] text-sm font-light leading-relaxed text-ink/75 sm:mt-4">
               Corporate gifts and wedding favours, chosen with care and presented in official Velvet
               Shell packaging — so every gesture feels considered from the first unboxing.
             </p>
             <button
               type="button"
               onClick={() => goToForm()}
-              className="mt-5 inline-flex items-center gap-3 font-label text-[11px] tracking-[0.16em] text-burgundy sm:mt-6 sm:tracking-[0.2em]"
+              className={`mt-5 inline-flex items-center gap-3 text-burgundy sm:mt-6 ${linkClass}`}
             >
               Share your gifting brief
               <span
@@ -292,13 +295,9 @@ export default function CorporateGifting() {
         <div className="mx-auto flex w-full max-w-[1600px] flex-1 flex-col px-4 py-8 sm:px-6 sm:py-10 md:px-10 md:py-12 lg:min-h-0 lg:py-8 xl:py-10">
           <div className="flex shrink-0 flex-col justify-between gap-3 sm:gap-4 md:flex-row md:items-end">
             <div className="max-w-2xl min-w-0">
-              <p className="font-label text-[9px] tracking-[0.22em] text-gold uppercase sm:text-[10px] sm:tracking-[0.28em]">
-                Packaging
-              </p>
-              <h2 className="font-display mt-2 text-[clamp(1.45rem,5.5vw,2.85rem)] leading-[1.08] tracking-[-0.02em]">
-                A treasure in every reveal
-              </h2>
-              <p className="mt-2 max-w-xl text-[13px] font-light leading-[1.65] text-ink/75 sm:text-[14px] sm:leading-[1.75]">
+              <p className={eyebrowClass}>Packaging</p>
+              <h2 className={titleClass}>A treasure in every reveal</h2>
+              <p className={bodyClass}>
                 Wedding presentation, shell reveal cases, and the Velvet Shell gift bag — each piece
                 arrives ready to give.
               </p>
@@ -306,7 +305,7 @@ export default function CorporateGifting() {
             <button
               type="button"
               onClick={() => goToForm()}
-              className="inline-flex shrink-0 items-center gap-2 self-start font-label text-[11px] tracking-[0.16em] text-ink/70 uppercase transition-colors hover:text-burgundy sm:tracking-[0.18em]"
+              className={`inline-flex shrink-0 items-center gap-2 self-start text-ink/70 transition-colors hover:text-burgundy ${linkClass}`}
             >
               Enquire about packaging
               <span aria-hidden>→</span>
@@ -333,7 +332,7 @@ export default function CorporateGifting() {
                       className="absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent opacity-80"
                       aria-hidden
                     />
-                    <span className="absolute bottom-3 left-3 font-label text-[9px] tracking-[0.18em] text-ivory uppercase sm:bottom-4 sm:left-4 sm:text-[10px] md:bottom-5 md:left-5 md:tracking-[0.2em]">
+                    <span className={`absolute bottom-3 left-3 sm:bottom-4 sm:left-4 md:bottom-5 md:left-5 ${captionClass}`}>
                       {shot.label}
                     </span>
                   </div>
@@ -367,10 +366,8 @@ export default function CorporateGifting() {
       <section className="bg-[#f6efe8]">
         <div className="mx-auto max-w-[1600px] px-4 py-10 sm:px-6 sm:py-12 md:px-10 md:py-16">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="font-label text-[9px] tracking-[0.22em] text-gold uppercase sm:text-[10px]">
-              Occasions
-            </p>
-            <h2 className="font-display mt-2 text-[clamp(1.55rem,5.5vw,2.75rem)] leading-[1.08] tracking-[-0.02em]">
+            <p className={eyebrowClass}>Occasions</p>
+            <h2 className={`${titleClass} mx-auto max-w-2xl`}>
               Curated for every gesture
             </h2>
           </div>
@@ -383,13 +380,13 @@ export default function CorporateGifting() {
                   onClick={() => goToForm(item.formValue)}
                   className="group flex h-full min-h-[11.5rem] w-full flex-col rounded-[1.15rem] bg-white p-5 text-left ring-1 ring-ink/6 transition-shadow duration-500 hover:shadow-[0_18px_50px_rgba(40,20,24,0.08)] sm:min-h-[12.5rem] sm:rounded-[1.35rem] sm:p-6 md:p-7"
                 >
-                  <span className="font-label text-[10px] tracking-[0.2em] text-gold">
+                  <span className={eyebrowClass}>
                     {String(index + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="font-display mt-3 text-[1.25rem] leading-[1.18] tracking-[-0.02em] text-ink sm:mt-4 sm:text-[1.4rem] md:text-[1.55rem]">
+                  <h3 className="font-display mt-3 text-xl leading-[1.15] tracking-[-0.02em] text-ink sm:mt-4 sm:text-2xl">
                     {item.title}
                   </h3>
-                  <p className="mt-2.5 flex-1 text-[13px] font-light leading-relaxed text-ink/70 sm:mt-3 sm:text-[14px]">
+                  <p className="mt-2.5 flex-1 text-sm font-light leading-relaxed text-ink/70 sm:mt-3">
                     {item.line}
                   </p>
                   <span
@@ -409,10 +406,8 @@ export default function CorporateGifting() {
       <section className="bg-velvet-texture overflow-hidden text-ivory">
         <div className="mx-auto flex max-w-[1600px] flex-col gap-6 px-4 py-10 sm:gap-8 sm:px-6 sm:py-14 md:flex-row md:items-end md:justify-between md:gap-16 md:px-10 md:py-16">
           <div className="max-w-2xl min-w-0">
-            <p className="font-label text-[9px] tracking-[0.22em] text-gold uppercase sm:text-[10px] sm:tracking-[0.28em]">
-              Made for your occasion
-            </p>
-            <h2 className="font-display mt-3 text-[clamp(1.4rem,5.5vw,2.75rem)] leading-[1.12] tracking-[-0.02em] sm:mt-4">
+            <p className={eyebrowClass}>Made for your occasion</p>
+            <h2 className="font-display mt-3 text-[clamp(1.7rem,5vw,2.85rem)] leading-[1.12] tracking-[-0.02em] text-ivory sm:mt-4">
               Whether you are gifting one meaningful piece or curating for an entire team, we shape a
               considered experience with you.
             </h2>
@@ -420,14 +415,14 @@ export default function CorporateGifting() {
           <button
             type="button"
             onClick={() => goToForm()}
-            className="inline-flex w-full shrink-0 items-center justify-center gap-3 rounded-full border border-ivory/35 px-6 py-3.5 text-center font-label text-[11px] tracking-[0.16em] text-ivory transition-colors hover:border-gold hover:text-gold sm:w-auto sm:px-7 sm:tracking-[0.2em]"
+            className={`inline-flex w-full shrink-0 items-center justify-center gap-3 rounded-full border border-ivory/35 px-6 py-3.5 text-center text-ivory transition-colors hover:border-gold hover:text-gold sm:w-auto sm:px-7 ${buttonClass}`}
           >
             Enquire for corporate gifting
             <span aria-hidden>→</span>
           </button>
         </div>
         <div className="overflow-hidden border-t border-ivory/10 py-3.5 sm:py-4" aria-hidden>
-          <div className="flex w-max animate-[marquee_28s_linear_infinite] gap-8 whitespace-nowrap font-label text-[10px] tracking-[0.22em] text-ivory/45 uppercase sm:gap-10 sm:text-[11px] sm:tracking-[0.28em]">
+          <div className="flex w-max animate-[marquee_28s_linear_infinite] gap-8 whitespace-nowrap font-label text-[10px] tracking-[0.22em] text-ivory/50 sm:gap-10">
             {[...TICKER, ...TICKER, ...TICKER].map((label, i) => (
               <span key={`${label}-${i}`} className="inline-flex items-center gap-8 sm:gap-10">
                 {label}
@@ -482,8 +477,10 @@ function GiftingEnquiryForm({ preferredOccasion = '' }) {
   if (status === 'sent') {
     return (
       <div className="rounded-[1.15rem] bg-white px-5 py-7 ring-1 ring-ink/8 sm:rounded-[1.35rem] sm:px-6 sm:py-8 md:px-8 md:py-9">
-        <p className="font-display text-[1.55rem] text-ink sm:text-2xl md:text-3xl">We have your brief.</p>
-        <p className="mt-2 max-w-sm text-[13px] font-light leading-relaxed text-ink/75 sm:mt-3 sm:text-[14px]">
+        <p className="font-display text-2xl leading-[1.08] tracking-[-0.02em] text-ink sm:text-3xl">
+          We have your brief.
+        </p>
+        <p className="mt-3 max-w-sm text-sm font-light leading-relaxed text-ink/75">
           Our team will review your occasion and write back with considered options.
         </p>
       </div>
@@ -502,15 +499,13 @@ function GiftingEnquiryForm({ preferredOccasion = '' }) {
       <div className="mt-4 grid gap-4 sm:mt-5 sm:grid-cols-2 sm:gap-5">
         <Field label="Phone" name="phone" type="tel" autoComplete="tel" placeholder="Optional" />
         <label className="block min-w-0">
-          <span className="font-label text-[10px] tracking-[0.14em] text-ink/55 uppercase">
-            Occasion
-          </span>
+          <span className="font-label text-[10px] tracking-[0.22em] text-ink/55">Occasion</span>
           <select
             name="occasion"
             required
             value={occasion}
             onChange={(e) => setOccasion(e.target.value)}
-            className="mt-2 w-full appearance-none border-b border-ink/12 bg-transparent py-2.5 text-[14px] font-light text-ink outline-none sm:mt-2.5 sm:py-3 sm:text-[15px]"
+            className="mt-2 w-full appearance-none border-b border-ink/12 bg-transparent py-2.5 font-sans text-sm font-light text-ink outline-none"
           >
             <option value="" disabled>
               Choose an occasion…
@@ -524,19 +519,19 @@ function GiftingEnquiryForm({ preferredOccasion = '' }) {
         </label>
       </div>
       <label className="mt-4 block sm:mt-5">
-        <span className="font-label text-[10px] tracking-[0.14em] text-ink/55 uppercase">Note</span>
+        <span className="font-label text-[10px] tracking-[0.22em] text-ink/55">Note</span>
         <textarea
           name="note"
           rows={2}
           placeholder="Quantity, timeline, or anything we should know…"
-          className="mt-2 w-full resize-none border-b border-ink/12 bg-transparent py-2.5 text-[14px] font-light text-ink outline-none placeholder:text-ink/30 sm:mt-2.5 sm:py-3 sm:text-[15px]"
+          className="mt-2 w-full resize-none border-b border-ink/12 bg-transparent py-2.5 font-sans text-sm font-light text-ink outline-none placeholder:text-ink/30"
         />
       </label>
       {error ? <p className="mt-3 text-sm text-burgundy">{error}</p> : null}
       <button
         type="submit"
         disabled={status === 'sending'}
-        className="bg-velvet-texture mt-5 inline-flex h-11 w-full items-center justify-center gap-3 rounded-full px-7 font-label text-[11px] tracking-[0.16em] text-ivory transition-opacity hover:opacity-90 disabled:opacity-60 sm:mt-6 sm:h-12 sm:w-auto sm:tracking-[0.2em]"
+        className="bg-velvet-texture mt-5 inline-flex h-11 w-full items-center justify-center gap-3 rounded-full px-7 font-label text-[11px] tracking-[0.18em] text-ivory transition-opacity hover:opacity-90 disabled:opacity-60 sm:mt-6 sm:h-12 sm:w-auto"
       >
         {status === 'sending' ? 'Sending…' : 'Send enquiry'}
         <span
@@ -553,7 +548,7 @@ function GiftingEnquiryForm({ preferredOccasion = '' }) {
 function Field({ id, label, name, type = 'text', required, placeholder, autoComplete }) {
   return (
     <label className="block min-w-0">
-      <span className="font-label text-[10px] tracking-[0.14em] text-ink/55 uppercase">{label}</span>
+      <span className="font-label text-[10px] tracking-[0.22em] text-ink/55">{label}</span>
       <input
         id={id}
         name={name}
@@ -561,7 +556,7 @@ function Field({ id, label, name, type = 'text', required, placeholder, autoComp
         required={required}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        className="mt-2 w-full border-b border-ink/12 bg-transparent py-2.5 text-[14px] font-light text-ink outline-none placeholder:text-ink/30 sm:mt-2.5 sm:py-3 sm:text-[15px]"
+        className="mt-2 w-full border-b border-ink/12 bg-transparent py-2.5 font-sans text-sm font-light text-ink outline-none placeholder:text-ink/30"
       />
     </label>
   );

@@ -44,7 +44,7 @@ export default function SearchPage() {
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Nacre, cuff, pearl…"
+          placeholder="Ring, earring, bracelet…"
           className="font-display mt-10 w-full border-b border-cream bg-transparent pb-4 text-3xl outline-none placeholder:text-ink/20"
         />
         <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12 lg:grid-cols-4">

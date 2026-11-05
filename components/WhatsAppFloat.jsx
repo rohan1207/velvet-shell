@@ -12,11 +12,12 @@ export default function WhatsAppFloat() {
     (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
   );
 
-  if (hidden) return null;
+  const href = whatsappHref();
+  if (hidden || !href) return null;
 
   return (
     <a
-      href={whatsappHref()}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"

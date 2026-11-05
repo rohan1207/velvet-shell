@@ -5,7 +5,7 @@ import { journal } from '@/lib/journal';
 export const metadata = {
   title: 'Blogs',
   description:
-    'Notes from Velvet Shell — materials, atelier days, wearing well, and the quiet craft behind each piece.',
+    'Notes from Velvet Shell on materials, shipping across India, pearl care, and gifting.',
 };
 
 export default function BlogsPage() {
@@ -14,10 +14,10 @@ export default function BlogsPage() {
       <div className="mx-auto max-w-[1600px] px-5 md:px-10">
         <p className="font-label text-gold">Blogs</p>
         <h1 className="font-display mt-4 max-w-3xl text-[clamp(2.8rem,6vw,5.2rem)] leading-[1.02] tracking-[-0.03em] text-ink">
-          Notes from the house
+          From Velvet Shell
         </h1>
         <p className="mt-5 max-w-xl text-[15px] font-light leading-relaxed text-ink/85">
-          Stories of nacre, craft, and the quiet decisions that shape every Velvet Shell piece.
+          Materials, shipping, care and gifting — the same details we use on the shop and the FAQ.
         </p>
 
         <div className="mt-10 grid grid-cols-2 gap-x-3 gap-y-8 md:mt-16 md:gap-x-10 md:gap-y-16">

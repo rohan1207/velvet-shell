@@ -30,11 +30,37 @@ export function loadStore() {
       return fresh;
     }
     const parsed = JSON.parse(raw);
+    let dirty = false;
+    if (Array.isArray(parsed.orders) && parsed.orders.some((order) => String(order.paymentId || '').startsWith('pay_demo') || String(order.email || '').endsWith('@email.com'))) {
+      parsed.orders = [];
+      dirty = true;
+    }
+    if (Array.isArray(parsed.blogs) && parsed.blogs.some((post) => post.slug === 'week-in-jaipur' || post.slug === 'nacre-remembers-light')) {
+      parsed.blogs = clone(seed.blogs);
+      dirty = true;
+    }
+    if (Array.isArray(parsed.testimonials) && parsed.testimonials.some((item) => ['ananya', 'meera', 'arjun', 'isha', 'priya'].includes(item.id))) {
+      parsed.testimonials = [];
+      dirty = true;
+    }
+    if (Array.isArray(parsed.products)) {
+      for (const product of parsed.products) {
+        if (Array.isArray(product.details) && product.details.includes('Handmade in Jaipur')) {
+          product.details = product.details.filter((line) => line !== 'Handmade in Jaipur');
+          dirty = true;
+        }
+        if (product.story === 'A circle that remembers Paris.') {
+          product.story = 'A circle drop, worn close.';
+          dirty = true;
+        }
+      }
+    }
     // Migrate older admin stores that predate looks.
     if (!Array.isArray(parsed.looks) || parsed.looks.length === 0) {
       parsed.looks = clone(seed.looks || []);
-      localStorage.setItem(KEY, JSON.stringify(parsed));
+      dirty = true;
     }
+    if (dirty) localStorage.setItem(KEY, JSON.stringify(parsed));
     return parsed;
   } catch {
     return defaultStore();

@@ -38,7 +38,7 @@ export default function TheHouse() {
         <div className="lg:col-span-6 xl:col-span-5">
           <div className="flex items-center gap-3">
             <span className="h-px w-7 bg-gold/80" aria-hidden />
-            <p className="font-label text-gold">The house</p>
+            <p className="font-label text-gold">Velvet Shell</p>
           </div>
 
           <h2 className="font-display mt-5 text-[clamp(2.2rem,4.5vw,3.6rem)] leading-[1.05] tracking-[-0.02em] text-ink">

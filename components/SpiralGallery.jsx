@@ -3,16 +3,16 @@
 import InfiniteSpiral from './InfiniteSpiral';
 
 const images = [
-  { src: '/images/product-nacre-collar.png', alt: 'Nacre Collar', href: '/shop/nacre-collar' },
-  { src: '/images/product-tide-drops.png', alt: 'Tide Drops', href: '/shop/tide-drops' },
-  { src: '/images/product-abalone-signet.png', alt: 'Abalone Signet', href: '/shop/abalone-signet' },
-  { src: '/images/product-velvet-cuff.png', alt: 'Velvet Cuff', href: '/shop/velvet-cuff' },
-  { src: '/images/product-lumen-choker.png', alt: 'Lumen Choker', href: '/shop/lumen-choker' },
-  { src: '/images/product-moonlit-strand.png', alt: 'Moonlit Strand', href: '/shop/moonlit-strand' },
-  { src: '/images/look-neck-ears.png', alt: 'Collar edit look' },
-  { src: '/images/look-wrist-ring.png', alt: 'Wrist edit look' },
-  { src: '/images/category-banner-gifting.jpg', alt: 'White orchids in soft natural light' },
-  { src: '/images/category-banner-bracelets.jpg', alt: 'Clover leaves in soft forest light' },
+  { src: '/images/banners/rings/daisy-ladybug.jpg', alt: 'Rings', href: '/shop?category=rings' },
+  { src: '/images/banners/earrings/dragonfly.jpg', alt: 'Earrings', href: '/shop?category=earrings' },
+  { src: '/images/banners/bracelets/daisy-cuff.jpg', alt: 'Bracelets', href: '/shop?category=bracelets' },
+  { src: '/images/banners/necklaces/bamboo-mist.jpg', alt: 'Necklaces', href: '/shop?category=necklaces' },
+  { src: '/images/banners/pendants/honeycomb-bee.jpg', alt: 'Pendants', href: '/shop?category=pendants' },
+  { src: '/images/banners/sets/daisy-chain-set.jpg', alt: 'Sets', href: '/shop?category=sets' },
+  { src: '/images/banners/chains/gold-chain.jpg', alt: 'Chains', href: '/shop?category=chains' },
+  { src: '/images/banners/brooches/gold-silver-flower.jpg', alt: 'Brooches', href: '/shop?category=brooches' },
+  { src: '/images/gifting/hero-gift-box.jpg', alt: 'Gifting', href: '/gifting' },
+  { src: '/images/banners/bracelets/lotus-bangle.jpg', alt: 'Bracelets', href: '/shop?category=bracelets' },
 ];
 
 export default function SpiralGallery() {

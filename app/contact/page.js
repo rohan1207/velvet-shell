@@ -55,18 +55,20 @@ export default function ContactPage() {
                 </a>
               </div>
             ) : null}
-            <div>
-              <p className="text-[10px] tracking-[0.28em] text-gold uppercase">WhatsApp</p>
-              <a
-                href={contact.whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center gap-2 text-ink transition-opacity hover:opacity-70"
-              >
-                Chat with us
-                <span aria-hidden>↗</span>
-              </a>
-            </div>
+            {contact.whatsappHref ? (
+              <div>
+                <p className="text-[10px] tracking-[0.28em] text-gold uppercase">WhatsApp</p>
+                <a
+                  href={contact.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-flex items-center gap-2 text-ink transition-opacity hover:opacity-70"
+                >
+                  Chat with us
+                  <span aria-hidden>↗</span>
+                </a>
+              </div>
+            ) : null}
           </div>
 
           <div className="mt-8 space-y-7 text-sm sm:mt-10 sm:space-y-8">

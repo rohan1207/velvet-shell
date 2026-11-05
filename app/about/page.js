@@ -40,7 +40,7 @@ export default function AboutPage() {
       <section className="relative min-h-[55vh] md:min-h-[70vh]">
         <Image
           src="/images/atelier-daylight.png"
-          alt="Velvet Shell atelier"
+          alt="Velvet Shell"
           fill
           priority
           sizes="100vw"

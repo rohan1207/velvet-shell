@@ -202,14 +202,14 @@ export default function PrivacyPage() {
             <p className="font-label text-gold">Contact</p>
             <h2 className="font-display mt-3 text-3xl text-ink">Velvet Shell</h2>
             <div className="mt-5 space-y-2 text-[15px] font-light leading-relaxed text-ink/80">
-              <p>[BUSINESS / REGISTERED ADDRESS]</p>
+              <p>Velvet Shell</p>
+              <p>velvetshell.com</p>
+              <ContactPlaceholders />
               <p>
                 Email:{' '}
-                <span className="text-ink/85">[EMAIL]</span>
-              </p>
-              <p>
-                Phone:{' '}
-                <span className="text-ink/85">[NUMBER]</span>
+                <a href="mailto:info.velvetshell@gmail.com" className="text-ink/80 underline-offset-2 hover:underline">
+                  info.velvetshell@gmail.com
+                </a>
               </p>
             </div>
             <Link
@@ -241,11 +241,10 @@ function Section({ number, title, children }) {
 function ContactPlaceholders() {
   // Lazy import avoided — keep privacy page self-contained with same public defaults.
   const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'sales@velvetshell.in';
-  const phone =
-    process.env.NEXT_PUBLIC_CONTACT_PHONE ||
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ||
-    '';
-  const phoneDigits = String(phone).replace(/\D/g, '');
+  let phoneDigits = String(
+    process.env.NEXT_PUBLIC_CONTACT_PHONE || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '',
+  ).replace(/\D/g, '');
+  if (phoneDigits.length === 10) phoneDigits = `91${phoneDigits}`;
   let phoneDisplay = '';
   if (phoneDigits.length === 12 && phoneDigits.startsWith('91')) {
     phoneDisplay = `+91 ${phoneDigits.slice(2, 7)} ${phoneDigits.slice(7)}`;

@@ -57,7 +57,7 @@ function LoginForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="input mt-2"
-              placeholder="owner@velvetshell.com"
+              placeholder="sales@velvetshell.in"
             />
           </label>
           <label className="block">

@@ -17,7 +17,7 @@ export default function Hero3D() {
           <div className="inline-flex w-fit items-center gap-2 rounded-full border border-cream bg-pearl px-3.5 py-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" />
             <span className="text-[11px] font-medium tracking-[0.18em] text-ink/80 uppercase">
-              New season · Autumn 2027
+              925 silver · 18K gold-plated · freshwater pearls
             </span>
           </div>
 
@@ -28,10 +28,10 @@ export default function Hero3D() {
           </h1>
 
           <p className="mt-6 max-w-md text-[15px] leading-[1.75] text-stone md:text-[16px]">
-            Sculptural jewelry in nacre and champagne gold — made slowly in Jaipur, finished for the body, never for a tray.
+            Jewellery in 925 sterling silver, 18K gold-plated finishes and freshwater pearls. Shop online. We deliver across India.
           </p>
           <p className="mt-3 max-w-md text-[14px] leading-[1.7] text-stone md:text-[15px]">
-            Drag the piece to turn it in light. Then choose how you enter the house.
+            Open a category, or write to sales@velvetshell.in.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -80,7 +80,7 @@ export default function Hero3D() {
             <span className="hidden h-1 w-1 rounded-full bg-gold/60 sm:inline-block" />
             <span>18k gold</span>
             <span className="hidden h-1 w-1 rounded-full bg-gold/60 sm:inline-block" />
-            <span>Jaipur atelier</span>
+            <span>Ships across India</span>
           </div>
         </div>
 
