@@ -6,22 +6,19 @@ import ResponsiveBannerImage from '@/components/ResponsiveBannerImage';
 
 const packagingShots = [
   {
-    id: 'wedding',
-    src: '/images/gifting/packaging/wedding-bento.jpg',
-    alt: 'Velvet Shell wedding gift box with burgundy ribbon',
-    label: 'Wedding',
+    id: 'wide',
+    src: '/images/gifting/packaging/packaging-wide.jpg',
+    alt: 'Velvet Shell gift bag beside an open shell with dragonfly earrings',
+    label: 'The gift',
+    frame: 'aspect-[3/2] w-full lg:aspect-auto lg:h-full',
   },
   {
-    id: 'reveal',
-    src: '/images/gifting/packaging/shell-reveal-bento.jpg',
-    alt: 'Open Velvet Shell case with jewellery — the reveal',
-    label: 'The reveal',
-  },
-  {
-    id: 'bag',
-    src: '/images/gifting/packaging/gift-bag-bento.jpg',
-    alt: 'Velvet Shell gift box with wooden ring and branded ribbon',
-    label: 'Gift bag',
+    id: 'pearl',
+    src: '/images/gifting/packaging/packaging-pearl.jpg',
+    alt: 'Velvet Shell gift bag and open pearl shell case',
+    label: 'The pearl',
+    frame:
+      'mx-auto aspect-[4/5] w-[72%] max-w-[20rem] md:mx-0 md:w-full md:max-w-none lg:aspect-auto lg:h-full',
   },
 ];
 
@@ -298,8 +295,7 @@ export default function CorporateGifting() {
               <p className={eyebrowClass}>Packaging</p>
               <h2 className={titleClass}>A treasure in every reveal</h2>
               <p className={bodyClass}>
-                Wedding presentation, shell reveal cases, and the Velvet Shell gift bag — each piece
-                arrives ready to give.
+                The gift, with the piece inside, and the pearl shell beside the bag — ready to give.
               </p>
             </div>
             <button
@@ -312,51 +308,32 @@ export default function CorporateGifting() {
             </button>
           </div>
 
-          <div className="mt-5 grid min-h-0 flex-1 grid-cols-2 gap-2.5 sm:mt-7 sm:gap-4 md:grid-cols-3 md:gap-4 lg:mt-8 lg:gap-5">
-            {packagingShots.map((shot, i) => {
-              const card = (
-                <button
-                  type="button"
-                  onClick={() => goToForm(shot.id === 'wedding' ? 'Wedding favours' : '')}
-                  className="group relative block h-full min-w-0 w-full overflow-hidden rounded-[1rem] bg-white text-left ring-1 ring-ink/6 sm:rounded-[1.35rem] md:rounded-[1.5rem]"
-                >
-                  <div className="relative aspect-[3/4] w-full overflow-hidden md:aspect-auto md:h-full md:min-h-[20rem] lg:min-h-0 lg:h-full">
-                    <ResponsiveBannerImage
-                      src={shot.src}
-                      alt={shot.alt}
-                      sizes="(max-width:768px) 50vw, 33vw"
-                      className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
-                    />
-                    <div
-                      className="absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent opacity-80"
-                      aria-hidden
-                    />
-                    <span className={`absolute bottom-3 left-3 sm:bottom-4 sm:left-4 md:bottom-5 md:left-5 ${captionClass}`}>
-                      {shot.label}
-                    </span>
-                  </div>
-                </button>
-              );
-
-              if (i === 2) {
-                return (
+          <div className="mt-5 grid min-h-0 flex-1 grid-cols-1 items-stretch gap-3 sm:mt-7 sm:gap-4 md:grid-cols-[1.85fr_1fr] lg:mt-8 lg:gap-5">
+            {packagingShots.map((shot) => (
+              <button
+                key={shot.id}
+                type="button"
+                onClick={() => goToForm()}
+                className="group relative block h-full min-w-0 w-full overflow-hidden rounded-[1rem] bg-white text-left ring-1 ring-ink/6 sm:rounded-[1.35rem] md:rounded-[1.5rem]"
+              >
+                <div className={`relative overflow-hidden lg:h-full ${shot.frame}`}>
+                  <AppImage
+                    src={shot.src}
+                    alt={shot.alt}
+                    fill
+                    sizes={shot.id === 'wide' ? '(max-width:768px) 100vw, 62vw' : '(max-width:768px) 70vw, 34vw'}
+                    className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+                  />
                   <div
-                    key={shot.id}
-                    className="col-span-2 flex justify-center md:col-span-1 md:block md:h-full"
-                  >
-                    <div className="w-[calc(50%-0.3125rem)] sm:w-[calc(50%-0.5rem)] md:h-full md:w-full">
-                      {card}
-                    </div>
-                  </div>
-                );
-              }
-
-              return (
-                <div key={shot.id} className="min-w-0 md:h-full">
-                  {card}
+                    className="absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent opacity-80"
+                    aria-hidden
+                  />
+                  <span className={`absolute bottom-3 left-3 sm:bottom-4 sm:left-4 md:bottom-5 md:left-5 ${captionClass}`}>
+                    {shot.label}
+                  </span>
                 </div>
-              );
-            })}
+              </button>
+            ))}
           </div>
         </div>
       </section>
