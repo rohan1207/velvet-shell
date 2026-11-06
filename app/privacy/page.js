@@ -9,8 +9,8 @@ const lastUpdated = '3 October 2026';
 
 export default function PrivacyPage() {
   return (
-    <div className="bg-ivory pt-28 pb-24 md:pt-36">
-      <div className="mx-auto max-w-3xl px-5 md:px-10">
+    <div className="bg-ivory pt-page pb-24">
+      <div className="mx-auto max-w-3xl px-5 pt-8 md:px-10 md:pt-12">
         <p className="font-label text-gold">Legal</p>
         <h1 className="font-display mt-4 text-[clamp(2.8rem,6vw,4.5rem)] leading-[0.98] tracking-[-0.03em] text-ink">
           Privacy Policy
@@ -207,7 +207,7 @@ export default function PrivacyPage() {
               <ContactPlaceholders />
               <p>
                 Email:{' '}
-                <a href="mailto:info.velvetshell@gmail.com" className="text-ink/80 underline-offset-2 hover:underline">
+                <a href="mailto:info.velvetshell@gmail.com" className="font-medium text-burgundy underline decoration-burgundy/40 underline-offset-4 hover:decoration-burgundy">
                   info.velvetshell@gmail.com
                 </a>
               </p>
@@ -258,7 +258,7 @@ function ContactPlaceholders() {
     <div className="my-4 space-y-1 text-[15px] font-light text-ink/80">
       <p>
         Email:{' '}
-        <a href={`mailto:${email}`} className="text-ink/80 underline-offset-2 hover:underline">
+        <a href={`mailto:${email}`} className="font-medium text-burgundy underline decoration-burgundy/40 underline-offset-4 hover:decoration-burgundy">
           {email}
         </a>
       </p>

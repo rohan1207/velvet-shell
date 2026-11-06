@@ -24,7 +24,14 @@ export default function ConfirmationPage() {
         <h1 className="font-display mt-4 text-4xl tracking-[-0.03em] text-ink md:text-7xl">Your order is confirmed.</h1>
         <p className="mt-6 text-sm font-light leading-relaxed text-ink/85">
           A confirmation is on its way. We prepare the order for dispatch across India, then send
-          tracking once it leaves. Questions: sales@velvetshell.in.
+          tracking once it leaves. Questions:{' '}
+          <a
+            href="mailto:sales@velvetshell.in?subject=Order%20question"
+            className="font-medium text-burgundy underline decoration-burgundy/40 underline-offset-4 hover:decoration-burgundy"
+          >
+            sales@velvetshell.in
+          </a>
+          .
         </p>
         {order && (
           <div className="mt-12 border border-ink/10 bg-pearl px-7 py-8">
